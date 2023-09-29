@@ -82,6 +82,8 @@ class AudioFilePlayer {
 	            .then(buffer => {
 	                let key = audioFilePlayer.makeStrokeID(instrumentName, strokeName);
 	                loadedAudioBuffers[key] = buffer;
+
+	                console.log( `Loaded file for ${key}`);
 	                loadCount++;
 	                checkComplete();
 	            })
