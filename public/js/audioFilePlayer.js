@@ -59,6 +59,8 @@ class AudioFilePlayer {
 
 	    	if (!stroke2file.file || stroke2file.file==="" ) {
 	    		loadedAudioBuffers[key] = null;	
+	    		loadCount++;
+                checkComplete();
 	    	}
 	    	else {
 		        let path = folder + stroke2file.file;
@@ -66,7 +68,6 @@ class AudioFilePlayer {
 		            .then(response => response.arrayBuffer())
 		            .then(data => audioContext.decodeAudioData(data))
 		            .then(buffer => {
-		                
 		                loadedAudioBuffers[key] = buffer;
 
 		                console.log( `Loaded file for ${key}`);
