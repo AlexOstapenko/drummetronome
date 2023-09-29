@@ -93,6 +93,9 @@ class AudioFilePlayer {
 
 	filesLoaded( loadedAudioBuffers ) {
 		this.strokeID2Buffer = loadedAudioBuffers;
+
+		console.log( "All sound files are loaded. Playing the first!" );
+		this.playStroke( "darbuka_D", 0);
 	}
 
 	makeStrokeID(instrName, strokeName) {
