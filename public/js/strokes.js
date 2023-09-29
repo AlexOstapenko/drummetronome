@@ -9,7 +9,7 @@ class StrokeSelector {
 
     constructor(containerID) {
         this.containerID = containerID;
-        this.strokes = Object.keys(FRAMEDRUM_SOUNDS.stroke2frequecy);
+        this.strokes = strokeNames( INSTRUMENT_DARBUKA );
     }
 
     render() {
