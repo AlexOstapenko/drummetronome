@@ -94,7 +94,7 @@ class RhythmPlayer {
 
         this.calculateTimeline();
         this.performance.isActive = true;
-        this.performance.startTime = strokePlayer.audioContext.currentTime;
+        this.performance.startTime = this.player.audioContext.currentTime;
         
         this.scheduleNextBar();
 
