@@ -93,7 +93,7 @@ class AudioFilePlayer {
 
 	filesLoaded( loadedAudioBuffers ) {
 		this.strokeID2Buffer = loadedAudioBuffers;
-		console.log( "All sound files are loaded. Playing the first!" );
+		console.log( "All sound files are loaded." );
 	}
 
 	makeStrokeID(instrName, strokeName) {
