@@ -10,6 +10,9 @@ const L_BUTT_STOP = "STOP";
 const DEFAULT_BPM = 180;
 const defaultRhythm = "D-T-Tkk";
 
+
+const soundPlayer = audioFilePlayer;
+
 function onDocumentLoaded() {
     
     rhythmBoard.setNewRhythm(defaultRhythm);
@@ -24,7 +27,13 @@ function onDocumentLoaded() {
     document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
 
     // load sounds
-    audioFilePlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
+    soundPlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
+}
+
+function testSound() {
+    soundPlayer.resumeAudio().then( function () {
+        soundPlayer.playStroke( "darbuka_D", 0);
+    });
 }
 
 function clickPlayRhythm() {
@@ -45,7 +54,7 @@ function clickPlayRhythm() {
         butt.innerText = L_BUTT_STOP; 
         butt.className = "button-stop";
 
-        strokePlayer.resumeAudio().then( function () {
+        soundPlayer.resumeAudio().then( function () {
             onChangeTempo(); // make sure we use new tempo value
             rhythmPlayer.setRhythm( new Rhythm(rhythmBoard.rhythm) );
             rhythmPlayer.play();
