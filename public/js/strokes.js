@@ -1,5 +1,3 @@
-//const STROKES = ["–", "D", "T", "K", "t", "k", "S", "P", "i"];
-// const STROKES = ["D", "T", "t", "K", "k", "R", "L", "P"];
 
 function isPause(stroke) {
     return stroke === "–";
@@ -19,10 +17,12 @@ class StrokeSelector {
 
         this.strokes.forEach( (stroke, idx ) => {
             result += "<div class='button-sound' onclick='clickStrokeSelectorItem(" + idx + ")'>" + stroke + "</div>";
+            if ( (idx+1)%6 === 0 && idx !== this.strokes.length - 1 ) result += "<br>";
         });
 
         let elem = document.getElementById(this.containerID);
         elem.innerHTML = result;
+
     }
     
 }

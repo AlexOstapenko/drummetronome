@@ -160,7 +160,7 @@ body {
 }
 
 .strokeSelector {
-    display: flex;
+    /*display: flex;*/
     margin-top: 10px;
 }
 
@@ -179,12 +179,13 @@ body {
   background-color: #f39c12; /* Оранжевый (D) */
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   margin-right: 10px;
+  display: inline-block;
 }
 
 .button-sound:hover {
