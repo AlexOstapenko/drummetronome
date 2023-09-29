@@ -32,6 +32,7 @@ function onDocumentLoaded() {
 
 function testSound() {
     soundPlayer.resumeAudio().then( function () {
+        soundPlayer.turnOnSound();
         soundPlayer.playStroke( "darbuka_D", 0);
     });
 }
