@@ -79,7 +79,7 @@ class OscilatorStrokePlayer {
 	}
 }
 
-const strokePlayer = new OscilatorStrokePlayer();
+//const strokePlayer = new OscilatorStrokePlayer();
 
 function playNote(noteFrequency, when, gain) {
 	let audioContext = strokePlayer.audioContext;

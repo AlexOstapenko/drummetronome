@@ -115,6 +115,8 @@ class AudioFilePlayer {
 		let buffer = this.strokeID2Buffer[strokeID];
 		var bufferSource = this.audioCtx.createBufferSource();
 		bufferSource.buffer = buffer;
+
+		console.log( buffer );
 		
 		bufferSource.connect( this.gainNode );
 		bufferSource.start(when);
