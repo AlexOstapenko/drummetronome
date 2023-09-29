@@ -11,7 +11,8 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "k", file: "ke.mp3"},
         {stroke: "R", file: "ta.mp3"},
         {stroke: "L", file: "ka.mp3"},
-        {stroke: "P", file: "pa.mp3"}
+        {stroke: "P", file: "pa.mp3"},
+        {stroke: "-", file: ""}
     ]
 }
 

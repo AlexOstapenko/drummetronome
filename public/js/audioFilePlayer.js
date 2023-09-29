@@ -54,21 +54,27 @@ class AudioFilePlayer {
 	    }
 
 	    arrStrokeToFile.forEach(function (stroke2file) {
-	        let strokeName = stroke2file.stroke;
-	        let path = folder + stroke2file.file;
+			let strokeName = stroke2file.stroke;
+			let key = audioFilePlayer.makeStrokeID(instrumentName, strokeName);
 
-	        fetch(path)
-	            .then(response => response.arrayBuffer())
-	            .then(data => audioContext.decodeAudioData(data))
-	            .then(buffer => {
-	                let key = audioFilePlayer.makeStrokeID(instrumentName, strokeName);
-	                loadedAudioBuffers[key] = buffer;
+	    	if (!stroke2file.file || stroke2file.file==="" ) {
+	    		loadedAudioBuffers[key] = null;	
+	    	}
+	    	else {
+		        let path = folder + stroke2file.file;
+		        fetch(path)
+		            .then(response => response.arrayBuffer())
+		            .then(data => audioContext.decodeAudioData(data))
+		            .then(buffer => {
+		                
+		                loadedAudioBuffers[key] = buffer;
 
-	                console.log( `Loaded file for ${key}`);
-	                loadCount++;
-	                checkComplete();
-	            })
-	            .catch(error => console.error('Error loading audio:', error));
+		                console.log( `Loaded file for ${key}`);
+		                loadCount++;
+		                checkComplete();
+		            })
+		            .catch(error => console.error('Error loading audio:', error));
+	        }
 	    });
 	}
 
@@ -92,7 +98,9 @@ class AudioFilePlayer {
 		}
 		
 		let buffer = this.strokeID2Buffer[strokeID];
-		var bufferSource = this.audioCtx.createBufferSource();
+		if (!buffer) return; // if there is no audio buffer – just do nothing
+
+		let bufferSource = this.audioCtx.createBufferSource();
 		bufferSource.buffer = buffer;
 		
 		bufferSource.connect( this.gainNode );
