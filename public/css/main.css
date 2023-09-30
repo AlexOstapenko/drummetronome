@@ -108,6 +108,16 @@ body {
     align-items: center;
     border: 2px solid lightgray;
     background-color: white;
+    border-radius: 20px;
+}
+
+/* Медиа-запрос для смартфонов и устройств с меньшими экранами */
+@media (max-width: 768px) {
+    .rhythm_container {
+        width: 100%; /* Занимает всю доступную ширину */
+        height: auto; /* Автоматическая высота */
+        padding: 10px; /* Добавим немного отступа для компактности */
+    }
 }
 
 .rhythm-item {
@@ -202,7 +212,7 @@ body {
 .divDBContainer {
     margin: 20px auto;
     position: relative;
-    
+    display: none;
 }
 
 .div-db-categories {
@@ -275,4 +285,22 @@ body {
 
 .tempoInput {
     font-size: 1.2em;   
+}
+
+
+#divTempo {
+    padding: 20px;
+    width: 400px;
+}
+
+@media (max-width: 768px) {
+    #divTempo {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+
+#inputTempo {
+    width: 100%;
 }
