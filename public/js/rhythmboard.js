@@ -18,6 +18,9 @@ const classesForDarbukaStrokes = {
     "L" : ""
 };
 
+
+const RHYTHM_SIZE_INPUT_ID = "rhythmSize";
+
 // Edit rhythm in user interface.
 class RhythmBoard {
 
@@ -57,7 +60,7 @@ class RhythmBoard {
         });
         
         document.getElementById(this.containerID).innerHTML = result;
-        document.getElementById("num").value = this.items.length;
+        document.getElementById( RHYTHM_SIZE_INPUT_ID ).value = this.items.length;
     }
 
     select(num) {
@@ -65,7 +68,7 @@ class RhythmBoard {
     }
 
     // rhythm could be wether array of chars or string.
-    // if scting – it will be splitter char by char to create the array
+    // if scting - it will be splitter char by char to create the array
     setNewRhythm(rhythm) {
         this.items = (typeof rhythm == "string") ? rhythm.split("") : rhythm.slice();
         this.selected = -1;
@@ -120,17 +123,17 @@ function clickRhythmBoardStroke(idx) {
     rhythmBoard.render();
 }
 
-function setNewSize() {
-    let num = parseInt( document.getElementById("num").value );
+function setNewRhythmSize() {
+    let num = parseInt( document.getElementById( RHYTHM_SIZE_INPUT_ID ).value );
     if (!num || num <= 0) num = 8;
 
     rhythmBoard.setNewSize(num);
     rhythmBoard.render();
 }
 
-function setSize(num) {
-    document.getElementById("num").value = num;
-    setNewSize();
+function setRhythmSize(num) {
+    document.getElementById( RHYTHM_SIZE_INPUT_ID ).value = num;
+    setNewRhythmSize();
 }
 
 function clickPlayRhythm() {

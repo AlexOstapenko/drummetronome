@@ -16,7 +16,6 @@ const soundPlayer = audioFilePlayer;
 function onDocumentLoaded() {
     
     rhythmBoard.setNewRhythm(defaultRhythm);
-
     rhythmBoard.addRhythmChangedListener( rhythmPlayer.onRhythmChange.bind(rhythmPlayer) );
 
     rhythmBoard.render();
@@ -28,6 +27,14 @@ function onDocumentLoaded() {
 
     // load sounds
     soundPlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
+
+
+    //
+    document.getElementById("rhythmSize").addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') 
+            setNewRhythmSize();
+    });
+
 }
 
 function clickPlayRhythm() {
