@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,12 @@
     <title>METRONOME</title>
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/toolbar.css">
+    <link rel="stylesheet" href="css/rhythm-board.css">
+    <link rel="stylesheet" href="css/start-stop.css">
+    <link rel="stylesheet" href="css/db-rhythms.css">
+    <link rel="stylesheet" href="css/stroke-selector.css">
+
     <script src="js/instrumentDefinition.js"></script>
     <script src="js/rhythm.js"></script>
     <script src="js/rhythmboard.js"></script>
@@ -20,59 +26,70 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container no-select">
+       
+       <!-- Тут мы задаем размер ритма и вспомогательные кнопки для быстрого доступа-->
         <div class="toolbar">
-            <div class="counts">
-                <span class='counts-text'>Beats:</span> &nbsp; 
+
+            <div><div class="divCounts">
+                <span class='counts-label'>BEATS:</span> &nbsp; 
                 <input type="text" id="num" class='counts-inp' size="5"> 
+                <button class='button-size button-ok' onclick="setNewSize()">OK</button>
+            </div></div>
+            
+            <div class="toolbar-size-buttons">
+                <button class='button-size' onclick="setSize(3)">3</button>
+                <button class='button-size' onclick="setSize(4)">4</button>
+                <button class='button-size' onclick="setSize(5)">5</button>
+                <button class='button-size' onclick="setSize(6)">6</button>
+                <button class='button-size' onclick="setSize(7)">7</button>
+                <button class='button-size' onclick="setSize(8)">8</button>
+                <button class='button-size' onclick="setSize(9)">9</button>
+                <button class='button-size' onclick="setSize(10)">10</button>
+                <button class='button-size' onclick="setSize(12)">12</button>
+                <button class='button-size' onclick="setSize(14)">14</button>
+                <button class='button-size' onclick="setSize(16)">16</button>
             </div>
-            <button class='button-size button-ok' onclick="setNewSize()">Ok</button>
-            <button class='button-size' onclick="setSize(3)">3</button>
-            <button class='button-size' onclick="setSize(4)">4</button>
-            <button class='button-size' onclick="setSize(5)">5</button>
-            <button class='button-size' onclick="setSize(6)">6</button>
-            <button class='button-size' onclick="setSize(7)">7</button>
-            <button class='button-size' onclick="setSize(8)">8</button>
-            <button class='button-size' onclick="setSize(9)">9</button>
-            <button class='button-size' onclick="setSize(10)">10</button>
-            <button class='button-size' onclick="setSize(12)">12</button>
-            <button class='button-size' onclick="setSize(14)">14</button>
-            <button class='button-size' onclick="setSize(16)">16</button>
         </div>
     
+        <!-- тут пользователь редактирует свой ритм -->
         <div class="rhythm_container" id="rhythmContainer"></div>
+        
+        <!-- Тут список всех допустимых ударов -->
+        <div><div class="strokeSelector" id="strokeSelector"></div></div>
+
+        <!-- Кнопка Play/Stop -->
         <div>
-            <div class="strokeSelector" id="strokeSelector"></div>    
-        </div>
-         <div>
             <button id='buttPlayStop' class='button-listen' onclick="clickPlayRhythm();">PLAY</button>
         </div>
+
+        <!-- Изменение темпа -->
         <div id="divTempo">
             Tempo: <span id="inputTempoValue"></span> <br>
             <input id="inputTempo" class="genericInput tempoInput"
                 size="10" value="120" type="range" min="20" max="800" step="5"
                 onchange="onChangeTempo()" oninput="onChangeTempo()">
-            
-            <!-- <button class="btnTempo" onclick="clickButtonTempo()">👍</button> -->
         </div>
 
-        <div class="divDBContainer">
-            
-            <div class="div-db-categories" id="divDBCategories">
-            </div>
-
-            <!-- this is window to select rhythms from a chosen category -->
-            <div class="rhythm-list-for-category" id="divRhythmListForCategory">
-                <div class='div-for-xbut'>
-                    <button class='xbutton' onclick='clickCloseRhythmsListForCategory();'>x</button>
-                </div>
-                <div id="divRhythmsSelector" class='rhythms-selector'></div>
-            </div>
-        </div>
     </div>
     
     <script>
         onDocumentLoaded();
     </script>
+
+    <!-- пока что отключил этот функционал -->
+    <div class="divDBContainer">
+        <div class="div-db-categories" id="divDBCategories">
+        </div>
+
+        <!-- this is window to select rhythms from a chosen category -->
+        <div class="rhythm-list-for-category" id="divRhythmListForCategory">
+            <div class='div-for-xbut'>
+                <button class='xbutton' onclick='clickCloseRhythmsListForCategory();'>x</button>
+            </div>
+            <div id="divRhythmsSelector" class='rhythms-selector'></div>
+        </div>
+    </div>
+
 </body>
 </html>

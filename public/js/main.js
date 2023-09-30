@@ -21,20 +21,13 @@ function onDocumentLoaded() {
 
     rhythmBoard.render();
     strokeSelector.render();
-    RHYTHMS_DB.render();
+    //RHYTHMS_DB.render();
 
     document.getElementById(ID_INPUT_TEMPO).value = DEFAULT_BPM;
     document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
 
     // load sounds
     soundPlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
-}
-
-function testSound() {
-    soundPlayer.resumeAudio().then( function () {
-        soundPlayer.turnOnSound();
-        soundPlayer.playStroke( "darbuka_D", 0);
-    });
 }
 
 function clickPlayRhythm() {

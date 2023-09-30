@@ -16,7 +16,7 @@ class StrokeSelector {
         let result = "";
 
         this.strokes.forEach( (stroke, idx ) => {
-            result += "<div class='button-sound' onclick='clickStrokeSelectorItem(" + idx + ")'>" + stroke + "</div>";
+            result += "<div class='button-stroke' onclick='clickStrokeSelectorItem(" + idx + ")'>" + stroke + "</div>";
             //if ( (idx+1)%6 === 0 && idx !== this.strokes.length - 1 ) result += "<br>";
         });
 

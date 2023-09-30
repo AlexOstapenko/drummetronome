@@ -1,0 +1,73 @@
+.divDBContainer {
+    margin: 20px auto;
+    position: relative;
+    display: none;
+}
+
+.div-db-categories {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.db-category {
+    background-color: #ffec77;
+    border: 1px solid black;
+    text-align: center;
+    cursor:pointer;
+    vertical-align: middle;
+    margin-left: 10px;
+    border-radius: 10px; /* Закругленные углы */
+}
+
+.db-category:hover {
+    background-color: #60c898;
+
+}
+
+.db-category-text {
+    color: #000000;
+    padding: 5px;
+}
+
+.rhythm-list-for-category {
+    position: absolute;
+    top: 0;
+    left: -30000px;
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid black;
+}
+
+.rhythms-selector {
+    border: 1px solid gray;
+    overflow: scroll;
+    height: 100px;
+    margin-top: 5px;
+}
+
+.rhythm-to-select {
+    margin: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.rhythm-to-select:hover {
+    color: #60c898;
+}
+
+.div-for-xbut {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.xbutton {
+    font-size: 12px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}

@@ -1,0 +1,40 @@
+/* Стиль для кнопки "Слушать ритм" (зеленая) */
+.button-listen {
+    background-color: #2ecc71; /* Зеленый */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    font-size: 30px;
+
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-listen:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Стиль для кнопки "Остановить ритм" */
+.button-stop {
+    background-color: #e74c3c; /* Красный */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    font-size: 30px;
+
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button-stop:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}

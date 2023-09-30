@@ -2,7 +2,7 @@ const INSTR_NAME_DARBUKA = "darbuka";
 
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
-    folder: "audio/",
+    folder: "audio/darbuka_clay/", // add / in the end
     arrStrokeToFile: [
         {stroke: "D", file: "du.mp3"},
         {stroke: "T", file: "sta.mp3"},

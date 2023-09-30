@@ -44,9 +44,16 @@ class RhythmBoard {
         this.items.forEach( (item, idx) => {
             let clsActive = this.selected == idx ? " selected " : "";
             let cls = defaultClass + this.calcClasses( item ) + clsActive;
-            result += "<div class='" + cls + "' onclick='clickRhythmBoardStroke(" + idx + ")'>" + item + 
-            "<div class='board-idx'>" + (idx+1) + "</div>" +
-            "</div>";
+
+            result += 
+                `<div class='${cls}' onclick='clickRhythmBoardStroke(${idx})'>
+                    ${item}
+                    <div class='board-idx'>${idx+1}</div>
+                </div>`;
+
+            if ( idx%8 === 0 && idx != this.items.length)
+                result += "<br>";
+
         });
         
         document.getElementById(this.containerID).innerHTML = result;
@@ -115,7 +122,7 @@ function clickRhythmBoardStroke(idx) {
 
 function setNewSize() {
     let num = parseInt( document.getElementById("num").value );
-    if (num < 0) return;
+    if (!num || num <= 0) num = 8;
 
     rhythmBoard.setNewSize(num);
     rhythmBoard.render();

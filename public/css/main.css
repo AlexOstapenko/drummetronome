@@ -4,92 +4,12 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    
     background-image: radial-gradient(white,#b9f4d9);
 }
 
-.button-size {
-  background-color: #998888; 
-  color: #fff;
-  border: none;
-  padding: 5px 7px;
-  cursor: pointer;
-  border-radius: 10px; /* Закругленные углы */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Тень */
-  transition: transform 0.2s, box-shadow 0.2s; /* Анимация при наведении */
-}
 
-.button-size:hover {
-  transform: scale(1.05); /* Увеличение при наведении */
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
-}
-
-.button-ok {
-  background-color: #2ecc71; 
-}
-
-.button-ok:hover {
-  transform: scale(1.05); /* Увеличение при наведении */
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
-}
-
-/* Стиль для кнопки "Слушать ритм" (зеленая) */
-.button-listen {
-    background-color: #2ecc71; /* Зеленый */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 15px;
-    font-size: 30px;
-
-    cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.button-listen:hover {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Стиль для кнопки "Остановить ритм" */
-.button-stop {
-    background-color: #e74c3c; /* Красный */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 15px;
-    font-size: 30px;
-
-    cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.button-stop:hover {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.counts {
-    font-size: 20px;
-    display: inline;
-}
-
-.counts-text {
-    font-weight: 700;
-}
-
-.counts-inp {
-    font-size: 20px;
-    border-radius: 10px; /* Закругленные углы */
-}
-
-.counts_but {
-    font-size: 20px;
+.no-select {
+    user-select: none;
 }
 
 .container {
@@ -97,46 +17,6 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: center;
-}
-
-.rhythm_container {
-    width: 600px;
-    height: 400px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid lightgray;
-    background-color: white;
-    border-radius: 20px;
-}
-
-/* Медиа-запрос для смартфонов и устройств с меньшими экранами */
-@media (max-width: 768px) {
-    .rhythm_container {
-        width: 100%; /* Занимает всю доступную ширину */
-        height: auto; /* Автоматическая высота */
-        padding: 10px; /* Добавим немного отступа для компактности */
-    }
-}
-
-.rhythm-item {
-
-    border: 1px solid black;
-    border-radius: 10px; /* Закругленные углы */
-    min-width: 37px;
-    font-size: 20px;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px 10px;
-    cursor: pointer;
-    background-color: white;
-}
-
-.board-idx {
-    font-size: 10px;
-    color: #fdfdfd;
 }
 
 .low {
@@ -165,123 +45,8 @@ body {
     color: #aaaaaa;
 }
 
-.selected {
-    background-color: #f6f9a7;
-}
-
-.strokeSelector {
-    /*display: flex;*/
-    margin-top: 10px;
-}
-
-.stroke {
-    min-width: 50px;
-    min-height: 50px;
-    padding-top: 13px;
-    font-size: 20px;
-    text-align: center;
-    border: 1px solid black;
-}
 
 
-/* Стили для кнопок выбора разных ударов */
-.button-sound {
-  background-color: #f39c12; /* Оранжевый (D) */
-  color: #fff;
-  border: none;
-  padding: 10px 10px;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-right: 10px;
-  display: inline-block;
-}
-
-.button-sound:hover {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.toolbar {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-
-.divDBContainer {
-    margin: 20px auto;
-    position: relative;
-    display: none;
-}
-
-.div-db-categories {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.db-category {
-    background-color: #ffec77;
-    border: 1px solid black;
-    text-align: center;
-    cursor:pointer;
-    vertical-align: middle;
-    margin-left: 10px;
-    border-radius: 10px; /* Закругленные углы */
-}
-
-.db-category:hover {
-    background-color: #60c898;
-
-}
-
-.db-category-text {
-    color: #000000;
-    padding: 5px;
-}
-
-.rhythm-list-for-category {
-    position: absolute;
-    top: 0;
-    left: -30000px;
-    background-color: white;
-    padding: 10px;
-    width: 100%;
-    min-height: 100px;
-    border: 1px solid black;
-}
-
-.rhythms-selector {
-    border: 1px solid gray;
-    overflow: scroll;
-    height: 100px;
-    margin-top: 5px;
-}
-
-.rhythm-to-select {
-    margin: 5px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.rhythm-to-select:hover {
-    color: #60c898;
-}
-
-.div-for-xbut {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.xbutton {
-    font-size: 12px;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-}
 
 .tempoInput {
     font-size: 1.2em;   

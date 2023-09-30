@@ -1,0 +1,45 @@
+.rhythm_container {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid lightgray;
+    background-color: white;
+    border-radius: 20px;
+}
+
+/* Медиа-запрос для смартфонов и устройств с меньшими экранами */
+@media (max-width: 768px) {
+    .rhythm_container {
+        width: 100%; /* Занимает всю доступную ширину */
+        height: auto; /* Автоматическая высота */
+        padding: 10px; /* Добавим немного отступа для компактности */
+    }
+}
+
+.rhythm-item {
+
+    border: 1px solid black;
+    border-radius: 10px; /* Закругленные углы */
+    min-width: 37px;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 10px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.board-idx {
+    font-size: 10px;
+    color: #ffcc00;
+    margin-top: 10px;
+}
+
+.selected {
+    background-color: #f6f9a7;
+}
+
