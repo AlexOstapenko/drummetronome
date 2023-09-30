@@ -1,13 +1,12 @@
 
 .divCounts {
     margin: 0 auto;
-    width: 200px;
+    width: 300px;
     text-align: center;
 }
 
 .counts-label {
     font-weight: 700;
-    font-size: 20px;
 }
 
 .counts-inp {
