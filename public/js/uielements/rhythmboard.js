@@ -29,7 +29,6 @@ class RhythmBoard {
         this.selected = -1;
         this.containerID = containerID;
         this.rhythmChangedListeners = [];
-        this.setNewSize(8);
     }
 
     get size() {
@@ -49,7 +48,7 @@ class RhythmBoard {
             let cls = defaultClass + this.calcClasses( item ) + clsActive;
 
             result += 
-                `<div class='${cls}' onclick='clickRhythmBoardStroke(${idx})'>
+                `<div class='${cls}' onclick='rhythmBoard.clickStroke(${idx})'>
                     ${item}
                     <div class='board-idx'>${idx+1}</div>
                 </div>`;
@@ -75,6 +74,22 @@ class RhythmBoard {
         this.notifyRhythmChanged();
     }
 
+    // Creates an empty rhythm by the given number of counts
+    buildEmptyRhythm(num) {
+        num = parseInt( num + "");
+        if (!num || num <= 0) num = 8;
+
+        let arrItems = [];
+        for( let i=0; i < num; i++ ){
+            arrItems.push( "-");
+        }
+
+        this.setNewRhythm(arrItems);
+        this.render();
+    }
+
+    // Returns array of stroke names, can include "-" for pause.
+    // Each stroke's duration = 1 impulse (1/8th note, kind of).
     get rhythm() {
         return this.items.slice();
     }
@@ -87,19 +102,16 @@ class RhythmBoard {
             else this.selected = -1;
         }
     }
-
-    setNewSize(num) {
-        if (num < 0) return;
-
-        let arrItems = [];
-        for( let i=0; i < num; i++ ){
-            arrItems.push( "-");
-        }
-
-        this.setNewRhythm(arrItems);
+  
+    clickStroke(idx) {
+        this.select(idx);
+        this.render();
     }
 
-    // This callback takes one parameter - new rhythm as Rhythm object
+   
+    // RHYTHM CHANGE LISTENERS ------------------------
+
+    // This callback takes one parameter - new rhythm as PlainRhythm object
     addRhythmChangedListener(callback) {
         this.rhythmChangedListeners.push( callback );
     }
@@ -108,35 +120,13 @@ class RhythmBoard {
         this.rhythmChangedListeners = [];
     }
 
+    // notify those who want to know about the changes in the rhythm
     notifyRhythmChanged() {
         this.rhythmChangedListeners.forEach(listener => {
-            listener( new Rhythm(this.rhythm) );
+            listener( createRhythm( plainArrOfStrokesToPhrase(this.rhythm) ) );
         });
     }
 
 }
 
 const rhythmBoard = new RhythmBoard("rhythmContainer");
-
-function clickRhythmBoardStroke(idx) {
-    rhythmBoard.select(idx);
-    rhythmBoard.render();
-}
-
-function setNewRhythmSize() {
-    let num = parseInt( document.getElementById( RHYTHM_SIZE_INPUT_ID ).value );
-    if (!num || num <= 0) num = 8;
-
-    rhythmBoard.setNewSize(num);
-    rhythmBoard.render();
-}
-
-function setRhythmSize(num) {
-    document.getElementById( RHYTHM_SIZE_INPUT_ID ).value = num;
-    setNewRhythmSize();
-}
-
-function clickPlayRhythm() {
-    rhythmPlayer.setRhythm(new Rhythm( rhythmBoard.rhythm ) );
-    rhythmPlayer.play();
-}

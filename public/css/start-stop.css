@@ -1,5 +1,5 @@
 /* Стиль для кнопки "Слушать ритм" (зеленая) */
-.button-listen {
+.button-play {
     background-color: #2ecc71; /* Зеленый */
     color: #fff;
     border: none;
@@ -12,7 +12,7 @@
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.button-listen:hover {
+.button-play:hover {
   transform: scale(1.05);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }

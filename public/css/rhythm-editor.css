@@ -1,0 +1,19 @@
+.div-visual-rhythm-editor {
+	width: 100%;
+
+	flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.div-text-rhythm-editor {
+	width: 100%;
+	flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rhythm-text-editor {
+	width: 100%;
+	
+}

@@ -27,6 +27,23 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
 }
 
+.button-advanced-rhythm {
+    width: 40px;
+    background-color: transparent !important;
+    color: black !important;
+    border: solid black 2px !important;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Тень */
+    transition: transform 0.2s, box-shadow 0.2s; /* Анимация при наведении */
+}
+
+.button-advanced-rhythm:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+}
+
 .button-size {
   background-color: #998888; 
   color: #fff;
@@ -43,11 +60,28 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
 }
 
+
+
+
 .toolbar {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .toolbar-size-buttons {
-   margin-top: 10px;
+   width: 100%;
+   margin: 10 auto;
+   text-align: center;
+}
+
+.toolbar-size-buttons button {
+  background-color: #998888; 
+  color: #fff;
+  border: none;
+  padding: 5px 7px;
+  cursor: pointer;
+  border-radius: 10px; /* Закругленные углы */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Тень */
+  transition: transform 0.2s, box-shadow 0.2s; /* Анимация при наведении */
+
 }

@@ -1,5 +1,8 @@
 
-// Loop the given rhythm 
+/* Loop the given rhythm.
+ How is rhythm represented? By an objet of class Rhythm.
+
+*/
 
 class RhythmPlayer {
 
@@ -8,7 +11,8 @@ class RhythmPlayer {
             { 
                 instrName : DEFAULT_INSTRUMENT, 
                 startTime: 0, // last scheduled time of the 1st beat of rhythm
-                oneBarDuration: 2400,
+                oneLoopDuration: 0, // will be calculated when the particlar rhythm will be set
+                onePulseDuration: 0, // will be calculated when the particlar rhythm will be set
                 rhythm: null, // should be object of class Rhythm
                 timeline: [], // rhythm -> relative time of each next sound within one bar
                 isActive: false,
@@ -31,9 +35,9 @@ class RhythmPlayer {
      * Calculates duration of one bar based on two params: how many beats in one bar and what is bpm.
      * @param {{ beatsCount: any; bpm: any; }} value
      */
-    set tempo(value)  {
-        let {beatsCount, bpm} = value;
-        this.performance.oneBarDuration = 1000*beatsCount*60/bpm;
+    set tempoInfo(tempoInfo)  {
+        this.performance.onePulseDuration = tempoInfo.onePulseDuration;
+        this.performance.oneLoopDuration = tempoInfo.oneLoopDuration;
         this.performance.doUpdateTimeline = true;
     }
 
@@ -58,7 +62,8 @@ class RhythmPlayer {
             ); 
         });
 
-        this.performance.startTime += this.performance.oneBarDuration/1000;
+        // TODO: oneLoopDuration
+        this.performance.startTime += this.performance.oneLoopDuration/1000;
     }
 
     stop() {
@@ -71,18 +76,20 @@ class RhythmPlayer {
 
     // based on the info from performance builds timeline array which contains objects with time and stroke name to play
     calculateTimeline() {
-        let info = this.performance;
-        let numOfStrokes = info.rhythm.strokes.length;
-        info.timeline = [];
+        this.performance.timeline = [];
+        let accumulatedTime = 0;
 
-        let onePulseDuration = info.oneBarDuration / numOfStrokes;
-        info.rhythm.strokes.forEach( (stroke, idx) => {
-            if ( !isPause(stroke) ) {
-                info.timeline.push( { 
-                    relativeTime: onePulseDuration*idx, 
-                    stroke: stroke
+        this.performance.rhythm.elements.forEach( item => {
+            if ( !isPause(item.stroke) ) { // there is no sense to add pause to timeline
+                this.performance.timeline.push( { 
+                    stroke: item.stroke,
+                    relativeTime: accumulatedTime, 
                 });
             }
+
+            // move accumulated time forward for next iteration
+            const thisStrokeDuration = item.size*this.performance.onePulseDuration;
+            accumulatedTime += thisStrokeDuration;
         });
 
         this.performance.doUpdateTimeline = false;
@@ -100,12 +107,13 @@ class RhythmPlayer {
 
         this.performance.scheduleLoop = setInterval(function () {
             this.scheduleNextBar();
-        }.bind( this ), this.performance.oneBarDuration-200 );
+        }.bind( this ), this.performance.oneLoopDuration-200 ); // 200 ms before the end of the loop schedule next loop
+
     }
 
     // EVENT HANDLER FOR RHYTHM CHANGE
     onRhythmChange(newRhythm) {
-        this.setRhythm( newRhythm );
+        //this.setRhythm( newRhythm );
     }
 
 }

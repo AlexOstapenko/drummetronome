@@ -14,55 +14,78 @@
     <link rel="stylesheet" href="css/start-stop.css">
     <link rel="stylesheet" href="css/db-rhythms.css">
     <link rel="stylesheet" href="css/stroke-selector.css">
+    <link rel="stylesheet" href="css/rhythm-editor.css">
+
+    <!-- for parsing rhythm text -->
+    <script src="js/utils.js"></script>
+    <script src="js/command/command.js"></script>
+    <script src="js/sentence/fraction.js"></script>
+    <script src="js/sentence/phrase.js"></script>
+    <script src="js/sentence/sentence.js"></script>
 
     <script src="js/instrumentDefinition.js"></script>
     <script src="js/rhythm.js"></script>
-    <script src="js/rhythmboard.js"></script>
+    <script src="js/uielements/rhythmboard.js"></script>
     <script src="js/strokeplayer.js"></script>
-    <script src="js/strokes.js"></script>
-    <script src="js/rhythmsdb.js"></script>
+    <script src="js/uielements/strokes.js"></script>
+    <script src="js/uielements/rhythmsdb.js"></script>
     <script src="js/audioFilePlayer.js"></script>
     <script src="js/rhythmplayer.js"></script>
+    <script src="js/uielements/textrhythmeditor.js"></script>
+    <script src="js/textrhythmplayer.js"></script>
     <script src="js/main.js"></script>
+
    
 </head>
 <body>
 
     <div class="container no-select">
-       
-       <!-- Тут мы задаем размер ритма и вспомогательные кнопки для быстрого доступа-->
-        <div class="toolbar">
+        <div id="div-visual-rhythm-editor" class="div-visual-rhythm-editor">
+            <!-- Тут мы задаем размер ритма и вспомогательные кнопки для быстрого доступа-->
+            <div class="toolbar">
 
-            <div><div class="divCounts">
-                <span class='counts-label'>BEATS:</span> &nbsp; 
-                <input type="text" id="rhythmSize" class='counts-inp' size="3"> 
-                <button class='button-size button-ok' onclick="setNewRhythmSize()">OK</button>
-            </div></div>
-            
-            <div class="toolbar-size-buttons">
-                <button class='button-size' onclick="setRhythmSize(3)">3</button>
-                <button class='button-size' onclick="setRhythmSize(4)">4</button>
-                <button class='button-size' onclick="setRhythmSize(5)">5</button>
-                <button class='button-size' onclick="setRhythmSize(6)">6</button>
-                <button class='button-size' onclick="setRhythmSize(7)">7</button>
-                <button class='button-size' onclick="setRhythmSize(8)">8</button>
-                <button class='button-size' onclick="setRhythmSize(9)">9</button>
-                <button class='button-size' onclick="setRhythmSize(10)">10</button>
-                <button class='button-size' onclick="setRhythmSize(12)">12</button>
-                <button class='button-size' onclick="setRhythmSize(14)">14</button>
-                <button class='button-size' onclick="setRhythmSize(16)">16</button>
+                <div class="divCounts">
+                    <span class='counts-label'>BEATS:</span> &nbsp; 
+                    <input type="text" id="rhythmSize" class='counts-inp' size="3"> 
+                    <button class='button-size button-ok' onclick="setNewRhythmSize()">OK</button>
+                </div>
+                <div class="toolbar-size-buttons">
+                    <button onclick="buttonSetRhythmSize(3)">3</button>
+                    <button onclick="buttonSetRhythmSize(4)">4</button>
+                    <button onclick="buttonSetRhythmSize(5)">5</button>
+                    <button onclick="buttonSetRhythmSize(6)">6</button>
+                    <button onclick="buttonSetRhythmSize(7)">7</button>
+                    <button onclick="buttonSetRhythmSize(8)">8</button>
+                    <button onclick="buttonSetRhythmSize(9)">9</button>
+                    <button onclick="buttonSetRhythmSize(10)">10</button>
+                    <button onclick="buttonSetRhythmSize(12)">12</button>
+                    <button onclick="buttonSetRhythmSize(14)">14</button>
+                    <button onclick="buttonSetRhythmSize(16)">16</button>
+                    <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">...</button>
+                </div>
             </div>
-        </div>
-    
-        <!-- тут пользователь редактирует свой ритм -->
-        <div class="rhythm_container" id="rhythmContainer"></div>
         
-        <!-- Тут список всех допустимых ударов -->
-        <div><div class="strokeSelector" id="strokeSelector"></div></div>
+            <!-- тут пользователь редактирует свой ритм -->
+            <div class="rhythm_container" id="rhythmContainer"></div>
+        
+            <!-- Тут список всех допустимых ударов -->
+            <div class="strokeSelector" id="strokeSelector"></div>
+        </div>
+
+        <div id="div-text-rhythm-editor" class="div-text-rhythm-editor">
+            <div> 
+                <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">...</button>
+                <button onclick="addTextToRhythmTextEditor('( )/2')">1/2</button> 
+                <button onclick="addTextToRhythmTextEditor('( )/4')">1/4</button> 
+                <button onclick="addTextToRhythmTextEditor('( )/3')">1/3</button> 
+            </div>
+
+            <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="10">D K T K (D K T K)/2 (D K T K)/4 (D K)/2</textarea>
+        </div>
 
         <!-- Кнопка Play/Stop -->
         <div>
-            <button id='buttPlayStop' class='button-listen' onclick="clickPlayRhythm();">PLAY</button>
+            <button id='buttPlayStop' class='button-play' onclick="clickPlayRhythm();">PLAY</button>
         </div>
 
         <!-- Изменение темпа -->
