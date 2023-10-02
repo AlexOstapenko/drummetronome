@@ -14,8 +14,8 @@ const RHYTHM_EDITOR_TEXT = "div-text-rhythm-editor";
 const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
 // ------------------------
 
-const DEFAULT_BPM = 180;
-const DEFAULT_VISUAL_RHYTHM = "D-T-Tkk";
+const DEFAULT_BPM = 160;
+const DEFAULT_VISUAL_RHYTHM = "D-P-kkP-D-kkP-kk";
 let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
@@ -44,10 +44,20 @@ function setDefaultValues() {
 }
 
 function addUIEventHandlers() {
+
+
+    function updateRhythmSize() {
+        rhythmBoard.buildEmptyRhythm( document.getElementById( RHYTHM_SIZE_INPUT_ID ).value );
+    }
+
     // process ENTER in editing rhythm size input field
     document.getElementById("rhythmSize").addEventListener('keyup', function (event) {
         if (event.key === 'Enter') 
-            rhythmBoard.buildEmptyRhythm( document.getElementById( RHYTHM_SIZE_INPUT_ID ).value );
+            updateRhythmSize();
+    });
+
+    document.getElementById("buttonOkNewRhythmSize").addEventListener('click', function (event) {
+        updateRhythmSize();
     });
 }
 

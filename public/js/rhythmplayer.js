@@ -21,7 +21,7 @@ class RhythmPlayer {
 
             };
 
-            this.player = audioFilePlayer;
+            this.audioPlayer = audioFilePlayer;
     }
 
     get isActive() { return this.performance.isActive; }
@@ -56,7 +56,7 @@ class RhythmPlayer {
         this.performance.timeline.forEach( timeLineItem => {
 
             const time = this.performance.startTime + timeLineItem.relativeTime/1000;
-            this.player.playStroke( 
+            this.audioPlayer.playStroke( 
                 {instrumentName: DEFAULT_INSTRUMENT.instrumentName, strokeName: timeLineItem.stroke}, 
                 time
             ); 
@@ -68,10 +68,9 @@ class RhythmPlayer {
 
     stop() {
         this.performance.isActive = false;
-        this.player.turnOffSound();
+        this.audioPlayer.turnOffSound();
         if ( this.performance.scheduleLoop!= -1 )
             clearInterval( this.performance.scheduleLoop );
-
     }
 
     // based on the info from performance builds timeline array which contains objects with time and stroke name to play
@@ -97,11 +96,11 @@ class RhythmPlayer {
 
     play() {
         this.stop();
-        this.player.turnOnSound();
+        this.audioPlayer.turnOnSound();
 
         this.calculateTimeline();
         this.performance.isActive = true;
-        this.performance.startTime = this.player.audioContext.currentTime;
+        this.performance.startTime = this.audioPlayer.audioContext.currentTime;
         
         this.scheduleNextBar();
 

@@ -9,7 +9,7 @@ class StrokeSelector {
 
     constructor(containerID) {
         this.containerID = containerID;
-        this.strokes = strokeNames( INSTRUMENT_DARBUKA );
+        this.strokes = strokeNames( DEFAULT_INSTRUMENT );
     }
 
     render() {

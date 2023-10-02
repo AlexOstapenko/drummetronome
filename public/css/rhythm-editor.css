@@ -15,5 +15,9 @@
 
 .rhythm-text-editor {
 	width: 100%;
-	
+	font-size: 1.2em;
+}
+
+.button-delete-textrhythm {
+	width: 50px;
 }

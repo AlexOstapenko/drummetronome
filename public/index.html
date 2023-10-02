@@ -32,7 +32,6 @@
     <script src="js/audioFilePlayer.js"></script>
     <script src="js/rhythmplayer.js"></script>
     <script src="js/uielements/textrhythmeditor.js"></script>
-    <script src="js/textrhythmplayer.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -45,7 +44,7 @@
                 <div class="divCounts">
                     <span class='counts-label'>BEATS:</span> &nbsp; 
                     <input type="text" id="rhythmSize" class='counts-inp' size="3"> 
-                    <button class='button-size button-ok' onclick="setNewRhythmSize()">OK</button>
+                    <button id='buttonOkNewRhythmSize' class='button-size button-ok'>OK</button>
                 </div>
                 <div class="toolbar-size-buttons">
                     <button onclick="buttonSetRhythmSize(3)">3</button>
@@ -59,7 +58,7 @@
                     <button onclick="buttonSetRhythmSize(12)">12</button>
                     <button onclick="buttonSetRhythmSize(14)">14</button>
                     <button onclick="buttonSetRhythmSize(16)">16</button>
-                    <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">...</button>
+                    <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">* T *</button>
                 </div>
             </div>
         
@@ -72,13 +71,14 @@
 
         <div id="div-text-rhythm-editor" class="div-text-rhythm-editor">
             <div> 
-                <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">...</button>
+                <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">* V *</button>
                 <button onclick="addTextToRhythmTextEditor('( )/2')">1/2</button> 
                 <button onclick="addTextToRhythmTextEditor('( )/4')">1/4</button> 
                 <button onclick="addTextToRhythmTextEditor('( )/3')">1/3</button> 
             </div>
 
-            <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="10">D K T K (D K T K)/2 (D K T K)/4 (D K)/2</textarea>
+            <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="15"></textarea>
+            <button class="button-delete-textrhythm" onclick="setTextRhythm('')">x</button> 
         </div>
 
         <!-- Кнопка Play/Stop -->
