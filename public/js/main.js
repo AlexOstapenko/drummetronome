@@ -15,7 +15,7 @@ const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
 // ------------------------
 
 const DEFAULT_BPM = 180;
-const defaultRhythm = "D-T-Tkk";
+const DEFAULT_VISUAL_RHYTHM = "D-T-Tkk";
 let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
@@ -25,16 +25,22 @@ function onDocumentLoaded() {
     // load sounds
     soundPlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
 
+    setDefaultValues();
     //RHYTHMS_DB.render();
-
-    document.getElementById(ID_INPUT_TEMPO).value = DEFAULT_BPM;
-    document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
 
     updateRhythmEditorVisibility();
     if ( rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
         initVisualRhythmEditor();
     
     addUIEventHandlers();
+}
+
+function setDefaultValues() {
+    document.getElementById(ID_INPUT_TEMPO).value = DEFAULT_BPM;
+    document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
+    
+    setTextRhythm( DEFAULT_TEXTRHYTHM );
+    rhythmBoard.setNewRhythm(DEFAULT_VISUAL_RHYTHM);
 }
 
 function addUIEventHandlers() {
@@ -46,9 +52,8 @@ function addUIEventHandlers() {
 }
 
 function initVisualRhythmEditor() {
-    rhythmBoard.setNewRhythm(defaultRhythm);
+    
     rhythmBoard.addRhythmChangedListener( rhythmPlayer.onRhythmChange.bind(rhythmPlayer) );
-
     rhythmBoard.render();
     strokeSelector.render();
 }
