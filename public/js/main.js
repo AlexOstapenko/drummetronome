@@ -105,12 +105,19 @@ function showTempoDiv(doShow)  {
     document.getElementById( ID_DIV_TEMPO ).style.visibility = doShow ? "visible" : "hidden";
 }
 
+// When the tempo range element's value is changed
+function onChangeTempo() {
+    if (rhythmPlayer.isActive) return; // if user wants to change the tempo - only through STOP-START
+
+    let bpm = document.getElementById(ID_INPUT_TEMPO).value;
+    document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = bpm;
+}
+
 // Set new tempo and rhythm if player is not active
 function setRhythmAndTempoInfoToPlayer() {
     if (rhythmPlayer.isActive) return;
 
     let bpm = document.getElementById(ID_INPUT_TEMPO).value;
-    document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = bpm;
 
     let tempoInfo = {};
     let rhythmPhrase = null;
