@@ -43,7 +43,8 @@ const INSTRUMENT_COOPERMAN_TAR = {
 class InstrumentHelper {
     constructor() {
         this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR];
-        this.defaultInstrument = INSTRUMENT_COOPERMAN_TAR;
+        //this.defaultInstrument = INSTRUMENT_COOPERMAN_TAR;
+        this.defaultInstrument = INSTRUMENT_DARBUKA;
     }
 
     strokeNames(instrument) {

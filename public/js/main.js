@@ -16,7 +16,7 @@ const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
 
 const DEFAULT_BPM = 160;
 const DEFAULT_VISUAL_RHYTHM = 
-`D-tkDKTKP-P-Wbab`;
+`D-P–kkP-D-kkP-kk`;
 let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
@@ -150,7 +150,7 @@ function setRhythmAndTempoInfoToPlayer() {
 
     } else if (rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
         rhythmPhrase = new Phrase( getTextRhythm() );
-        tempoInfo.onePulseDuration = 60*1000/bpm;
+        tempoInfo.onePulseDuration = 60*1000/(bpm*2);
         tempoInfo.oneLoopDuration = rhythmPhrase.getSize(false) * tempoInfo.onePulseDuration;
     }
 
