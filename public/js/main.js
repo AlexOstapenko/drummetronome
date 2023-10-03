@@ -23,10 +23,6 @@ const soundPlayer = audioFilePlayer;
 
 function onDocumentLoaded() {
 
-    // test
-
-    console.log( instrumentHelper.getGainValue("cooperman-tar_R"));
-
     // load sounds
     soundPlayer.loadAudioFiles( instrumentHelper.defaultInstrument );
 
