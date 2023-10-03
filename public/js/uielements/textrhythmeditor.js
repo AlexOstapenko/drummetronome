@@ -19,7 +19,7 @@ function addTextToTextarea(id, newText) {
     const text = textarea.value;
 
     // Проверяем, находится ли курсор в начале строки
-    if ( text[text.length - 1] !== '\n')
+    if ( text !== "" && text[text.length - 1] !== '\n' )
         textarea.value +=  " ";
     
     textarea.value += newText;

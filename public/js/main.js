@@ -15,15 +15,20 @@ const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
 // ------------------------
 
 const DEFAULT_BPM = 160;
-const DEFAULT_VISUAL_RHYTHM = "D-P-kkP-D-kkP-kk";
+const DEFAULT_VISUAL_RHYTHM = 
+`D-tkDKTKP-P-Wbab`;
 let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
 
 function onDocumentLoaded() {
 
+    // test
+
+    console.log( instrumentHelper.getGainValue("cooperman-tar_R"));
+
     // load sounds
-    soundPlayer.loadAudioFiles( DEFAULT_INSTRUMENT );
+    soundPlayer.loadAudioFiles( instrumentHelper.defaultInstrument );
 
     setDefaultValues();
     //RHYTHMS_DB.render();

@@ -122,8 +122,18 @@ class AudioFilePlayer {
 
 		let bufferSource = this.audioCtx.createBufferSource();
 		bufferSource.buffer = buffer;
+
+		// if the stroke in the instrument defines it's own gain - add it in the chain
+		let nodeDestination = this.gainNode; // by default send it to the main gain node
+		const strokeGainValue = instrumentHelper.getGainValue( strokeID );
+		if (strokeGainValue >=0 ) {
+			const strokeGainNode = this.audioCtx.createGain();
+			strokeGainNode.gain.value = strokeGainValue;
+			nodeDestination = strokeGainNode; // redefine the destination for this stroke
+			strokeGainNode.connect( this.gainNode ); // connect personal gain of the stroke to the main gain node
+		}
 		
-		bufferSource.connect( this.gainNode );
+		bufferSource.connect( nodeDestination );
 		bufferSource.start(when);
 	}
 

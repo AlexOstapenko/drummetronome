@@ -9,7 +9,7 @@ class RhythmPlayer {
     constructor() {
         this.performance =
             { 
-                instrName : DEFAULT_INSTRUMENT, 
+                instrName : instrumentHelper.defaultInstrument.instrumentName, 
                 startTime: 0, // last scheduled time of the 1st beat of rhythm
                 oneLoopDuration: 0, // will be calculated when the particlar rhythm will be set
                 onePulseDuration: 0, // will be calculated when the particlar rhythm will be set
@@ -57,7 +57,7 @@ class RhythmPlayer {
 
             const time = this.performance.startTime + timeLineItem.relativeTime/1000;
             this.audioPlayer.playStroke( 
-                {instrumentName: DEFAULT_INSTRUMENT.instrumentName, strokeName: timeLineItem.stroke}, 
+                {instrumentName: this.performance.instrName, strokeName: timeLineItem.stroke}, 
                 time
             ); 
         });
