@@ -6,6 +6,7 @@ class AudioFilePlayer {
 		this.strokeID2Buffer = {}; // map stroke id -> buffer, strokeID = <instr-name>_<strokeName>
 		this.gainNode = null;
 		this.compressor = null;
+		this.loadedInstrumentNames = [];
     }
 
 	get audioContext() { 
@@ -53,36 +54,39 @@ class AudioFilePlayer {
 	* instrumentInfo = {
 			name: string,
     		folder: string,
-    		stroke2file: array of objects {
+    		strokeInfo: array of objects {
 				stroke: string,
 				file: string
     		}
 	  callback will receive object: {<instrName>_<strokeName> : AudioBuffer, ...}
 	*/
-	loadAudioFiles( instrumentInfo ) {
-
-		let {folder, instrumentName, arrStrokeToFile} = instrumentInfo;
+	loadAudioFiles( instrument, callback ) {
+		let {folder, instrumentName, arrStrokeInfo} = instrument;
+		if ( this.loadedInstrumentNames.indexOf( instrumentName ) >= 0 ) return;
+		
 		const audioContext = this.audioContext;
 	    let loadedAudioBuffers = {};
 	    let loadCount = 0;
 
 	    function checkComplete() {
-	        if (loadCount === arrStrokeToFile.length) {
-	            audioFilePlayer.filesLoaded(loadedAudioBuffers);
+	        if (loadCount === arrStrokeInfo.length) {
+	            audioFilePlayer.filesLoaded( loadedAudioBuffers );
+	            audioFilePlayer.loadedInstrumentNames.push( instrumentName );
+	            if (callback) callback( instrument ); 
 	        }
 	    }
 
-	    arrStrokeToFile.forEach(function (stroke2file) {
-			let strokeName = stroke2file.stroke;
-			let key = audioFilePlayer.makeStrokeID(instrumentName, strokeName);
+	    arrStrokeInfo.forEach(function (strokeInfo) {
+			let strokeName = strokeInfo.stroke;
+			let key = InstrumentManager.makeStrokeID(instrumentName, strokeName);
 
-	    	if (!stroke2file.file || stroke2file.file==="" ) {
+	    	if (!strokeInfo.file || strokeInfo.file==="" ) {
 	    		loadedAudioBuffers[key] = null;	
 	    		loadCount++;
                 checkComplete();
 	    	}
 	    	else {
-		        let path = folder + stroke2file.file;
+		        let path = folder + strokeInfo.file;
 		        fetch(path)
 		            .then(response => response.arrayBuffer())
 		            .then(data => audioContext.decodeAudioData(data))
@@ -98,14 +102,19 @@ class AudioFilePlayer {
 	    });
 	}
 
-	filesLoaded( loadedAudioBuffers ) {
-		this.strokeID2Buffer = loadedAudioBuffers;
-		console.log( "All sound files are loaded." );
+	// checks if the audio files for the given instrument are loaded
+	isInstrumentLoaded( instrument ) {
+		return this.loadedInstrumentNames.indexOf( instrument.instrumentName ) >= 0;
 	}
 
-	makeStrokeID(instrName, strokeName) {
-		return `${instrName}_${strokeName}`;
-	} 
+	filesLoaded( loadedAudioBuffers ) {
+		Object.keys(loadedAudioBuffers).forEach( key => {
+			this.strokeID2Buffer[key] = loadedAudioBuffers[key];
+		});
+
+		//this.strokeID2Buffer = loadedAudioBuffers;
+		console.log( "All sound files are loaded." );
+	}
 
 	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName
 	playStroke( strokeInfo, when ) {
@@ -114,7 +123,7 @@ class AudioFilePlayer {
 		if ( typeof strokeInfo == "string" ) {
 			strokeID = strokeInfo;
 		} else if (typeof strokeInfo == "object") {
-			strokeID = this.makeStrokeID( strokeInfo.instrumentName, strokeInfo.strokeName);
+			strokeID = InstrumentManager.makeStrokeID( strokeInfo.instrumentName, strokeInfo.strokeName);
 		}
 		
 		let buffer = this.strokeID2Buffer[strokeID];
@@ -125,7 +134,7 @@ class AudioFilePlayer {
 
 		// if the stroke in the instrument defines it's own gain - add it in the chain
 		let nodeDestination = this.gainNode; // by default send it to the main gain node
-		const strokeGainValue = instrumentHelper.getGainValue( strokeID );
+		const strokeGainValue = instrumentManager.getGainValue( strokeID );
 		if (strokeGainValue >=0 ) {
 			const strokeGainNode = this.audioCtx.createGain();
 			strokeGainNode.gain.value = strokeGainValue;

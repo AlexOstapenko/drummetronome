@@ -14,20 +14,19 @@ const RHYTHM_EDITOR_TEXT = "div-text-rhythm-editor";
 const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
 // ------------------------
 
-const DEFAULT_BPM = 160;
-const DEFAULT_VISUAL_RHYTHM = 
-`D-P–kkP-D-kkP-kk`;
+const DEFAULT_BPM = 90;
 let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
 
 function onDocumentLoaded() {
 
-    // load sounds
-    soundPlayer.loadAudioFiles( instrumentHelper.defaultInstrument );
+    initDefaultInstrument();
 
     setDefaultValues();
     //RHYTHMS_DB.render();
+
+    instrumentSelector.render();
 
     updateRhythmEditorVisibility();
     if ( rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
@@ -36,16 +35,23 @@ function onDocumentLoaded() {
     addUIEventHandlers();
 }
 
+function initDefaultInstrument() {
+    // load sounds
+    const currInstr = instrumentManager.currentInstrument;
+    soundPlayer.loadAudioFiles( currInstr );
+
+    // set default rhythm texts for visual and text rhythm editor
+    rhythmBoard.setNewRhythm(currInstr.defaultRhythms[0] );
+    setTextRhythm( currInstr.defaultRhythms[1] );
+}
+
 function setDefaultValues() {
     document.getElementById(ID_INPUT_TEMPO).value = DEFAULT_BPM;
     document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
-    
-    setTextRhythm( DEFAULT_TEXTRHYTHM );
-    rhythmBoard.setNewRhythm(DEFAULT_VISUAL_RHYTHM);
+
 }
 
 function addUIEventHandlers() {
-
 
     function updateRhythmSize() {
         rhythmBoard.buildEmptyRhythm( document.getElementById( RHYTHM_SIZE_INPUT_ID ).value );

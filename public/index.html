@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/db-rhythms.css">
     <link rel="stylesheet" href="css/stroke-selector.css">
     <link rel="stylesheet" href="css/rhythm-editor.css">
+    <link rel="stylesheet" href="css/instruments.css">
 
     <!-- for parsing rhythm text -->
     <script src="js/utils.js"></script>
@@ -23,12 +24,14 @@
     <script src="js/sentence/phrase.js"></script>
     <script src="js/sentence/sentence.js"></script>
 
-    <script src="js/instrumentDefinition.js"></script>
+    <script src="js/instruments/instrumentdefinition.js"></script>
+    <script src="js/instruments/instrumentmanager.js"></script>
     <script src="js/rhythm.js"></script>
     <script src="js/uielements/rhythmboard.js"></script>
     <script src="js/strokeplayer.js"></script>
     <script src="js/uielements/strokes.js"></script>
     <script src="js/uielements/rhythmsdb.js"></script>
+    <script src="js/uielements/instrumentselector.js"></script>
     <script src="js/audioFilePlayer.js"></script>
     <script src="js/rhythmplayer.js"></script>
     <script src="js/uielements/textrhythmeditor.js"></script>
@@ -37,10 +40,12 @@
 <body>
 
     <div class="container no-select">
+        <!-- Здесь пользователь выбирает инструмент -->
+        <div id="divInstrumentSelect" class='div-instrument-select'></div>
+
         <div id="div-visual-rhythm-editor" class="div-visual-rhythm-editor">
             <!-- Тут мы задаем размер ритма и вспомогательные кнопки для быстрого доступа-->
             <div class="toolbar">
-
                 <div class="divCounts">
                     <span class='counts-label'>BEATS:</span> &nbsp; 
                     <input type="text" id="rhythmSize" class='counts-inp' size="3"> 

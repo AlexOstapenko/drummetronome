@@ -9,7 +9,7 @@ class RhythmPlayer {
     constructor() {
         this.performance =
             { 
-                instrName : instrumentHelper.defaultInstrument.instrumentName, 
+                instrName : instrumentManager.currentInstrument.instrumentName, 
                 startTime: 0, // last scheduled time of the 1st beat of rhythm
                 oneLoopDuration: 0, // will be calculated when the particlar rhythm will be set
                 onePulseDuration: 0, // will be calculated when the particlar rhythm will be set
@@ -108,6 +108,10 @@ class RhythmPlayer {
             this.scheduleNextBar();
         }.bind( this ), this.performance.oneLoopDuration-200 ); // 200 ms before the end of the loop schedule next loop
 
+    }
+
+    updateCurrentInstrument() {
+        this.performance.instrName = instrumentManager.currentInstrument.instrumentName;
     }
 
     // EVENT HANDLER FOR RHYTHM CHANGE

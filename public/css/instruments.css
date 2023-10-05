@@ -1,0 +1,31 @@
+.div-instrument-select {
+	background-color: #a8e2c7;
+	width: 100%;
+	text-align: center;
+	height: 25px;
+}
+
+.divInstrument {
+	display: inline;
+	padding: 5px 10px;
+	
+	border-radius: 4px;
+	background-color: #eeeeee;
+	color: #aaaaaa;
+	font-size: 0.8em;
+}
+
+.divInstrument:hover {
+	transform: scale(1.05);
+  	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.instrument-selected {
+	background-color: #f6f9a7;
+	color: black;
+	border: 1px solid black;
+}
+
+.instrument-selected:hover {
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+}
