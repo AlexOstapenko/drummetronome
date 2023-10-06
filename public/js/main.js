@@ -155,7 +155,8 @@ function setRhythmAndTempoInfoToPlayer() {
         rhythmPhrase = new Phrase( rhythmBoard.rhythm.join( " " ) );
 
     } else if (rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
-        rhythmPhrase = new Phrase( getTextRhythm() );
+        let textRhythmRaw = getTextRhythm();
+        rhythmPhrase = new Phrase( processRawTextRhythm( getTextRhythm() ) );
         tempoInfo.onePulseDuration = 60*1000/(bpm*2);
         tempoInfo.oneLoopDuration = rhythmPhrase.getSize(false) * tempoInfo.onePulseDuration;
     }

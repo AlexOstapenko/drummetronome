@@ -36,3 +36,25 @@ function getTextRhythm() {
 function setTextRhythm( str ) {
     document.querySelector(`#${RHYTHM_EDITOR_TEXT_ID}`).value = str; 
 }
+
+// In the end of line can be ": N"
+// It means - repeat the text from this line N times.
+function processRawTextRhythm( text ) {
+
+    let result = "";
+    const lines = text.split("\n").filter(line => line.trim() !== "");
+
+    for (const line of lines) {
+        value = "";
+        if (line.includes(":")) {
+            const [start, number] = line.split(":");
+            value = ( start + (start[start.length-1]===" "? "" : " ") ).repeat(Number(number));
+        } else {
+            value = line;
+        }
+
+        if (result) result += "\n"; 
+        result += value;
+    }
+    return result;
+}
