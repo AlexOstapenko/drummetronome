@@ -16,18 +16,17 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "R", file: "ta.mp3"},
         {stroke: "L", file: "ka.mp3"},
         {stroke: "S", file: "pa.mp3"},
-        {stroke: "A", file: "A.mp3", gain: 0.5},
-        {stroke: "B", file: "B.mp3", gain: 0.5},
-        {stroke: "C", file: "C.mp3", gain: 0.5},
-        {stroke: "P", file: "H.mp3", gain: 0.5},
+        {stroke: "P", file: "P.mp3", gain: 0.5},
+        {stroke: "Pm", file: "PP.mp3", gain: 0.5},
+        {stroke: "Pl", file: "PPP.mp3", gain: 0.5},
         {stroke: "X", file: "X.mp3"},
         {stroke: "-", file: ""}
     ],
-    defaultRhythms: ["DSPSDPSX", 
+    defaultRhythms: ["D P Pl P D K X –", 
 `D S k S D k S (k k)/2
-D S (k k)/2 S D k (S X P C)/2
+D S (k k)/2 S D k (S X P Pm)/2
 D S (k k)/2 S D (k k)/2 S (k k)/2
-(D D D D)/4 S (A B C P)/2 X X T/2 (t k k t k k t k k)/6`]
+(D D D D)/4 S (Pl Pl Pm P)/2 X X T/2 (t k k t k k t k k)/6`]
 }
 
 const INSTRUMENT_COOPERMAN_TAR = {
@@ -51,7 +50,7 @@ const INSTRUMENT_COOPERMAN_TAR = {
         {stroke: "W", file: "W.mp3"}
     ],
     // first for visual editor, second for text editor
-    defaultRhythms: [ "D-P–kkP-D-kkP-kk", 
+    defaultRhythms: [ "D - P – k k P - D - k k P - k k", 
 `D L L L (R R L L)/2 (D L L L)/4 (T K)/2
 D L L L (R R L L)/2 (D L L L)/4 (T K)/2
 

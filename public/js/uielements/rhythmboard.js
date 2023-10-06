@@ -66,10 +66,23 @@ class RhythmBoard {
         this.selected = this.selected == num ? -1 : num;
     }
 
-    // rhythm could be wether array of chars or string.
-    // if scting - it will be splitter char by char to create the array
+    // Rhythm could be wether array of chars or string.
+    // if string - it will be treated as a Phrase. 
+    // But make sure each syllable in the phrase has a duration of 1, duration info is ignored.
     setNewRhythm(rhythm) {
-        this.items = (typeof rhythm == "string") ? rhythm.split("") : rhythm.slice();
+        let items = [];
+
+        if (Array.isArray(rhythm))
+            items = rhythm.slice();
+        else if ( typeof rhythm === 'string' ) {
+            let phrase = new Phrase( rhythm );
+            for( const el of phrase.elements ) {
+                items.push( el.syllable );
+            }
+        }
+        else return;
+
+        this.items = items;
         this.selected = -1;
         this.notifyRhythmChanged();
     }
