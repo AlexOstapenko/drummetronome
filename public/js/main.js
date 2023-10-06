@@ -7,15 +7,7 @@ const ID_DIV_TEMPO = "divTempo";
 const L_BUTT_PLAY = "PLAY";
 const L_BUTT_STOP = "STOP";
 
-
-// REGARDING RHYTHM EDITORS
-const RHYTHM_EDITOR_VISUAL = "div-visual-rhythm-editor";
-const RHYTHM_EDITOR_TEXT = "div-text-rhythm-editor";
-const rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
-// ------------------------
-
 const DEFAULT_BPM = 90;
-let currentRhythmEditorIdx = 0;
 
 const soundPlayer = audioFilePlayer;
 
@@ -24,12 +16,12 @@ function onDocumentLoaded() {
     initDefaultInstrument();
 
     setDefaultValues();
-    //RHYTHMS_DB.render();
+    RHYTHMS_DB.render();
 
     instrumentSelector.render();
 
     updateRhythmEditorVisibility();
-    if ( rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
+    if ( rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
         initVisualRhythmEditor();
     
     addUIEventHandlers();
@@ -78,8 +70,8 @@ function initVisualRhythmEditor() {
 // There is 2 types of rhythm, editors: visual, more simple 
 // and text editor where you can define more complex rhythmic phrases
 function switchRhythmEditor() {
-    currentRhythmEditorIdx++; 
-    if (currentRhythmEditorIdx === rhythmEditors.length) currentRhythmEditorIdx = 0;
+    rhythmEditorsManager.currentRhythmEditorIdx++; 
+    if (rhythmEditorsManager.currentRhythmEditorIdx === rhythmEditors.length) rhythmEditorsManager.currentRhythmEditorIdx = 0;
     updateRhythmEditorVisibility();
 }
 
@@ -87,7 +79,7 @@ function updateRhythmEditorVisibility() {
     // show the current rhythm editor type
     rhythmEditors.forEach( (item, idx) => {
         let div = document.querySelector(`#${item}`);
-        div.style.display = (idx===currentRhythmEditorIdx) ? "flex" : "none";
+        div.style.display = (idx===rhythmEditorsManager.currentRhythmEditorIdx) ? "flex" : "none";
     });
 }
 
@@ -144,7 +136,7 @@ function setRhythmAndTempoInfoToPlayer() {
     let tempoInfo = {};
     let rhythmPhrase = null;
 
-    if (rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL) {
+    if (rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL) {
         let beatsCount = rhythmBoard.size;
         let actualBPM = bpm*2;
 
@@ -154,7 +146,7 @@ function setRhythmAndTempoInfoToPlayer() {
         // setting up the rhythm
         rhythmPhrase = new Phrase( rhythmBoard.rhythm.join( " " ) );
 
-    } else if (rhythmEditors[currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
+    } else if (rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
         let textRhythmRaw = getTextRhythm();
         rhythmPhrase = new Phrase( processRawTextRhythm( getTextRhythm() ) );
         tempoInfo.onePulseDuration = 60*1000/(bpm*2);

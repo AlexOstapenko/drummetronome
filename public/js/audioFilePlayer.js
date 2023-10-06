@@ -7,6 +7,9 @@ class AudioFilePlayer {
 		this.gainNode = null;
 		this.compressor = null;
 		this.loadedInstrumentNames = [];
+		
+		// TODO
+		//this.fileToBuffer = {}; // to make sure we don't load same file twice (two or more strokes can use the same file)
     }
 
 	get audioContext() { 
@@ -76,7 +79,7 @@ class AudioFilePlayer {
 	        }
 	    }
 
-	    arrStrokeInfo.forEach(function (strokeInfo) {
+	    arrStrokeInfo.forEach( function (strokeInfo) {
 			let strokeName = strokeInfo.stroke;
 			let key = InstrumentManager.makeStrokeID(instrumentName, strokeName);
 
@@ -92,7 +95,6 @@ class AudioFilePlayer {
 		            .then(data => audioContext.decodeAudioData(data))
 		            .then(buffer => {
 		                loadedAudioBuffers[key] = buffer;
-
 		                console.log( `Loaded file for ${key}`);
 		                loadCount++;
 		                checkComplete();
