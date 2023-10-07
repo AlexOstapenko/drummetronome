@@ -36,14 +36,14 @@
     background-color: white;
     padding: 10px;
     width: 100%;
-    min-height: 100px;
+    min-height: 200px;
     border: 1px solid black;
 }
 
 .rhythms-selector {
     border: 1px solid gray;
     overflow: scroll;
-    height: 100px;
+    height: 100%;
     margin-top: 5px;
 }
 
