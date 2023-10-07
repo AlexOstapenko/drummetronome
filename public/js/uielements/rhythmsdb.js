@@ -35,9 +35,9 @@ let RHYTHMS_DB = {
       ]
     }, 
 
-    {
-      id : "fd_warmups", name : "Frame drum warm ups",
-        rhythms: [
+{id : "fd_warmups", name : "Frame drum warm ups",
+rhythms: 
+[
 
 {name: FRAMEDRUM_EXERCISES_IDS.PREFIX + "1", text: 
 `R R R R L L L L : 3
@@ -136,11 +136,24 @@ D L L (D L L L R R R L L L )/4 (D L L L R R R L L L )/4`},
 
 {name: FRAMEDRUM_EXERCISES_IDS.PREFIX + "24", text: 
 `(D2 T K)/2 (R R R R L L L L)/4
-(T K)/2 (R R R R L L L L)/4 (D K)/2`
-}
+(T K)/2 (R R R R L L L L)/4 (D K)/2`}
+]},
 
-        ]
-    }
+
+{ id: "compositions_for_darbuka", name : "Compositions for Darbuka",
+      rhythms: [
+        { name: "Intro to Malfuf", text: 
+`D/4 : 8
+T/2 : 4
+X : 4
+
+(K - t k D -)/4 :2
+(X X)/2
+(D X D D K D)/2 (T K T K)/4
+
+(D k k S k k S k)/2 :16`}
+      ]
+}
 
 
 
