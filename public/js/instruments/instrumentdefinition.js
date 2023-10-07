@@ -53,14 +53,11 @@ const INSTRUMENT_COOPERMAN_TAR = {
     ],
     // first for visual editor, second for text editor
     defaultRhythms: [ "D - P – k k P - D - k k P - k k", 
-`D L L L (R R L L)/2 (D L L L)/4 (T K)/2
-D L L L (R R L L)/2 (D L L L)/4 (T K)/2
+`D L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2
 
-(R R L L)/2 (D L L L)/4 (T K)/2
-(R R L L)/2 (D L L L)/4 (T K)/2
+(R R L L)/2 (D L L L)/4 (T K)/2 :2
 
-(D L L L)/4 (T K)/2
-(D L L L)/4 (T K)/2
+(D L L L)/4 (T K)/2 :2
 
-(R R R R L L L L R R R R L L L L)/4`]
+(R R R R L L L L)/4 :2`]
 }
