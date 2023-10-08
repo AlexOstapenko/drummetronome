@@ -4,29 +4,56 @@
     text-align: center;
 }
 
+.label-rhythm-library {
+    font-weight: 300;
+    color: #000000;
+    padding-bottom: 10px;
+}
+
+.div-categories-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Дополнительные стили для контейнера */
+  background-color: transparent;
+}
+
 .div-db-categories {
-    /* display: flex;
-    justify-content: flex-start;
-    align-items: flex-start; */
-
-    text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 500px; /* Максимальная ширина контейнера */
+  border-radius: 10px;
+  border: 1px solid green;
+  background-color: #ffec77;
 }
 
-.button-db-category {
-    font-size: 1em;
-    background-color: #ffec77;
-    color: black;
-    border: 1px solid black;
-    text-align: center;
+.div-db-category {
+    width: calc(50%); /* 50% ширины контейнера минус отступы между элементами */
+    /*margin-bottom: 20px; */
     cursor:pointer;
-    vertical-align: middle;
-    margin-left: 10px;
-    padding: 10px;
-    border-radius: 10px; /* Закругленные углы */
+    font-size: 1em;
+    /*background-color: #ffec77;*/
+    color: black;
+    /*border: 0.5px solid black;
+    border-radius: 10px;*/
+    padding:5px;
 }
 
-.button-db-category:hover {
-    background-color: #60c898;
+.div-db-category:nth-child(even) {
+  border-left: 1px solid #ccc; /* Линия между элементами */
+}
+
+.div-db-category:not(:last-child){
+    border-bottom: 1px solid #ccc; /* Линия между рядами элементов */
+}
+
+.div-db-category:nth-last-child(2){
+    border-bottom: 0px;
+}
+
+.div-db-category:hover {
+    color: #60c898;
 }
 
 .rhythm-list-for-category {
@@ -39,7 +66,7 @@
     padding: 10px;
     min-width: 300px;
     border: 1px solid black;
-background-color: lightgray;
+    background-color: lightgray;
 }
 
 .rhythms-selector {

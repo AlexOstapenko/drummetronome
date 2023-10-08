@@ -18,11 +18,16 @@ class RhythmsDBUIController {
     
     // create interactive div for each category
     let arr = RhythmLibrary1.categories.map( cat => {
-      let result = 
-      `<button class='button-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</button>`
+      let result = `<div class='div-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</div>`;
+
+      //`<button class='button-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</button>`
       return result;
     });
-    elem.innerHTML = arr.join("");
+    elem.innerHTML = 
+    `<div class='div-db-categories'>
+        ${arr.join("")}
+    </div>
+    `;
   } 
 
   clickCategory(id) {

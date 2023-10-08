@@ -111,12 +111,13 @@
     
     <!-- Доступ к ритмам и композициям из библиотеки -->
     <div class="divDBContainer">
-        <div class="div-db-categories" id="divDBCategories"></div>
+        <div class='label-rhythm-library'>RHYTHM LIBRARY</div>
+        <div class="div-categories-container" id="divDBCategories"></div>
 
         <!-- this is window to select rhythms from a chosen category -->
         <div class="rhythm-list-for-category" id="divRhythmListForCategory">
             <div class='div-for-xbut'>
-                <span id="spanRhythmCategoryName">Choose rhythm</span>
+                <span class='spanRhythmCategoryName' id="spanRhythmCategoryName">Choose rhythm</span>
                 <button class='xbutton' onclick='rhythmsDBUI.clickCloseRhythmsListForCategory();'>x</button>
             </div>
             <div id="divRhythmsSelector" class='rhythms-selector'></div>
