@@ -8,6 +8,7 @@ class RhythmsDBUIController {
     this.htmlElementIDToRender = "divDBCategories";
     this.htmlElementIDToSelectRhythms_Container = "divRhythmListForCategory";
     this.htmlElementIDToSelectRhythms = "divRhythmsSelector";
+    this.elementID_Title = "spanRhythmCategoryName";
     this.openedCategory = "";
   }
 
@@ -38,6 +39,7 @@ class RhythmsDBUIController {
 
     let divRhythms = document.getElementById( this.htmlElementIDToSelectRhythms_Container );
     let divRhythmsSelector = document.getElementById( this.htmlElementIDToSelectRhythms );
+    let elementTitle = document.getElementById( this.elementID_Title );
     
     //divRhythms.style.left = "50px";
     divRhythmsSelector.innerHTML = selectedCat.rhythms.map( (rhythm, idx) => {
@@ -45,12 +47,15 @@ class RhythmsDBUIController {
       return result;
     }).join("");
 
+    // set the title to category name
+
+    elementTitle.innerHTML = selectedCat.name;
+
     const divW = divRhythmsSelector.offsetWidth;
     const divH = divRhythmsSelector.offsetHeight;
 
     divRhythms.style.left = (window.innerWidth/2 - divW/2) + 'px';
     divRhythms.style.top = window.scrollY + "px";
-
   }
 
   clickCloseRhythmsListForCategory() {

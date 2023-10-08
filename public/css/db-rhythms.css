@@ -54,6 +54,7 @@ background-color: lightgray;
     margin: 5px;
     font-size: 0.9em;
     cursor: pointer;
+    padding: 3px;
 }
 
 .rhythm-to-select:hover {
@@ -62,7 +63,8 @@ background-color: lightgray;
 
 .div-for-xbut {
     display: flex;
-    justify-content: flex-end;
+    /*justify-content: flex-end;*/
+    justify-content: space-between;
 }
 
 .xbutton {
@@ -72,4 +74,9 @@ background-color: lightgray;
     height: 20px;
     border: 1px solid black;
     border-radius: 10px;
+}
+
+
+.spanRhythmCategoryName {
+    color: black;
 }
