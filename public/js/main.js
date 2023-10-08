@@ -16,11 +16,12 @@ function onDocumentLoaded() {
     initDefaultInstrument();
 
     setDefaultValues();
-    RHYTHMS_DB.render();
+    rhythmsDBUI.render();
 
     instrumentSelector.render();
 
     updateRhythmEditorVisibility();
+
     if ( rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
         initVisualRhythmEditor();
     
@@ -72,6 +73,7 @@ function initVisualRhythmEditor() {
 function switchRhythmEditor() {
     rhythmEditorsManager.currentRhythmEditorIdx++; 
     if (rhythmEditorsManager.currentRhythmEditorIdx === rhythmEditors.length) rhythmEditorsManager.currentRhythmEditorIdx = 0;
+
     updateRhythmEditorVisibility();
 }
 
@@ -81,6 +83,9 @@ function updateRhythmEditorVisibility() {
         let div = document.querySelector(`#${item}`);
         div.style.display = (idx===rhythmEditorsManager.currentRhythmEditorIdx) ? "flex" : "none";
     });
+
+    document.querySelector('#buttonSwitchRhythmEditor').innerText = 
+        buttonLabelsForRhythmEditors.slice().reverse()[rhythmEditorsManager.currentRhythmEditorIdx];
 }
 
 function buttonSetRhythmSize(num) {

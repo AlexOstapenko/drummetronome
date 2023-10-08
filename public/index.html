@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/db-rhythms.css">
     <link rel="stylesheet" href="css/stroke-selector.css">
     <link rel="stylesheet" href="css/rhythm-editor.css">
-    <link rel="stylesheet" href="css/instruments.css">
+    <link rel="stylesheet" href="css/top-toolbar.css">
 
     <!-- for parsing rhythm text -->
     <script src="js/utils.js"></script>
@@ -30,21 +30,26 @@
     <script src="js/uielements/rhythmboard.js"></script>
     <script src="js/strokeplayer.js"></script>
     <script src="js/uielements/strokes.js"></script>
-    <script src="js/uielements/rhythmsdb.js"></script>
+    <script src="js/rhythmsforpractice/rhythmlibrary1.js"></script>
+    <script src="js/uielements/rhythmsdbui.js"></script>
     <script src="js/uielements/instrumentselector.js"></script>
     <script src="js/audioFilePlayer.js"></script>
     <script src="js/rhythmplayer.js"></script>
     <script src="js/uielements/textrhythmeditor.js"></script>
     <script src="js/uielements/rhythmeditorsmanager.js"></script>
-
-    <script src="js/rhythmsforpractice/framedrumwarmup.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
 
     <div class="container no-select">
         <!-- Здесь пользователь выбирает инструмент -->
-        <div id="divInstrumentSelect" class='div-instrument-select'></div>
+        <div class="top-toolbar">
+            <div id="divInstrumentSelect" class='div-instrument-select'></div>
+            | 
+            <div class="div-rhythm-editor-selector" id="divRhythmEditorSelector">
+                <button class='button-advanced-rhythm' id='buttonSwitchRhythmEditor' onclick="switchRhythmEditor()">* T *</button>
+            </div>
+        </div>
 
         <div id="div-visual-rhythm-editor" class="div-visual-rhythm-editor">
             <!-- Тут мы задаем размер ритма и вспомогательные кнопки для быстрого доступа-->
@@ -66,7 +71,6 @@
                     <button onclick="buttonSetRhythmSize(12)">12</button>
                     <button onclick="buttonSetRhythmSize(14)">14</button>
                     <button onclick="buttonSetRhythmSize(16)">16</button>
-                    <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">* T *</button>
                 </div>
             </div>
         
@@ -79,7 +83,6 @@
 
         <div id="div-text-rhythm-editor" class="div-text-rhythm-editor">
             <div> 
-                <button class='button-advanced-rhythm' onclick="switchRhythmEditor()">* V *</button>
                 <button onclick="addTextToRhythmTextEditor('( )/2')">1/2</button> 
                 <button onclick="addTextToRhythmTextEditor('( )/4')">1/4</button> 
                 <button onclick="addTextToRhythmTextEditor('( )/3')">1/3</button> 
@@ -106,15 +109,14 @@
 
     </div>
     
-    <!-- пока что отключил этот функционал -->
+    <!-- Доступ к ритмам и композициям из библиотеки -->
     <div class="divDBContainer">
-        <div class="div-db-categories" id="divDBCategories">
-        </div>
+        <div class="div-db-categories" id="divDBCategories"></div>
 
         <!-- this is window to select rhythms from a chosen category -->
         <div class="rhythm-list-for-category" id="divRhythmListForCategory">
             <div class='div-for-xbut'>
-                <button class='xbutton' onclick='clickCloseRhythmsListForCategory();'>x</button>
+                <button class='xbutton' onclick='rhythmsDBUI.clickCloseRhythmsListForCategory();'>x</button>
             </div>
             <div id="divRhythmsSelector" class='rhythms-selector'></div>
         </div>
