@@ -15,6 +15,7 @@
 .button-db-category {
     font-size: 1em;
     background-color: #ffec77;
+    color: black;
     border: 1px solid black;
     text-align: center;
     cursor:pointer;

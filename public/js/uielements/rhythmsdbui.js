@@ -45,8 +45,12 @@ class RhythmsDBUIController {
       return result;
     }).join("");
 
-    let divWidth = divRhythmsSelector.offsetWidth;
-    divRhythms.style.left = (window.innerWidth/2 - divWidth/2) + 'px';
+    const divW = divRhythmsSelector.offsetWidth;
+    const divH = divRhythmsSelector.offsetHeight;
+
+    divRhythms.style.left = (window.innerWidth/2 - divW/2) + 'px';
+    divRhythms.style.top = window.scrollY + "px";
+
   }
 
   clickCloseRhythmsListForCategory() {
