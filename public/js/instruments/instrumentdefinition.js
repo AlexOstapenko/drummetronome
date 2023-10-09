@@ -10,10 +10,11 @@ const INSTRUMENT_DARBUKA = {
     arrStrokeInfo: [
         {stroke: "D", file: "du.mp3", gain: 1.5},
         {stroke: "d", file: "du.mp3", gain: 0.8},
+        {stroke: "-", file: ""},
         {stroke: "T", file: "T.mp3", gain: 0.7},
 		{stroke: "K", file: "K.mp3", gain: 0.7},
-        {stroke: "t", file: "te.mp3"},
-        {stroke: "k", file: "ke.mp3"},
+        {stroke: "t", file: "te.mp3", gain: 0.6},
+        {stroke: "k", file: "ke.mp3", gain: 0.6},
         {stroke: "R", file: "ta.mp3"},
         {stroke: "L", file: "ka.mp3"},
         {stroke: "S", file: "pa.mp3"},
@@ -21,8 +22,7 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "Pm", file: "PP.mp3", gain: 0.5},
         {stroke: "Pl", file: "PPP.mp3", gain: 0.5},
         {stroke: "X", file: "X.mp3"},
-        {stroke: "N", file: "snap.mp3"},
-        {stroke: "-", file: ""}
+        {stroke: "N", file: "snap.mp3"}
     ],
     defaultRhythms: ["D P Pl P D K X –", 
 `D S k S D k S (k k)/2

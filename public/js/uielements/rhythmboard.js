@@ -52,10 +52,6 @@ class RhythmBoard {
                     ${item}
                     <div class='board-idx'>${idx+1}</div>
                 </div>`;
-
-            if ( idx%8 === 0 && idx != this.items.length)
-                result += "<br>";
-
         });
         
         document.getElementById(this.containerID).innerHTML = result;

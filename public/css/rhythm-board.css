@@ -1,5 +1,6 @@
-.rhythm_container {
-    width: 100%;
+
+.visual-rhythm-container {
+    /*width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
@@ -8,20 +9,28 @@
     border: 2px solid lightgray;
     background-color: white;
     border-radius: 20px;
+    padding: 40px;*/
+
+    width: 98%;
+    overflow-x: auto; /* Включаем горизонтальный скроллинг */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    text-align: center; /* Центрируем содержимое контейнера */
+
+    border: 2px solid lightgray;
+    background-color: white;
+    border-radius: 20px;
     padding: 40px;
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
-/* Медиа-запрос для смартфонов и устройств с меньшими экранами */
-@media (max-width: 768px) {
-    .rhythm_container {
-        width: 100%; /* Занимает всю доступную ширину */
-        height: auto; /* Автоматическая высота */
-        padding: 10px; /* Добавим немного отступа для компактности */
-    }
+.visual-rhythm-row {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .rhythm-item {
-
     border: 1px solid black;
     border-radius: 10px; /* Закругленные углы */
     min-width: 37px;
@@ -32,6 +41,10 @@
     padding: 10px 10px;
     cursor: pointer;
     background-color: white;
+
+    display: inline-block;
+    margin-right: 10px; /* Добавьте желаемый отступ между ячейками */
+    /*line-height: 100px;*/
 }
 
 .board-idx {
