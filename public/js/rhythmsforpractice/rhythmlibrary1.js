@@ -136,7 +136,27 @@ D L L (D L L L R R R L L L )/4 (D L L L R R R L L L )/4`, instr: INSTRUMENT_COOP
 
 {name: FRAMEDRUM_EXERCISES_IDS.PREFIX + "24", text: 
 `(D2 T K)/2 (R R R R L L L L)/4
-(T K)/2 (R R R R L L L L)/4 (D K)/2`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName}
+(T K)/2 (R R R R L L L L)/4 (D K)/2`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName},
+
+{name: FRAMEDRUM_EXERCISES_IDS.PREFIX + "25", text: 
+`D a a a 
+T a a a :3
+
+D L L L R R L L T L L L R R L L 
+D L L L R R L L T L L L  (R R R R L L L L )/2
+
+D L L L R R L L T L L L R R L L 
+D L L L R R L L T L L L  (R R R R L L L L )/2
+
+D L L L R R L L T L L L  (R R R R L L L L )/2 : 2
+
+D L L L (R R R R L L L L )/2 T L L L  (R R R R L L L L )/2 : 2
+
+(D L L L R R R R L L L L R R L L )/2
+(T L L L R R R R L L L L R R L L )/2
+(D L L L R R R R L L L L R R L L )/2
+(T L L L R R R R L L L L )/2 R L`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName}
+
 ]},
 
 

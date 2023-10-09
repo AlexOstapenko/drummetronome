@@ -22,8 +22,8 @@ function onDocumentLoaded() {
 
     updateRhythmEditorVisibility();
 
-    if ( rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
-        initVisualRhythmEditor();
+    //if ( rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
+    initVisualRhythmEditor();
     
     addUIEventHandlers();
 }
