@@ -146,7 +146,8 @@ function setRhythmAndTempoInfoToPlayer() {
         let actualBPM = bpm*2;
 
         tempoInfo.oneLoopDuration = 1000*beatsCount*60/actualBPM;
-        tempoInfo.onePulseDuration = tempoInfo.oneLoopDuration / beatsCount; 
+        //tempoInfo.onePulseDuration = tempoInfo.oneLoopDuration / beatsCount; 
+        tempoInfo.onePulseDuration = 60*1000/actualBPM;
         
         // setting up the rhythm
         rhythmPhrase = new Phrase( rhythmBoard.rhythm.join( " " ) );
@@ -161,5 +162,9 @@ function setRhythmAndTempoInfoToPlayer() {
     rhythmPlayer.tempoInfo = tempoInfo;
     rhythmPlayer.setRhythm( createRhythm( rhythmPhrase ) );
 }
+
+
+
+
 
 

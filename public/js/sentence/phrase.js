@@ -159,33 +159,11 @@ class Syllable
 	}
 
 
-	toString(callBackSyllableToStringAgent)
-	{
-		let result = "";
-
-		if (callBackSyllableToStringAgent === undefined)
-		{
-			let sizeText = this.sizeToString();
-
-			if ( this.fraction.equals("1") )
-				result = this.syllable.toUpperCase();
-			else if ( this.fraction.getSize()>=1 )
-				result = this.syllable.toUpperCase() + this.sizeToString();
-			if ( this.fraction.equals("1/2") )
-				result = this.syllable.toLowerCase();
-			else if (this.fraction.equals("1/4"))
-				result = this.syllable[0].toLowerCase();
-			else // if (this.fraction.getSize() < 0.25)
-				result = this.syllable.toUpperCase() + this.sizeToString();
-		}
-		else
-			result = callBackSyllableToStringAgent(this);
-
-		return result;
+	toString() {
+		return this.syllable + this.sizeToString();
 	}
 
-	serialize()
-	{
+	serialize() {
 		let result = "";
 		let sizeTxt = this.fraction.toString();
 
