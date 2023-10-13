@@ -20,29 +20,10 @@ class AudioFilePlayer {
 		return this.audioCtx.resume();
 	}
 
-    turnOnSound()
-	{
+    turnOnSound() {
 		this.gainNode = this.audioCtx.createGain();
         this.gainNode.gain.value = 1;
-
-/*
-		// Создаем DynamicsCompressorNode (компрессор)
-		this.compressor = this.audioCtx.createDynamicsCompressor();
-
-		// Настраиваем параметры компрессора
-		this.compressor.threshold.value = -10; // Устанавливаем порог срабатывания компрессора (в децибелах)
-		this.compressor.ratio.value = 4; // Устанавливаем коэффициент сжатия (4:1)
-		this.compressor.attack.value = 0.005; // Время нарастания (атака) компрессора в секундах
-		this.compressor.release.value = 0.1; // Время спада (релиз) компрессора в секундах
-
-		this.gainNode.connect( this.compressor );
-
-		// Подключаем компрессор к контексту аудио
-		this.compressor.connect( this.audioCtx.destination );
-		*/
-
 		this.gainNode.connect( this.audioCtx.destination );
-
     }
 
     turnOffSound()
@@ -51,7 +32,6 @@ class AudioFilePlayer {
 		this.gainNode.gain.linearRampToValueAtTime(0.001, this.audioCtx.currentTime + 5);
 		this.gainNode.disconnect();
 	}
-
 
 	/*
 	* instrumentInfo = {

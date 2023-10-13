@@ -21,10 +21,11 @@ function getRandomInt(min, max)
   return min + Math.floor(Math.random() * (max - min));
 }
 
+// ------------------- ARRAYS
+
 function trimArray(arr)
 {
-    for(i=0;i<arr.length;i++)
-    {
+    for(i=0;i<arr.length;i++) {
         arr[i] = arr[i].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
     return arr;
@@ -51,6 +52,7 @@ function strRemoveSpaces(str)
       result += str[i];
   return result;
 }
+
 
 /*
 * For a given string adds single space between all chars

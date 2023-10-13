@@ -9,7 +9,7 @@ const L_BUTT_STOP = "STOP";
 
 const DEFAULT_BPM = 90;
 
-const soundPlayer = audioFilePlayer;
+const soundPlayer = audioFilePlayer; // object that actually plays sounds
 
 function onDocumentLoaded() {
 
@@ -101,11 +101,12 @@ function clickPlayRhythm() {
 
         // stop
         rhythmPlayer.stop();
+        playingDurationTimer.stop();
+
         butt.innerText = L_BUTT_PLAY; 
         butt.className = "button-play";
 
         showTempoDiv(true);
-
     } else {
         // start or restart
         rhythmPlayer.stop();
@@ -115,6 +116,7 @@ function clickPlayRhythm() {
         soundPlayer.resumeAudio().then( function () {
             setRhythmAndTempoInfoToPlayer();
             rhythmPlayer.play();
+            playingDurationTimer.start();
          });
          showTempoDiv(false);
     }

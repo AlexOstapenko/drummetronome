@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/stroke-selector.css">
     <link rel="stylesheet" href="css/rhythm-editor.css">
     <link rel="stylesheet" href="css/top-toolbar.css">
+    <link rel="stylesheet" href="css/playing-duration-timer.css">
 
     <!-- for parsing rhythm text -->
     <script src="js/utils.js"></script>
@@ -28,7 +29,6 @@
     <script src="js/instruments/instrumentmanager.js"></script>
     <script src="js/rhythm.js"></script>
     <script src="js/uielements/rhythmboard.js"></script>
-    <script src="js/strokeplayer.js"></script>
     <script src="js/uielements/strokes.js"></script>
     <script src="js/rhythmsforpractice/rhythmlibrary1.js"></script>
     <script src="js/uielements/rhythmsdbui.js"></script>
@@ -37,6 +37,7 @@
     <script src="js/rhythmplayer.js"></script>
     <script src="js/uielements/textrhythmeditor.js"></script>
     <script src="js/uielements/rhythmeditorsmanager.js"></script>
+    <script src="js/uielements/playingtimer.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -93,13 +94,14 @@
             <div>
                 <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="15"></textarea>
                 <button class="button-delete-textrhythm" onclick="setTextRhythm('')">x</button> 
-                <button class="button-delete-textrhythm" onclick="setTextRhythmToVisualEditorAndSwitch()">T ➔ V</button> 
+                <button class="button-txt-rhythm-to-vis-editor" onclick="setTextRhythmToVisualEditorAndSwitch()">T ➔ V</button> 
             </div>
         </div>
 
         <!-- Кнопка Play/Stop -->
         <div>
             <button id='buttPlayStop' class='button-play' onclick="clickPlayRhythm();">PLAY</button>
+            <div id='divDurationTimer' class='divPlayingDurationTimer'></div>
         </div>
 
         <!-- Изменение темпа -->

@@ -25,6 +25,7 @@ class RhythmPlayer {
     }
 
     get isActive() { return this.performance.isActive; }
+    get startTime() { return this.performance.startTime };
 
     setRhythm(rhythm) {
         this.performance.rhythm = rhythm;
@@ -62,7 +63,6 @@ class RhythmPlayer {
             ); 
         });
 
-        // TODO: oneLoopDuration
         this.performance.startTime += this.performance.oneLoopDuration/1000;
     }
 
@@ -100,8 +100,7 @@ class RhythmPlayer {
 
         this.calculateTimeline();
         this.performance.isActive = true;
-        this.performance.startTime = this.audioPlayer.audioContext.currentTime;
-        
+        this.performance.startTime = this.audioPlayer.audioContext.currentTime+0.1;
         this.scheduleNextBar();
 
         this.performance.scheduleLoop = setInterval(function () {
@@ -122,3 +121,5 @@ class RhythmPlayer {
 }
 
 const rhythmPlayer = new RhythmPlayer();
+
+
