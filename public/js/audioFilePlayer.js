@@ -121,6 +121,9 @@ class AudioFilePlayer {
 	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName
 	playStroke( strokeInfo, when ) {
 
+		function isNumber(when) { return !isNaN(parseFloat(when)) && isFinite(when); }
+		if (!isNumber(when) ) return;
+
 		let strokeID = "";
 		if ( typeof strokeInfo == "string" ) {
 			strokeID = strokeInfo;

@@ -125,6 +125,7 @@ class CommandParser
 	* Returns array of strings or instances of Command class.
 	*/
 	
+	
 	splitCommands(scriptString, asStrings, separatorChar)
 	{
 		let result = [];

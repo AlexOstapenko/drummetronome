@@ -247,3 +247,53 @@ class Fraction
 
   
 }
+
+// Gets array of text fractions and simplifies it,
+// returns new array
+function simplifyFractions(fractions) {
+    const correctFractions = fractions.map( item => (item.indexOf("/") < 0 ? (item + "/1") : item ) );
+
+    // Функция для нахождения общего знаменателя
+    function findCommonDenominator(fractions) {
+        let commonDenominator = 1;
+        for (const fraction of correctFractions) {
+            const [numerator, denominator] = fraction.split('/').map(Number);
+            commonDenominator *= denominator;
+        }
+        return commonDenominator;
+    }
+
+    // Находим общий знаменатель
+    const commonDenominator = findCommonDenominator(correctFractions);
+
+    // Преобразуем все дроби
+    const simplifiedFractions = correctFractions.map(fraction => {
+        const [numerator] = fraction.split('/').map(Number);
+        const simplifiedNumerator = numerator * (commonDenominator / fraction.split('/')[1]);
+        return simplifiedNumerator.toString();
+    });
+
+    // Функция для нахождения наибольшего общего делителя (НОД)
+    function findGCD(a, b) {
+        if (b === 0) {
+            return a;
+        } else {
+            return findGCD(b, a % b);
+        }
+    }
+
+    // Находим НОД для всех числителей и знаменателей
+    const gcd = simplifiedFractions.reduce((currentGCD, fraction) => {
+        const numerator = parseInt(fraction);
+        return findGCD(currentGCD, numerator);
+    }, parseInt(simplifiedFractions[0]));
+
+    // Поделим все дроби на общий делитель (НОД)
+    const furtherSimplifiedFractions = simplifiedFractions.map(fraction => {
+        const numerator = parseInt(fraction);
+        const simplifiedNumerator = numerator / gcd;
+        return simplifiedNumerator.toString();
+    });
+
+    return furtherSimplifiedFractions;
+}

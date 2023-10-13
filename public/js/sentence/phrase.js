@@ -205,7 +205,11 @@ class Syllable
 /* 
 * Phrase is a single unit that combines several syllables (each of them can have it's own size).
 * Unlike sentence, phrase doesn't contain separators. 
-* Example: "ta ki ta", "(ta2 ka2 (dum2taka)/2)/2" etc.
+* Example: "ta ki ta", "(ta2 ka2 (dum2 taka)/2 )/2" etc.
+* Also it can contain such modifier as ":" - repetition.
+* For example: D:3 T:3 S2 will be treated as: D D D T T T S -
+* You can use repetition for brackets: (D3 T3 S2):4 will repeat the 3 3 2 rhythm 4 times.
+* Brackets and repetitions can be nested up to any depth.
 */
 class Phrase
 {
@@ -225,6 +229,12 @@ class Phrase
 	setText(text, separator)
 	{
 
+		function parseSingleCmd(parentPhrase, cmdText, ) {
+			let arr = parentPhrase.parseData(cmdText);
+			if (Array.isArray(arr)) parentPhrase.elements = parentPhrase.elements.concat( arr );
+		}
+
+
 		text = text.trim();
 		this.elements = [];
 		if ( !(text === undefined) && text.length > 0 )
@@ -232,13 +242,19 @@ class Phrase
 			if (separator === undefined) separator = " ";
 
 			let cmdParser = new CommandParser();
-			let commands = cmdParser.splitCommands(text, true, separator);
+			let commands = cmdParser.splitCommands(text, false, separator);
 			
-			let me = this;
-			commands.forEach(function(cmdText,idx,thisArr)
-			{
-				let arr = me.parseData(cmdText);
-				if (Array.isArray(arr)) me.elements = me.elements.concat( arr );
+			commands.forEach( (cmd,idx,thisArr) => {
+				let arrItemsToParse = [];
+				let repetitionsInfo = cmd.splitByModifier(":");
+				let textBeforeModifier = repetitionsInfo[0];
+				let numOfCopies = toInteger( repetitionsInfo[1] );
+				if (!numOfCopies) numOfCopies = 1;
+				
+				arrItemsToParse = Array.from( { length: numOfCopies }, () => textBeforeModifier );
+				arrItemsToParse.forEach( item => {
+					parseSingleCmd( this, item );	
+				});				
 			});
 		}
 	}
@@ -256,6 +272,24 @@ class Phrase
 		if (txt[0]=='(')
 		{
 			let cmd = new Command(txt);
+
+			// TODO: change to process also :N after "()"
+			// e.g. (D T K T)/2:4 - repeat 4 times all phrase
+			// or many lines:
+			/*
+			(
+				D K T K
+				D:4 T:4
+			):2
+
+			will become
+
+			D K T K D D D D T T T T 
+			D K T K D D D D T T T T 
+			*/
+
+
+			// process the inner space of the brackets
 			let indexes = cmd.getBracketIndexes('(');
 			let bracketData = "";
 			if (indexes.idx1 >=0 && indexes.idx2 > 0)

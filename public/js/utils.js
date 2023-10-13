@@ -75,6 +75,17 @@ function containsValue(arr, val)
   return result;
 }
 
+
+function toInteger(value) {
+    // Попытаемся преобразовать значение в целое число
+    const integer = parseInt(value, 10);
+    // Проверим, было ли успешное преобразование
+    if (!isNaN(integer) && Number.isInteger(integer)) {
+        return integer;
+    }
+    return null; // Возвращаем null, если не удалось преобразовать
+}
+
 /////////////////////////////////////////////////////////
 // TWO FUNCTIONS = make and combinations work together
 // All possible rearrangements of an array
