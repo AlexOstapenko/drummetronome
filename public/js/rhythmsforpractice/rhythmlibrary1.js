@@ -5,8 +5,62 @@ const FRAMEDRUM_EXERCISES_IDS = {
   CATEGORY: "fd_warmups",
 }
 
-const RhythmLibrary1 = {
-  categories : 
+class RhythmLibrary {
+
+  constructor() {
+    this.categories = [];
+  }
+
+  /*
+  trimRhythms() {
+
+    function trimLines(txt) {
+      let arr = txt.split('\n');
+      let arr1 = arr.map( item => item.trim() );
+      return arr1.join("\n");
+    }
+
+    this.categories.forEach( cat => {
+      cat.rhythms.forEach( (rhythmInfo,idx) => {
+        let text = rhythmInfo[idx].text;
+        rhythmInfo[idx].text = trimLines(text);
+      })
+    });
+  }*/
+
+}
+
+const rhythmLibrary = new RhythmLibrary();
+
+
+function addRhythmsArray(arrRhythms, category, nameGeneratorCallback, instrumentName, categoryName) {
+  
+    // create new category if it doesn't exist
+    if ( !rhythmLibrary.categories[category] ) 
+      rhythmLibrary.categories[category] = 
+        {id: category, name: categoryName ? categoryName : category, rhythms: []};
+
+    let categoryContent = rhythmLibrary.categories.filter( item => item.id===category )[0];
+
+    function addNewRhythm(txt) {
+      let rhythmsCount = categoryContent.rhythms.length;
+      let nameOfRhythm = nameGeneratorCallback ? nameGeneratorCallback( rhythmsCount ) : ((rhythmsCount+1)+"");
+      categoryContent.rhythms.push( {name: nameOfRhythm, text: txt, instr: instrumentName} );
+    }
+
+    function trimLines(txt) {
+      let arr = txt.split('\n');
+      let arr1 = arr.map( item => item.trim() );
+      return arr1.join("\n");
+    }
+
+    arrRhythms.forEach( txt => {
+      addNewRhythm( trimLines(txt) );
+    })
+}
+
+function createRhythmLibrary() {
+  rhythmLibrary.categories = 
   [
     { id: "arab_rhythms", name : "Arabic rhythms",
       rhythms: [
@@ -40,111 +94,84 @@ const RhythmLibrary1 = {
     rhythms:[] }, // will be defined later in this file
 
 
-{ id: "compositions_1", name : "Compositions",
-      rhythms: 
-[
-{ name: "Intro to Malfuf", text: 
-`D/4 : 8
-T/2 : 4
-X : 4
+    { id: "compositions_1", name : "Compositions",
+      rhythms: [
+      { 
+        name: "Intro to Malfuf", text: 
+        `D/4 : 8
+        T/2 : 4
+        X : 4
 
-(K - t k D -)/4 :2
-(X X)/2
-(D X D D K D)/2 (T K T K)/4
+        (K - t k D -)/4 :2
+        (X X)/2
+        (D X D D K D)/2 (T K T K)/4
 
-(D k k S k k S k)/2 :16`, instr: INSTRUMENT_DARBUKA.instrumentName},
-        { name: "7/8 phrase for Tar", text:
-`D a D a D a a
-T a T a T a a
-W a W a W a a
-P a P a (M N S M N S)/2
+        (D k k S k k S k)/2 :16`, instr: INSTRUMENT_DARBUKA.instrumentName},
+                { name: "7/8 phrase for Tar", text:
+        `D a D a D a a
+        T a T a T a a
+        W a W a W a a
+        P a P a (M N S M N S)/2
 
-D a D a D a a
-T a T a T a a
-R R R R L L L
-T a T a D K a
+        D a D a D a a
+        T a T a T a a
+        R R R R L L L
+        T a T a D K a
 
-D a D a D a a
-T a T a T a a
-R R R R L L L
-P a P a (M N S M N S)/2
+        D a D a D a a
+        T a T a T a a
+        R R R R L L L
+        P a P a (M N S M N S)/2
 
-D a D a T b b 
-D a D a T b b 
-R R R R L L L
-T a T a ( T N S M N S M N S)/3`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName},
+        D a D a T b b 
+        D a D a T b b 
+        R R R R L L L
+        T a T a ( T N S M N S M N S)/3`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName
+      },
 
-{name: "Composition for Dmitry", text:
-`// INTRO
-(D k t D):3 D K - K    :3
+      {
+        name: "Composition for Dmitry", text:
+        `// INTRO
+        (D k t D):3 D K - K    :3
 
-// First break
-(D D D D)/2 (T T T T)/2    :3
-T4
+        // First break
+        (D D D D)/2 (T T T T)/2    :3
+        T4
 
-(D k t D):3 D K - K    :3
+        (D k t D):3 D K - K    :3
 
-// Second break
-(D D D D)/2 T    :4
-(D D D D)/2 (T T T T)/2
+        // Second break
+        (D D D D)/2 T    :4
+        (D D D D)/2 (T T T T)/2
 
-// PART 2
-D k t    :4
-T K T K
+        // PART 2
+        D k t    :4
+        T K T K
 
-D k t   :4
-T - K -
+        D k t   :4
+        T - K -
 
-D k t   :4
-T K T K
+        D k t   :4
+        T K T K
 
-(T k t k)/2:6
-T4
+        (T k t k)/2:6
+        T4
 
-// PART 2 - AYUB
-(
-(D - - D D - T -)/2:3
-(D K - D D - T -)/2
+        // PART 2 - AYUB
+        (
+        (D - - D D - T -)/2:3
+        (D K - D D - T -)/2
 
-(D - - D D - T -)/2:3
-D D D T
-):4`, instr: INSTRUMENT_DARBUKA.instrumentName}
-
-
-]} // end of category
-
-]}; // end of library
-
+        (D - - D D - T -)/2:3
+        D D D T
+        ):4`, instr: INSTRUMENT_DARBUKA.instrumentName
+      }
+      ]
+    } // end of category
+  ];
 
 
-function addRhythmsArray(arrRhythms, category, nameGeneratorCallback, instrumentName, categoryName) {
-  
-    // create new category if it doesn't exist
-    if ( !RhythmLibrary1.categories[category] ) 
-      RhythmLibrary1.categories[category] = 
-        {id: category, name: categoryName ? categoryName : category, rhythms: []};
-
-    let categoryContent = RhythmLibrary1.categories.filter( item => item.id===category )[0];
-
-    function addNewRhythm(txt) {
-      let rhythmsCount = categoryContent.rhythms.length;
-      let nameOfRhythm = nameGeneratorCallback ? nameGeneratorCallback( rhythmsCount ) : ((rhythmsCount+1)+"");
-      categoryContent.rhythms.push( {name: nameOfRhythm, text: txt, instr: instrumentName} );
-    }
-
-    function trimLines(txt) {
-      let arr = txt.split('\n');
-      let arr1 = arr.map( item => item.trim() );
-      return arr1.join("\n");
-    }
-
-    arrRhythms.forEach( txt => {
-      addNewRhythm( trimLines(txt) );
-    })
-}
-
-addRhythmsArray(
-    [
+  addRhythmsArray([
 
     // -----------------  
     `R R R R L L L L : 3
@@ -274,7 +301,15 @@ addRhythmsArray(
     FRAMEDRUM_EXERCISES_IDS.CATEGORY, 
     idx => FRAMEDRUM_EXERCISES_IDS.PREFIX + (idx+1),
     INSTRUMENT_COOPERMAN_TAR.instrumentName
-);
+  );
+
+  //rhythmLibrary.trimRhythms();
+}
+
+///////////////////////////////
+createRhythmLibrary();
+
+
 
 
 

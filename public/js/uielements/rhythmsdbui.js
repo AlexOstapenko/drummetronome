@@ -10,6 +10,7 @@ class RhythmsDBUIController {
     this.htmlElementIDToSelectRhythms = "divRhythmsSelector";
     this.elementID_Title = "spanRhythmCategoryName";
     this.openedCategory = "";
+    this.elementID_lastChoiceFromLib = 'divLastChoiceFromLib';
   }
 
   render() {
@@ -17,7 +18,7 @@ class RhythmsDBUIController {
     let elem = document.getElementById(this.htmlElementIDToRender);
     
     // create interactive div for each category
-    let arr = RhythmLibrary1.categories.map( cat => {
+    let arr = rhythmLibrary.categories.map( cat => {
       let result = `<div class='div-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</div>`;
 
       //`<button class='button-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</button>`
@@ -40,7 +41,7 @@ class RhythmsDBUIController {
   }
 
   showRhythms( categoryID ) {
-    let selectedCat = RhythmLibrary1.categories.find( cat => cat.id===categoryID );
+    let selectedCat = rhythmLibrary.categories.find( cat => cat.id===categoryID );
 
     let divRhythms = document.getElementById( this.htmlElementIDToSelectRhythms_Container );
     let divRhythmsSelector = document.getElementById( this.htmlElementIDToSelectRhythms );
@@ -70,9 +71,13 @@ class RhythmsDBUIController {
   }
 
   clickRhythmSelected( categoryID, rhythmIdx ) {
-    let rhythm = RhythmLibrary1.categories.find( cat => cat.id === categoryID ).rhythms[rhythmIdx]; 
+    let category = rhythmLibrary.categories.find( cat => cat.id === categoryID );
+    let rhythm = category.rhythms[rhythmIdx]; 
     rhythmEditorsManager.setRhythmToCurrentEditor( rhythm.text );
     this.clickCloseRhythmsListForCategory();
+
+    //set text of divLastChoiceFromLib - to Category name + Rhythm name
+    document.getElementById(this.elementID_lastChoiceFromLib).innerHTML = category.name + " | " + rhythm.name;
   }
 }
 
