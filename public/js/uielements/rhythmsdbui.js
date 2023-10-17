@@ -11,6 +11,7 @@ class RhythmsDBUIController {
     this.elementID_Title = "spanRhythmCategoryName";
     this.openedCategory = "";
     this.elementID_lastChoiceFromLib = 'divLastChoiceFromLib';
+    this.lastChoice = {category: "", rhythm: ""};
   }
 
   render() {
@@ -29,7 +30,16 @@ class RhythmsDBUIController {
         ${arr.join("")}
     </div>
     `;
+
+    this.updateLastChoiceUI();
   } 
+
+  updateLastChoiceUI() {
+    let txt = "";
+    if ( this.lastChoice.category.trim()!=="" || this.lastChoice.rhythm.trim()!=="")
+      txt = `<b>Last seen:</b><br>${this.lastChoice.category} | ${this.lastChoice.rhythm}`;
+    document.getElementById(this.elementID_lastChoiceFromLib).innerHTML = txt;
+  }
 
   clickCategory(id) {
     if (this.openedCategory === id)
@@ -75,9 +85,8 @@ class RhythmsDBUIController {
     let rhythm = category.rhythms[rhythmIdx]; 
     rhythmEditorsManager.setRhythmToCurrentEditor( rhythm.text );
     this.clickCloseRhythmsListForCategory();
-
-    //set text of divLastChoiceFromLib - to Category name + Rhythm name
-    document.getElementById(this.elementID_lastChoiceFromLib).innerHTML = category.name + " | " + rhythm.name;
+    this.lastChoice = {category: category.name, rhythm: rhythm.name};
+    this.updateLastChoiceUI();
   }
 }
 

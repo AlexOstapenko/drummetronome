@@ -13,7 +13,7 @@ class PlayingDurationTimer {
             this.startTime = Date.now();
             this.intervalID = setInterval( () => {
                   playingDurationTimer.update();
-            }, 500);
+            }, 200);
       }
 
       stop() {

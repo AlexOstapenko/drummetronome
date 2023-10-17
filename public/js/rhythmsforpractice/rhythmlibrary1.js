@@ -11,7 +11,7 @@ class RhythmLibrary {
     this.categories = [];
   }
 
-  /*
+  
   trimRhythms() {
 
     function trimLines(txt) {
@@ -20,13 +20,13 @@ class RhythmLibrary {
       return arr1.join("\n");
     }
 
-    this.categories.forEach( cat => {
-      cat.rhythms.forEach( (rhythmInfo,idx) => {
-        let text = rhythmInfo[idx].text;
-        rhythmInfo[idx].text = trimLines(text);
+    this.categories.forEach( (cat,catIdx) => {
+      cat.rhythms.forEach( (rhythmInfo,rIdx) => {
+        let text = rhythmInfo.text;
+        this.categories[catIdx].rhythms[rIdx].text = trimLines(text);
       })
     });
-  }*/
+  }
 
 }
 
@@ -303,7 +303,7 @@ function createRhythmLibrary() {
     INSTRUMENT_COOPERMAN_TAR.instrumentName
   );
 
-  //rhythmLibrary.trimRhythms();
+  rhythmLibrary.trimRhythms();
 }
 
 ///////////////////////////////
