@@ -308,9 +308,13 @@ class Command
 		return result;
 	}
 
-	// checks if a char by given idx is 
-	isOutsideOfAnyBlock(idx)
-	{
+	// checks if a char by given idx is not inside any (...), [...], <...>, {...}
+	isOutsideOfAnyBlock(idx) {
+		return this.isOutsideOfBlock( idx, COMMAND_OPENING_BRACKETS, COMMAND_CLOSING_BRACKETS );
+	}
+
+	// checks if a char by given idx is not inside any openingBracket...closingBracket
+	isOutsideOfBlock( idx, arrOpeningBrackets, arrClosingBrackets) {
 		if (idx > this.commandText.length)
 			idx = this.commandText.length-1;
 
@@ -319,9 +323,9 @@ class Command
 		{
 			let ch = this.commandText[i];
 
-			if ( COMMAND_OPENING_BRACKETS.includes(ch) )
+			if ( arrOpeningBrackets.includes(ch) )
 				stack.push(ch);
-			else if ( COMMAND_CLOSING_BRACKETS.includes(ch) )
+			else if ( arrClosingBrackets.includes(ch) )
 			{
 				let errText = 
 					BracketsUtils.checkClosingBracket( stack, ch, i, function(stack){stack.pop();})

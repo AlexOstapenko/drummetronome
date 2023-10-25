@@ -26,6 +26,8 @@ function onDocumentLoaded() {
     initVisualRhythmEditor();
     
     addUIEventHandlers();
+
+    test();
 }
 
 function initDefaultInstrument() {
@@ -156,7 +158,7 @@ function setRhythmAndTempoInfoToPlayer() {
 
     } else if (rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
         let textRhythmRaw = getTextRhythm();
-        rhythmPhrase = new Phrase( processRawTextRhythm( getTextRhythm() ) );
+        rhythmPhrase = new Phrase( processRawTextRhythm( textRhythmRaw ) );
         tempoInfo.onePulseDuration = 60*1000/(bpm*2);
         tempoInfo.oneLoopDuration = rhythmPhrase.getSize(false) * tempoInfo.onePulseDuration;
     }
@@ -165,6 +167,16 @@ function setRhythmAndTempoInfoToPlayer() {
     rhythmPlayer.setRhythm( createRhythm( rhythmPhrase ) );
 }
 
+function test() {
+
+    //normalizeTextRhythm( '(D T (D D T T)/2 ) K D :2');
+    //normalizeTextRhythm( `(D T :2 P Pm   
+    //    K/2:2 D : 3 ):5`);
+
+    //let exprParser = new ExpressionParser();
+    //exprParser.parse( `T K :2 (D T : 4) K K :3` );
+
+}
 
 
 

@@ -234,7 +234,6 @@ class Phrase
 			if (Array.isArray(arr)) parentPhrase.elements = parentPhrase.elements.concat( arr );
 		}
 
-
 		text = text.trim();
 		this.elements = [];
 		if ( !(text === undefined) && text.length > 0 )

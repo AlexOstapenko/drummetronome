@@ -1,13 +1,13 @@
 .div-visual-rhythm-editor {
 	width: 100%;
-
 	flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
 }
 
 .div-text-rhythm-editor {
-	width: 100%;
+	width: 94%;
+	max-width: 900px;
 	flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;

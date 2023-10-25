@@ -1,15 +1,4 @@
 const RHYTHM_EDITOR_TEXT_ID = "rhythmEditor_text";
-const DEFAULT_TEXTRHYTHM = 
-`D L L L (R R L L)/2 (D L L L)/4 (T K)/2
-D L L L (R R L L)/2 (D L L L)/4 (T K)/2
-
-(R R L L)/2 (D L L L)/4 (T K)/2
-(R R L L)/2 (D L L L)/4 (T K)/2
-
-(D L L L)/4 (T K)/2
-(D L L L)/4 (T K)/2
-
-(R R R R L L L L R R R R L L L L)/4`;
 
 function addTextToTextarea(id, newText) {
     const textarea = document.getElementById(id); 
@@ -35,6 +24,92 @@ function getTextRhythm() {
 
 function setTextRhythm( str ) {
     document.querySelector(`#${RHYTHM_EDITOR_TEXT_ID}`).value = str; 
+}
+
+/* Задача: все неспецифичные операторы повтора ":" превратить в повторы фраз, перед которыми они стоят.
+Неспецифичный - это такой, который не стоит вплотную к слогу или скобковому выражению. 
+Тогда он относится ко всему, что слева, но до такого же несецифичного оператора левее 
+или до начала строки (то есть он действует только на то, что находится в этой строке).
+То есть было: "фраза : 3"
+стало: "(фраза) (фраза) (фраза)"
+
+Пример: (D T :2 (T K)/2:2 ):2 P Pm :2
+Станет: ( (D T) (D T) (T K)/2:2 ):2 (P Pm) (P Pm)
+*/
+
+/* TODO: не отлавливает вот такую фразу
+D K :2 T2 ( (D K T K)/2 :2 T K ):3
+
+
+A = D K
+B = (D K T K)/2
+
+A:2 (B:2 T K):3
+*/
+
+function normalizeTextRhythm( text ) {
+    let exprParser = new ExpressionParser();
+    return exprParser.parse( text );
+}
+
+function normalizeTextRhythm_old( text ) {
+    let text1 = text.replace(/^\s+/g, '').replace(/\s+:\s*(\d+)/g, " ~[$1]");
+    text1 = trimArray( text1.split('\n') ).join("\n");
+
+    // searches for the beginning of block: opened (, beginning of line or beginning of string
+    function findBeginningOfBlock(str, startIdx) {
+        for( let i=startIdx; i >= 0; i--) {
+            let currChar = str.charAt(i);
+            if ( ['\n','|'].includes(currChar) ) // found!
+                return i+1;
+        }
+        return 0;
+    }
+
+    function processFirstTilda(str) {
+
+        let firstTildaIdx = str.indexOf('~');
+        if ( firstTildaIdx === -1 ) return str;
+
+        // if we found ~ char, then right after it we should find [N] (according to the first regexp replacement)
+        // so get the number N
+        const idxClosingOfN = str.indexOf( "]", firstTildaIdx);
+        const N = parseInt(str.substring(firstTildaIdx+2, idxClosingOfN));
+        const restOfString = idxClosingOfN === str.length? "" : str.substring( idxClosingOfN+1 );
+        let bracketsCounter = 0;
+        let content = "";
+        let lineStartIdx = findBeginningOfBlock(str, firstTildaIdx);
+        const beginningOfString = str.substring(0, lineStartIdx);
+        
+        // find beginning of the related block and get all the block content
+        for( let i=firstTildaIdx-1; i >= lineStartIdx; i--) {
+            let currChar = str.charAt(i);
+            if (currChar === ")") bracketsCounter++;
+            if (currChar === "(") bracketsCounter--;
+
+            if (i==lineStartIdx || (currChar==="(" && bracketsCounter===0)) {
+                if (bracketsCounter===0) {
+                    let substr = str.substring(lineStartIdx, firstTildaIdx-1);
+                    content = Array.from( {length: N}, () => substr ).join(" ")
+                } else if (str.charAt(i) === "(" && bracketsCounter === -1 ) {
+                    let substr = str.substring(i+1, firstTildaIdx-1);
+                    content = "(" + Array.from( {length: N}, () => substr ).join(" ");
+                }
+            }
+        }
+
+        return beginningOfString + " " + content + "|" + restOfString;
+    }
+
+    while( text1.includes('~') ) {
+        text1 = processFirstTilda(text1);
+    }
+
+    text1 = text1.replace(/\|/g, '').replace( / +/g, ' ');
+
+    console.log( "NORMALIZED TEXT" );
+    console.log( text1 ); 
+    return text1;
 }
 
 // RULES
@@ -64,7 +139,7 @@ function setTextRhythm( str ) {
     L:3/2 = L/2:3 = L/2 L/2 L/2
 
     Ex3:
-    Unspecific repetitions char :
+    Non-specific repetitions char :
     D K : 2 S T :2 will be treated as: 2 times (D K) and 2 times (S T)
     D K D K S T S T
 
@@ -75,42 +150,17 @@ function setTextRhythm( str ) {
 
     T:2 D:2 :4 - means 4 times (T T D D) 
 */
-
-function processRawTextRhythm( text ) {
-
-    let result = "";
-
-    function isWhitespaceAtIndex(str, index) {
-        const char = str.charAt(index);
-        return char.trim() === '';
-    }
-
-    // find first : with space before it
-    function findFirstNonspecificRepetitionChar(str) {
-        for( let i=0; i < str.length; i++ ) {
-            if ( str.charAt(i) === ":" && i > 0 && isWhitespaceAtIndex(str, i-1) ) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    function splitStringAtIndex(str, index) {
-        if (index >= 0 && index < str.length) {
-            const part1 = str.substring(0, index);
-            const part2 = str.substring(index + 1); // Исключаем символ по заданному индексу
-            return [part1.trim(), part2.trim() ];
-        } else {
-            // Индекс находится за пределами строки
-            return [str, ''];
-        }
-    }
-
-    // exclude empty line and comments - lines that start with //
+function processRawTextRhythm( text ) {    
+   
+    // exclude empty lines and comments - lines that start with "//"
     const lines = nonEmptyValues( text.split("\n") );
     const effectiveLines = lines.filter( line => line.slice(0,2) !== "//" );
+    
+    // apply all non-specific operators of repetition
+    return normalizeTextRhythm( effectiveLines.join("\n") );
 
-    // preprocess text: if there is nonspecific " : N" in the middle of line - it means: copy the left part N times
+/*
+    let line = effectiveLines.join(" ");
 
     let arrPreprocessed = [];
     effectiveLines.forEach( line => {
@@ -126,14 +176,15 @@ function processRawTextRhythm( text ) {
                 let numOfCopies = toInteger( arr2[0] );
                 if (!numOfCopies) numOfCopies = 1;
                 arrPreprocessed.push(...Array.from( {length: numOfCopies}, () => arr1[0] ) );
-                arrPreprocessed.push( processRawTextRhythm(restOfString) );
+                if (restOfString.trim()!=="" )
+                    arrPreprocessed.push( processRawTextRhythm(restOfString) );
             }
         } else {
             arrPreprocessed.push( line );
         }
     });
 
-    return arrPreprocessed.join("\n");
+    return arrPreprocessed.join("\n");*/
 }
 
 function setTextRhythmToVisualEditor() {

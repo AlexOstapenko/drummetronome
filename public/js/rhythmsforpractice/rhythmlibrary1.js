@@ -3,6 +3,7 @@
 const FRAMEDRUM_EXERCISES_IDS = {
   PREFIX: "Warmup exercise #",
   CATEGORY: "fd_warmups",
+  NAME: "Lap style warmups (Tar)" 
 }
 
 class RhythmLibrary {
@@ -90,7 +91,7 @@ function createRhythmLibrary() {
       ]
     }, 
 
-    { id : FRAMEDRUM_EXERCISES_IDS.CATEGORY, name : "Frame drum warm ups",
+    { id : FRAMEDRUM_EXERCISES_IDS.CATEGORY, name : FRAMEDRUM_EXERCISES_IDS.NAME,
     rhythms:[] }, // will be defined later in this file
 
 
@@ -98,40 +99,44 @@ function createRhythmLibrary() {
       rhythms: [
       { 
         name: "Intro to Malfuf", text: 
-        `D/4 : 8
-        T/2 : 4
-        X : 4
+          `D/4 : 8
+          T/2 : 4
+          X : 4
 
-        (K - t k D -)/4 :2
-        (X X)/2
-        (D X D D K D)/2 (T K T K)/4
+          (K - t k D -)/4 :2
+          (X X)/2
+          (D X D D K D)/2 (T K T K)/4
 
-        (D k k S k k S k)/2 :16`, instr: INSTRUMENT_DARBUKA.instrumentName},
-                { name: "7/8 phrase for Tar", text:
-        `D a D a D a a
-        T a T a T a a
-        W a W a W a a
-        P a P a (M N S M N S)/2
+          (D k k S k k S k)/2 :16`, instr: INSTRUMENT_DARBUKA.instrumentName},
+        { name: "7/8 phrase for Tar", text:
+          `D ki D ki D ki ki
+          T ki T ki T ki ki
+          X ki X ki X ki ki
+          P ki P ki (A B C A B C)/2
 
-        D a D a D a a
-        T a T a T a a
-        R R R R L L L
-        T a T a D K a
+          D ki D ki D ki ki
+          T ki T ki T ki ki
+          R R R R L L L
+          T ki T ki D K ki
 
-        D a D a D a a
-        T a T a T a a
-        R R R R L L L
-        P a P a (M N S M N S)/2
+          D ki D ki D ki ki
+          T ki T ki T ki ki
+          R R R R L L L
+          P ki P ki (A B C A B C)/2
 
-        D a D a T b b 
-        D a D a T b b 
-        R R R R L L L
-        T a T a ( T N S M N S M N S)/3`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName
+          D ki D ki T ki ki
+          D ki D ki T ki ki
+          R R R R L L L
+          T ki T ki ( T A B C A B C A B)/3`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName
       },
 
       {
         name: "Composition for Dmitry", text:
-        `// INTRO
+        `
+        // COUNT
+        T2 T2 T:4
+
+        // INTRO
         (D k t D):3 D K - K    :3
 
         // First break
@@ -142,7 +147,7 @@ function createRhythmLibrary() {
 
         // Second break
         (D D D D)/2 T    :4
-        (D D D D)/2 (T T T T)/2
+        (D D D D)/2 (T K T K)/2
 
         // PART 2
         D k t    :4
@@ -170,6 +175,41 @@ function createRhythmLibrary() {
     } // end of category
   ];
 
+
+/*
+
+(T2 D2 D2 T2
+T K D2 D2 T2
+D2 ( T K T K)/2 D2 T2
+T D (T K T K T K T K T K T K)/2 ):2
+
+(T2 D2 D2 T2
+T D (T K T K T K T K T K T K)/2 ):2
+
+T D (T K T K T K T K T K T K)/2 P4
+T D (T K T K T K T K T K T K)/2 P4
+T D (T K T K T K T K T K T K)/2
+
+D16
+
+
+Takita Dum2
+
+P2 P2 P2 P2
+
+T k k D2 T k k T k k k D2 D2
+T k k k T k k D2 T k k D2 D2
+T K D2 T K D2
+T K K D2 T K K D2
+T k T k k T k T k k T2 D2
+
+((T k k D2 T k k T k k k D2 D2
+T k k k T k k D2 T k k D2 D2
+T K D2 T K D2
+T K K D2 T K K D2
+T k T k k T k T k k T2 D2)/2 ):2
+
+*/
 
   addRhythmsArray([
 
