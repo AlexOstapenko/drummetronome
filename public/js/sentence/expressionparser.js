@@ -90,33 +90,26 @@ class ExpressionParser {
 		if (text1.indexOf('</r')==-1) //  nothing to parse!
 			return text;
 
-		//console.log( "0\n" + text1 );
-
 		// now process according to the rules
 		let counter = 0;
 		while( text1.indexOf('</r') > 0) {
 			text1 = processFirstTag(text1, counter+1);
 			counter++;
-			//console.log(`${counter}\n${text1}`)
 		}
-
 		
-		//console.log( "Processed: " + counter + " tags");
-		//console.log( tagsInfo );
+		// now as we have the bigger picture, we can apply repetition tags
 		tagsInfo.forEach( tagData => {
-			text1 = replaceTag( text1, tagData.tagName, tagData.numOfRepetitions );	
-			//console.log( `Replacing tag ${tagData.tagName}\n${text1}`);
+			text1 = applyRepetitionTag( text1, tagData.tagName, tagData.numOfRepetitions );	
 		});
-
-		//console.log( text1 );
 		return text1;
 
-		// Before: T K :2 (D T : 4) K K :3
-		// Result: T K </r~2> (D T </r~4> ) K K </r~3>
-		// Now we need to put correctly all opening tags
+		// Algorhythm
+		// Input: T K :2 (D T : 4) K K :3
+		// First step - closing tags: T K </r~2> (D T </r~4> ) K K </r~3>
+		// Now we need to put correctly all opening tags,
 		// for this we need to properly determine the context.
 		// If it's inside the ( ... ), then brackets define local context.
-		// If it's outside, then the context is defined by previous tag or the new line char.
+		// If it's outside, then the beginning of context is defined by previous tag or the new line char.
 
 		function processFirstTag(str, commandID) {
 
@@ -170,7 +163,8 @@ class ExpressionParser {
 	        return result;
 	    }
 
-	    function replaceTag(inputText, tagName, n) {
+	    // Replaces 
+	    function applyRepetitionTag(inputText, tagName, n) {
 
 	    	let result = inputText;
 	    	const openingTag = `[${tagName}]`;
@@ -190,7 +184,7 @@ class ExpressionParser {
 
 	}
 
-	parse_old(text) {
+	/*parse_old(text) {
 
 	    let text1 = text.replace(/^\s+/g, '').replace(/\s+:\s*(\d+)/g, " ~[$1]");
 	    text1 = trimArray( text1.split('\n') ).join("\n");
@@ -251,7 +245,7 @@ class ExpressionParser {
 	    return text1;
 
 
-	}
+	}*/
 
 }
 

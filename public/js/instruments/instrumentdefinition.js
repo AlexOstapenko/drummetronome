@@ -3,6 +3,7 @@ const INSTRUMENT_ID_SPLITTER = "~";
 
 const INSTR_NAME_DARBUKA = "Darbuka";
 const INSTR_NAME_COOPERMAN_TAR = "Tar";
+const INSTR_NAME_KOSMOSKY = "Kosmo Sky";
 
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
@@ -32,8 +33,6 @@ const INSTRUMENT_DARBUKA = {
 D S (k k)/2 S D k (S X P Pm)/2
 D S (k k)/2 S D (k k)/2 S (k k)/2
 (D D D D)/4 S (Pl Pl Pm P)/2 X X T/2 (t k k t k k t k k)/6`]
-
-
 }
 
 const INSTRUMENT_COOPERMAN_TAR = {
@@ -62,10 +61,27 @@ const INSTRUMENT_COOPERMAN_TAR = {
     // first for visual editor, second for text editor
     defaultRhythms: [ "D - P – k k P - D - k k P - k k", 
 `D L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2
-
 (R R L L)/2 (D L L L)/4 (T K)/2 :2
-
 (D L L L)/4 (T K)/2 :2
-
 (R R R R L L L L)/4 :2`]
 }
+
+const INSTRUMENT_KOSMOSKY = {
+    instrumentName: INSTR_NAME_KOSMOSKY,
+    folder: "audio/kosmosky/", // add / in the end
+    arrStrokeInfo: [
+        {stroke: "El", file: "E-L.mp3"},
+        {stroke: "B", file: "B.mp3"},
+        {stroke: "D", file: "D.mp3"},
+        {stroke: "E", file: "E.mp3"},
+        {stroke: "F", file: "F-sharp.mp3"},
+        {stroke: "G", file: "G.mp3"},
+        {stroke: "A", file: "A.mp3"},
+        {stroke: "Bh", file: "B-higher.mp3"},
+        {stroke: "Dh", file: "D-higher.mp3"},
+        {stroke: "Eh", file: "E-higher.mp3"},
+        {stroke: "-", file: ""}
+    ],
+    defaultRhythms: ["", ""]
+};
+

@@ -1,9 +1,7 @@
 class InstrumentManager {
     constructor() {
-        this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR];
-        //this.selectedInstrument = INSTRUMENT_COOPERMAN_TAR;
+        this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR, INSTRUMENT_KOSMOSKY];
         this.selectedInstrument = INSTRUMENT_DARBUKA;
-
         this.instrumentChangedListeners = [];
     }
 
