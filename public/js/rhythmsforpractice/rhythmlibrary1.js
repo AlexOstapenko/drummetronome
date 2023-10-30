@@ -11,20 +11,12 @@ class RhythmLibrary {
   constructor() {
     this.categories = [];
   }
-
   
   trimRhythms() {
-
-    function trimLines(txt) {
-      let arr = txt.split('\n');
-      let arr1 = arr.map( item => item.trim() );
-      return arr1.join("\n");
-    }
-
     this.categories.forEach( (cat,catIdx) => {
       cat.rhythms.forEach( (rhythmInfo,rIdx) => {
         let text = rhythmInfo.text;
-        this.categories[catIdx].rhythms[rIdx].text = trimLines(text);
+        this.categories[catIdx].rhythms[rIdx].text = trimLinesInRhythm(text);
       })
     });
   }
@@ -32,7 +24,6 @@ class RhythmLibrary {
 }
 
 const rhythmLibrary = new RhythmLibrary();
-
 
 function addRhythmsArray(arrRhythms, category, nameGeneratorCallback, instrumentName, categoryName) {
   
@@ -132,10 +123,9 @@ function createRhythmLibrary() {
 
       {
         name: "Composition for Dmitry", text:
-        `
-        // COUNT
+        `// PRECOUNT
         T2 T2 T:4
-
+        ***
         // INTRO
         (D k t D):3 D K - K    :3
 
@@ -220,6 +210,9 @@ T k T k k T k T k k T2 D2)/2 ):2
     // -----------------
     `R R R R L L L L : 3
     R R L L (R R R R L L L L)/2`,
+
+    // -----------------
+    `(D+R R R R L L L L)/2 R:4 L:4 R:2 L:2`,
 
     // -----------------
     `R R R R L L L L (R R R R L L L L)/2 R R L L`, 

@@ -48,17 +48,18 @@ body {
     color: #aaaaaa;
 }
 
-
-
-
 .tempoInput {
     font-size: 1.2em;   
 }
 
-
 #divTempo {
-    padding: 10px;
+    padding: 0px;
     width: 400px;
+}
+
+.div-tempo-text {
+    padding-top: 10px;
+    text-align: center;
 }
 
 @media (max-width: 768px) {

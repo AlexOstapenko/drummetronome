@@ -1,6 +1,9 @@
 
-/* Loop the given rhythm.
+/* 
+ Loop the given rhythm.
  How is rhythm represented? By an objet of class Rhythm.
+ In the first round, if given, first will be played precount and only after that the rhythm will be looped.
+ Precount is any rhythmic phrase that is separated by three stars *** from the rest of the rhythmic text.
 
 */
 
@@ -14,10 +17,12 @@ class RhythmPlayer {
                 oneLoopDuration: 0, // will be calculated when the particlar rhythm will be set
                 onePulseDuration: 0, // will be calculated when the particlar rhythm will be set
                 rhythm: null, // should be object of class Rhythm
+                precount: null, // should be object of class Rhythm
                 timeline: [], // rhythm -> relative time of each next sound within one bar
                 isActive: false,
                 scheduleLoop: -1,
                 doUpdateTimeline: false,
+                isJustStarted : false
 
             };
 
@@ -27,8 +32,11 @@ class RhythmPlayer {
     get isActive() { return this.performance.isActive; }
     get startTime() { return this.performance.startTime };
 
-    setRhythm(rhythm) {
+    // Here you set the rhyth to be looped (an instance of class Rhythm), 
+    // and optionally precount rhythm that should be played just once in the beginning (also object of class Rhythm).
+    setRhythm(rhythm, precount) {
         this.performance.rhythm = rhythm;
+        this.performance.precount = precount ? precount : null;
         this.performance.doUpdateTimeline = true;
     }
 
@@ -43,14 +51,20 @@ class RhythmPlayer {
     }
 
     /**
-     * Schedule next bar of the rhythm with Web Audio API
+     * Schedule next bar of the rhythm with Web Audio API.
+     * Returns the duration of the phrase that has been scheduled.
+     * It may be equal to the oneLoopDuration, but for the first time it will also include the precount duration. 
      */
     scheduleNextBar() {
+
+        let loopDuration = this.performance.isJustStarted ? 
+            this.performance.precount.size*this.performance.onePulseDuration + this.performance.oneLoopDuration : 
+            this.performance.oneLoopDuration;
 
         // rhythm has been changed, let's recalculate timeline
         if (this.performance.doUpdateTimeline) {
             this.calculateTimeline();
-            this.performance.doUpdateTimeline = false;
+            
         }
 
         // schedule next bar of rhythm in Web Audio API from new startTime
@@ -63,7 +77,8 @@ class RhythmPlayer {
             ); 
         });
 
-        this.performance.startTime += this.performance.oneLoopDuration/1000;
+        this.performance.startTime += loopDuration/1000;
+        return loopDuration;
     }
 
     stop() {
@@ -78,35 +93,64 @@ class RhythmPlayer {
         this.performance.timeline = [];
         let accumulatedTime = 0;
 
-        this.performance.rhythm.elements.forEach( item => {
-            if ( !isPause(item.stroke) ) { // there is no sense to add pause to timeline
-                this.performance.timeline.push( { 
-                    stroke: item.stroke,
-                    relativeTime: accumulatedTime, 
-                });
-            }
+        let addRhythmToTimeline = ( rhythm, accumulatedTime ) => {
+            rhythm.elements.forEach( item => {
+                if ( !isPause(item.stroke) ) { // there is no sense to add pause to timeline
 
-            // move accumulated time forward for next iteration
-            const thisStrokeDuration = item.size*this.performance.onePulseDuration;
-            accumulatedTime += thisStrokeDuration;
-        });
+                    // it is allowed the + sign in the syllable. It means several syllables should be played simultaneously.
+                    // here we'll split them and add each to timeline.
 
-        this.performance.doUpdateTimeline = false;
+                    item.stroke.split("+").forEach( singleStroke => {
+                        this.performance.timeline.push( { 
+                            stroke: singleStroke,
+                            relativeTime: accumulatedTime,
+                        });
+                    });
+                }
+
+                // move accumulated time forward for next iteration
+                const thisStrokeDuration = item.size*this.performance.onePulseDuration;
+                accumulatedTime += thisStrokeDuration;
+            });
+            return accumulatedTime;
+        }
+
+        // for the first time add first precount and then main rhythm
+        if (this.performance.isJustStarted && this.performance.precount != null ) {
+            accumulatedTime = addRhythmToTimeline(this.performance.precount, accumulatedTime);
+            this.performance.doUpdateTimeline = true;
+        }
+        else
+            this.performance.doUpdateTimeline = false;
+
+        this.performance.isJustStarted = false;
+
+        // now add the main rhythm
+        addRhythmToTimeline(this.performance.rhythm, accumulatedTime);
     }
 
     play() {
         this.stop();
         this.audioPlayer.turnOnSound();
 
-        this.calculateTimeline();
+        this.performance.isJustStarted = true;
+        this.performance.doUpdateTimeline = true;
+        //this.calculateTimeline();
         this.performance.isActive = true;
         this.performance.startTime = this.audioPlayer.audioContext.currentTime+0.1;
-        this.scheduleNextBar();
+        let precountAndRhythmDuration = this.scheduleNextBar();
 
+        // first time we play precount + main rhythm, but after this we set interval only for main rhythm
+        setTimeout( function() {
+            this.setInterval()
+        }.bind(this), precountAndRhythmDuration - 200 );
+    }
+
+    setInterval() {
+        this.scheduleNextBar();
         this.performance.scheduleLoop = setInterval(function () {
             this.scheduleNextBar();
-        }.bind( this ), this.performance.oneLoopDuration-200 ); // 200 ms before the end of the loop schedule next loop
-
+        }.bind( this ), this.performance.oneLoopDuration-200 ); // 200 ms before the end of the loop schedule next loop        
     }
 
     updateCurrentInstrument() {

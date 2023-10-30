@@ -10,6 +10,14 @@ class Rhythm {
     get elements() {
         return this.arrElements;
     }
+
+    get size() {
+        let result = 0;
+        this.arrElements.forEach(element => {
+            result += element.size;
+        });
+        return result;
+    }
 }
 
 function isPhrase(obj) {

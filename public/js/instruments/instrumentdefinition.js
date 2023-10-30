@@ -3,7 +3,7 @@ const INSTRUMENT_ID_SPLITTER = "~";
 
 const INSTR_NAME_DARBUKA = "Darbuka";
 const INSTR_NAME_COOPERMAN_TAR = "Tar";
-const INSTR_NAME_KOSMOSKY = "Kosmo Sky";
+const INSTR_NAME_KOSMOSKY = "Kosmosky (E)";
 
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
@@ -27,12 +27,17 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "X", file: "X.mp3"},
         {stroke: "N", file: "snap.mp3"}
     ],
-    defaultRhythms: 
-["D P Pl P D K X –", 
-`D S k S D k S (k k)/2
-D S (k k)/2 S D k (S X P Pm)/2
-D S (k k)/2 S D (k k)/2 S (k k)/2
-(D D D D)/4 S (Pl Pl Pm P)/2 X X T/2 (t k k t k k t k k)/6`]
+    defaultRhythms: {
+        [RHYTHM_TYPE_VISUAL] : "D P Pl P D K X –",
+        [RHYTHM_TYPE_TEXT] : 
+        `// PRECOUNT
+        T2:2 T:4
+        ***
+        D S k S D k S (k k)/2
+        D S (k k)/2 S D k (S X P Pm)/2
+        D S (k k)/2 S D (k k)/2 S (k k)/2
+        (D D D D)/4 S (Pl Pl Pm P)/2 X X T/2 (t k k t k k t k k)/6`
+    }
 }
 
 const INSTRUMENT_COOPERMAN_TAR = {
@@ -56,32 +61,42 @@ const INSTRUMENT_COOPERMAN_TAR = {
         {stroke: "a", file: "A.mp3", gain: 0.3},
         {stroke: "b", file: "B.mp3", gain: 0.3},
         {stroke: "c", file: "C.mp3", gain: 0.3},
-        {stroke: "X", file: "X.mp3"}
+        {stroke: "X", file: "X.mp3", gain: 1.5},
+        {stroke: "x", file: "X.mp3", gain: 0.8}
     ],
     // first for visual editor, second for text editor
-    defaultRhythms: [ "D - P – k k P - D - k k P - k k", 
-`D L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2
-(R R L L)/2 (D L L L)/4 (T K)/2 :2
-(D L L L)/4 (T K)/2 :2
-(R R R R L L L L)/4 :2`]
+    defaultRhythms: {
+        [RHYTHM_TYPE_VISUAL] : "D - P – k k P - D - k k P - k k", 
+        [RHYTHM_TYPE_TEXT] : 
+        `// PRECOUNT
+        T2:2 T:4
+        ***
+        D L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2
+        (R R L L)/2 (D L L L)/4 (T K)/2 :2
+        (D L L L)/4 (T K)/2 :2
+        (R R R R L L L L)/4 :2`
+    }
 }
 
 const INSTRUMENT_KOSMOSKY = {
     instrumentName: INSTR_NAME_KOSMOSKY,
-    folder: "audio/kosmosky/", // add / in the end
+    folder: "audio/kosmosky/guitar/", // add / in the end
     arrStrokeInfo: [
-        {stroke: "El", file: "E-L.mp3"},
-        {stroke: "B", file: "B.mp3"},
-        {stroke: "D", file: "D.mp3"},
-        {stroke: "E", file: "E.mp3"},
-        {stroke: "F", file: "F-sharp.mp3"},
-        {stroke: "G", file: "G.mp3"},
-        {stroke: "A", file: "A.mp3"},
-        {stroke: "Bh", file: "B-higher.mp3"},
-        {stroke: "Dh", file: "D-higher.mp3"},
-        {stroke: "Eh", file: "E-higher.mp3"},
+        {stroke: "El", file: "E-L.mp3", gain: 0.7},
+        {stroke: "B", file: "B.mp3", gain: 0.7},
+        {stroke: "D", file: "D.mp3", gain: 0.7},
+        {stroke: "E", file: "E.mp3", gain: 0.7},
+        {stroke: "F", file: "F-sharp.mp3", gain: 0.7},
+        {stroke: "G", file: "G.mp3", gain: 0.7},
+        {stroke: "A", file: "A.mp3", gain: 0.7},
+        {stroke: "Bh", file: "B-higher.mp3", gain: 0.7},
+        {stroke: "Dh", file: "D-higher.mp3", gain: 0.7},
+        {stroke: "Eh", file: "E-higher.mp3", gain: 0.7},
         {stroke: "-", file: ""}
     ],
-    defaultRhythms: ["", ""]
+    defaultRhythms: {
+        [RHYTHM_TYPE_VISUAL] : "El B D El B D E F", 
+        [RHYTHM_TYPE_TEXT] : "(El+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
+    }
 };
 

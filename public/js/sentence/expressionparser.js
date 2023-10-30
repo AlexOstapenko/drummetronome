@@ -65,10 +65,6 @@ T ( D T T :3)
 D T :2 T D D :3 T :5
 тут первый ":2" относится в "D T", второй оператор - ":3" относится к "T D D", а третий оператор ":5" относится к T,
 итого должно получиться: (D T) (D T) (T D D) (T D D) (T D D) T T T T T
-
-
-
-
 */
 
 class ExpressionParser {
@@ -163,7 +159,7 @@ class ExpressionParser {
 	        return result;
 	    }
 
-	    // Replaces 
+	    // Finds and replaces [tagName] sentence [/tagName] to n times sentence.
 	    function applyRepetitionTag(inputText, tagName, n) {
 
 	    	let result = inputText;
@@ -183,70 +179,6 @@ class ExpressionParser {
 		}
 
 	}
-
-	/*parse_old(text) {
-
-	    let text1 = text.replace(/^\s+/g, '').replace(/\s+:\s*(\d+)/g, " ~[$1]");
-	    text1 = trimArray( text1.split('\n') ).join("\n");
-
-	    // searches for the beginning of block: opened (, beginning of line or beginning of string
-	    function findBeginningOfBlock(str, startIdx) {
-	        for( let i=startIdx; i >= 0; i--) {
-	            let currChar = str.charAt(i);
-	            if ( ['\n','|'].includes(currChar) ) // found!
-	                return i+1;
-	        }
-	        return 0;
-	    }
-
-	    function processFirstTilda(str) {
-
-	        let firstTildaIdx = str.indexOf('~');
-	        if ( firstTildaIdx === -1 ) return str;
-
-	        // if we found ~ char, then right after it we should find [N] (according to the first regexp replacement)
-	        // so get the number N
-	        const idxClosingOfN = str.indexOf( "]", firstTildaIdx);
-	        const N = parseInt(str.substring(firstTildaIdx+2, idxClosingOfN));
-	        const restOfString = idxClosingOfN === str.length? "" : str.substring( idxClosingOfN+1 );
-	        let bracketsCounter = 0;
-	        let content = "";
-	        let lineStartIdx = findBeginningOfBlock(str, firstTildaIdx);
-	        const beginningOfString = str.substring(0, lineStartIdx);
-	        
-	        // find beginning of the related block and get all the block content
-	        for( let i=firstTildaIdx-1; i >= lineStartIdx; i--) {
-	            let currChar = str.charAt(i);
-	            if (currChar === ")") bracketsCounter++;
-	            if (currChar === "(") bracketsCounter--;
-
-	            if (i==lineStartIdx || (currChar==="(" && bracketsCounter===0)) {
-	                if (bracketsCounter===0) {
-	                    let substr = str.substring(lineStartIdx, firstTildaIdx-1);
-	                    content = Array.from( {length: N}, () => substr ).join(" ")
-	                } else if (str.charAt(i) === "(" && bracketsCounter === -1 ) {
-	                    let substr = str.substring(i+1, firstTildaIdx-1);
-	                    content = "(" + Array.from( {length: N}, () => substr ).join(" ");
-	                }
-	            }
-	        }
-
-	        return beginningOfString + " " + content + "|" + restOfString;
-	    }
-
-	    while( text1.includes('~') ) {
-	        text1 = processFirstTilda(text1);
-	    }
-
-	    text1 = text1.replace(/\|/g, '').replace( / +/g, ' ');
-
-	    console.log( "NORMALIZED TEXT" );
-	    console.log( text1 ); 
-	    return text1;
-
-
-	}*/
-
 }
 
 

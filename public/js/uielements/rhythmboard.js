@@ -1,14 +1,4 @@
 /*const classesForDarbukaStrokes = { 
-    "D" : "low right",
-    "T" : "high",
-    "K" : "high",
-    "t" : "nonaccented",
-    "k" : "nonaccented",
-    "R" : "right",
-    "L" : "left"
-};*/
-
-const classesForDarbukaStrokes = { 
     "D" : "low",
     "T" : "",
     "K" : "",
@@ -16,8 +6,7 @@ const classesForDarbukaStrokes = {
     "k" : "nonaccented",
     "R" : "",
     "L" : ""
-};
-
+};*/
 
 const RHYTHM_SIZE_INPUT_ID = "rhythmSize";
 
@@ -36,8 +25,9 @@ class RhythmBoard {
     }
 
     calcClasses(text) {
-        const classes = classesForDarbukaStrokes;
-        return classes[text] ? classes[text] : "";
+        //const classes = classesForDarbukaStrokes;
+        //return classes[text] ? classes[text] : "";
+        return "";
     }
 
     render() {
@@ -101,6 +91,10 @@ class RhythmBoard {
     // Each stroke's duration = 1 impulse (1/8th note, kind of).
     get rhythm() {
         return this.items.slice();
+    }
+
+    get rhythmAsText() {
+        return this.items.join(" ");
     }
 
     setSelectedStroke(stroke) {

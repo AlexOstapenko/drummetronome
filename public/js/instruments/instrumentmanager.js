@@ -1,8 +1,17 @@
+/*
+Loading instruments.
+Managing the currently selected instrument.
+Managing, which instruments are currently active (can be more than one).
+Storing memory for each instrument (last rhythms, audio settings etc).
+*/
 class InstrumentManager {
     constructor() {
         this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR, INSTRUMENT_KOSMOSKY];
         this.selectedInstrument = INSTRUMENT_DARBUKA;
+        this.activeInstruments = []; 
         this.instrumentChangedListeners = [];
+        // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
+        this.instrumentsMemory = {}; 
     }
 
     strokeNames(instrument) {
@@ -14,19 +23,21 @@ class InstrumentManager {
     }
 
     set currentInstrument(instrument) {
-        if ( instrument.instrumentName === this.currentInstrument.instrumentName) return;
+        if ( instrument.instrumentName === this.selectedInstrument.instrumentName) return;
+        this.selectedInstrument = instrument;
 
-        function instrumentLoaded( instr ) {
-            // we change selected instrument value only when in is finally loaded
-            instrumentManager.selectedInstrument = instr;
-            instrumentManager.notifyInstrumentChanged();
+        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
+            audioFilePlayer.loadAudioFiles( instrument, this.instrumentLoaded.bind(this) );
+        } else
+            this.instrumentLoaded(instrument);
+    }
 
-            // todo: hide the status "LOADING..." 
-        }
-        if (!audioFilePlayer.isInstrumentLoaded(instrument) )
-            audioFilePlayer.loadAudioFiles( instrument, instrumentLoaded );
-        else
-            instrumentLoaded(instrument);
+    instrumentLoaded( instr ) {
+        // we change selected instrument value only when in is finally loaded
+        this.selectedInstrument = instr;
+        this.notifyInstrumentChanged();
+
+        // todo: hide the status "LOADING..." 
     }
 
     addInstrumentChangedListener(listener) {
@@ -35,7 +46,7 @@ class InstrumentManager {
 
     notifyInstrumentChanged() {
         this.instrumentChangedListeners.forEach( listener => {
-            if (listener) listener.instrumentChanged( this.currentInstrument );
+            if (listener) listener.instrumentChanged( this.selectedInstrument );
         });
     }
 
@@ -75,6 +86,44 @@ class InstrumentManager {
         }
         return null;
     }
+
+    addActiveInstrument(instrumentName) {
+        let instr = this.getInstrument(instrumentName);
+        if (instr === null)
+            this.activeInstruments.push( instr );
+    }
+
+    removeActiveInstrument( instrumentName ) {
+
+        let newArr = [];
+        for( let instr of this.activeInstruments) {
+            if (instr.instrumentName !== instrumentName )
+                newArr.push( instr );
+        }
+        this.activeInstruments = newArr;
+    }
+
+    // MEMORY FUNCTIONS
+    saveRhythm(instrumentName, rhythmType, rhythmRawText) {
+        if (!this.instrumentsMemory[instrumentName]) {
+            this.instrumentsMemory[instrumentName] = {}
+        }
+        let instrMemory = this.instrumentsMemory[instrumentName];
+
+        instrMemory[ rhythmType ] = rhythmRawText;
+    }
+
+    recallRhythm(instrumentName, rhythmType) {
+        if (!this.instrumentsMemory[instrumentName]) {
+            let instrument = this.getInstrument( instrumentName );
+            this.instrumentsMemory[instrumentName] = {
+                [RHYTHM_TYPE_TEXT]: trimLinesInRhythm(instrument.defaultRhythms[RHYTHM_TYPE_TEXT]),
+                [RHYTHM_TYPE_VISUAL]: trimLinesInRhythm(instrument.defaultRhythms[RHYTHM_TYPE_VISUAL])
+            }
+        }
+        return this.instrumentsMemory[instrumentName][rhythmType];
+    }
+
 }
 
 const instrumentManager = new InstrumentManager();

@@ -64,7 +64,6 @@ class RhythmsDBUIController {
     }).join("");
 
     // set the title to category name
-
     elementTitle.innerHTML = selectedCat.name;
 
     const divW = divRhythmsSelector.offsetWidth;

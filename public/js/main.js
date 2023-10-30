@@ -1,33 +1,14 @@
-const ID_BUTT_PLAYSTOP = "buttPlayStop";
-const ID_INPUT_TEMPO = "inputTempo";
-const ID_INPUT_TEMPOVAL = "inputTempoValue";
-
-const ID_DIV_TEMPO = "divTempo";
-
-const L_BUTT_PLAY = "PLAY";
-const L_BUTT_STOP = "STOP";
-
-const DEFAULT_BPM = 90;
 
 const soundPlayer = audioFilePlayer; // object that actually plays sounds
 
 function onDocumentLoaded() {
-
     initDefaultInstrument();
-
     setDefaultValues();
     rhythmsDBUI.render();
-
     instrumentSelector.render();
-
-    updateRhythmEditorVisibility();
-
-    //if ( rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL)
+    rhythmEditorsManager.updateRhythmEditorVisibility();
     initVisualRhythmEditor();
-    
     addUIEventHandlers();
-
-    test();
 }
 
 function initDefaultInstrument() {
@@ -36,14 +17,13 @@ function initDefaultInstrument() {
     soundPlayer.loadAudioFiles( currInstr );
 
     // set default rhythm texts for visual and text rhythm editor
-    rhythmBoard.setNewRhythm(currInstr.defaultRhythms[0] );
-    setTextRhythm( currInstr.defaultRhythms[1] );
+    rhythmBoard.setNewRhythm(instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_TYPE_VISUAL) );
+    rhythmEditorsManager.setTextRhythm( instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_TYPE_TEXT)  );
 }
 
 function setDefaultValues() {
     document.getElementById(ID_INPUT_TEMPO).value = DEFAULT_BPM;
     document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = DEFAULT_BPM;
-
 }
 
 function addUIEventHandlers() {
@@ -73,21 +53,7 @@ function initVisualRhythmEditor() {
 // There is 2 types of rhythm, editors: visual, more simple 
 // and text editor where you can define more complex rhythmic phrases
 function switchRhythmEditor() {
-    rhythmEditorsManager.currentRhythmEditorIdx++; 
-    if (rhythmEditorsManager.currentRhythmEditorIdx === rhythmEditors.length) rhythmEditorsManager.currentRhythmEditorIdx = 0;
-
-    updateRhythmEditorVisibility();
-}
-
-function updateRhythmEditorVisibility() {
-    // show the current rhythm editor type
-    rhythmEditors.forEach( (item, idx) => {
-        let div = document.querySelector(`#${item}`);
-        div.style.display = (idx===rhythmEditorsManager.currentRhythmEditorIdx) ? "flex" : "none";
-    });
-
-    document.querySelector('#buttonSwitchRhythmEditor').innerText = 
-        buttonLabelsForRhythmEditors.slice().reverse()[rhythmEditorsManager.currentRhythmEditorIdx];
+    rhythmEditorsManager.switchRhythmEditor();
 }
 
 function buttonSetRhythmSize(num) {
@@ -143,41 +109,35 @@ function setRhythmAndTempoInfoToPlayer() {
     let bpm = document.getElementById(ID_INPUT_TEMPO).value;
 
     let tempoInfo = {};
-    let rhythmPhrase = null;
+    let rhythmData = {precount: "", mainRhythm: ""};
 
-    if (rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL) {
+    if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL) {
         let beatsCount = rhythmBoard.size;
         let actualBPM = bpm*2;
 
         tempoInfo.oneLoopDuration = 1000*beatsCount*60/actualBPM;
-        //tempoInfo.onePulseDuration = tempoInfo.oneLoopDuration / beatsCount; 
         tempoInfo.onePulseDuration = 60*1000/actualBPM;
         
         // setting up the rhythm
-        rhythmPhrase = new Phrase( rhythmBoard.rhythm.join( " " ) );
+        rhythmData.mainRhythm = rhythmBoard.rhythm.join( " " );
 
-    } else if (rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
-        let textRhythmRaw = getTextRhythm();
-        rhythmPhrase = new Phrase( processRawTextRhythm( textRhythmRaw ) );
+    } else if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
+        let textRhythmRaw = rhythmEditorsManager.getTextRhythm();
+        let processedRhythm = processRawTextRhythm( textRhythmRaw );
+        if ( Array.isArray(processedRhythm ) ) { // in means we have 0 - precount, 1 - rhythm itself
+            rhythmData.precount = processedRhythm[0];
+            rhythmData.mainRhythm = processedRhythm[1];
+        } else rhythmData.mainRhythm = processedRhythm;
+
+        let rhythmPhrase = new Phrase( rhythmData.mainRhythm );
         tempoInfo.onePulseDuration = 60*1000/(bpm*2);
         tempoInfo.oneLoopDuration = rhythmPhrase.getSize(false) * tempoInfo.onePulseDuration;
     }
 
     rhythmPlayer.tempoInfo = tempoInfo;
-    rhythmPlayer.setRhythm( createRhythm( rhythmPhrase ) );
+    rhythmPlayer.setRhythm( createRhythm( new Phrase(rhythmData.mainRhythm) ), 
+                            createRhythm( new Phrase(rhythmData.precount) ) );
 }
-
-function test() {
-
-    //normalizeTextRhythm( '(D T (D D T T)/2 ) K D :2');
-    //normalizeTextRhythm( `(D T :2 P Pm   
-    //    K/2:2 D : 3 ):5`);
-
-    //let exprParser = new ExpressionParser();
-    //exprParser.parse( `T K :2 (D T : 4) K K :3` );
-
-}
-
 
 
 

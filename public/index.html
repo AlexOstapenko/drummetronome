@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/top-toolbar.css">
     <link rel="stylesheet" href="css/playing-duration-timer.css">
 
+    <script src="js/general/constants.js"></script>
+
     <!-- for parsing rhythm text -->
     <script src="js/utils.js"></script>
     <script src="js/command/command.js"></script>
@@ -25,6 +27,7 @@
     <script src="js/sentence/phrase.js"></script>
     <script src="js/sentence/sentence.js"></script>
     <script src="js/sentence/expressionparser.js"></script>
+    <script src="js/sentence/textrhythmprocessor.js"></script>
 
     <script src="js/instruments/instrumentdefinition.js"></script>
     <script src="js/instruments/instrumentmanager.js"></script>
@@ -94,8 +97,9 @@
 
             <div>
                 <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="20"></textarea>
-                <button class="button-delete-textrhythm" onclick="setTextRhythm('')">x</button> 
-                <button class="button-txt-rhythm-to-vis-editor" onclick="setTextRhythmToVisualEditorAndSwitch()">T ➔ V</button> 
+                <button class="button-delete-textrhythm" onclick="rhythmEditorsManager.setTextRhythm('')">x</button> 
+                <button class="button-txt-rhythm-to-vis-editor" 
+                    onclick="rhythmEditorsManager.setTextRhythmToVisualEditorAndSwitch()">T ➔ V</button> 
             </div>
         </div>
 
@@ -106,8 +110,9 @@
         </div>
 
         <!-- Изменение темпа -->
+        
+        <div class='div-tempo-text'>Tempo: <span id="inputTempoValue"></span> <br></div>
         <div id="divTempo">
-            Tempo: <span id="inputTempoValue"></span> <br>
             <input id="inputTempo" class="genericInput tempoInput"
                 size="10" value="120" type="range" min="20" max="500" step="5"
                 onchange="onChangeTempo()" oninput="onChangeTempo()">
