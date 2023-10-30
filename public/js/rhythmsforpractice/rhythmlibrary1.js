@@ -6,6 +6,8 @@ const FRAMEDRUM_EXERCISES_IDS = {
   NAME: "Lap style warmups (Tar)" 
 }
 
+
+
 class RhythmLibrary {
 
   constructor() {
@@ -162,7 +164,18 @@ function createRhythmLibrary() {
         ):4`, instr: INSTRUMENT_DARBUKA.instrumentName
       }
       ]
-    } // end of category
+    }, // end of category
+    {
+      id: "kosmosky_1", name: "Kosmosky compositions",
+      rhythms: [
+        {name: "Tender sun", 
+        text: `El G E El A F B D
+               El G E El A2 F2
+               El G E El A F B D
+               El G E A F2 B+E2`, 
+              instr: INSTRUMENT_KOSMOSKY.instrumentName}
+      ]
+    }
   ];
 
 

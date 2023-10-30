@@ -62,7 +62,9 @@ const INSTRUMENT_COOPERMAN_TAR = {
         {stroke: "b", file: "B.mp3", gain: 0.3},
         {stroke: "c", file: "C.mp3", gain: 0.3},
         {stroke: "X", file: "X.mp3", gain: 1.5},
-        {stroke: "x", file: "X.mp3", gain: 0.8}
+        {stroke: "x", file: "X.mp3", gain: 0.8},
+        {stroke: "Z", file: "triangle.mp3", gain: 0.3},
+        {stroke: "SH", file: "cabasa.mp3", gain: 0.1}
     ],
     // first for visual editor, second for text editor
     defaultRhythms: {
