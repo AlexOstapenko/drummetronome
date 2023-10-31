@@ -7,7 +7,7 @@ const INSTR_NAME_KOSMOSKY = "Kosmosky (E)";
 
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
-    folder: "audio/darbuka_clay/", // add / in the end
+    folder: "audio1/darbuka_clay/", // add / in the end
     arrStrokeInfo: [
         {stroke: "D", file: "du.mp3", gain: 1.5},
         {stroke: "d", file: "du.mp3", gain: 0.8},
@@ -42,7 +42,7 @@ const INSTRUMENT_DARBUKA = {
 
 const INSTRUMENT_COOPERMAN_TAR = {
     instrumentName: INSTR_NAME_COOPERMAN_TAR,
-    folder: "audio/cooperman_tar/", // add / in the end
+    folder: "audio1/cooperman_tar/", // add / in the end
     arrStrokeInfo: [
         {stroke: "D", file: "d.mp3"},
         {stroke: "-", file: ""},
@@ -82,7 +82,7 @@ const INSTRUMENT_COOPERMAN_TAR = {
 
 const INSTRUMENT_KOSMOSKY = {
     instrumentName: INSTR_NAME_KOSMOSKY,
-    folder: "audio/kosmosky/guitar/", // add / in the end
+    folder: "audio1/kosmosky/guitar/", // add / in the end
     arrStrokeInfo: [
         {stroke: "El", file: "e-l.mp3", gain: 0.7},
         {stroke: "B", file: "b.mp3", gain: 0.7},
