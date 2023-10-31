@@ -1,3 +1,25 @@
+
+/*
+We have a stage with several instruments.
+Each instrument exists as a separate instance. It contains information about the rhythms,
+sound settings as volume, panorama etc.
+*/
+class InstrumentInstance {
+    constructor(instrName) {
+        this.instrument = instrumentManager.getInstrument( instrName );
+        this.data = {
+            rhythms: {
+                [RHYTHM_TYPE_TEXT]: "",
+                [RHYTHM_TYPE_VISUAL] : ""
+            },
+            audio: {
+                gain: 1.0,
+                panorama: 0
+            }
+        }
+    }
+}
+
 /*
 Loading instruments.
 Managing the currently selected instrument.
@@ -12,6 +34,9 @@ class InstrumentManager {
         this.instrumentChangedListeners = [];
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
         this.instrumentsMemory = {}; 
+
+        // to keep all info about particular instance of an instrument like rhythms, audio settings etc.
+        this.instrumentInstances = {}; // key: instrument name, value - onject of InstrumentInstance
     }
 
     strokeNames(instrument) {
@@ -56,20 +81,19 @@ class InstrumentManager {
         let arr = strokeID.split(INSTRUMENT_ID_SPLITTER);
         let instrName = arr[0];
         let strokeName = arr[1];
+        let instrument = this.getInstrument( instrName );
 
-        // search the needed instrument
-        for (let instr of this.allInstruments) {
-            if (instr.instrumentName === instrName) {
-                for (let strokeInfo of instr.arrStrokeInfo) {
-                    if (strokeInfo.stroke === strokeName) {
-                        // !!! found it!
-                        if ( strokeInfo.gain ) 
-                            return strokeInfo.gain;
-                        else return -1;
-                    }
-                };
+
+        // search the needed stroke
+        for (let strokeInfo of instrument.arrStrokeInfo) {
+            if (strokeInfo.stroke === strokeName) {
+                // !!! found it!
+                if ( strokeInfo.gain ) 
+                    return strokeInfo.gain;
+                else return -1;
             }
         };
+
         return -1;
     }
 
@@ -87,20 +111,17 @@ class InstrumentManager {
         return null;
     }
 
-    addActiveInstrument(instrumentName) {
-        let instr = this.getInstrument(instrumentName);
-        if (instr === null)
-            this.activeInstruments.push( instr );
+    addInstrumentInstance(instrumentName) {
+        this.instrumentInstances.push( new InstrumentInstance( instrumentName ) );
     }
 
-    removeActiveInstrument( instrumentName ) {
-
+    removeInstrumentInstane( instrumentName ) {
         let newArr = [];
-        for( let instr of this.activeInstruments) {
-            if (instr.instrumentName !== instrumentName )
+        for( let instr of this.instrumentInstances) {
+            if (instr.instrument.instrumentName !== instrumentName )
                 newArr.push( instr );
         }
-        this.activeInstruments = newArr;
+        this.instrumentInstances = newArr;
     }
 
     // MEMORY FUNCTIONS

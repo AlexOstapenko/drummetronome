@@ -84,7 +84,7 @@ const INSTRUMENT_KOSMOSKY = {
     instrumentName: INSTR_NAME_KOSMOSKY,
     folder: "audio/kosmosky/guitar/", // add / in the end
     arrStrokeInfo: [
-        {stroke: "El", file: "e-l.mp3", gain: 0.7},
+        {stroke: "O", file: "e-l.mp3", gain: 0.7},
         {stroke: "B", file: "b.mp3", gain: 0.7},
         {stroke: "D", file: "d.mp3", gain: 0.7},
         {stroke: "E", file: "e.mp3", gain: 0.7},
@@ -97,8 +97,8 @@ const INSTRUMENT_KOSMOSKY = {
         {stroke: "-", file: ""}
     ],
     defaultRhythms: {
-        [RHYTHM_TYPE_VISUAL] : "El B D El B D E F", 
-        [RHYTHM_TYPE_TEXT] : "(El+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
+        [RHYTHM_TYPE_VISUAL] : "O B D O B D E F", 
+        [RHYTHM_TYPE_TEXT] : "(O+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
     }
 };
 

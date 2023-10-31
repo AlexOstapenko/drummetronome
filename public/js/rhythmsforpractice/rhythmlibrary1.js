@@ -165,23 +165,24 @@ function createRhythmLibrary() {
       },
       {
         name: "Composition of Nina for konnakol", text:
-        `T2:2 T:4
+        `X2:4
 
-        D - T ki ki T - ki
-        T ki ki D - X Pm Pl
-        D - T ki ki T - ki
-        ( T K T K D –)/2:2 (T K T K)/2
-        D - T ki ki T - ki
-        ( T k k T k k T K d d T K d d T K)/2
-        T ki ki T - ki :2
+        // 1 PART
+        D - T k k T - k
+        T k k D - X Pm Pl
+        D - T k k T - k
+        (T K T K)/2 D :2 (T K T K)/2
+        D - T k k T - k
+        (X k k D k k T K d d T K d d T K)/2
+        T k k T - k :2
         (T k k T k k T k)/2
 
-        D2 (T k k k T k k):2
-        T2 k k D5 T2 T2 X k k 
-        T k k D2 :2 T k k k T k
-        (T k k k)/2 D : 2 (T k k k)/2
-        ( T k k T k k T K d d T K d d T K)/2
-
+        // 2 PART
+        D2 (T k d d T k k :2)
+        T2 k k D5 d+X2:2 X k k
+        T k k D2 :2 T k d d T k
+        (T k k k)/2 D : 2 (T K d d)/2
+        ( T k k T k k (T k d d):2 T K)/2
         `, instr: INSTRUMENT_DARBUKA.instrumentName
       }
       ]
@@ -190,10 +191,10 @@ function createRhythmLibrary() {
       id: "kosmosky_1", name: "Kosmosky compositions",
       rhythms: [
         {name: "Tender sun", 
-        text: `El G E El A F B D
-               El G E El A2 F2
-               El G E El A F B D
-               El G E A F2 B+E2`, 
+        text: `O G E O A F B D
+               O G E O A2 F2
+               O G E O A F B D
+               O G E A F2 B+E2`, 
               instr: INSTRUMENT_KOSMOSKY.instrumentName}
       ]
     }
