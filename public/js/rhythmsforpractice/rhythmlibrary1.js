@@ -162,6 +162,22 @@ function createRhythmLibrary() {
         (D - - D D - T -)/2:3
         D D D T
         ):4`, instr: INSTRUMENT_DARBUKA.instrumentName
+      },
+      {
+        name: "Composition of Nina for konnakol", text:
+        `T2:2 T:4
+
+        D - T ki ki T - ki
+        T ki ki D - X Pm Pl
+
+        D - T ki ki T - ki
+        ( T K T K D –)/2:2 (T K T K)/2
+
+        D - T ki ki T - ki
+        ( T k k T k k T K d d T K d d T K)/2
+
+        T ki ki T - ki :2
+        (T k k T k k T k)/2`, instr: INSTRUMENT_DARBUKA.instrumentName
       }
       ]
     }, // end of category
