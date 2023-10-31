@@ -169,15 +169,20 @@ function createRhythmLibrary() {
 
         D - T ki ki T - ki
         T ki ki D - X Pm Pl
-
         D - T ki ki T - ki
         ( T K T K D –)/2:2 (T K T K)/2
-
         D - T ki ki T - ki
         ( T k k T k k T K d d T K d d T K)/2
-
         T ki ki T - ki :2
-        (T k k T k k T k)/2`, instr: INSTRUMENT_DARBUKA.instrumentName
+        (T k k T k k T k)/2
+
+        D2 (T k k k T k k):2
+        T2 k k D5 T2 T2 X k k 
+        T k k D2 :2 T k k k T k
+        (T k k k)/2 D : 2 (T k k k)/2
+        ( T k k T k k T K d d T K d d T K)/2
+
+        `, instr: INSTRUMENT_DARBUKA.instrumentName
       }
       ]
     }, // end of category
