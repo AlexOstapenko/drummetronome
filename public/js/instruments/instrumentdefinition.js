@@ -4,6 +4,7 @@ const INSTRUMENT_ID_SPLITTER = "~";
 const INSTR_NAME_DARBUKA = "Darbuka";
 const INSTR_NAME_COOPERMAN_TAR = "Tar";
 const INSTR_NAME_KOSMOSKY = "Kosmosky (E)";
+const INSTR_NAME_HANG_D_LOW_MYSTIC = "Hang Low Mystic (D)";
 
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
@@ -104,3 +105,25 @@ const INSTRUMENT_KOSMOSKY = {
     }
 };
 
+const INSTRUMENT_HAND_D_LOW_MYSTIC = {
+    instrumentName: INSTR_NAME_HANG_D_LOW_MYSTIC,
+    folder: "audio/hang_d_low_mystic/", // add / in the end
+    arrStrokeInfo: [
+        {stroke: "O", file: "d-ding.mp3"},
+        {stroke: "G", file: "g.mp3"},
+        {stroke: "A", file: "a.mp3"},
+        {stroke: "A#", file: "asharp.mp3"},
+        {stroke: "D", file: "d.mp3"},
+        {stroke: "E", file: "e.mp3"},
+        {stroke: "F", file: "f.mp3"},
+        {stroke: "Ah", file: "ah.mp3"},
+        {stroke: "Ch", file: "ch.mp3"},
+        {stroke: "-", file: ""},
+        {stroke: "Z", file: "triangle.mp3", gain: 0.3},
+        {stroke: "^", file: "cabasa.mp3", gain: 0.1}
+    ],
+    defaultRhythms: {
+        [RHYTHM_TYPE_VISUAL] : "O G A A# D E F Ah Ch", 
+        [RHYTHM_TYPE_TEXT] : "O-G A A# D E F Ah Ch"
+    }
+};
