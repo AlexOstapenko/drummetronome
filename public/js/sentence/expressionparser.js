@@ -73,13 +73,99 @@ class ExpressionParser {
 
 	}
 
+
+	/*
+	In the beginning you can define variables. For example:
+	A = (D K T K)/2 (D K):2 T (K K)/2;
+	A A/2:2
+
+	So after this text all "A"'s will be replaced with "(value of A)"
+	Variables are expected as first part of any text rhythm
+	*/
+	parseVariables(text) {
+		// check what is before and afer the given indexes
+	    function isSeparateWord(text, startIndex, endIndex) {
+	          const varAllowedChars = "_"+
+	      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"+
+	      "абвгдеёжзийклмнопрстуфхцышщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"; // Список допустимых символов в словах
+	      const charBefore = text[startIndex - 1] || '';
+	      const charAfter = text[endIndex] || '';
+
+	      return (
+	        varAllowedChars.includes(text[startIndex]) && // Первый символ слова
+	        (!varAllowedChars.includes(charBefore) || charBefore === '') && // Проверка, что перед словом нет другой буквы
+	        (!varAllowedChars.includes(charAfter) || charAfter === '') // Проверка, что после слова нет другой буквы
+	      );
+	    }
+
+	   function replaceVar( text, varName, varValue) {
+	        let startIdx = 0;
+	        let result = "";
+	        let idx = text.indexOf(varName, startIdx);
+	        while (idx>=0) {
+	            let endIdx = idx + varName.length;
+	            if ( isSeparateWord(text, idx, endIdx) ) {
+	                text = text.substring(0, idx) + ' (' + varValue.trim() +')' + text.substring( endIdx ); 
+	            } else startIdx = endIdx;
+	            idx = text.indexOf(varName, startIdx);
+	        }
+	        return text;
+
+	    }
+
+		function processFirstVariable(text) {
+			let idx = text.indexOf( "=" );
+			if (idx===-1) return text;
+
+			// get the variable name from the position of "=" till the beginning of current line
+			let doContinue = true;
+			let varName = "";
+			for( let i=idx-1; doContinue; i--) {
+				let currChar = text.charAt(i);
+				if ( !/\s/.test(currChar) && currChar!='\n') varName = currChar + varName;
+				doContinue = !(currChar==='\n' || i===0);
+			}
+			
+			// get variable value from "=" char to ";" char
+			let idxSemicolon = text.indexOf(';');
+			if (idxSemicolon===-1) throw new SyntaxError(`Semicolon ';' not found in variable ${varName} declaration.`)
+			let varValue = text.substring(idx+1, idxSemicolon);
+
+			// get rest of the string
+			let restOfText = text.substring( idxSemicolon+1 ).trim();
+
+			//replace all [varName] to [varValue]
+			doContinue = true;
+			do {
+				let replaced = replaceVar(restOfText, varName, varValue);
+				doContinue = (replaced !== restOfText);
+				restOfText = replaced;
+			} while (doContinue);
+
+			return restOfText;
+		}
+
+		// replace all variables to their values
+		let doContinue = true;
+		let processed = text;
+		do {
+			let currProcessed = processFirstVariable(processed);
+			doContinue = ( currProcessed !== processed);
+			processed = currProcessed;
+		}while(doContinue);
+
+		return processed;
+	}
+
 	// Parses the expression
 	parse(text) {
+
+		// first parse variables
+		text = this.parseVariables(text);
 
 		// array, here we'll collect info about each tag as object: {tagName: , numOfRepetitions: }
 		let tagsInfo = [];
 
-		//console.log( "Original text:\n" + text);
 		// first replace all non-specific repetition " : N" with ending tag: </r~N>
 		let text1 = text.replace(/^\s+/g, '').replace(/\s+:\s*(\d+)/g, " </r~$1>");
 

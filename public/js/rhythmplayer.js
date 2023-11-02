@@ -1,4 +1,6 @@
 
+const MULTI_STROKE_JOINT = '-';
+
 /* 
  Loop the given rhythm.
  How is rhythm represented? By an objet of class Rhythm.
@@ -100,7 +102,7 @@ class RhythmPlayer {
                     // it is allowed the + sign in the syllable. It means several syllables should be played simultaneously.
                     // here we'll split them and add each to timeline.
 
-                    item.stroke.split("+").forEach( singleStroke => {
+                    item.stroke.split( MULTI_STROKE_JOINT ).forEach( singleStroke => {
                         this.performance.timeline.push( { 
                             stroke: singleStroke,
                             relativeTime: accumulatedTime,

@@ -6,8 +6,6 @@ const FRAMEDRUM_EXERCISES_IDS = {
   NAME: "Lap style warmups (Tar)" 
 }
 
-
-
 class RhythmLibrary {
 
   constructor() {
@@ -190,51 +188,20 @@ function createRhythmLibrary() {
     {
       id: "kosmosky_1", name: "Kosmosky compositions",
       rhythms: [
-        {name: "Tender sun", 
-        text: `O G E O A F B D
-               O G E O A2 F2
-               O G E O A F B D
-               O G E A F2 B+E2`, 
-              instr: INSTRUMENT_KOSMOSKY.instrumentName}
+        {name: "Tender sun", text: 
+          `O G E O A F B D
+           O G E O A2 F2
+           O G E O A F B D
+           O G E A F2 B-E2`, 
+           instr: INSTRUMENT_KOSMOSKY.instrumentName},
+        {name: "Dancy Groove For Practice", text:
+          `O-Z-^ B D-^ E
+           O-^ B D-^ E :2
+           G-^ A Bh-Z-^ Dh-^/2 ^/2`, 
+          instr: INSTRUMENT_KOSMOSKY.instrumentName}
       ]
     }
   ];
-
-
-/*
-
-(T2 D2 D2 T2
-T K D2 D2 T2
-D2 ( T K T K)/2 D2 T2
-T D (T K T K T K T K T K T K)/2 ):2
-
-(T2 D2 D2 T2
-T D (T K T K T K T K T K T K)/2 ):2
-
-T D (T K T K T K T K T K T K)/2 P4
-T D (T K T K T K T K T K T K)/2 P4
-T D (T K T K T K T K T K T K)/2
-
-D16
-
-
-Takita Dum2
-
-P2 P2 P2 P2
-
-T k k D2 T k k T k k k D2 D2
-T k k k T k k D2 T k k D2 D2
-T K D2 T K D2
-T K K D2 T K K D2
-T k T k k T k T k k T2 D2
-
-((T k k D2 T k k T k k k D2 D2
-T k k k T k k D2 T k k D2 D2
-T K D2 T K D2
-T K K D2 T K K D2
-T k T k k T k T k k T2 D2)/2 ):2
-
-*/
 
   addRhythmsArray([
 

@@ -9,7 +9,14 @@ function onDocumentLoaded() {
     rhythmEditorsManager.updateRhythmEditorVisibility();
     initVisualRhythmEditor();
     addUIEventHandlers();
+
+    test();
 }
+
+function test() {
+
+}
+
 
 function initDefaultInstrument() {
     // load sounds

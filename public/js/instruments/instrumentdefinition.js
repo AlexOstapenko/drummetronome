@@ -64,7 +64,7 @@ const INSTRUMENT_COOPERMAN_TAR = {
         {stroke: "X", file: "x.mp3", gain: 1.5},
         {stroke: "x", file: "x.mp3", gain: 0.8},
         {stroke: "Z", file: "triangle.mp3", gain: 0.3},
-        {stroke: "SH", file: "cabasa.mp3", gain: 0.1}
+        {stroke: "O", file: "cabasa.mp3", gain: 0.1}
     ],
     // first for visual editor, second for text editor
     defaultRhythms: {
@@ -94,6 +94,8 @@ const INSTRUMENT_KOSMOSKY = {
         {stroke: "Bh", file: "b-higher.mp3", gain: 0.7},
         {stroke: "Dh", file: "d-higher.mp3", gain: 0.7},
         {stroke: "Eh", file: "e-higher.mp3", gain: 0.7},
+        {stroke: "Z", file: "triangle.mp3", gain: 0.3},
+        {stroke: "^", file: "cabasa.mp3", gain: 0.1},
         {stroke: "-", file: ""}
     ],
     defaultRhythms: {
