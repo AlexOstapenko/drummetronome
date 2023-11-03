@@ -12,6 +12,7 @@ class InstrumentManager {
         this.instrumentChangedListeners = [];
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
         this.instrumentsMemory = {};
+        this.currentModalDiv = null;
     }
 
     strokeNames(instrument) {
@@ -28,6 +29,9 @@ class InstrumentManager {
 
         if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
             audioFilePlayer.loadAudioFiles( instrument, this.instrumentLoaded.bind(this) );
+            this.currentModalDiv = new ModalDiv();
+            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
+
         } else
             this.instrumentLoaded(instrument);
     }
@@ -37,7 +41,12 @@ class InstrumentManager {
         this.selectedInstrument = instr;
         this.notifyInstrumentChanged();
 
-        // todo: hide the status "LOADING..." 
+        // todo: hide the status "LOADING..."
+        if (this.currentModalDiv){
+            this.currentModalDiv.close();
+            this.currentModalDiv = null;
+        }
+
     }
 
     addInstrumentChangedListener(listener) {
