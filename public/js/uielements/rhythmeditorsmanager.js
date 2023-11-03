@@ -6,17 +6,17 @@ class RhythmEditorsManager {
 	constructor() {
 		this.currentRhythmEditorIdx = 1;
 		// these 2 arrays must me synchronized
-		this.rhythmEditors = [ RHYTHM_EDITOR_VISUAL, RHYTHM_EDITOR_TEXT ];
-		this.buttonLabelsForRhythmEditors = ["* V *", "* T *"];
+		this.rhythmEditors = [ RHYTHM_EDITOR_TYPE_VISUAL, RHYTHM_EDITOR_TYPE_TEXT ];
+		this.buttonLabelsForRhythmEditors = ["Visual editor", "Text editor"];
 	}
 
 	setRhythmToCurrentEditor( text ) {
 
-		if ( this.rhythmEditors[ this.currentRhythmEditorIdx ] === RHYTHM_EDITOR_VISUAL ) {
+		if ( this.rhythmEditors[ this.currentRhythmEditorIdx ] === RHYTHM_EDITOR_TYPE_VISUAL ) {
 			rhythmBoard.setNewRhythm( text );
     		rhythmBoard.render();
 
-		} else if ( this.rhythmEditors[ this.currentRhythmEditorIdx ] === RHYTHM_EDITOR_TEXT ) {
+		} else if ( this.rhythmEditors[ this.currentRhythmEditorIdx ] === RHYTHM_EDITOR_TYPE_TEXT ) {
 			this.setTextRhythm( text );
 		}
 	}
@@ -30,7 +30,7 @@ class RhythmEditorsManager {
 	updateRhythmEditorVisibility() {
 	    // show the current rhythm editor type
 	    this.rhythmEditors.forEach( (item, idx) => {
-	        let div = document.querySelector(`#${item}`);
+	        let div = document.querySelector(`#${DIV_RHYTHM_EDITOR(item)}`);
 	        div.style.display = (idx===rhythmEditorsManager.currentRhythmEditorIdx) ? "flex" : "none";
 	    });
 

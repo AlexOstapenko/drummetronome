@@ -24,24 +24,24 @@ class InstrumentSelector {
 		if (this.selectedInstrumentName === instrumentName ) return;
 
 		// before selecting new instrument - save data for the current
-		instrumentManager.saveRhythm( this.selectedInstrumentName, RHYTHM_TYPE_TEXT, rhythmEditorsManager.getTextRhythm() );
-		instrumentManager.saveRhythm( this.selectedInstrumentName, RHYTHM_TYPE_VISUAL, rhythmBoard.rhythmAsText );
+		instrumentManager.saveRhythm( this.selectedInstrumentName, RHYTHM_EDITOR_TYPE_TEXT, rhythmEditorsManager.getTextRhythm() );
+		instrumentManager.saveRhythm( this.selectedInstrumentName, RHYTHM_EDITOR_TYPE_VISUAL, rhythmBoard.rhythmAsText );
 		// select new instrument
 		this.selectedInstrumentName = instrumentName;
 		this.render();
 
 		// set new instrument and restore rhythms from instruments memory
 		instrumentManager.currentInstrument = instrumentManager.getInstrument( instrumentName );
-		instrumentManager.recallRhythm( this.selectedInstrumentName, RHYTHM_TYPE_TEXT );
-		instrumentManager.recallRhythm( this.selectedInstrumentName, RHYTHM_TYPE_VISUAL );
+		instrumentManager.recallRhythm( this.selectedInstrumentName, RHYTHM_EDITOR_TYPE_TEXT );
+		instrumentManager.recallRhythm( this.selectedInstrumentName, RHYTHM_EDITOR_TYPE_VISUAL );
 		this.instrumentChanged( this.selectedInstrumentName );
 	}
 
 	instrumentChanged( instrumentName ) {
 	    // set rhythm texts for visual and text rhythm editor
-	    rhythmBoard.setNewRhythm( instrumentManager.recallRhythm( instrumentName, RHYTHM_TYPE_VISUAL) );
+	    rhythmBoard.setNewRhythm( instrumentManager.recallRhythm( instrumentName, RHYTHM_EDITOR_TYPE_VISUAL) );
 	    rhythmBoard.render();
-	    rhythmEditorsManager.setTextRhythm( instrumentManager.recallRhythm( instrumentName, RHYTHM_TYPE_TEXT) );
+	    rhythmEditorsManager.setTextRhythm( instrumentManager.recallRhythm( instrumentName, RHYTHM_EDITOR_TYPE_TEXT) );
 	    
 	    strokeSelector.updateStrokes();
 	    rhythmPlayer.updateCurrentInstrument();

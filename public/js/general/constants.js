@@ -1,14 +1,10 @@
 // INSTRUMENTS AND RHYTHM EDITORS
 
 // There are 2 rhythm editors: V - visual, T - text
-const RHYTHM_TYPE_VISUAL = "visual-rhythm";
-const RHYTHM_TYPE_TEXT = "text-rhythm";
+const RHYTHM_EDITOR_TYPE_VISUAL = "visual-rhythm";
+const RHYTHM_EDITOR_TYPE_TEXT = "text-rhythm";
 
-const RHYTHM_EDITOR_VISUAL = "div-"+ RHYTHM_TYPE_VISUAL + "-editor";
-const RHYTHM_EDITOR_TEXT = "div-" + RHYTHM_TYPE_TEXT + "-editor";
-
-
-
+const DIV_RHYTHM_EDITOR = editorType => `div-${editorType}-editor`;
 
 // HTML IDS and LABELS
 const ID_BUTT_PLAYSTOP = "buttPlayStop";

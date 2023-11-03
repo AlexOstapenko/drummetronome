@@ -21,8 +21,6 @@ class RhythmsDBUIController {
     // create interactive div for each category
     let arr = rhythmLibrary.categories.map( cat => {
       let result = `<div class='div-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</div>`;
-
-      //`<button class='button-db-category' onclick="rhythmsDBUI.clickCategory('${cat.id}')">${cat.name}</button>`
       return result;
     });
     elem.innerHTML = 
@@ -82,6 +80,11 @@ class RhythmsDBUIController {
   clickRhythmSelected( categoryID, rhythmIdx ) {
     let category = rhythmLibrary.categories.find( cat => cat.id === categoryID );
     let rhythm = category.rhythms[rhythmIdx]; 
+
+    // select the instrument, related to this composition
+    instrumentSelector.select( rhythm.instr );
+
+    // set the chosen rhythm to curremt editor
     rhythmEditorsManager.setRhythmToCurrentEditor( rhythm.text );
     this.clickCloseRhythmsListForCategory();
     this.lastChoice = {category: category.name, rhythm: rhythm.name};

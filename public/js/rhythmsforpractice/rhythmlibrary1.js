@@ -56,26 +56,26 @@ function createRhythmLibrary() {
   [
     { id: "arab_rhythms", name : "Arabic rhythms",
       rhythms: [
-        { name: "Maqsum (8)", text: "D T - T D - T -"},
-        { name: "Maqsum (16)", text: "D - T - - - T - D - - - T - - -" },
-        { name: 'Malfuf ("plain")', text: "D - - T - - T -" },
-        { name: 'Malfuf', text: "D k k S k k S k" },
-        { name: 'Ayub', text: "D - - K D - T -" },
-        { name: 'Karachi', text: "T - - T - D -" },
-        { name: 'Karachi-a', text: "T - - k T – D –" },
-        { name: 'Chifteteli (Wahda kebira)', text: "D - k T - k T - D - D - T - - -" },
-        { name: 'Chifteteli (filled)', text: "D - t K - k T - D k D k T - t k" },
-        { name: 'Samai', text: "D - - T - D D T - -" }
+        { name: "Maqsum (8)", text: "D T - T D - T -", instr: INSTRUMENT_DARBUKA.instrumentName},
+        { name: "Maqsum (16)", text: "D - T - - - T - D - - - T - - -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Malfuf ("plain")', text: "D - - T - - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Malfuf', text: "D k k S k k S k", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Ayub', text: "D - - K D - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Karachi', text: "T - - T - D -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Karachi-a', text: "T - - k T – D –", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Chifteteli (Wahda kebira)', text: "D - k T - k T - D - D - T - - -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Chifteteli (filled)', text: "D - t K - k T - D k D k T - t k", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: 'Samai', text: "D - - T - D D T - -", instr: INSTRUMENT_DARBUKA.instrumentName }
       ]
     },
 
     { id: "odd_rhythms", name: "Odd rhythms",
       rhythms: [
-        { name: "7/8 a (2 2 3)", text: "D - D - T k k" },
-        { name: "7-8 b", text: "D - T T - T -" },
-        { name: "9-8 a", text: "D - T - D - T k k" },
-        { name: "9-8 b", text: "D - T - D - T T -" },
-        { name: "18-8 a", text: "D - t k T - t k D - t k T - T - t k" },
+        { name: "7/8 a (2 2 3)", text: "D - D - T k k", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: "7-8 b", text: "D - T T - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: "9-8 a", text: "D - T - D - T k k", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: "9-8 b", text: "D - T - D - T T -", instr: INSTRUMENT_DARBUKA.instrumentName },
+        { name: "18-8 a", text: "D - t k T - t k D - t k T - T - t k", instr: INSTRUMENT_DARBUKA.instrumentName },
         { name: "18-8 b", text: "D - t k S - t k D k k D k k S - t k", instr: INSTRUMENT_DARBUKA.instrumentName  },
         { name: "36-8 a", text: "D - t k S - t k D k k D k k S - t k D - t k S - t k D - K - K - S - S -", instr: INSTRUMENT_DARBUKA.instrumentName  }
         

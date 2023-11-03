@@ -29,8 +29,8 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "N", file: "snap.mp3"}
     ],
     defaultRhythms: {
-        [RHYTHM_TYPE_VISUAL] : "D P Pl P D K X –",
-        [RHYTHM_TYPE_TEXT] : 
+        [RHYTHM_EDITOR_TYPE_VISUAL] : "D P Pl P D K X –",
+        [RHYTHM_EDITOR_TYPE_TEXT] : 
         `// PRECOUNT
         T2:2 T:4
         ***
@@ -69,8 +69,8 @@ const INSTRUMENT_COOPERMAN_TAR = {
     ],
     // first for visual editor, second for text editor
     defaultRhythms: {
-        [RHYTHM_TYPE_VISUAL] : "D - P – k k P - D - k k P - k k", 
-        [RHYTHM_TYPE_TEXT] : 
+        [RHYTHM_EDITOR_TYPE_VISUAL] : "D - P – k k P - D - k k P - k k", 
+        [RHYTHM_EDITOR_TYPE_TEXT] : 
         `// PRECOUNT
         T2:2 T:4
         ***
@@ -100,8 +100,8 @@ const INSTRUMENT_KOSMOSKY = {
         {stroke: "-", file: ""}
     ],
     defaultRhythms: {
-        [RHYTHM_TYPE_VISUAL] : "O B D O B D E F", 
-        [RHYTHM_TYPE_TEXT] : "(O+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
+        [RHYTHM_EDITOR_TYPE_VISUAL] : "O B D O B D E F", 
+        [RHYTHM_EDITOR_TYPE_TEXT] : "(O+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
     }
 };
 
@@ -123,7 +123,7 @@ const INSTRUMENT_HAND_D_LOW_MYSTIC = {
         {stroke: "^", file: "cabasa.mp3", gain: 0.1}
     ],
     defaultRhythms: {
-        [RHYTHM_TYPE_VISUAL] : "O G A A# D E F Ah Ch", 
-        [RHYTHM_TYPE_TEXT] : "O-G A A# D E F Ah Ch"
+        [RHYTHM_EDITOR_TYPE_VISUAL] : "O G A A# D E F Ah Ch", 
+        [RHYTHM_EDITOR_TYPE_TEXT] : "O-G A A# D E F Ah Ch"
     }
 };

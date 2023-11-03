@@ -24,8 +24,8 @@ function initDefaultInstrument() {
     soundPlayer.loadAudioFiles( currInstr );
 
     // set default rhythm texts for visual and text rhythm editor
-    rhythmBoard.setNewRhythm(instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_TYPE_VISUAL) );
-    rhythmEditorsManager.setTextRhythm( instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_TYPE_TEXT)  );
+    rhythmBoard.setNewRhythm(instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_EDITOR_TYPE_VISUAL) );
+    rhythmEditorsManager.setTextRhythm( instrumentManager.recallRhythm( currInstr.instrumentName, RHYTHM_EDITOR_TYPE_TEXT)  );
 }
 
 function setDefaultValues() {
@@ -118,7 +118,7 @@ function setRhythmAndTempoInfoToPlayer() {
     let tempoInfo = {};
     let rhythmData = {precount: "", mainRhythm: ""};
 
-    if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_VISUAL) {
+    if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TYPE_VISUAL) {
         let beatsCount = rhythmBoard.size;
         let actualBPM = bpm*2;
 
@@ -128,7 +128,7 @@ function setRhythmAndTempoInfoToPlayer() {
         // setting up the rhythm
         rhythmData.mainRhythm = rhythmBoard.rhythm.join( " " );
 
-    } else if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TEXT) {
+    } else if (rhythmEditorsManager.rhythmEditors[rhythmEditorsManager.currentRhythmEditorIdx] === RHYTHM_EDITOR_TYPE_TEXT) {
         let textRhythmRaw = rhythmEditorsManager.getTextRhythm();
         let processedRhythm = processRawTextRhythm( textRhythmRaw );
         if ( Array.isArray(processedRhythm ) ) { // in means we have 0 - precount, 1 - rhythm itself
