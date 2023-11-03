@@ -75,7 +75,7 @@ class RhythmPlayer {
             const time = this.performance.startTime + timeLineItem.relativeTime/1000;
             this.audioPlayer.playStroke( 
                 {instrumentName: this.performance.instrName, strokeName: timeLineItem.stroke}, 
-                time
+                time + (timeLineItem.randomShift ? timeLineItem.randomShift : 0 )
             ); 
         });
 
@@ -102,10 +102,11 @@ class RhythmPlayer {
                     // it is allowed the + sign in the syllable. It means several syllables should be played simultaneously.
                     // here we'll split them and add each to timeline.
 
-                    item.stroke.split( MULTI_STROKE_JOINT ).forEach( singleStroke => {
+                    item.stroke.split( MULTI_STROKE_JOINT ).forEach( (singleStroke, idx) => {
                         this.performance.timeline.push( { 
                             stroke: singleStroke,
                             relativeTime: accumulatedTime,
+                            randomShift: idx > 0 ? (Math.floor(Math.random() * 20)/1000) : 0
                         });
                     });
                 }
@@ -139,7 +140,7 @@ class RhythmPlayer {
         this.performance.doUpdateTimeline = true;
         //this.calculateTimeline();
         this.performance.isActive = true;
-        this.performance.startTime = this.audioPlayer.audioContext.currentTime+0.1;
+        this.performance.startTime = this.audioPlayer.audioContext.currentTime+0.05;
         let precountAndRhythmDuration = this.scheduleNextBar();
 
         // first time we play precount + main rhythm, but after this we set interval only for main rhythm
