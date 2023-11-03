@@ -101,7 +101,7 @@ const INSTRUMENT_KOSMOSKY = {
     ],
     defaultRhythms: {
         [RHYTHM_EDITOR_TYPE_VISUAL] : "O B D O B D E F", 
-        [RHYTHM_EDITOR_TYPE_TEXT] : "(O+E)3 B Bh3 E Eh3 D Dh2 (Dh+A)2"
+        [RHYTHM_EDITOR_TYPE_TEXT] : "(O-E)3 B Bh3 E Eh3 D Dh2 (Dh-A)2"
     }
 };
 
