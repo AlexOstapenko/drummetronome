@@ -193,12 +193,12 @@ function createRhythmLibrary() {
            O G E O A2 F2
            O G E O A F B D
            O G E A F2 B-E2`, 
-           instr: INSTRUMENT_KOSMOSKY.instrumentName},
+           instr: INSTRUMENT_KOSMOSKY_E.instrumentName},
         {name: "Dancy Groove For Practice", text:
           `O-Z-^ B D-^ E
            O-^ B D-^ E :2
            G-^ A Bh-Z-^ Dh-^/2 ^/2`, 
-          instr: INSTRUMENT_KOSMOSKY.instrumentName}
+          instr: INSTRUMENT_KOSMOSKY_E.instrumentName}
       ]
     }
   ];

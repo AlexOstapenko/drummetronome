@@ -3,7 +3,7 @@ const INSTRUMENT_ID_SPLITTER = "~";
 
 const INSTR_NAME_DARBUKA = "Darbuka";
 const INSTR_NAME_COOPERMAN_TAR = "Tar";
-const INSTR_NAME_KOSMOSKY = "Kosmosky (E)";
+const INSTR_NAME_KOSMOSKY_E = "Kosmosky (E)";
 const INSTR_NAME_HANG_D_LOW_MYSTIC = "Hang Low Mystic (D)";
 
 const INSTRUMENT_DARBUKA = {
@@ -85,9 +85,9 @@ const INSTRUMENT_COOPERMAN_TAR = {
     }
 }
 
-const INSTRUMENT_KOSMOSKY = {
-    instrumentName: INSTR_NAME_KOSMOSKY,
-    folder: "audio/kosmosky/guitar/", // add / in the end
+const INSTRUMENT_KOSMOSKY_E = {
+    instrumentName: INSTR_NAME_KOSMOSKY_E,
+    folder: "audio/kosmosky-e/guitar/", // add / in the end
     arrStrokeInfo: [
         {stroke: "O", file: "e-l.mp3", gain: 0.4},
         {stroke: "B", file: "b.mp3", gain: 0.4},

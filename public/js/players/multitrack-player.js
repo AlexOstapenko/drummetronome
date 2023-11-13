@@ -1,13 +1,13 @@
 
 class Track {
-	constructor(parentRack, instrument) {
+	constructor(parentRack, instrInstance) {
 		this.parentRack = parentRack;
 		this.rhythmPhrase = null;
 		this.oneLoopDuration = 0;
 		this.timeline = [];
-		this.instrument = instrument;
+		this.instrInstance = instrInstance;
 		this.intervalID = -1;
-		this.audioSetup = {};
+		// this.audioSetup = {};
 		this.lastStartTime = 0;
 		this.doRepeat = false;
 
@@ -15,9 +15,15 @@ class Track {
 		const audioCtx = this.parentRack.audioPlayer.audioCtx;
 
 		this.gainNode = audioCtx.createGain();
-        this.gainNode.gain.value = 1;
-	    this.panNode = audioCtx.createStereoPanner();
-	    this.panNode.pan.value = 0;
+        this.panNode = audioCtx.createStereoPanner();
+	    
+	    this.gainNode.gain.value = instrInstance.data.audio && instrInstance.data.audio.gain ? 
+	    	instrInstance.data.audio.gain : 1;
+		this.panNode.pan.value = instrInstance.data.audio && instrInstance.data.audio.panorama ? 
+			instrInstance.data.audio.panorama : 0;
+
+		// add event listener about gain / panorama change
+		instrInstance.gainPanChangeListener.addValueChangeListener( this.gainPanoramaChanged.bind(this) );
 	}	
 
 	set rhythm(rhythmText) {
@@ -37,7 +43,7 @@ class Track {
             const time = this.lastStartTime + timeLineItem.relativeTime/1000;
             const strokeInfo = 
             {
-            	instrumentName: this.instrument.instrumentName, 
+            	instrumentName: this.instrInstance.instrument.instrumentName, 
             	strokeName: timeLineItem.stroke,
             	gainNode: this.gainNode,
             	panNode: this.panNode
@@ -126,19 +132,8 @@ class MultiTrackRhythmPlayer {
 			// take into account only un-muted instruments
 			if ( !instrInst.data.audio.mute ) {
 
-				let currTrack = new Track(this, instrInst.instrument);
+				let currTrack = new Track( this, instrInst );
 				currTrack.doRepeat = true;
-
-				// add event listener about gain / panorama change
-				instrInst.gainPanChangeListener.addValueChangeListener( currTrack.gainPanoramaChanged.bind(currTrack) );
-
-				// get the audio setup if any
-				if (instrInst.data.audio) {
-					if ( instrInst.data.audio.gain )
-						currTrack.audioSetup.gain = instrInst.data.audio.gain;
-					if (instrInst.data.audio.panorama)
-						currTrack.audioSetup.panorama = instrInst.data.audio.panorama;	
-				};
 
 				// get the main rhythm and precount (if any)
 				let processedRhythm = processRawTextRhythm( instrInst.data.rhythm );

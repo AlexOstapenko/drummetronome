@@ -7,7 +7,7 @@ Storing memory for each instrument (last rhythms, audio settings etc).
 */
 class InstrumentManager {
     constructor() {
-        this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR, INSTRUMENT_KOSMOSKY, INSTRUMENT_HAND_D_LOW_MYSTIC];
+        this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR, INSTRUMENT_KOSMOSKY_E, INSTRUMENT_HAND_D_LOW_MYSTIC];
         this.selectedInstrument = INSTRUMENT_DARBUKA;
         this.instrumentChangedListeners = [];
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
