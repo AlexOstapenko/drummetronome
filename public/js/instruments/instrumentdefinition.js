@@ -26,7 +26,10 @@ const INSTRUMENT_DARBUKA = {
         {stroke: "Pm", file: "pp.mp3", gain: 0.5},
         {stroke: "Pl", file: "ppp.mp3", gain: 0.5},
         {stroke: "X", file: "x.mp3"},
-        {stroke: "N", file: "snap.mp3"}
+        {stroke: "N", file: "snap.mp3"},
+        {stroke: "Z", file: "triangle.mp3", gain: 0.3},
+        {stroke: "z", file: "triangle.mp3", gain: 0.1},
+        {stroke: "O", file: "cabasa.mp3", gain: 0.1}
     ],
     defaultRhythms: {
         [RHYTHM_EDITOR_TYPE_VISUAL] : "D P Pl P D K X –",
@@ -65,6 +68,7 @@ const INSTRUMENT_COOPERMAN_TAR = {
         {stroke: "X", file: "x.mp3", gain: 1.5},
         {stroke: "x", file: "x.mp3", gain: 0.8},
         {stroke: "Z", file: "triangle.mp3", gain: 0.3},
+        {stroke: "z", file: "triangle.mp3", gain: 0.1},
         {stroke: "O", file: "cabasa.mp3", gain: 0.1}
     ],
     // first for visual editor, second for text editor
@@ -85,18 +89,18 @@ const INSTRUMENT_KOSMOSKY = {
     instrumentName: INSTR_NAME_KOSMOSKY,
     folder: "audio/kosmosky/guitar/", // add / in the end
     arrStrokeInfo: [
-        {stroke: "O", file: "e-l.mp3", gain: 0.7},
-        {stroke: "B", file: "b.mp3", gain: 0.7},
-        {stroke: "D", file: "d.mp3", gain: 0.7},
-        {stroke: "E", file: "e.mp3", gain: 0.7},
-        {stroke: "F", file: "f-sharp.mp3", gain: 0.7},
-        {stroke: "G", file: "g.mp3", gain: 0.7},
-        {stroke: "A", file: "a.mp3", gain: 0.7},
-        {stroke: "Bh", file: "b-higher.mp3", gain: 0.7},
-        {stroke: "Dh", file: "d-higher.mp3", gain: 0.7},
-        {stroke: "Eh", file: "e-higher.mp3", gain: 0.7},
-        {stroke: "Z", file: "triangle.mp3", gain: 0.3},
-        {stroke: "^", file: "cabasa.mp3", gain: 0.1},
+        {stroke: "O", file: "e-l.mp3", gain: 0.4},
+        {stroke: "B", file: "b.mp3", gain: 0.4},
+        {stroke: "D", file: "d.mp3", gain: 0.4},
+        {stroke: "E", file: "e.mp3", gain: 0.4},
+        {stroke: "F", file: "f-sharp.mp3", gain: 0.4},
+        {stroke: "G", file: "g.mp3", gain: 0.4},
+        {stroke: "A", file: "a.mp3", gain: 0.4},
+        {stroke: "Bh", file: "b-higher.mp3", gain: 0.4},
+        {stroke: "Dh", file: "d-higher.mp3", gain: 0.4},
+        {stroke: "Eh", file: "e-higher.mp3", gain: 0.4},
+        {stroke: "Z", file: "triangle.mp3", gain: 0.08},
+        {stroke: "^", file: "cabasa.mp3", gain: 0.08},
         {stroke: "-", file: ""}
     ],
     defaultRhythms: {

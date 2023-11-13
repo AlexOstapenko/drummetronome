@@ -1,6 +1,3 @@
-// TEXT EDITOR
-const RHYTHM_EDITOR_TEXT_ID = "rhythmEditor_text";
-
 class RhythmEditorsManager {
 
 	constructor() {
@@ -8,6 +5,7 @@ class RhythmEditorsManager {
 		// these 2 arrays must me synchronized
 		this.rhythmEditors = [ RHYTHM_EDITOR_TYPE_VISUAL, RHYTHM_EDITOR_TYPE_TEXT ];
 		this.buttonLabelsForRhythmEditors = ["Visual editor", "Text editor"];
+		this.textRhythmEditorAgent = new TextRhythmEditorAgent( RHYTHM_EDITOR_TEXT_ID );
 	}
 
 	setRhythmToCurrentEditor( text ) {
@@ -58,11 +56,11 @@ class RhythmEditorsManager {
 	} 
 
 	getTextRhythm() {
-	    return document.querySelector(`#${RHYTHM_EDITOR_TEXT_ID}`).value;
+	    return this.textRhythmEditorAgent.getRhythm();
 	}
 
 	setTextRhythm( str ) {
-	    document.querySelector(`#${RHYTHM_EDITOR_TEXT_ID}`).value = str; 
+		this.textRhythmEditorAgent.setRhythm( str );
 	}
 
 	setTextRhythmToVisualEditor() {

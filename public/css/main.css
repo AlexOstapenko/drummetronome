@@ -51,24 +51,3 @@ body {
 .tempoInput {
     font-size: 1.2em;   
 }
-
-#divTempo {
-    padding: 0px;
-    width: 400px;
-}
-
-.div-tempo-text {
-    padding-top: 10px;
-    text-align: center;
-}
-
-@media (max-width: 768px) {
-    #divTempo {
-        width: 100%;
-        padding: 10px;
-    }
-}
-
-#inputTempo {
-    width: 100%;
-}

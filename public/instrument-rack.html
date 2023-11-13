@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrument Rack</title>
+
+    <link rel="icon" href="data:;base64," />
+
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tempo.css">
+    <!-- <link rel="stylesheet" href="css/vis-editor-toolbar.css"> -->
+    <!-- <link rel="stylesheet" href="css/rhythm-board.css"> -->
+    <link rel="stylesheet" href="css/start-stop.css">
+    <!-- <link rel="stylesheet" href="css/db-rhythms.css"> -->
+    <!-- <link rel="stylesheet" href="css/stroke-selector.css"> -->
+    <link rel="stylesheet" href="css/text-rhythm-editor.css">
+    <!-- <link rel="stylesheet" href="css/top-toolbar.css"> -->
+    <link rel="stylesheet" href="css/playing-duration-timer.css">
+    <link rel="stylesheet" href="css/div-modal.css">
+    <link rel="stylesheet" href="css/instrument-rack/instrument-rack.css">
+    <link rel="stylesheet" href="css/instrument-rack/instrument-rack-mixer.css">
+
+    <script src="js/general/constants.js"></script>
+
+    <!-- for parsing rhythm text -->
+    <script src="js/general/utils.js"></script>
+    <script src="js/general/value-change-listener.js"></script>
+    <script src="js/command/command.js"></script>
+    <script src="js/sentence/fraction.js"></script>
+    <script src="js/sentence/phrase.js"></script>
+    <script src="js/sentence/sentence.js"></script>
+    <script src="js/sentence/expressionparser.js"></script>
+    <script src="js/sentence/textrhythmprocessor.js"></script>
+
+    <script src="js/uielements/tempo-agent.js"></script>
+    <script src="js/uielements/rhythm-editors-agent.js"></script>
+    <script src="js/instruments/instrumentdefinition.js"></script>
+    <script src="js/instruments/instrumentmanager.js"></script>
+    <script src="js/instrument-rack/instrument-instance.js"></script>
+    <script src="js/instrument-rack/instrument-rack.js"></script>
+    <script src="js/instrument-rack/instrument-rack-ui.js"></script>
+    <script src="js/instrument-rack/instrument-rack-mixer.js"></script>
+    <script src="js/players/rhythm.js"></script>
+    <script src="js/uielements/modaldiv.js"></script>
+    <script src="js/rhythmsforpractice/rhythmlibrary1.js"></script>
+    <!-- <script src="js/uielements/rhythmsdbui.js"></script> -->
+    <script src="js/players/audioFilePlayer.js"></script>
+    <script src="js/players/multitrack-player.js"></script>
+    <script src="js/uielements/playingtimer.js"></script>
+    <script src="js/main/instrument-rack-main.js"></script>
+</head>
+<body>
+
+    <div class="container no-select">
+
+        <div id='divInstrumentsRackBoard' class='div-instruments-rack-board'>
+            <div id='divInstrumentsRack' class='div-instruments-rack'></div>
+            <div id='divInstrumentsRackToolbar' class='div-instruments-rack-toolbar'>
+                <select id='selectInstrument'>
+                </select>
+                <button onclick="instrumentRackUI.onClickAddNew()" class='butt-instrument-inst-new'>Add</button>
+                <button onclick="instrumentRackUI.onClickDeleteAll()" class='butt-instrument-inst-new'>Delete All</button>
+            </div>
+            
+        </div>
+
+        <div id="div-text-rhythm-editor" class="div-text-rhythm-editor">
+            <div>
+                <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="20"></textarea><br>
+                <button class="button-delete-textrhythm" onclick="clearTextRhythm()">Clear text</button>
+            </div>
+        </div>
+
+        <!-- Кнопка Play/Stop -->
+        <div>
+            <button id='buttPlayStop' class='button-play' onclick="clickPlayRhythm();">PLAY</button>
+            <div id='divDurationTimer' class='divPlayingDurationTimer'></div>
+        </div>
+
+        <!-- Изменение темпа -->
+        <div class='div-tempo-container'>
+            <div class='div-tempo-text'>Tempo: <span id="inputTempoValue"></span> <br></div>
+            <div id="divTempo">
+                <input id="inputTempo" class="genericInput tempoInput"
+                    size="10" value="120" type="range" min="20" max="500" step="5"
+                    oninput="tempoAgent.onChangeTempo()">
+
+                <button class='butt-tempo-shift' onclick="tempoAgent.clickShiftTempo(-20)">-20</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class='butt-tempo-shift' onclick="tempoAgent.clickShiftTempo(-5)">-5</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class='butt-tempo-shift' onclick="tempoAgent.clickShiftTempo(5)">+5</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class='butt-tempo-shift' onclick="tempoAgent.clickShiftTempo(20)">+20</button>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div class='div-instrument-rack-mixer-container' id="div-instrument-rack-mixer-container">
+    </div>
+
+    <script>
+        onDocumentLoaded();
+    </script>
+</body>
+</html>

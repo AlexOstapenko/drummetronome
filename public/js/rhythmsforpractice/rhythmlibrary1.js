@@ -330,7 +330,21 @@ function createRhythmLibrary() {
     (T L L L R R R R L L L L )/2 R L`,
 
     `D (L L L L)/2 T (L L L L D L L L)/2
-    D (L L L L)/2 T (L L L L R R L L)/2`
+    D (L L L L)/2 T (L L L L R R L L)/2`,
+
+    `D D L/2:4 T2 (R:4 L:4)/4
+    D D L/2:4 (R:4 L:4 R:4 L:4)/4`,
+
+    `z-D D (L L L L R R R R)/4 
+    (L L L L)/2 (R R R R L L L L)/4`,
+
+    `D L L L L T A B :3
+    D L L L (R R R R L L L L)/2`,
+
+    `(R:4 L:4)/4 D D :2
+    ( 
+      X L L L D L L L (A B C):2 D2
+    )/2`
 
     ], 
     FRAMEDRUM_EXERCISES_IDS.CATEGORY, 

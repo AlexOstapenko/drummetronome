@@ -1,7 +1,12 @@
+const MULTI_STROKE_JOINT = '-';
 const SENTENCE_SPLITTER = ":";
 const SENTENCE_NEW_LINE = "|";
 const SENTENCE_BETWEEN_PHRASES_FOR_USER = " " + SENTENCE_SPLITTER + " ";
 // const SENTENCE_BETWEEN_PHRASES_FOR_PROCESSING = " " + SENTENCE_SPLITTER + " "; // " | ";
+
+function isPause(stroke) {
+    return stroke === "–";
+}
 
 class UIDGenerator
 {

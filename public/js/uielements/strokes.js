@@ -1,8 +1,3 @@
-
-function isPause(stroke) {
-    return stroke === "–";
-}
-
 // UI control to select different strokes while editing rhythm in RhythmBoard
 
 class StrokeSelector {

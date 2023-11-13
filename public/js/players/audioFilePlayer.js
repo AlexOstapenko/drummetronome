@@ -4,7 +4,7 @@ class AudioFilePlayer {
     constructor() {
         this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 		this.strokeID2Buffer = {}; // map stroke id -> buffer, strokeID = <instr-name>_<strokeName>
-		this.gainNode = null;
+		this.masterGainNode = null;
 		this.compressor = null;
 		this.loadedInstrumentNames = [];
 		
@@ -21,16 +21,16 @@ class AudioFilePlayer {
 	}
 
     turnOnSound() {
-		this.gainNode = this.audioCtx.createGain();
-        this.gainNode.gain.value = 1;
-		this.gainNode.connect( this.audioCtx.destination );
+		this.masterGainNode = this.audioCtx.createGain();
+        this.masterGainNode.gain.value = 1;
+		this.masterGainNode.connect( this.audioCtx.destination );
     }
 
     turnOffSound()
 	{
-		if (!this.gainNode) return;
-		this.gainNode.gain.linearRampToValueAtTime(0.001, this.audioCtx.currentTime + 5);
-		this.gainNode.disconnect();
+		if (!this.masterGainNode) return;
+		this.masterGainNode.gain.linearRampToValueAtTime(0.001, this.audioCtx.currentTime + 5);
+		this.masterGainNode.disconnect();
 	}
 
 	/*
@@ -98,7 +98,8 @@ class AudioFilePlayer {
 		console.log( "All sound files are loaded." );
 	}
 
-	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName
+	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName,
+	// masterGainNode (with set from outside gain value) and panNode.
 	playStroke( strokeInfo, when ) {
 
 		function isNumber(when) { return !isNaN(parseFloat(when)) && isFinite(when); }
@@ -117,17 +118,29 @@ class AudioFilePlayer {
 		let bufferSource = this.audioCtx.createBufferSource();
 		bufferSource.buffer = buffer;
 
-		// if the stroke in the instrument defines it's own gain - add it in the chain
-		let nodeDestination = this.gainNode; // by default send it to the main gain node
-		const strokeGainValue = instrumentManager.getGainValue( strokeID );
-		if (strokeGainValue >=0 ) {
-			const strokeGainNode = this.audioCtx.createGain();
-			strokeGainNode.gain.value = strokeGainValue;
-			nodeDestination = strokeGainNode; // redefine the destination for this stroke
-			strokeGainNode.connect( this.gainNode ); // connect personal gain of the stroke to the main gain node
+		let mixerGainNode = null;
+		if ( strokeInfo.gainNode ) mixerGainNode = strokeInfo.gainNode;
+		else {
+			mixerGainNode = this.audioCtx.createGain();
+			mixerGainNode.gain.value = 1;
 		}
-		
-		bufferSource.connect( nodeDestination );
+
+		let mixerPanNode = null;
+		if (strokeInfo.panNode) mixerPanNode = strokeInfo.panNode;
+		else {
+			mixerPanNode = this.audioCtx.createStereoPanner();
+			mixerPanNode.pan.value = 0;
+		}
+
+		const strokeGainValueByInstrument = instrumentManager.getGainValue( strokeID ); // check if we have special gain defined in instrument
+	    const strokeGainNodeByInstrument = this.audioCtx.createGain();
+	    strokeGainNodeByInstrument.gain.value = strokeGainValueByInstrument >=0 ? strokeGainValueByInstrument : 1;
+
+		// Make the connections
+		bufferSource.connect( strokeGainNodeByInstrument );
+		strokeGainNodeByInstrument.connect( mixerGainNode );
+		mixerGainNode.connect( mixerPanNode );
+		mixerPanNode.connect( this.masterGainNode );
 		bufferSource.start(when);
 	}
 

@@ -7,6 +7,8 @@ const RHYTHM_EDITOR_TYPE_TEXT = "text-rhythm";
 const DIV_RHYTHM_EDITOR = editorType => `div-${editorType}-editor`;
 
 // HTML IDS and LABELS
+
+const RHYTHM_EDITOR_TEXT_ID = "rhythmEditor_text"; // Rhythm TEXT EDITOR
 const ID_BUTT_PLAYSTOP = "buttPlayStop";
 const ID_INPUT_TEMPO = "inputTempo";
 const ID_INPUT_TEMPOVAL = "inputTempoValue";

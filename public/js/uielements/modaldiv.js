@@ -12,7 +12,7 @@ class ModalDiv {
 		this.div.className = 'div-modal';
 
 		// Создаем элемент для сообщения
-		const messageElement = document.createElement('p');
+		const messageElement = document.createElement('div');
 		messageElement.className = 'div-modal-message';
 		messageElement.textContent = message;
 

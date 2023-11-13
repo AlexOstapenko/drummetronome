@@ -1,0 +1,21 @@
+.div-instrument-rack-mixer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.div-instrument-rack-mixer {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  width: 80%;
+}
+
+.individual-mixer {
+  border-bottom: 1px solid black;
+  padding: 10px;
+  display: block;
+}

@@ -13,6 +13,7 @@ class InstrumentManager {
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
         this.instrumentsMemory = {};
         this.currentModalDiv = null;
+        this.callbackWhenInstrumentIsLoaded = null;
     }
 
     strokeNames(instrument) {
@@ -26,27 +27,44 @@ class InstrumentManager {
     set currentInstrument(instrument) {
         if ( instrument.instrumentName === this.selectedInstrument.instrumentName) return;
         this.selectedInstrument = instrument;
-
-        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
-            audioFilePlayer.loadAudioFiles( instrument, this.instrumentLoaded.bind(this) );
-            this.currentModalDiv = new ModalDiv();
-            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
-
-        } else
-            this.instrumentLoaded(instrument);
+        this.loadInstrument(instrument, this.onInstrumentLoaded.bind(this) );
     }
 
     instrumentLoaded( instr ) {
-        // we change selected instrument value only when in is finally loaded
-        this.selectedInstrument = instr;
-        this.notifyInstrumentChanged();
-
-        // todo: hide the status "LOADING..."
+        if (this.callbackWhenInstrumentIsLoaded) {
+            this.callbackWhenInstrumentIsLoaded(instr);
+            this.callbackWhenInstrumentIsLoaded = null;
+        }
+        
+        // hide the status "LOADING..."
         if (this.currentModalDiv){
             this.currentModalDiv.close();
             this.currentModalDiv = null;
         }
+    }
 
+    // Call this function to load instrument and give the callback to get notified when the instrument is loaded.
+    // The callback function receives one argument, it is instrument which was loaded.
+    // In instrumentRef you can pass either name of the instrument or the instrument itself.
+    // While the instrument is being loaded the modal window in shown "Loading the instrument <instrument name>".
+    loadInstrument(instrumentRef, callbackFunction) {
+        let instrument = null;
+        if ( typeof instrumentRef === 'string') instrument = this.getInstrument(instrumentRef);
+        else instrument = instrumentRef;
+
+        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
+            this.callbackWhenInstrumentIsLoaded = callbackFunction;
+            audioFilePlayer.loadAudioFiles( instrument, this.instrumentLoaded.bind(this) );
+            this.currentModalDiv = new ModalDiv();
+            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
+        } else
+            this.instrumentLoaded(instrument);   
+    }
+
+    onInstrumentLoaded(instr) {
+        // we change selected instrument value only when in is finally loaded
+        this.selectedInstrument = instr;
+        this.notifyInstrumentChanged();
     }
 
     addInstrumentChangedListener(listener) {

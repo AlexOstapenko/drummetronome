@@ -65,8 +65,10 @@
     background-color: white;
     padding: 10px;
     min-width: 300px;
+    max-height: 500px;
     border: 1px solid black;
     background-color: lightgray;
+    overflow-y: auto;
 }
 
 .rhythms-selector {

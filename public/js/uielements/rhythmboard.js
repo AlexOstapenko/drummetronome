@@ -126,7 +126,7 @@ class RhythmBoard {
     // notify those who want to know about the changes in the rhythm
     notifyRhythmChanged() {
         this.rhythmChangedListeners.forEach(listener => {
-            listener( createRhythm( plainArrOfStrokesToPhrase(this.rhythm) ) );
+            listener( Rhythm.createRhythm( plainArrOfStrokesToPhrase(this.rhythm) ) );
         });
     }
 

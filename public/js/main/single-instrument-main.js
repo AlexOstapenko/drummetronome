@@ -9,14 +9,7 @@ function onDocumentLoaded() {
     rhythmEditorsManager.updateRhythmEditorVisibility();
     initVisualRhythmEditor();
     addUIEventHandlers();
-
-    test();
 }
-
-function test() {
-
-}
-
 
 function initDefaultInstrument() {
     // load sounds
@@ -142,8 +135,8 @@ function setRhythmAndTempoInfoToPlayer() {
     }
 
     rhythmPlayer.tempoInfo = tempoInfo;
-    rhythmPlayer.setRhythm( createRhythm( new Phrase(rhythmData.mainRhythm) ), 
-                            createRhythm( new Phrase(rhythmData.precount) ) );
+    rhythmPlayer.setRhythm( Rhythm.createRhythm( new Phrase(rhythmData.mainRhythm) ), 
+                            Rhythm.createRhythm( new Phrase(rhythmData.precount) ) );
 }
 
 

@@ -1,8 +1,8 @@
 .div-visual-rhythm-editor {
 	width: 100%;
 	flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .div-text-rhythm-editor {
@@ -17,7 +17,7 @@
 .rhythm-text-editor {
 	width: 100%;
 	font-size: 1.2em;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .button-delete-textrhythm {

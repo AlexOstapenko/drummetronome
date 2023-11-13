@@ -1,12 +1,9 @@
 
-const MULTI_STROKE_JOINT = '-';
-
 /* 
  Loop the given rhythm.
  How is rhythm represented? By an objet of class Rhythm.
  In the first round, if given, first will be played precount and only after that the rhythm will be looped.
  Precount is any rhythmic phrase that is separated by three stars *** from the rest of the rhythmic text.
-
 */
 
 class RhythmPlayer {
@@ -34,7 +31,7 @@ class RhythmPlayer {
     get isActive() { return this.performance.isActive; }
     get startTime() { return this.performance.startTime };
 
-    // Here you set the rhyth to be looped (an instance of class Rhythm), 
+    // Here you set the rhythm to be looped (an instance of class Rhythm), 
     // and optionally precount rhythm that should be played just once in the beginning (also object of class Rhythm).
     setRhythm(rhythm, precount) {
         this.performance.rhythm = rhythm;
@@ -43,8 +40,7 @@ class RhythmPlayer {
     }
 
     /**
-     * Calculates duration of one bar based on two params: how many beats in one bar and what is bpm.
-     * @param {{ beatsCount: any; bpm: any; }} value
+     * Gets duration of one loop, one pulse
      */
     set tempoInfo(tempoInfo)  {
         this.performance.onePulseDuration = tempoInfo.onePulseDuration;
@@ -76,6 +72,8 @@ class RhythmPlayer {
             this.audioPlayer.playStroke( 
                 {instrumentName: this.performance.instrName, strokeName: timeLineItem.stroke}, 
                 time + (timeLineItem.randomShift ? timeLineItem.randomShift : 0 )
+
+                
             ); 
         });
 

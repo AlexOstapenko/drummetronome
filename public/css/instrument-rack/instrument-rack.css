@@ -1,0 +1,62 @@
+.div-instruments-rack-board {
+	display: inline;
+	text-align: center;
+	width: 90%;
+}
+
+.div-instruments-rack{
+	width: 100%;
+	text-align: center;
+	display: inline;
+}
+
+.div-instrument-instance {
+	vertical-align: middle;
+	display: inline-block;
+	padding: 2px 5px;
+	
+	border-radius: 3px;
+	border: 0.5px solid gray;
+	background-color: rgba(255,255,0,0.1);
+	color: #aaaaaa;
+	font-size: 1em;
+}
+
+.div-instrument-instance-label {
+	display: inline;
+	cursor: pointer;
+}
+
+.div-instrument-instance-label:hover {
+	color: black;
+}
+
+.instrument-instance-selected {
+	background-color: #f6f9a7;
+	color: black;
+	border: 1px solid black;
+}
+
+.instrument-instance-selected:hover {
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-instrument-instance {
+	background-color: yellow;
+	transform: scale(0.8);
+}
+
+.butt-delete-instrument-instance {
+	font-size: 0.5em;
+	height: 100%;
+}
+
+ /* TOOLBAR  */
+
+ .div-instruments-rack-toolbar {
+ 	display: inline;
+ }
+
+ .butt-instrument-add-inst {
+
+ }
