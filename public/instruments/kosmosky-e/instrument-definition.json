@@ -11,8 +11,8 @@
         {"stroke": "Bh", "file": "b-higher.mp3", "gain": 0.4},
         {"stroke": "Dh", "file": "d-higher.mp3", "gain": 0.7},
         {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.4},
-        {"stroke": "Z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.08},
-        {"stroke": "^", "file": "#root#/common_audio/cabasa.mp3", "gain": 0.08},
+        {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.08},
+        {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08},
         {"stroke": "-", "file": ""}
     ],
     "defaultRhythms": {

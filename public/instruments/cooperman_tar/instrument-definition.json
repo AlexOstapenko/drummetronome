@@ -21,9 +21,9 @@
         {"stroke": "c", "file": "c.mp3", "gain": 0.3},
         {"stroke": "X", "file": "x.mp3", "gain": 1.5},
         {"stroke": "x", "file": "x.mp3", "gain": 0.8},
-        {"stroke": "Z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.3},
-        {"stroke": "z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.1},
-        {"stroke": "O", "file": "#root#/common_audio/cabasa.mp3", "gain": 0.1}
+        {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.3},
+        {"stroke": "z", "file": "#root#/common/triangle.mp3", "gain": 0.1},
+        {"stroke": "O", "file": "#root#/common/cabasa.mp3", "gain": 0.1}
     ],
     "images": {
         "large" : "img/tar.png",
