@@ -22,7 +22,7 @@
         {"stroke": "z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.1},
         {"stroke": "O", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
     ],
-     "images" : {
+    "images" : {
         "large" : "img/darbuka.png",
         "icon" : "img/darbuka-icon.png"
     },
