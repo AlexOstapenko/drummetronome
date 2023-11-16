@@ -18,9 +18,9 @@
         {"stroke": "Pl", "file": "ppp.mp3", "gain": 0.5},
         {"stroke": "X", "file": "x.mp3"},
         {"stroke": "N", "file": "snap.mp3"},
-        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.3},
-        {"stroke": "z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.1},
-        {"stroke": "O", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
+        {"stroke": "Z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.3},
+        {"stroke": "z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.1},
+        {"stroke": "O", "file": "#root#/common_audio/cabasa.mp3", "gain": 0.1}
     ],
     "images" : {
         "large" : "img/darbuka.png",

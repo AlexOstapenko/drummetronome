@@ -11,8 +11,8 @@
         {"stroke": "Ah", "file": "ah.mp3"},
         {"stroke": "Ch", "file": "ch.mp3"},
         {"stroke": "-", "file": ""},
-        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.3},
-        {"stroke": "^", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
+        {"stroke": "Z", "file": "#root#/common_audio/triangle.mp3", "gain": 0.3},
+        {"stroke": "^", "file": "#root#/common_audio/cabasa.mp3", "gain": 0.1}
     ],
     "images" : {
         "large" : "img/hang-600x600.png",
