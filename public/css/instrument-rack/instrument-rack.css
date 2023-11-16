@@ -10,47 +10,6 @@
 	display: inline;
 }
 
-.div-instrument-instance {
-	vertical-align: middle;
-	display: inline-block;
-	padding: 2px 5px;
-	
-	border-radius: 3px;
-	border: 0.5px solid gray;
-	background-color: rgba(255,255,0,0.1);
-	color: #aaaaaa;
-	font-size: 1em;
-}
-
-.div-instrument-instance-label {
-	display: inline;
-	cursor: pointer;
-}
-
-.div-instrument-instance-label:hover {
-	color: black;
-}
-
-.instrument-instance-selected {
-	background-color: #f6f9a7;
-	color: black;
-	border: 1px solid black;
-}
-
-.instrument-instance-selected:hover {
-	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-instrument-instance {
-	background-color: yellow;
-	transform: scale(0.8);
-}
-
-.butt-delete-instrument-instance {
-	font-size: 0.5em;
-	height: 100%;
-}
-
  /* TOOLBAR  */
 
  .div-instruments-rack-toolbar {
@@ -60,3 +19,51 @@
  .butt-instrument-add-inst {
 
  }
+
+/*
+ONE INSTRUMENT INSTANCE
+*/
+.instr-instance {
+	display: inline-block;
+	padding: 5px;
+}
+
+.instr-instance-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	opacity: 0.5;
+	border: 0.5px solid black;
+	border-radius: 3px;
+}
+
+.instr-instance-container-selected {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	opacity: 1;
+	background-color: #eeeeee;
+	color: black;
+	border: 0.5px solid black;
+	border-radius: 3px;
+}
+
+.instr-instance-center-item {
+  margin: auto; /* Центрируем изображение по вертикали */
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.instr-instance-close-button {
+  align-self: flex-start; /* Размещаем кнопку в верхней части блока */
+  padding: 2px 5px;
+  font-size: 0.7em;
+
+}
+
+
+
+
+
+

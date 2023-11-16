@@ -56,28 +56,28 @@ function createRhythmLibrary() {
   [
     { id: "arab_rhythms", name : "Arabic rhythms",
       rhythms: [
-        { name: "Maqsum (8)", text: "D T - T D - T -", instr: INSTRUMENT_DARBUKA.instrumentName},
-        { name: "Maqsum (16)", text: "D - T - - - T - D - - - T - - -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Malfuf ("plain")', text: "D - - T - - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Malfuf', text: "D k k S k k S k", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Ayub', text: "D - - K D - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Karachi', text: "T - - T - D -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Karachi-a', text: "T - - k T – D –", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Chifteteli (Wahda kebira)', text: "D - k T - k T - D - D - T - - -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Chifteteli (filled)', text: "D - t K - k T - D k D k T - t k", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: 'Samai', text: "D - - T - D D T - -", instr: INSTRUMENT_DARBUKA.instrumentName }
+        { name: "Maqsum (8)", text: "D T - T D - T -", instr: INSTRUMENT_NAME_DARBUKA},
+        { name: "Maqsum (16)", text: "D - T - - - T - D - - - T - - -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Malfuf ("plain")', text: "D - - T - - T -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Malfuf', text: "D k k S k k S k", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Ayub', text: "D - - K D - T -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Karachi', text: "T - - T - D -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Karachi-a', text: "T - - k T – D –", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Chifteteli (Wahda kebira)', text: "D - k T - k T - D - D - T - - -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Chifteteli (filled)', text: "D - t K - k T - D k D k T - t k", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: 'Samai', text: "D - - T - D D T - -", instr: INSTRUMENT_NAME_DARBUKA }
       ]
     },
 
     { id: "odd_rhythms", name: "Odd rhythms",
       rhythms: [
-        { name: "7/8 a (2 2 3)", text: "D - D - T k k", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: "7-8 b", text: "D - T T - T -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: "9-8 a", text: "D - T - D - T k k", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: "9-8 b", text: "D - T - D - T T -", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: "18-8 a", text: "D - t k T - t k D - t k T - T - t k", instr: INSTRUMENT_DARBUKA.instrumentName },
-        { name: "18-8 b", text: "D - t k S - t k D k k D k k S - t k", instr: INSTRUMENT_DARBUKA.instrumentName  },
-        { name: "36-8 a", text: "D - t k S - t k D k k D k k S - t k D - t k S - t k D - K - K - S - S -", instr: INSTRUMENT_DARBUKA.instrumentName  }
+        { name: "7/8 a (2 2 3)", text: "D - D - T k k", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: "7-8 b", text: "D - T T - T -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: "9-8 a", text: "D - T - D - T k k", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: "9-8 b", text: "D - T - D - T T -", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: "18-8 a", text: "D - t k T - t k D - t k T - T - t k", instr: INSTRUMENT_NAME_DARBUKA },
+        { name: "18-8 b", text: "D - t k S - t k D k k D k k S - t k", instr: INSTRUMENT_NAME_DARBUKA  },
+        { name: "36-8 a", text: "D - t k S - t k D k k D k k S - t k D - t k S - t k D - K - K - S - S -", instr: INSTRUMENT_NAME_DARBUKA  }
         
       ]
     }, 
@@ -98,7 +98,7 @@ function createRhythmLibrary() {
           (X X)/2
           (D X D D K D)/2 (T K T K)/4
 
-          (D k k S k k S k)/2 :16`, instr: INSTRUMENT_DARBUKA.instrumentName},
+          (D k k S k k S k)/2 :16`, instr: INSTRUMENT_NAME_DARBUKA},
         { name: "7/8 phrase for Tar", text:
           `D ki D ki D ki ki
           T ki T ki T ki ki
@@ -118,7 +118,7 @@ function createRhythmLibrary() {
           D ki D ki T ki ki
           D ki D ki T ki ki
           R R R R L L L
-          T ki T ki ( T A B C A B C A B)/3`, instr: INSTRUMENT_COOPERMAN_TAR.instrumentName
+          T ki T ki ( T A B C A B C A B)/3`, instr: INSTRUMENT_NAME_COOPERMAN_TAR
       },
 
       {
@@ -154,12 +154,12 @@ function createRhythmLibrary() {
 
         // PART 2 - AYUB
         (
-        (D - - D D - T -)/2:3
+        (D - - D D - K -)/2:3
         (D K - D D - T -)/2
 
-        (D - - D D - T -)/2:3
+        (D - - D D - K -)/2:3
         D D D T
-        ):4`, instr: INSTRUMENT_DARBUKA.instrumentName
+        ):4`, instr: INSTRUMENT_NAME_DARBUKA
       },
       {
         name: "Composition of Nina for konnakol", text:
@@ -181,7 +181,7 @@ function createRhythmLibrary() {
         T k k D2 :2 T k d d T k
         (T k k k)/2 D : 2 (T K d d)/2
         ( T k k T k k (T k d d):2 T K)/2
-        `, instr: INSTRUMENT_DARBUKA.instrumentName
+        `, instr: INSTRUMENT_NAME_DARBUKA
       }
       ]
     }, // end of category
@@ -193,12 +193,12 @@ function createRhythmLibrary() {
            O G E O A2 F2
            O G E O A F B D
            O G E A F2 B-E2`, 
-           instr: INSTRUMENT_KOSMOSKY_E.instrumentName},
+           instr: INSTRUMENT_NAME_KOSMOSKY_E},
         {name: "Dancy Groove For Practice", text:
           `O-Z-^ B D-^ E
            O-^ B D-^ E :2
            G-^ A Bh-Z-^ Dh-^/2 ^/2`, 
-          instr: INSTRUMENT_KOSMOSKY_E.instrumentName}
+          instr: INSTRUMENT_NAME_KOSMOSKY_E}
       ]
     }
   ];
@@ -261,6 +261,16 @@ function createRhythmLibrary() {
     R L (R R R R L L L L )/4
     D L (R R R R L L L L )/4
     (R R R R L L L L )/2`, 
+
+    `D L L L 
+    (R R R R L L L L )/2
+    R R L L 
+    (R R L L)/2       :2
+
+    D L L L 
+    (R R R R L L L L )/2
+    R R L L 
+    (R R R R L L L L)/4       :2`,
 
     // -----------------
     `D L L L (D L L L T L L L )/2
@@ -344,12 +354,20 @@ function createRhythmLibrary() {
     `(R:4 L:4)/4 D D :2
     ( 
       X L L L D L L L (A B C):2 D2
-    )/2`
+    )/2`,
+
+    `// PRECOUNT
+    T2:2 T:4
+    ***
+    D L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2
+    (R R L L)/2 (D L L L)/4 (T K)/2 :2
+    (D L L L)/4 (T K)/2 :2
+    (R R R R L L L L)/4 :2`
 
     ], 
     FRAMEDRUM_EXERCISES_IDS.CATEGORY, 
     idx => FRAMEDRUM_EXERCISES_IDS.PREFIX + (idx+1),
-    INSTRUMENT_COOPERMAN_TAR.instrumentName
+    INSTRUMENT_NAME_COOPERMAN_TAR
   );
 
   rhythmLibrary.trimRhythms();

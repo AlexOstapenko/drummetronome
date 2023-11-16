@@ -2,13 +2,19 @@
 const soundPlayer = audioFilePlayer; // object that actually plays sounds
 
 function onDocumentLoaded() {
-    initDefaultInstrument();
-    setDefaultValues();
-    rhythmsDBUI.render();
-    instrumentSelector.render();
-    rhythmEditorsManager.updateRhythmEditorVisibility();
-    initVisualRhythmEditor();
-    addUIEventHandlers();
+
+    instrumentManager.loadInstrumentDefinitions( function() {
+        initDefaultInstrument();
+        setDefaultValues();
+        rhythmsDBUI.render();
+        strokeSelector.init();
+        instrumentSelector.init();
+        instrumentSelector.render();
+        rhythmPlayer.init();
+        rhythmEditorsManager.updateRhythmEditorVisibility();
+        initVisualRhythmEditor();
+        addUIEventHandlers();    
+    });
 }
 
 function initDefaultInstrument() {

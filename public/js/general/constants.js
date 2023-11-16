@@ -20,3 +20,10 @@ const L_BUTT_STOP = "STOP";
 
 // Defaults
 const DEFAULT_BPM = 90;
+
+// Instruments names (keys to access instruments via InstrumentManager)
+const INSTRUMENT_NAME_DARBUKA = "Darbuka";
+const INSTRUMENT_NAME_COOPERMAN_TAR = "Tar";
+const INSTRUMENT_NAME_KOSMOSKY_E = "Kosmosky (E)";
+const INSTRUMENT_NAME_HANG_D_LOW_MYSTIC = "Hang Low Mystic (D)";
+

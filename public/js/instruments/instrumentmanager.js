@@ -1,19 +1,35 @@
+// DON'T USE underscore "~" in the name of the instrument.
+const INSTRUMENT_ID_SPLITTER = "~";
 
 /*
-Loading instruments.
+Loading instrument definitions.
+Loading instruments by those definitions.
 Managing the currently selected instrument.
-Managing, which instruments are currently active (can be more than one).
 Storing memory for each instrument (last rhythms, audio settings etc).
 */
 class InstrumentManager {
     constructor() {
-        this.allInstruments = [INSTRUMENT_DARBUKA, INSTRUMENT_COOPERMAN_TAR, INSTRUMENT_KOSMOSKY_E, INSTRUMENT_HAND_D_LOW_MYSTIC];
-        this.selectedInstrument = INSTRUMENT_DARBUKA;
+        this.allInstruments = [];
+        this.selectedInstrument = null;
         this.instrumentChangedListeners = [];
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
         this.instrumentsMemory = {};
         this.currentModalDiv = null;
+        this.callbackWhenInstrumentDefinitionsLoaded = null;
         this.callbackWhenInstrumentIsLoaded = null;
+    }
+
+    loadInstrumentDefinitions(callbackWhenInitIsDone) {
+        this.callbackWhenInstrumentDefinitionsLoaded = callbackWhenInitIsDone;
+        let instrDefLoader = new InstrumentDefinitionsLoader();
+        instrDefLoader.loadDefinitions( this.onInstrumentDefinitionsLoaded.bind(this) );
+    }
+
+    onInstrumentDefinitionsLoaded( instrumentDefinitions ) {
+        this.allInstruments = instrumentDefinitions;
+        this.selectedInstrument = this.allInstruments ? this.allInstruments[0] : null;
+        if ( this.callbackWhenInstrumentDefinitionsLoaded ) 
+            this.callbackWhenInstrumentDefinitionsLoaded();
     }
 
     strokeNames(instrument) {
@@ -75,6 +91,13 @@ class InstrumentManager {
         this.instrumentChangedListeners.forEach( listener => {
             if (listener) listener.instrumentChanged( this.selectedInstrument );
         });
+    }
+
+    getInstrumentGain(instrumentName) {
+        let instrument = this.getInstrument( instrumentName );
+        if (instrument && instrument.gain)
+            return parseFloat( instrument.gain );
+        return 1;
     }
 
     // strokeID = <instrumentName>~<strokeName>

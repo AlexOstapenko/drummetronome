@@ -1,0 +1,34 @@
+{
+    "instrumentName": "Darbuka",
+    "arrStrokeInfo": [
+        {"stroke": "D", "file": "du.mp3", "gain": 1.5},
+        {"stroke": "d", "file": "du.mp3", "gain": 0.8},
+        {"stroke": "-", "file": ""},
+        {"stroke": "T", "file": "t.mp3", "gain": 0.7},
+        {"stroke": "K", "file": "k.mp3", "gain": 0.7},
+        {"stroke": "t", "file": "te.mp3", "gain": 0.6},
+        {"stroke": "k", "file": "ke.mp3", "gain": 0.6},
+        {"stroke": "ti", "file": "te.mp3", "gain": 0.1},
+        {"stroke": "ki", "file": "ke.mp3", "gain": 0.1},
+        {"stroke": "R", "file": "ta.mp3"},
+        {"stroke": "L", "file": "ka.mp3"},
+        {"stroke": "S", "file": "pa.mp3"},
+        {"stroke": "P", "file": "p.mp3", "gain": 0.5},
+        {"stroke": "Pm", "file": "pp.mp3", "gain": 0.5},
+        {"stroke": "Pl", "file": "ppp.mp3", "gain": 0.5},
+        {"stroke": "X", "file": "x.mp3"},
+        {"stroke": "N", "file": "snap.mp3"},
+        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.3},
+        {"stroke": "z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.1},
+        {"stroke": "O", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
+    ],
+     "images" : {
+        "large" : "img/darbuka.png",
+        "icon" : "img/darbuka-icon.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "D P Pl P D K X –",
+        "text-rhythm" : 
+        "// PRECOUNT\nT2:2 T:4\n***\nD S k S D k S (k k)/2\nD S (k k)/2 S D k (S X P Pm)/2\nD S (k k)/2 S D (k k)/2 S (k k)/2\n(D D D D)/4 S (Pl Pl Pm P)/2 X X T/2 (t k k t k k t k k)/6"
+    }
+}

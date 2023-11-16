@@ -1,0 +1,26 @@
+{
+    "instrumentName": "Kosmosky (E)",
+    "arrStrokeInfo": [
+        {"stroke": "O", "file": "e-l.mp3", "gain": 0.4},
+        {"stroke": "B", "file": "b.mp3", "gain": 0.4},
+        {"stroke": "D", "file": "d.mp3", "gain": 0.4},
+        {"stroke": "E", "file": "e.mp3", "gain": 0.4},
+        {"stroke": "F", "file": "f-sharp.mp3", "gain": 0.4},
+        {"stroke": "G", "file": "g.mp3", "gain": 0.4},
+        {"stroke": "A", "file": "a.mp3", "gain": 0.4},
+        {"stroke": "Bh", "file": "b-higher.mp3", "gain": 0.4},
+        {"stroke": "Dh", "file": "d-higher.mp3", "gain": 0.7},
+        {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.4},
+        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.08},
+        {"stroke": "^", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.08},
+        {"stroke": "-", "file": ""}
+    ],
+    "defaultRhythms": {
+        "visual-rhythm" : "O B D O B D E F", 
+        "text-rhythm": "(O-E)3 B Bh3 E Eh3 D Dh2 (Dh-A)2"
+    },
+    "images" : {
+        "large" : "img/kosmosky-e_600x600.png",
+        "icon" : "img/kosmosky-e_100x100.png"
+    }
+}

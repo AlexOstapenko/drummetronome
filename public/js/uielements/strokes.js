@@ -4,6 +4,9 @@ class StrokeSelector {
 
     constructor(containerID) {
         this.containerID = containerID;
+    }
+
+    init() {
         this.strokes = instrumentManager.strokeNames( instrumentManager.currentInstrument );
     }
 

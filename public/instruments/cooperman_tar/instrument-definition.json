@@ -1,0 +1,37 @@
+{
+    "instrumentName": "Tar",
+    "gain" : 1.5,
+    "arrStrokeInfo": [
+        {"stroke": "D", "file": "d.mp3"},
+        {"stroke": "-", "file": ""},
+        {"stroke": "T", "file": "t.mp3"},
+        {"stroke": "K", "file": "k.mp3"},
+        {"stroke": "t", "file": "tsoft.mp3"},
+        {"stroke": "k", "file": "ksoft.mp3"},
+        {"stroke": "ti", "file": "ti.mp3"},
+        {"stroke": "ki", "file": "ki.mp3"},
+        {"stroke": "R", "file": "r.mp3", "gain": 0.6},
+        {"stroke": "L", "file": "l.mp3", "gain": 0.6},
+        {"stroke": "P", "file": "pbrighter.mp3"},
+        {"stroke": "A", "file": "a.mp3", "gain": 1},
+        {"stroke": "B", "file": "b.mp3", "gain": 1},
+        {"stroke": "C", "file": "c.mp3", "gain": 1},
+        {"stroke": "a", "file": "a.mp3", "gain": 0.3},
+        {"stroke": "b", "file": "b.mp3", "gain": 0.3},
+        {"stroke": "c", "file": "c.mp3", "gain": 0.3},
+        {"stroke": "X", "file": "x.mp3", "gain": 1.5},
+        {"stroke": "x", "file": "x.mp3", "gain": 0.8},
+        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.3},
+        {"stroke": "z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.1},
+        {"stroke": "O", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
+    ],
+    "images": {
+        "large" : "img/tar.png",
+        "icon" : "img/tar-icon.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "D - P – k k P - D - k k P - k k", 
+        "text-rhythm" : 
+        "// PRECOUNT\nT2:2 T:4\n***\nD L L L (R R L L)/2 (D L L L)/4 (T K)/2 :2\n(R R L L)/2 (D L L L)/4 (T K)/2 :2\n(D L L L)/4 (T K)/2 :2\n(R R R R L L L L)/4 :2"
+    }
+}

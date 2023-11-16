@@ -1,8 +1,10 @@
 function onDocumentLoaded() {
-	instrumentRackUI.render();
-	instrumentRackUI.generateInstrumentOptions();
-	setDefaultValues();
-    addEventListeners();
+    instrumentManager.loadInstrumentDefinitions( function() {
+        instrumentRackUI.render();
+        instrumentRackUI.generateInstrumentOptions();
+        setDefaultValues();
+        addEventListeners();
+    } );
 }
 
 function setDefaultValues() {

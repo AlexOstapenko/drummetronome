@@ -1,14 +1,9 @@
-// DON'T USE underscore "~" in the name of the instrument.
-const INSTRUMENT_ID_SPLITTER = "~";
 
-const INSTR_NAME_DARBUKA = "Darbuka";
-const INSTR_NAME_COOPERMAN_TAR = "Tar";
-const INSTR_NAME_KOSMOSKY_E = "Kosmosky (E)";
-const INSTR_NAME_HANG_D_LOW_MYSTIC = "Hang Low Mystic (D)";
 
+/*
 const INSTRUMENT_DARBUKA = {
     instrumentName: INSTR_NAME_DARBUKA,
-    folder: "audio/darbuka_clay/", // add / in the end
+    folder: "instruments/darbuka_clay/audio/", // add / in the end
     arrStrokeInfo: [
         {stroke: "D", file: "du.mp3", gain: 1.5},
         {stroke: "d", file: "du.mp3", gain: 0.8},
@@ -46,7 +41,7 @@ const INSTRUMENT_DARBUKA = {
 
 const INSTRUMENT_COOPERMAN_TAR = {
     instrumentName: INSTR_NAME_COOPERMAN_TAR,
-    folder: "audio/cooperman_tar/", // add / in the end
+    folder: "instruments/cooperman_tar/audio/", // add / in the end
     arrStrokeInfo: [
         {stroke: "D", file: "d.mp3"},
         {stroke: "-", file: ""},
@@ -87,7 +82,7 @@ const INSTRUMENT_COOPERMAN_TAR = {
 
 const INSTRUMENT_KOSMOSKY_E = {
     instrumentName: INSTR_NAME_KOSMOSKY_E,
-    folder: "audio/kosmosky-e/guitar/", // add / in the end
+    folder: "instruments/kosmosky-e/audio/", // add / in the end
     arrStrokeInfo: [
         {stroke: "O", file: "e-l.mp3", gain: 0.4},
         {stroke: "B", file: "b.mp3", gain: 0.4},
@@ -111,7 +106,7 @@ const INSTRUMENT_KOSMOSKY_E = {
 
 const INSTRUMENT_HAND_D_LOW_MYSTIC = {
     instrumentName: INSTR_NAME_HANG_D_LOW_MYSTIC,
-    folder: "audio/hang_d_low_mystic/", // add / in the end
+    folder: "instruments/hang_d_low_mystic/audio/", // add / in the end
     arrStrokeInfo: [
         {stroke: "O", file: "d-ding.mp3"},
         {stroke: "G", file: "g.mp3"},
@@ -131,3 +126,4 @@ const INSTRUMENT_HAND_D_LOW_MYSTIC = {
         [RHYTHM_EDITOR_TYPE_TEXT] : "O-G A A# D E F Ah Ch"
     }
 };
+*/

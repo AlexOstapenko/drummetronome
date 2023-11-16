@@ -11,7 +11,7 @@ class RhythmPlayer {
     constructor() {
         this.performance =
             { 
-                instrName : instrumentManager.currentInstrument.instrumentName, 
+                instrName : "",
                 startTime: 0, // last scheduled time of the 1st beat of rhythm
                 oneLoopDuration: 0, // will be calculated when the particlar rhythm will be set
                 onePulseDuration: 0, // will be calculated when the particlar rhythm will be set
@@ -26,6 +26,10 @@ class RhythmPlayer {
             };
 
             this.audioPlayer = audioFilePlayer;
+    }
+
+    init() {
+        this.performance.instrName = instrumentManager.currentInstrument.instrumentName;
     }
 
     get isActive() { return this.performance.isActive; }
@@ -133,6 +137,7 @@ class RhythmPlayer {
     play() {
         this.stop();
         this.audioPlayer.turnOnSound();
+        this.audioPlayer.setMasterGainValue( instrumentManager.getInstrumentGain(this.performance.instrName) );
 
         this.performance.isJustStarted = true;
         this.performance.doUpdateTimeline = true;

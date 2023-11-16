@@ -4,8 +4,10 @@ const DIV_INSTRUMENT_SELECTION = "divInstrumentSelect";
 class InstrumentSelector {
 
 	constructor() {
+	}
+
+	init() {
 		this.selectedInstrumentName = instrumentManager.currentInstrument.instrumentName;
-		//instrumentManager.addInstrumentChangedListener( this );
 	}
 
 	render() {
@@ -14,7 +16,9 @@ class InstrumentSelector {
 		instrumentManager.allInstruments.forEach(instr => {
 			let addClass = instr.instrumentName === this.selectedInstrumentName ? "instrument-selected" : "";
 
-			html += `<div class='divInstrument ${addClass}' onclick="instrumentSelector.select('${instr.instrumentName}')">${instr.instrumentName}</div>`;
+			html += `<div class='divInstrument ${addClass}' onclick="instrumentSelector.select('${instr.instrumentName}')">
+			${instr.instrumentName}
+			</div>`;
 		});
 		div.innerHTML = html;
 	}
@@ -49,3 +53,4 @@ class InstrumentSelector {
 }
 
 const instrumentSelector = new InstrumentSelector();
+

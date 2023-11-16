@@ -69,7 +69,7 @@ class AudioFilePlayer {
                 checkComplete();
 	    	}
 	    	else {
-		        let path = folder + strokeInfo.file;
+		        let path = strokeInfo.folderRedefined ? strokeInfo.file : (folder + '/audio/' + strokeInfo.file);
 		        fetch(path)
 		            .then(response => response.arrayBuffer())
 		            .then(data => audioContext.decodeAudioData(data))
@@ -144,7 +144,9 @@ class AudioFilePlayer {
 		bufferSource.start(when);
 	}
 
-	
+	setMasterGainValue(value) {
+		this.masterGainNode.gain.value = value;
+	}
 }
 
 const audioFilePlayer = new AudioFilePlayer();

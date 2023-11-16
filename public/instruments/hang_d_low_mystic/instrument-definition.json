@@ -1,0 +1,25 @@
+{
+    "instrumentName": "Hang Low Mystic (D)",
+    "arrStrokeInfo": [
+        {"stroke": "O", "file": "d-ding.mp3"},
+        {"stroke": "G", "file": "g.mp3"},
+        {"stroke": "A", "file": "a.mp3"},
+        {"stroke": "A#", "file": "asharp.mp3"},
+        {"stroke": "D", "file": "d.mp3"},
+        {"stroke": "E", "file": "e.mp3"},
+        {"stroke": "F", "file": "f.mp3"},
+        {"stroke": "Ah", "file": "ah.mp3"},
+        {"stroke": "Ch", "file": "ch.mp3"},
+        {"stroke": "-", "file": ""},
+        {"stroke": "Z", "file": "#root#/_common_audio/triangle.mp3", "gain": 0.3},
+        {"stroke": "^", "file": "#root#/_common_audio/cabasa.mp3", "gain": 0.1}
+    ],
+    "images" : {
+        "large" : "img/hang-600x600.png",
+        "icon" : "img/hang-100x100.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "O G A A# D E F Ah Ch", 
+        "text-rhythm" : "O-G A A# D E F Ah Ch"
+    }
+}

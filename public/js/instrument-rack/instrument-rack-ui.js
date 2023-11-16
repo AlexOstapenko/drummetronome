@@ -24,15 +24,54 @@ class InstrumentRackUIController {
 
     render() {
         let html = '';
+        let html2 = '';
         this.rack.instrumentInstances.forEach( (instance, idx) => {
-            let checkbox = `<input type='checkbox' class='checkbox-instrument-instance' id='checkbox${instance.id}' ${instance.data.audio.mute ? "" : "checked"}
+
+            let instr = instance.instrument;
+            // let clickableItem = "";
+            // if (instr.images && instr.images.icon) {
+            //     clickableItem = `<img width='50px' height='50px' src='${instr.folder}/${instr.images.icon}'>`;
+            // }
+            // else {
+            //     clickableItem = `${instr.instrumentName}`;
+            // }
+
+            // let checkbox = `<input type='checkbox' class='checkbox-instrument-instance' id='checkbox${instance.id}' ${instance.data.audio.mute ? "" : "checked"}
+            // onclick='instrumentRackUI.onClickCheckbox(${instance.id})'>`;
+            
+            // let additionalClass = this.rack.selectedInstance === idx ? "instrument-instance-selected" : "";
+            
+            // html += `<div class='div-instrument-instance ${additionalClass}'>
+            // ${checkbox} 
+            // <div class='div-instrument-instance-label' onclick='instrumentRackUI.onClickInstrument(${instance.id})'>
+            //     ${clickableItem}
+            // </div> 
+            // <button class='butt-delete-instrument-instance' onclick='instrumentRackUI.onClickXButton(${instance.id})'>x</button>
+            // </div>`;
+            // ----------
+
+            let checkbox = `<input type='checkbox' id='checkbox${instance.id}' ${instance.data.audio.mute ? "" : "checked"}
             onclick='instrumentRackUI.onClickCheckbox(${instance.id})'>`;
-            let additionalClass = this.rack.selectedInstance === idx ? "instrument-instance-selected" : "";
-            html += `<div class='div-instrument-instance ${additionalClass}'>
-            ${checkbox} 
-            <div class='div-instrument-instance-label' onclick='instrumentRackUI.onClickInstrument(${instance.id})'>${instance.instrument.instrumentName}</div> 
-            <button class='butt-delete-instrument-instance' onclick='instrumentRackUI.onClickXButton(${instance.id})'>x</button>
+            let clickableItem = '';
+            if (instr.images && instr.images.icon)
+                clickableItem = `<img class='instr-instance-center-item' width='50px' height='50px' src='${instr.folder}/${instr.images.icon}'>`;
+            else 
+                clickableItem = `<p class='instr-instance-center-item'>${instr.instrumentName}</p>`;
+
+            let containerClass = this.rack.selectedInstance === idx ? "instr-instance-container-selected" : "instr-instance-container";
+
+            html += 
+            `<div class='instr-instance'>
+                <div class='${containerClass}'>
+                    ${checkbox}
+                    <div onclick='instrumentRackUI.onClickInstrument(${instance.id})'>
+                        ${clickableItem} 
+                    </div>
+                    <button class='instr-instance-close-button' onclick='instrumentRackUI.onClickXButton(${instance.id})'>x</button>
+                </div>
             </div>`;
+
+
         });
         let divRack = document.querySelector(`#${this.divNameRack}`);
         divRack.innerHTML = html + (html === "" ? "" : "<br>");
