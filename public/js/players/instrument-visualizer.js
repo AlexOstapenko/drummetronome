@@ -62,8 +62,18 @@ class InstrumentVisualizer {
 		// Радиус полупрозрачного круга
 		var R1 = 35;
 
-		var clickX = event.clientX - canvas.getBoundingClientRect().left;
-		var clickY = event.clientY - canvas.getBoundingClientRect().top;
+		var clickX = 0; //event.clientX - canvas.getBoundingClientRect().left;
+		var clickY = 0; //event.clientY - canvas.getBoundingClientRect().top;
+
+		if (event.touches && event.touches.length > 0) {
+	      // Если есть касание, используем его координаты
+	      clickX = event.touches[0].clientX - canvas.getBoundingClientRect().left;
+	      clickY = event.touches[0].clientY - canvas.getBoundingClientRect().top;
+	    } else {
+	      // Иначе используем координаты клика мыши
+	      clickX = event.clientX - canvas.getBoundingClientRect().left;
+	      clickY = event.clientY - canvas.getBoundingClientRect().top;
+	    }
 
 		// Проверяем, находится ли клик в радиусе R от какой-то точки
 		for (var i = 0; i < coordinates.length; i++) {
@@ -73,8 +83,7 @@ class InstrumentVisualizer {
 			if (distance <= R) {
 				audioFilePlayer.turnOnSound();
 				audioFilePlayer.playStroke( {instrumentName: currInstance.instrument.instrumentName, 
-											strokeName: coordinates[i].stroke}, 0)
-
+											strokeName: coordinates[i].stroke}, 0);
 
 				// Рисуем полупрозрачный желтый круг
 				ctx.beginPath();
@@ -88,8 +97,6 @@ class InstrumentVisualizer {
 				function initAnimate(x, y,  idx) {
 
 					function animate() {
-						console.log( "Рисуем круг для " + idx);
-
 						var elapsedTime = Date.now() - startTime;
 						var alpha = 1 - (elapsedTime / 500); // 500 миллисекунд для затухания
 
