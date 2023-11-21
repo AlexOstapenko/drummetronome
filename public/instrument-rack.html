@@ -22,12 +22,13 @@
     <link rel="stylesheet" href="css/div-modal.css">
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack.css">
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack-mixer.css">
+    <link rel="stylesheet" href="css/canvas.css">
 
     <script src="js/general/constants.js"></script>
 
     <!-- for parsing rhythm text -->
     <script src="js/general/utils.js"></script>
-    <script src="js/general/value-change-listener.js"></script>
+    <script src="js/general/value-change-notifier.js"></script>
     <script src="js/command/command.js"></script>
     <script src="js/sentence/fraction.js"></script>
     <script src="js/sentence/phrase.js"></script>
@@ -36,7 +37,9 @@
     <script src="js/sentence/textrhythmprocessor.js"></script>
 
     <script src="js/instruments/instrument-definitions-loader.js"></script>
+    <script src="js/rhythm-cards/rhythm-card.js"></script>    
 
+    <script src="js/uielements/canvas-manager.js"></script>
     <script src="js/uielements/tempo-agent.js"></script>
     <script src="js/uielements/rhythm-editors-agent.js"></script>
     <script src="js/instruments/instrumentmanager.js"></script>
@@ -44,6 +47,8 @@
     <script src="js/instrument-rack/instrument-rack.js"></script>
     <script src="js/instrument-rack/instrument-rack-ui.js"></script>
     <script src="js/instrument-rack/instrument-rack-mixer.js"></script>
+    <script src="js/players/instrument-visualizer.js"></script>
+
     <script src="js/players/rhythm.js"></script>
     <script src="js/uielements/modaldiv.js"></script>
     <script src="js/rhythmsforpractice/rhythmlibrary1.js"></script>
@@ -72,7 +77,7 @@
 
         <div id="div-text-rhythm-editor" class="div-text-rhythm-editor">
             <div>
-                <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="20"></textarea><br>
+                <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="10"></textarea><br>
                 <button class="button-delete-textrhythm" onclick="clearTextRhythm()">Clear text</button>
             </div>
         </div>
@@ -101,6 +106,12 @@
             </div>
             
             
+        </div>
+    </div>
+
+    <div class="centered">
+        <div id="canvas-container" class="canvas-container canvas-hidden">
+            <canvas id="canvas-visualization" class='canvas-style' width="500" height="500"></canvas>
         </div>
     </div>
 

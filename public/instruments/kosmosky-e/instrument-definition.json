@@ -10,7 +10,7 @@
         {"stroke": "A", "file": "a.mp3", "gain": 0.4},
         {"stroke": "Bh", "file": "b-higher.mp3", "gain": 0.4},
         {"stroke": "Dh", "file": "d-higher.mp3", "gain": 0.7},
-        {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.4},
+        {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.6},
         {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.08},
         {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08},
         {"stroke": "-", "file": ""}
@@ -22,5 +22,17 @@
     "images" : {
         "large" : "img/kosmosky-e_600x600.png",
         "icon" : "img/kosmosky-e_100x100.png"
-    }
+    },
+    "strokeCoordinates" : [
+        {"stroke": "O" , "x": 250, "y": 250},
+        {"stroke": "B" , "x": 298, "y": 340},
+        {"stroke": "D" , "x": 196, "y": 340},
+        {"stroke": "E" , "x": 370, "y": 275},
+        {"stroke": "F" , "x": 129, "y": 267},
+        {"stroke": "G" , "x": 380, "y": 185},
+        {"stroke": "A" , "x": 125, "y": 176},
+        {"stroke": "Bh", "x": 334, "y": 112},
+        {"stroke": "Dh", "x": 175, "y": 100},
+        {"stroke": "Eh", "x": 255, "y": 80}
+    ]
 }

@@ -102,6 +102,8 @@ class AudioFilePlayer {
 	// masterGainNode (with set from outside gain value) and panNode.
 	playStroke( strokeInfo, when ) {
 
+		let a = 10;
+
 		function isNumber(when) { return !isNaN(parseFloat(when)) && isFinite(when); }
 		if (!isNumber(when) ) return;
 

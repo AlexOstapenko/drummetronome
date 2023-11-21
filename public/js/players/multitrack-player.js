@@ -23,7 +23,7 @@ class Track {
 			instrInstance.data.audio.panorama : 0;
 
 		// add event listener about gain / panorama change
-		instrInstance.gainPanChangeListener.addValueChangeListener( this.gainPanoramaChanged.bind(this) );
+		instrInstance.gainPanChangeNotifier.addValueChangeListener( this.gainPanoramaChanged.bind(this) );
 	}	
 
 	set rhythm(rhythmText) {

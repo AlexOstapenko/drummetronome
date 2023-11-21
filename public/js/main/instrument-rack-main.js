@@ -1,4 +1,7 @@
 function onDocumentLoaded() {
+
+    instrumentVisualizer.init();
+
     instrumentManager.loadInstrumentDefinitions( function() {
         instrumentRackUI.render();
         instrumentRackUI.generateInstrumentOptions();
@@ -12,9 +15,13 @@ function setDefaultValues() {
 }
 
 function addEventListeners() {
-    instrumentRackUI.addRackChangeListener( () => {
-        insrumentRackMixer.updateAndRender();
-    });
+    instrumentRackUI.rackChangedNotifier.addValueChangeListener( [
+        (rack) => { insrumentRackMixer.updateAndRender(); },
+        instrumentVisualizer.onRackChanged.bind(instrumentVisualizer)
+    ]);
+
+    // to update the canvas when the image is loaded
+    //instrumentRackUI.instrumentLoadedNotifier.addValueChangeListener( instrumentVisualizer.onInstrumentLoaded.bind(instrumentVisualizer) );
 }
 
 function clearTextRhythm() {

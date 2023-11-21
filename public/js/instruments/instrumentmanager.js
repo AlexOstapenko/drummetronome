@@ -46,6 +46,40 @@ class InstrumentManager {
         this.loadInstrument(instrument, this.onInstrumentLoaded.bind(this) );
     }
 
+    // Call this function to load instrument and give the callback to get notified when the instrument is loaded.
+    // The callback function receives one argument, it is instrument which was loaded.
+    // In instrumentRef you can pass either name of the instrument or the instrument itself.
+    // While the instrument is being loaded the modal window in shown "Loading the instrument <instrument name>".
+    loadInstrument(instrumentRef, callbackFunction) {
+        let instrument = null;
+        if ( typeof instrumentRef === 'string') instrument = this.getInstrument(instrumentRef);
+        else instrument = instrumentRef;
+
+        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
+            // load audio
+            this.callbackWhenInstrumentIsLoaded = callbackFunction;
+            audioFilePlayer.loadAudioFiles( instrument, this.onInstrumentAudioLoaded.bind(this) );
+            this.currentModalDiv = new ModalDiv();
+            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
+
+        } else
+            this.instrumentLoaded(instrument);   
+
+        // load image for future use in canvas
+        if ( !instrument.imagesLoaded && instrument.images && 
+            instrument.images.large && this.checkInstrumentVisualizationInfo(instrument) ) {
+            var img = new Image();
+            img.onload = () => {
+                instrument.imagesLoaded = true;
+                if ( audioFilePlayer.isInstrumentLoaded(instrument) ) {
+                    this.instrumentLoaded(instrument);
+                }
+            };
+            instrument.images.largeImg = img;
+            img.src = instrument.folder + "/" + instrument.images.large; // start downloading
+        } else instrument.imagesLoaded = true;
+    }
+
     instrumentLoaded( instr ) {
         if (this.callbackWhenInstrumentIsLoaded) {
             this.callbackWhenInstrumentIsLoaded(instr);
@@ -59,28 +93,21 @@ class InstrumentManager {
         }
     }
 
-    // Call this function to load instrument and give the callback to get notified when the instrument is loaded.
-    // The callback function receives one argument, it is instrument which was loaded.
-    // In instrumentRef you can pass either name of the instrument or the instrument itself.
-    // While the instrument is being loaded the modal window in shown "Loading the instrument <instrument name>".
-    loadInstrument(instrumentRef, callbackFunction) {
-        let instrument = null;
-        if ( typeof instrumentRef === 'string') instrument = this.getInstrument(instrumentRef);
-        else instrument = instrumentRef;
 
-        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
-            this.callbackWhenInstrumentIsLoaded = callbackFunction;
-            audioFilePlayer.loadAudioFiles( instrument, this.instrumentLoaded.bind(this) );
-            this.currentModalDiv = new ModalDiv();
-            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
-        } else
-            this.instrumentLoaded(instrument);   
+    onInstrumentAudioLoaded(instr) {
+        if (instr.imagesLoaded)
+            this.instrumentLoaded(instr);
     }
 
+    // finishes the instrument selection process
     onInstrumentLoaded(instr) {
         // we change selected instrument value only when in is finally loaded
         this.selectedInstrument = instr;
         this.notifyInstrumentChanged();
+    }
+
+    checkInstrumentVisualizationInfo(instrument) {
+        return instrument.strokeCoordinates;
     }
 
     addInstrumentChangedListener(listener) {

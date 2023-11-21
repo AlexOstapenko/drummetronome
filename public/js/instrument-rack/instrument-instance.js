@@ -16,7 +16,7 @@ class InstrumentInstance {
             }
         }
 
-        this.gainPanChangeListener = new ValueChangeListener();
+        this.gainPanChangeNotifier = new ValueChangeNotifier();
     }
 
     setRhythm( text ) {
@@ -26,7 +26,7 @@ class InstrumentInstance {
     getRhythm() { return this.data.rhythm };
 
     notifyAboutChanges() {
-        this.gainPanChangeListener.notify( 
+        this.gainPanChangeNotifier.notify( 
             {
                 gain: this.data.audio.gain,
                 panorama: this.data.audio.panorama

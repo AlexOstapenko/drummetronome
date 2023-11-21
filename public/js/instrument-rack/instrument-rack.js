@@ -76,6 +76,11 @@ class InstrumentRack {
         return null;
     }
 
+    getSelectedInstance() {
+        if (this.instrumentInstances.length === 0 || this.selectedInstance===-1 ) return null;
+        return this.instrumentInstances[this.selectedInstance];
+    }
+
     newId() {
         this.idcounter++;
         return this.idcounter;

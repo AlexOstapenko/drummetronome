@@ -9,17 +9,7 @@ class InstrumentRackUIController {
         this.rack = new InstrumentRack();
         this.divNameRack = 'divInstrumentsRack';
         this.textRhythmEditorAgent = new TextRhythmEditorAgent(RHYTHM_EDITOR_TEXT_ID);
-        this.rackChangedListeners = [];
-    }
-
-    addRackChangeListener( callbackFunc ) {
-        this.rackChangedListeners.push( callbackFunc );
-    }
-
-    notifyRackChangedListeners() {
-        this.rackChangedListeners.forEach( func => {
-            func();
-        });
+        this.rackChangedNotifier = new ValueChangeNotifier();
     }
 
     render() {
@@ -28,28 +18,6 @@ class InstrumentRackUIController {
         this.rack.instrumentInstances.forEach( (instance, idx) => {
 
             let instr = instance.instrument;
-            // let clickableItem = "";
-            // if (instr.images && instr.images.icon) {
-            //     clickableItem = `<img width='50px' height='50px' src='${instr.folder}/${instr.images.icon}'>`;
-            // }
-            // else {
-            //     clickableItem = `${instr.instrumentName}`;
-            // }
-
-            // let checkbox = `<input type='checkbox' class='checkbox-instrument-instance' id='checkbox${instance.id}' ${instance.data.audio.mute ? "" : "checked"}
-            // onclick='instrumentRackUI.onClickCheckbox(${instance.id})'>`;
-            
-            // let additionalClass = this.rack.selectedInstance === idx ? "instrument-instance-selected" : "";
-            
-            // html += `<div class='div-instrument-instance ${additionalClass}'>
-            // ${checkbox} 
-            // <div class='div-instrument-instance-label' onclick='instrumentRackUI.onClickInstrument(${instance.id})'>
-            //     ${clickableItem}
-            // </div> 
-            // <button class='butt-delete-instrument-instance' onclick='instrumentRackUI.onClickXButton(${instance.id})'>x</button>
-            // </div>`;
-            // ----------
-
             let checkbox = `<input type='checkbox' id='checkbox${instance.id}' ${instance.data.audio.mute ? "" : "checked"}
             onclick='instrumentRackUI.onClickCheckbox(${instance.id})'>`;
             let clickableItem = '';
@@ -86,10 +54,6 @@ class InstrumentRackUIController {
         instance.setRhythm( this.textRhythmEditorAgent.getRhythm() );
     }
 
-    onInstrumentLoaded(instr) {
-    
-    }
-
     isEmpty() {
         return this.rack.isEmpty();
     }
@@ -107,6 +71,8 @@ class InstrumentRackUIController {
         // set text of the newly selected instrument into text editor
         let instance = this.rack.getInstanceByIdx( this.rack.selectedInstance );
         this.textRhythmEditorAgent.setRhythm( instance.getRhythm() );
+
+        this.rackChangedNotifier.notify(this.rack);
     }
 
     updateRhythmText() {
@@ -129,12 +95,20 @@ class InstrumentRackUIController {
         let select = document.getElementById( INSTRUMENT_SELECT_EL_ID );
         const instrumentName = select.value;
         instrumentManager.loadInstrument( instrumentName, this.onInstrumentLoaded.bind(this) );
-        let instance = this.rack.createInstrumentInstance( instrumentName );
+
+        // the rest is done in onInstrumentLoaded method
+    }
+
+    onInstrumentLoaded(instr) {
+        let instance = this.rack.createInstrumentInstance( instr.instrumentName );
         this.render();
         this.textRhythmEditorAgent.setRhythm( instance.getRhythm() );
+        this.rackChangedNotifier.notify( this.rack );
 
-        this.notifyRackChangedListeners();
+        //console.log( `Instrument ${instr.instrumentName} is loaded. Notifying.`)
+        //this.instrumentLoadedNotifier.notify( instr );
     }
+
 
     onClickCheckbox(id) {
         let instance = this.rack.getInstanceById(id);
@@ -145,13 +119,13 @@ class InstrumentRackUIController {
     onClickXButton(id) {
         this.rack.removeInstrumentInstance(id);
         this.render();
-        this.notifyRackChangedListeners();
+        this.rackChangedNotifier.notify( this.rack );
     }
 
     onClickDeleteAll() {
         this.rack.deleteAll();
         this.render();
-        this.notifyRackChangedListeners();
+        this.rackChangedNotifier.notify( this.rack );
     }
 
     generateInstrumentOptions() {

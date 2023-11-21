@@ -1,0 +1,44 @@
+category: Mini-compositions
+name: Dialog of 2 Darbukas and Maqsum by Tar
+tempo: 120
+
+#####
+
+Darbuka
+gain=0.7
+pan=-0.5
+rhythm:
+(
+((T K :2)/2 T2 P2 Pl2 )/2
+es4
+):3
+
+D/2:4 X P Pm Pl Es2
+
+@@@@@
+
+Tar
+pan=0
+gain=1.3
+rhythm:
+D P2 P D2 P2 : 3
+
+Es:6 ( R R R  L L L)/3
+
+D P2 P D2 P2 : 3
+
+Es:6 (D K K K)/2
+
+@@@@@
+
+Darbuka
+gain=0.7
+pan=0.5
+rhythm:
+
+(
+es4
+((T K :2)/2 T2 P2 Pl2 )/2
+):3
+
+D/2:4 X P Pm Pl Es2
