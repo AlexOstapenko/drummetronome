@@ -9,11 +9,11 @@ class InstrumentVisualizer {
 
 	show() {
 		let currInstance = instrumentRackUI.rack.getSelectedInstance();
-		if ( currInstance && currInstance.instrument.images.largeImg ) {
+		if ( currInstance && currInstance.instrument.images.largeImg && 
+			instrumentManager.checkInstrumentVisualizationInfo(currInstance.instrument) ) {
 			this.canvasManager.show();
 			this.drawInstrument(currInstance);
 		}
-
 	}
 
 	hide() {

@@ -4,67 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        #canvas {
+        #container {
             position: relative;
-            width: 400px;
-            height: 400px;
-            background-color: lightgreen;
         }
 
-        .circle {
+        #canvas {
             position: absolute;
-            pointer-events: none;
-            transition: opacity 0.5s;
-            transform: translate(-50%, -50%); /* Центрируем изображение относительно точки */
+            width: 500px;
+            height: 500px;
+            background: url('instruments/kosmosky-e/img/kosmosky-e_600x600.png') center center no-repeat;
+            background-size: cover;
+            overflow: hidden;
         }
+
+        .strokeCircle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+            border-radius: 50%;
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .strokeCircle span {
+            color: white;
+        }
+
+
     </style>
 </head>
 <body>
-    <div id="canvas"></div>
+
+    <div>
+        <h1> TESTING TOUCH </h1>
+        BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... BLA BLA BLA ... 
+    </div>
+
+    <div id="container">
+        <div id="canvas"></div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const canvasDiv = document.getElementById('canvas');
+        // Координаты активных точек
+        const visualizationInfo = {
+            size: {
+                width: 500,
+                height: 500
+            },
+            strokeCoordinates : 
+            [
+                {"stroke": "O" , "x": 247, "y": 248},
+                {"stroke": "B" , "x": 294, "y": 317},
+                {"stroke": "D" , "x": 200, "y": 312},
+                {"stroke": "E" , "x": 362, "y": 252},
+                {"stroke": "F" , "x": 132, "y": 246},
+                {"stroke": "G" , "x": 377, "y": 170},
+                {"stroke": "A" , "x": 126, "y": 161},
+                {"stroke": "Bh", "x": 332, "y": 100},
+                {"stroke": "Dh", "x": 180, "y": 96},
+                {"stroke": "Eh", "x": 256, "y": 73}
+            ]
+        };
 
-            // Обработчик для события касания (touch) и клика (mousedown)
-            canvasDiv.addEventListener('touchstart', handleTouch);
-            canvasDiv.addEventListener('mousedown', handleMouseClick);
+        class InstrumentVisualizer {
+            constructor() {
+                this.circleR = 40;
+            }  
 
-            function handleTouch(event) {
-                event.preventDefault(); // Предотвращаем стандартное поведение браузера
+            init() {
+                const container = document.getElementById('container');
+                const canvasDiv = document.getElementById('canvas');
+                const circleTemplate = document.getElementById('circleTemplate');
 
-                // Обрабатываем каждую точку касания
+                // Обработчик для события касания (touch) и клика (mousedown)
+                canvasDiv.addEventListener('touchstart', this.handleTouch.bind(this) );
+                canvasDiv.addEventListener('mousedown', this.handleMouseClick.bind(this) );
+            }
+
+            handleTouch(event) {
+                event.preventDefault();
+
                 for (let i = 0; i < event.touches.length; i++) {
                     const touch = event.touches[i];
-                    createAndAnimateCircle(touch.clientX, touch.clientY);
+                    this.handleInput(touch.clientX - container.offsetLeft, 
+                        touch.clientY - container.offsetTop,
+                        -this.circleR/2, 0);
                 }
             }
 
-            function handleMouseClick(event) {
-                event.preventDefault(); 
-                createAndAnimateCircle(event.clientX, event.clientY);
+            handleMouseClick(event) {
+                event.preventDefault();
+                this.handleInput(event.clientX - container.offsetLeft, event.clientY - container.offsetTop,
+                    -this.circleR/2, 0);
             }
 
-            function createAndAnimateCircle(x, y) {
-                // Создаем новое изображение круга
-                const newCircle = document.createElement('img');
-                newCircle.src = 'img/yellow-circle.png';
-                newCircle.className = 'circle';
-                newCircle.style.left = x + 'px';
-                newCircle.style.top = y + 'px';
-                newCircle.style.opacity = 1; // Начальная непрозрачность
+            handleInput(x, y, xOffset, yOffset) {
+                // Проверяем каждую активную точку
+                for (const point of visualizationInfo.strokeCoordinates) {
+                    const distance = Math.sqrt((x - point.x) ** 2 + (y - point.y) ** 2);
 
-                // Добавляем изображение круга в div
-                canvasDiv.appendChild(newCircle);
-
-                // Устанавливаем центр изображения в точку клика
-                newCircle.style.transformOrigin = '50% 50%';
-
-                // Запускаем анимацию затухания
-                fadeOut(newCircle);
+                    // Если клик находится в радиусе действия точки, рисуем круг
+                    if (distance <= this.circleR) {
+                        this.createAndAnimateCircle(point.x+xOffset, point.y+yOffset);
+                        return; // Прерываем цикл, чтобы не проверять остальные точки
+                    }
+                }
             }
 
-            function fadeOut(element) {
+            createAndAnimateCircle(x, y) {
+
+                let newCircle = this.drawPoint( x, y, "yellow" );
+                newCircle.style.opacity = 1;
+                this.fadeOut(newCircle);
+            }
+
+            fadeOut(element) {
                 let opacity = 1;
 
                 function animate() {
@@ -74,13 +131,49 @@
                         requestAnimationFrame(animate);
                     } else {
                         element.style.display = 'none';
-                        element.remove(); // Очищаем изображение после затухания
+                        element.remove();
                     }
                 }
 
                 animate();
             }
-        });
+
+
+            drawPoint(x, y, bgcolor) {
+                const canvasDiv = document.getElementById('canvas');
+                const circleElement = document.createElement('div');
+                circleElement.className = 'strokeCircle';
+                circleElement.style.backgroundColor = bgcolor;
+                circleElement.style.left = x + "px";
+                circleElement.style.top = y + "px";
+                canvasDiv.appendChild(circleElement);
+                return circleElement;
+            }
+
+            drawPoints() {
+                const canvasDiv = document.getElementById('canvas');
+                for (const point of visualizationInfo.strokeCoordinates) {
+
+                    let circleElement = this.drawPoint( 
+                        point.x*canvasDiv.offsetWidth/visualizationInfo.size.width - this.circleR/2,
+                        point.y*canvasDiv.offsetHeight/visualizationInfo.size.height,
+                        "red"
+                    );
+
+                    const spanElement = document.createElement('span');
+                    spanElement.textContent = point.stroke;
+                    circleElement.appendChild(spanElement);
+                }
+            }   
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const instrVis = new InstrumentVisualizer();
+            instrVis.init();
+            instrVis.drawPoints();
+        });          
+
     </script>
 </body>
 </html>
+

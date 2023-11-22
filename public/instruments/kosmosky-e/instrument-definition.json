@@ -23,16 +23,25 @@
         "large" : "img/kosmosky-e_600x600.png",
         "icon" : "img/kosmosky-e_100x100.png"
     },
-    "strokeCoordinates" : [
-        {"stroke": "O" , "x": 250, "y": 250},
-        {"stroke": "B" , "x": 298, "y": 340},
-        {"stroke": "D" , "x": 196, "y": 340},
-        {"stroke": "E" , "x": 370, "y": 275},
-        {"stroke": "F" , "x": 129, "y": 267},
-        {"stroke": "G" , "x": 380, "y": 185},
-        {"stroke": "A" , "x": 125, "y": 176},
-        {"stroke": "Bh", "x": 334, "y": 112},
-        {"stroke": "Dh", "x": 175, "y": 100},
-        {"stroke": "Eh", "x": 255, "y": 80}
-    ]
+    "visualization" : {
+        "size": {
+            "width": 500,
+            "height": 500
+        },
+        "strokeCoordinates" : 
+        [
+            {"stroke": "O" , "x": 247, "y": 248, "r": 30},
+            {"stroke": "B" , "x": 294, "y": 317, "r": 30},
+            {"stroke": "D" , "x": 200, "y": 312, "r": 30},
+            {"stroke": "E" , "x": 362, "y": 252, "r": 30},
+            {"stroke": "F" , "x": 132, "y": 246, "r": 30},
+            {"stroke": "G" , "x": 377, "y": 170, "r": 30},
+            {"stroke": "A" , "x": 126, "y": 161, "r": 30},
+            {"stroke": "Bh", "x": 332, "y": 100, "r": 30},
+            {"stroke": "Dh", "x": 180, "y": 96, "r": 30},
+            {"stroke": "Eh", "x": 256, "y": 73, "r": 30}
+        ]
+
+    }
+    
 }

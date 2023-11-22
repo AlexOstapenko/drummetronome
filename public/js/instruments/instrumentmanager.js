@@ -107,7 +107,7 @@ class InstrumentManager {
     }
 
     checkInstrumentVisualizationInfo(instrument) {
-        return instrument.strokeCoordinates;
+        return instrument.visualization;
     }
 
     addInstrumentChangedListener(listener) {

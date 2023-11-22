@@ -7,6 +7,10 @@ class CanvasManager {
 		return document.getElementById( "canvas-visualization" );
 	}
 
+	get size() {
+		return { width: this.canvas.width, height: this.canvas.height };
+	}
+
 	show() {
 		this.canvasContainer.style.visibility = "visible";
 		this.canvasContainer.style.display = "block";
