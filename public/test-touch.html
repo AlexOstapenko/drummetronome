@@ -6,12 +6,16 @@
     <style>
         #canvas {
             position: relative;
+            width: 400px;
+            height: 400px;
+            background-color: lightgreen;
         }
 
         .circle {
             position: absolute;
             pointer-events: none;
             transition: opacity 0.5s;
+            transform: translate(-50%, -50%); /* Центрируем изображение относительно точки */
         }
     </style>
 </head>
@@ -22,31 +26,43 @@
         document.addEventListener('DOMContentLoaded', function () {
             const canvasDiv = document.getElementById('canvas');
 
-            // Обработчик для события касания (touch)
-            canvasDiv.addEventListener('touchstart', function (event) {
+            // Обработчик для события касания (touch) и клика (mousedown)
+            canvasDiv.addEventListener('touchstart', handleTouch);
+            canvasDiv.addEventListener('mousedown', handleMouseClick);
+
+            function handleTouch(event) {
                 event.preventDefault(); // Предотвращаем стандартное поведение браузера
 
                 // Обрабатываем каждую точку касания
                 for (let i = 0; i < event.touches.length; i++) {
                     const touch = event.touches[i];
-                    const x = touch.clientX;
-                    const y = touch.clientY;
-
-                    // Создаем новое изображение круга
-                    const newCircle = document.createElement('img');
-                    newCircle.src = 'circle.png';
-                    newCircle.className = 'circle';
-                    newCircle.style.left = x + 'px';
-                    newCircle.style.top = y + 'px';
-                    newCircle.style.opacity = 1; // Начальная непрозрачность
-
-                    // Добавляем изображение круга в div
-                    canvasDiv.appendChild(newCircle);
-
-                    // Запускаем анимацию затухания
-                    fadeOut(newCircle);
+                    createAndAnimateCircle(touch.clientX, touch.clientY);
                 }
-            });
+            }
+
+            function handleMouseClick(event) {
+                event.preventDefault(); 
+                createAndAnimateCircle(event.clientX, event.clientY);
+            }
+
+            function createAndAnimateCircle(x, y) {
+                // Создаем новое изображение круга
+                const newCircle = document.createElement('img');
+                newCircle.src = 'img/yellow-circle.png';
+                newCircle.className = 'circle';
+                newCircle.style.left = x + 'px';
+                newCircle.style.top = y + 'px';
+                newCircle.style.opacity = 1; // Начальная непрозрачность
+
+                // Добавляем изображение круга в div
+                canvasDiv.appendChild(newCircle);
+
+                // Устанавливаем центр изображения в точку клика
+                newCircle.style.transformOrigin = '50% 50%';
+
+                // Запускаем анимацию затухания
+                fadeOut(newCircle);
+            }
 
             function fadeOut(element) {
                 let opacity = 1;
