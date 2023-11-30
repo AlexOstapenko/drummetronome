@@ -1,8 +1,7 @@
 function onDocumentLoaded() {
 
-    instrumentVisualizer.init();
-
     instrumentManager.loadInstrumentDefinitions( function() {
+        instrumentVisualizer.init();
         instrumentRackUI.render();
         instrumentRackUI.generateInstrumentOptions();
         setDefaultValues();
@@ -58,5 +57,64 @@ function clickPlayRhythm() {
          });
         tempoAgent.showTempoDiv(false);
     }
+}
+
+function collectAllRhythms() {
+    let result = "";
+
+    // header
+    result =  `category: ?
+                name: ?
+                tempo: ${tempoAgent.bpm}
+
+                #####\n\n`;
+
+    if (instrumentRackUI.rack.instrumentInstances)
+    instrumentRackUI.rack.instrumentInstances.forEach( (instance,idx) => {
+        if (idx > 0) result += '@@@@@\n\n';
+        result += `${instance.instrument.instrumentName}
+            gain: ${instance.data.audio.gain}
+            pan: ${instance.data.audio.panorama}
+            rhythm:
+            ${instance.data.rhythm}\n\n`;
+        
+    });
+    result = result.split("\n").map(line=>line.trim()).join("\n");
+    console.log( result );
+    return result;
+}
+
+let strokesInfoVisible = false;
+const buttLabelsShowHideStrokesInfo = ["Show strokes", "Hide strokes"];
+function showHideStrokesHelp() {
+    let div = document.getElementById( "div-strokes-help" );
+    let butt = document.getElementById( "buttShowHideStrokesHelp" );
+
+    if (strokesInfoVisible) {
+        hideStrokesInfo();
+    } else {
+        let selectedInstance = instrumentRackUI.rack.getSelectedInstance();
+        div.innerHTML = !selectedInstance ? "" : 
+            selectedInstance.instrument.strokeInfo();
+
+        butt.textContent = buttLabelsShowHideStrokesInfo[1];
+        strokesInfoVisible = true;
+    }
+}
+
+function hideStrokesInfo() {
+    let div = document.getElementById( "div-strokes-help" );
+    let butt = document.getElementById( "buttShowHideStrokesHelp" );
+
+    div.innerHTML = "";
+    butt.textContent = buttLabelsShowHideStrokesInfo[0];
+    strokesInfoVisible = false;
+}
+
+function parseRhythmCard() {
+    let rCard = new RhythmCard();
+    rCard.parseRhythmCardText();
+
+
 }
 

@@ -139,7 +139,7 @@ class MultiTrackRhythmPlayer {
 				let processedRhythm = processRawTextRhythm( instrInst.data.rhythm );
 		        if ( Array.isArray(processedRhythm ) ) { // in means we have 0 - precount, 1 - rhythm itself
 		            if (!this.precountTrack) { // setup special track for precount only if it doesn't exist yet
-		            	this.precountTrack = new Track( this, instrInst.instrument );
+		            	this.precountTrack = new Track( this, instrInst );
 		            	this.precountTrack.doRepeat = false;
 						this.precountTrack.audioSetup = currTrack.audioSetup;
 						this.precountTrack.rhythm = processedRhythm[0];

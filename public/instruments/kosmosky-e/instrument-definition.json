@@ -1,7 +1,8 @@
 {
     "instrumentName": "Kosmosky (E)",
     "arrStrokeInfo": [
-        {"stroke": "O", "file": "e-l.mp3", "gain": 0.4},
+        {"stroke": "-", "file": "", "hint" : "pause"},
+        {"stroke": "O", "file": "e-l.mp3", "gain": 0.4, "hint" : "ding"},
         {"stroke": "B", "file": "b.mp3", "gain": 0.4},
         {"stroke": "D", "file": "d.mp3", "gain": 0.4},
         {"stroke": "E", "file": "e.mp3", "gain": 0.4},
@@ -11,9 +12,8 @@
         {"stroke": "Bh", "file": "b-higher.mp3", "gain": 0.4},
         {"stroke": "Dh", "file": "d-higher.mp3", "gain": 0.7},
         {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.6},
-        {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.08},
-        {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08},
-        {"stroke": "-", "file": ""}
+        {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.08, "hint" : "triangle open"},
+        {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08, "hint" : "shaker"}
     ],
     "defaultRhythms": {
         "visual-rhythm" : "O B D O B D E F", 
@@ -41,7 +41,5 @@
             {"stroke": "Dh", "x": 180, "y": 96, "r": 30},
             {"stroke": "Eh", "x": 256, "y": 73, "r": 30}
         ]
-
     }
-    
 }

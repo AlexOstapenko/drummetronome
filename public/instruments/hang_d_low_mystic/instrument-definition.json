@@ -11,6 +11,7 @@
         {"stroke": "Ah", "file": "ah.mp3"},
         {"stroke": "Ch", "file": "ch.mp3"},
         {"stroke": "-", "file": ""},
+        {"stroke": "X", "file": "body.mp3", "gain": 0.5},
         {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.3},
         {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.1}
     ],

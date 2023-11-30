@@ -30,6 +30,17 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.button-tools {
+	font-size: 0.8em;
+	background-color: #ffaa00;	
+}
+
+.button-tools:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
 .button-txt-rhythm-to-vis-editor {
 	/*width: 7em;*/
 	font-size: 0.8em;	

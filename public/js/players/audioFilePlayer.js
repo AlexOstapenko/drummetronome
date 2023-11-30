@@ -101,7 +101,6 @@ class AudioFilePlayer {
 	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName,
 	// masterGainNode (with set from outside gain value) and panNode.
 	playStroke( strokeInfo, when ) {
-
 		let a = 10;
 
 		function isNumber(when) { return !isNaN(parseFloat(when)) && isFinite(when); }

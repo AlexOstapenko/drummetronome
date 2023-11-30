@@ -1,0 +1,23 @@
+category: Back tracks
+name: Light Kosmosky mood
+tempo: 145
+
+#####
+
+Kosmosky (E)
+rhythm:
+O4 B-E4 D-F4 B2 D2
+O4 B-E4 D-F4 E F G A
+O4 B-E4 D-F4 B2 D2
+O4 B-E4 D-F4 A G F E
+
+@@@@@
+
+Darbuka
+
+rhythm:
+
+T:4
+***
+Z-D2 O D O-P2 O D
+O-D2 O-D2 O-P2 O-t k

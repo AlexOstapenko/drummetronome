@@ -55,9 +55,10 @@ class InstrumentManager {
         if ( typeof instrumentRef === 'string') instrument = this.getInstrument(instrumentRef);
         else instrument = instrumentRef;
 
+        this.callbackWhenInstrumentIsLoaded = callbackFunction;
+
         if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
             // load audio
-            this.callbackWhenInstrumentIsLoaded = callbackFunction;
             audioFilePlayer.loadAudioFiles( instrument, this.onInstrumentAudioLoaded.bind(this) );
             this.currentModalDiv = new ModalDiv();
             this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
@@ -65,6 +66,7 @@ class InstrumentManager {
         } else
             this.instrumentLoaded(instrument);   
 
+        /*
         // load image for future use in canvas
         if ( !instrument.imagesLoaded && instrument.images && 
             instrument.images.large && this.checkInstrumentVisualizationInfo(instrument) ) {
@@ -78,6 +80,7 @@ class InstrumentManager {
             instrument.images.largeImg = img;
             img.src = instrument.folder + "/" + instrument.images.large; // start downloading
         } else instrument.imagesLoaded = true;
+        */
     }
 
     instrumentLoaded( instr ) {
@@ -95,8 +98,8 @@ class InstrumentManager {
 
 
     onInstrumentAudioLoaded(instr) {
-        if (instr.imagesLoaded)
-            this.instrumentLoaded(instr);
+        //if (instr.imagesLoaded)
+        this.instrumentLoaded(instr);
     }
 
     // finishes the instrument selection process

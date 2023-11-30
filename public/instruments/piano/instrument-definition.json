@@ -1,0 +1,27 @@
+{
+    "instrumentName": "Piano",
+    "arrStrokeInfo": [
+        {"stroke": "-", "file": ""},
+        {"stroke": "C", "file": "c.mp3", "gain": 1},
+        {"stroke": "C#", "file": "csharp.mp3", "gain": 1},
+        {"stroke": "D", "file": "d.mp3", "gain": 1},
+        {"stroke": "D#", "file": "dsharp.mp3", "gain": 1},
+        {"stroke": "E", "file": "e.mp3", "gain": 1},
+        {"stroke": "F", "file": "f.mp3", "gain": 1},
+        {"stroke": "F#", "file": "fsharp.mp3", "gain": 1},
+        {"stroke": "G", "file": "g.mp3", "gain": 1},
+        {"stroke": "G#", "file": "gsharp.mp3", "gain": 1},
+        {"stroke": "A", "file": "a.mp3", "gain": 1},
+        {"stroke": "A#", "file": "asharp.mp3", "gain": 1},
+        {"stroke": "B", "file": "b.mp3", "gain": 1},
+        {"stroke": "Ch", "file": "ch.mp3", "gain": 1}
+    ],
+    "images" : {
+        "icon" : "img/piano-icon.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "",
+        "text-rhythm" : 
+        ""
+    }
+}

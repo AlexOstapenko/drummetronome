@@ -1,3 +1,24 @@
+ class InstrumentDefinition {
+    static create(obj) {
+        let def = new InstrumentDefinition();
+        Object.assign( def, obj );
+        return def;
+    }
+
+    strokeInfo() {
+        let result = "";
+        if (this.arrStrokeInfo && this.arrStrokeInfo.length > 0 ) {
+            this.arrStrokeInfo.forEach( (strokeInfo, idx) => {
+                result += strokeInfo.stroke;
+                if ( strokeInfo.hint ) result += " (" + strokeInfo.hint + ")";
+                if ( idx < this.arrStrokeInfo.length-1 )
+                    result += " | ";
+            });
+        }
+        return result;
+    }
+
+ }
 
 /*
 * 1. Information about ready-to-use instruments is stored in instruments/instruments.json file
@@ -67,6 +88,7 @@ class InstrumentDefinitionsLoader {
 
         // Дожидаемся завершения всех загрузок
         this.instrumentDefinitions = await Promise.all(promises);
+        this.instrumentDefinitions = this.instrumentDefinitions.map(json => InstrumentDefinition.create(json));
 
         // Вызываем callback-функцию с загруженными данными
         if ( this.callbackDefinitionsLoaded )

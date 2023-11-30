@@ -1,0 +1,29 @@
+.instrument-visualizer-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+/*    border: 3px solid white;*/
+}
+
+.instrument-visualizer-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+/*    border: 1px solid black;*/
+}
+
+.instrument-visualizer-stroke-circle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    border-radius: 50%;
+    background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instrument-visualizer-stroke-circle span {
+    color: white;
+}

@@ -1,0 +1,23 @@
+category: back-tracks
+name: Tar and Kosmosky (E) - two friends
+tempo: 70
+
+#####
+
+Tar
+gain: 1.4
+pan: -0.1
+rhythm:
+D L:3 T L:3
+(D L:3 T L:3)/2 D L:2 (L:2)/2
+D L:3 T L:3
+(D L:3 R:4 L:4)/4 (R L)/2 D D (L L)/2 (R R L L)/4
+
+@@@@@
+
+Kosmosky (E)
+gain: 1
+pan: 0.15
+rhythm:
+Z-O2 B-E2 D-F2 G A :3
+O:2 B-E:2 (Dh Bh A G F E D B)/2

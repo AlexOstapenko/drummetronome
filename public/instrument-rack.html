@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/div-modal.css">
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack.css">
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack-mixer.css">
-    <link rel="stylesheet" href="css/canvas.css">
+    <link rel="stylesheet" href="css/instrument-visualizer.css">
 
     <script src="js/general/constants.js"></script>
 
@@ -39,7 +39,6 @@
     <script src="js/instruments/instrument-definitions-loader.js"></script>
     <script src="js/rhythm-cards/rhythm-card.js"></script>    
 
-    <script src="js/uielements/canvas-manager.js"></script>
     <script src="js/uielements/tempo-agent.js"></script>
     <script src="js/uielements/rhythm-editors-agent.js"></script>
     <script src="js/instruments/instrumentmanager.js"></script>
@@ -79,7 +78,13 @@
             <div>
                 <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="10"></textarea><br>
                 <button class="button-delete-textrhythm" onclick="clearTextRhythm()">Clear text</button>
+                <button class="button-tools" onclick="collectAllRhythms()">Collect rhythms</button>
+                <button id="buttShowHideStrokesHelp" 
+                    class="button-tools" onclick="showHideStrokesHelp()">Show strokes</button> 
+                <button class="button-tools" onclick="parseRhythmCard()">Parse rhythm card</button>
             </div>
+            <div id="div-strokes-help" class="div-strokes-help"></div>
+
         </div>
 
         <!-- Кнопка Play/Stop -->
@@ -109,11 +114,19 @@
         </div>
     </div>
 
-    <div class="centered">
-        <div id="canvas-container" class="canvas-container canvas-hidden">
-            <canvas id="canvas-visualization" class='canvas-style' width="500" height="500"></canvas>
+    <!-- Instrument visualizer -->
+    <div class="container-centered">
+        <div id="instrument-visualizer-container" class='instrument-visualizer-container'>
+            <div id="instrument-visualizer-main-div" class="instrument-visualizer-main-div"></div>
         </div>
     </div>
+
+<!--     <div class="centered">
+        <div id="canvas-container" class="canvas-container canvas-hidden">
+            <canvas id="canvas-visualization" class='canvas-style' width="500" height="500"></canvas> 
+        </div>
+    </div>
+ -->
 
     <div class='div-instrument-rack-mixer-container' id="div-instrument-rack-mixer-container">
     </div>
