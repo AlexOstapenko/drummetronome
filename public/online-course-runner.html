@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrument Rack</title>
+
+    <link rel="icon" href="data:;base64," />
+
+    <link rel="stylesheet" href="css/knowledge-base/online-course-style.css">
+    <link rel="stylesheet" href="css/knowledge-base/tempo-control.css">
+
+	<script src="js/general/constants.js"></script>
+
+    <!-- for parsing rhythm text -->
+    <script src="js/general/utils.js"></script>
+    <script src="js/general/value-change-notifier.js"></script>
+    <script src="js/command/command.js"></script>
+    <script src="js/sentence/fraction.js"></script>
+    <script src="js/sentence/phrase.js"></script>
+    <script src="js/sentence/sentence.js"></script>
+    <script src="js/sentence/expressionparser.js"></script>
+    <script src="js/sentence/textrhythmprocessor.js"></script>
+
+    <script src="js/instruments/instrument-definitions-loader.js"></script>
+    <script src="js/knowledge-base/rhythm-card.js"></script>    
+    <script src="js/knowledge-base/loader/file-loader.js"></script>    
+    <script src="js/knowledge-base/loader/online-course-loader.js"></script>    
+	
+	<script src="js/uielements/tempo-agent.js"></script>
+
+    <script src="js/instruments/instrumentmanager.js"></script>
+    <script src="js/instrument-rack/instrument-instance.js"></script>
+    <script src="js/instrument-rack/instrument-rack.js"></script>
+
+	<script src="js/players/rhythm.js"></script>
+    <script src="js/uielements/modaldiv.js"></script>
+
+    <script src="js/players/audioFilePlayer.js"></script>
+    <script src="js/players/multitrack-player.js"></script>
+    <script src="js/uielements/playingtimer.js"></script>
+
+	<script src="js/knowledge-base/ui/tempo-control.js"></script>    
+	<script src="js/knowledge-base/ui/online-course-ui.js"></script>
+    <script src="js/main/online-course-runner-main.js"></script>
+
+    </head>
+<body>
+
+	Online course:
+	<input id="inputCourseFolder" type="text" value="frame-drums">
+	<button onclick="loadCourse()">Load course</button>
+
+	<div id="divOnlineCourse" width="100%"></div>
+
+	<script>
+        onDocumentLoaded();
+    </script>
+
+</body>
+
+</html>

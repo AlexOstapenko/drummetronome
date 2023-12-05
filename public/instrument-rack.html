@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack.css">
     <link rel="stylesheet" href="css/instrument-rack/instrument-rack-mixer.css">
     <link rel="stylesheet" href="css/instrument-visualizer.css">
+    <link rel="stylesheet" href="css/stroke-info.css">
 
     <script src="js/general/constants.js"></script>
 
@@ -37,8 +38,9 @@
     <script src="js/sentence/textrhythmprocessor.js"></script>
 
     <script src="js/instruments/instrument-definitions-loader.js"></script>
-    <script src="js/rhythm-cards/rhythm-card.js"></script>    
+    <script src="js/knowledge-base/rhythm-card.js"></script>    
 
+    <script src="js/uielements/extra-text-editor.js"></script>
     <script src="js/uielements/tempo-agent.js"></script>
     <script src="js/uielements/rhythm-editors-agent.js"></script>
     <script src="js/instruments/instrumentmanager.js"></script>
@@ -78,7 +80,7 @@
             <div>
                 <textarea class="rhythm-text-editor" id="rhythmEditor_text" rows="10"></textarea><br>
                 <button class="button-delete-textrhythm" onclick="clearTextRhythm()">Clear text</button>
-                <button class="button-tools" onclick="collectAllRhythms()">Collect rhythms</button>
+                <button class="button-tools" onclick="makeRhythmCard()">Create Rhythm Card</button>
                 <button id="buttShowHideStrokesHelp" 
                     class="button-tools" onclick="showHideStrokesHelp()">Show strokes</button> 
                 <button class="button-tools" onclick="parseRhythmCard()">Parse rhythm card</button>
@@ -129,6 +131,12 @@
  -->
 
     <div class='div-instrument-rack-mixer-container' id="div-instrument-rack-mixer-container">
+    </div>
+
+    <div id="div-extra-text-editor" class="div-extra-text-editor">
+        <div>
+            <textarea class="extra-text-editor" id="extra-text-editor" rows="10"></textarea><br>
+        </div>
     </div>
 
     <script>

@@ -1,0 +1,25 @@
+{
+	"name" : "6/8 basic to advanced training",
+	"intro" : "module-intro.html",
+	"img" : {
+		"icon" : ""
+	},
+	"lessons" : [
+		{
+			"name" : "Basic rhythm",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "First variation",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Second variation",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "A B A C",
+			"file" : "lesson-4.html"
+		}
+	]
+}

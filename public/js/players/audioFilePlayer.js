@@ -53,7 +53,7 @@ class AudioFilePlayer {
 
 	    function checkComplete() {
 	        if (loadCount === arrStrokeInfo.length) {
-	            audioFilePlayer.filesLoaded( loadedAudioBuffers );
+	            audioFilePlayer.filesLoaded( loadedAudioBuffers, instrumentName );
 	            audioFilePlayer.loadedInstrumentNames.push( instrumentName );
 	            if (callback) callback( instrument ); 
 	        }
@@ -75,7 +75,7 @@ class AudioFilePlayer {
 		            .then(data => audioContext.decodeAudioData(data))
 		            .then(buffer => {
 		                loadedAudioBuffers[key] = buffer;
-		                console.log( `Loaded file for ${key}`);
+		                //console.log( `Loaded ${key}`);
 		                loadCount++;
 		                checkComplete();
 		            })
@@ -89,13 +89,13 @@ class AudioFilePlayer {
 		return this.loadedInstrumentNames.indexOf( instrument.instrumentName ) >= 0;
 	}
 
-	filesLoaded( loadedAudioBuffers ) {
+	filesLoaded( loadedAudioBuffers, instrumentName ) {
 		Object.keys(loadedAudioBuffers).forEach( key => {
 			this.strokeID2Buffer[key] = loadedAudioBuffers[key];
 		});
 
 		//this.strokeID2Buffer = loadedAudioBuffers;
-		console.log( "All sound files are loaded." );
+		console.log( `------------------------\n[${instrumentName}] - all sound files are loaded. `);
 	}
 
 	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName,

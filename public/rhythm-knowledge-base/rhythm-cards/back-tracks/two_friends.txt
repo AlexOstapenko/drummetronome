@@ -4,7 +4,7 @@ tempo: 70
 
 #####
 
-Tar
+instrument: Tar
 gain: 1.4
 pan: -0.1
 rhythm:
@@ -15,7 +15,7 @@ D L:3 T L:3
 
 @@@@@
 
-Kosmosky (E)
+instrument: Kosmosky (E)
 gain: 1
 pan: 0.15
 rhythm:

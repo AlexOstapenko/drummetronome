@@ -11,10 +11,10 @@ class InstrumentInstanceMixer {
 			<div id='mixer-label-${id}'>${this.labelHTML()}</div>
 			
 			Volume: <input id='mixer-gain-range-${id}' type="range" min="0" max="300" step="1" value="${this.instrumentInstance.data.audio.gain*100}"
-			oninput='insrumentRackMixer.onInputGainValue(${id})'>&nbsp;&nbsp;
+			oninput='instrumentRackMixer.onInputGainValue(${id})'>&nbsp;&nbsp;
 
 			Panorama: <input id='mixer-panorama-range-${id}' type="range" min="-100" max="100" step="1" value="${this.instrumentInstance.data.audio.panorama*100}"
-			oninput='insrumentRackMixer.onInputPanoramaValue(${id})'>
+			oninput='instrumentRackMixer.onInputPanoramaValue(${id})'>
 	    	
 	    </div>`;
 	}
@@ -82,7 +82,7 @@ class InstrumentRackMixer {
 
 }
 
-const insrumentRackMixer = new InstrumentRackMixer( instrumentRackUI.rack );
+const instrumentRackMixer = new InstrumentRackMixer( instrumentRackUI.rack );
 
 
 

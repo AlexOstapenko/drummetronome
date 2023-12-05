@@ -48,41 +48,27 @@ class InstrumentManager {
 
     // Call this function to load instrument and give the callback to get notified when the instrument is loaded.
     // The callback function receives one argument, it is instrument which was loaded.
-    // In instrumentRef you can pass either name of the instrument or the instrument itself.
+    // In instrumentRef you can pass either name of the instrument or the instrument definition itself.
     // While the instrument is being loaded the modal window in shown "Loading the instrument <instrument name>".
-    loadInstrument(instrumentRef, callbackFunction) {
-        let instrument = null;
-        if ( typeof instrumentRef === 'string') instrument = this.getInstrument(instrumentRef);
-        else instrument = instrumentRef;
+    loadSingleInstrument(instrumentRef, callbackFunction) {
+        let instrumentDef = null;
+        if ( typeof instrumentRef === 'string') instrumentDef = this.getInstrument(instrumentRef);
+        else instrumentDef = instrumentRef;
 
-        this.callbackWhenInstrumentIsLoaded = callbackFunction;
-
-        if (!audioFilePlayer.isInstrumentLoaded(instrument) ) {
-            // load audio
-            audioFilePlayer.loadAudioFiles( instrument, this.onInstrumentAudioLoaded.bind(this) );
+        if (!audioFilePlayer.isInstrumentLoaded(instrumentDef) ) {
             this.currentModalDiv = new ModalDiv();
-            this.currentModalDiv.show( `Loading instrument: ` + instrument.instrumentName );
+            this.currentModalDiv.show( `Loading instrument: ` + instrumentDef.instrumentName );
 
+            this.callbackWhenInstrumentIsLoaded = callbackFunction;
+
+            if (!audioFilePlayer.isInstrumentLoaded(instrumentDef) ) {
+                audioFilePlayer.loadAudioFiles( instrumentDef, this.instrumentLoaded.bind(this) );
+            }
         } else
-            this.instrumentLoaded(instrument);   
-
-        /*
-        // load image for future use in canvas
-        if ( !instrument.imagesLoaded && instrument.images && 
-            instrument.images.large && this.checkInstrumentVisualizationInfo(instrument) ) {
-            var img = new Image();
-            img.onload = () => {
-                instrument.imagesLoaded = true;
-                if ( audioFilePlayer.isInstrumentLoaded(instrument) ) {
-                    this.instrumentLoaded(instrument);
-                }
-            };
-            instrument.images.largeImg = img;
-            img.src = instrument.folder + "/" + instrument.images.large; // start downloading
-        } else instrument.imagesLoaded = true;
-        */
+            this.currentModalDiv.hide();
     }
 
+    // Called when single instrument is loaded (see loadSingleInstrument method).
     instrumentLoaded( instr ) {
         if (this.callbackWhenInstrumentIsLoaded) {
             this.callbackWhenInstrumentIsLoaded(instr);
@@ -97,10 +83,34 @@ class InstrumentManager {
     }
 
 
-    onInstrumentAudioLoaded(instr) {
-        //if (instr.imagesLoaded)
-        this.instrumentLoaded(instr);
+    // Call this function to load a set of instruments.
+    // Pass the callback to get notified when the instruments are loaded.
+    // The callback function receives no arguments.
+    // While the instruments are being loaded the modal window in shown "Loading instruments: <list>".
+    loadMultipleInstruments(arrInstrNames, callbackFunction) {
+
+        // making sure arrInstrNames has only unique values
+        function unique(arr) {
+            let arrNames = [];
+            arr.forEach(name => {
+                if (arrNames.indexOf(name)===-1) arrNames.push( name );
+            });
+            return arrNames;
+        }
+        let arrInstrumentDefinitions = unique( arrInstrNames ).map( instrName => this.getInstrument(instrName) );
+
+        const currentModalDiv = new ModalDiv();
+        currentModalDiv.show( `Loading instruments:]\n` + arrInstrNames.join("\n") );
+
+        const onInstrumentsLoaded = () => {
+            currentModalDiv.close();
+            callbackFunction();
+        }
+    
+        let multInstrLoader = new MultipleInstrumentsLoader();
+        multInstrLoader.loadInstruments( arrInstrumentDefinitions, onInstrumentsLoaded );
     }
+
 
     // finishes the instrument selection process
     onInstrumentLoaded(instr) {
@@ -156,6 +166,7 @@ class InstrumentManager {
         return `${instrName}${INSTRUMENT_ID_SPLITTER}${strokeName}`;
     }
 
+    // Returns Onject of InstrumentDefinition
     getInstrument( instrumentName ) {
         // search the needed instrument
         for (let instr of this.allInstruments) {
@@ -190,3 +201,51 @@ class InstrumentManager {
 }
 
 const instrumentManager = new InstrumentManager();
+
+
+// ---------------------------------
+// ---------------------------------
+class MultipleInstrumentsLoader {
+
+    constructor() {
+        this.arrInstrumentNames = [];
+        this.loadedInstruments = [];
+        this.callbackWhenAllLoaded = null;
+    }
+
+    // callbackWhenAllLoaded will be called with no params when all instruments are loaded
+    loadInstruments(arrInstrDefinitions, callbackWhenAllLoaded) {
+        this.callbackWhenAllLoaded = callbackWhenAllLoaded;
+        this.arrInstrumentDefinitions = arrInstrDefinitions;
+        this.loadedInstruments = [];
+        this.arrInstrumentDefinitions.forEach( instrDef => {
+            if ( audioFilePlayer.isInstrumentLoaded(instrDef) )
+                this.onInstrumentLoaded( instrDef );
+            else {
+                audioFilePlayer.loadAudioFiles( instrDef, this.onInstrumentLoaded.bind(this) );
+            }   
+        });
+    }
+
+    onInstrumentLoaded(instrDef) {
+        this.loadedInstruments.push( instrDef );
+
+        // check if all instruments are loaded
+        if ( this.loadedInstruments.length === this.arrInstrumentDefinitions.length &&
+            this.callbackWhenAllLoaded ) {
+            this.callbackWhenAllLoaded();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

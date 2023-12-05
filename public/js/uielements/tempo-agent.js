@@ -1,17 +1,25 @@
 
 class TempoAgent {
 
-	constructor() {
+	constructor(idDivTempo, idInputTempo, idTempoValue) {
 		this.bpm = DEFAULT_BPM;
+		this.idDivTempo = idDivTempo;
+		this.idInputTempo = idInputTempo;
+		this.idTempoValue = idTempoValue;
+	}
+
+	setTempo(newBPM) {
+		this.bpm = newBPM;
+		this.updateToWebDoc();
 	}
 
 	updateToWebDoc() {
-		document.getElementById(ID_INPUT_TEMPO).value = this.bpm;
-		document.getElementById(ID_INPUT_TEMPOVAL).innerHTML = this.bpm;
+		document.getElementById(this.idInputTempo).value = this.bpm;
+		document.getElementById(this.idTempoValue).innerHTML = this.bpm;
 	}
 
 	updateBPMFromWebDoc() {
-		this.bpm = parseInt( document.getElementById(ID_INPUT_TEMPO).value );
+		this.bpm = parseInt( document.getElementById(this.idInputTempo).value );
 	}
 
 	onChangeTempo(){
@@ -28,9 +36,9 @@ class TempoAgent {
 	}
 
 	showTempoDiv(doShow)  {
-    	document.getElementById( ID_DIV_TEMPO ).style.visibility = doShow ? "visible" : "hidden";
+    	document.getElementById( this.idDivTempo ).style.visibility = doShow ? "visible" : "hidden";
 	}
 
 }
 
-const tempoAgent = new TempoAgent();
+const tempoAgent = new TempoAgent(ID_DIV_TEMPO, ID_INPUT_TEMPO, ID_INPUT_TEMPOVAL);

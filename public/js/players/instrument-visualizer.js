@@ -126,7 +126,7 @@ class InstrumentVisualizer {
         this.container.appendChild(this.instrumentImg);
 
         // Обработчик для события касания (touch) и клика (mousedown)
-        this.instrumentImg.addEventListener('touchstart', this.handleTouch.bind(this) );
+        this.instrumentImg.addEventListener('touchstart', this.handleTouch.bind(this), { passive: true } );
         this.instrumentImg.addEventListener('mousedown', this.handleMouseClick.bind(this) );
     }
 

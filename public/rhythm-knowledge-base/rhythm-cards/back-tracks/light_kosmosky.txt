@@ -4,7 +4,7 @@ tempo: 145
 
 #####
 
-Kosmosky (E)
+instrument: Kosmosky (E)
 rhythm:
 O4 B-E4 D-F4 B2 D2
 O4 B-E4 D-F4 E F G A
@@ -13,7 +13,7 @@ O4 B-E4 D-F4 A G F E
 
 @@@@@
 
-Darbuka
+instrument: Darbuka
 
 rhythm:
 

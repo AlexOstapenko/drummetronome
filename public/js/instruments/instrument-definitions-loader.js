@@ -5,14 +5,12 @@
         return def;
     }
 
-    strokeInfo() {
+    // Takes funcFormatInfo(strokeName, hint, idx, length) to format the text according to the caller's needs
+    strokeInfo(funcFormatInfo) {
         let result = "";
         if (this.arrStrokeInfo && this.arrStrokeInfo.length > 0 ) {
             this.arrStrokeInfo.forEach( (strokeInfo, idx) => {
-                result += strokeInfo.stroke;
-                if ( strokeInfo.hint ) result += " (" + strokeInfo.hint + ")";
-                if ( idx < this.arrStrokeInfo.length-1 )
-                    result += " | ";
+                result += funcFormatInfo( strokeInfo.stroke, strokeInfo.hint, idx, this.arrStrokeInfo.length);
             });
         }
         return result;

@@ -1,10 +1,10 @@
-category: Grooves
+category: Back tracks
 name: D - T K with stereo effect and Kosmosky
 tempo: 90
 
 #####
 
-Tar
+instrument: Tar
 gain:0.93
 pan:-0.5
 rhythm:
@@ -21,16 +21,16 @@ rhythm:
 
 @@@@@
 
-Darbuka
-gain=0.8
-pan=0.4
+instrument: Darbuka
+gain:0.8
+pan:0.4
 rhythm:
 
 D - T K
 
 @@@@@
 
-Kosmosky (E)
+instrument: Kosmosky (E)
 gain:0.64
 pan:0
 rhythm:

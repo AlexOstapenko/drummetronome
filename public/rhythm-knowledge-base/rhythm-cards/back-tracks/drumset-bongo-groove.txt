@@ -1,0 +1,60 @@
+category: Back tracks
+name: Drumset-bongo groove with Hang
+tempo: 190
+
+#####
+
+instrument: Percussion
+gain: 0.85
+pan: -0.44
+rhythm:
+Z-Wb3 Cb Wb2 Cb2
+Wb3 Cb Wb2 Cb2 :3
+
+@@@@@
+
+instrument: Percussion
+gain: 0.83
+pan: 0.56
+rhythm:
+Bh3 Bl3 C C :3
+Bh2:2 Bl2 C C
+
+Bh3 Bl3 C C :3
+Bh Bl2 Bl Bl2 Ch Cl
+
+
+@@@@@
+
+instrument: Percussion
+gain: 1.82
+pan: 0
+rhythm:
+K-H2 H2 Sn-H H Ho2
+K-H - K-H H Sn-H H (H:4)/2
+
+K-H2 H2 Sn-H H Ho2
+K-H - K-H H Sn-H K-H (H - H H)/2
+
+K-H2 H2 Sn-H H Ho2
+K-H - K-H H Sn-H H (H H H)2/3
+
+K-H2 H2 Sn-H H Ho2
+K-H - K-H K-H Sn-H K-H H-Sn H-Sn
+
+@@@@@
+
+instrument: Hang Low Mystic (D)
+gain: 2.18
+pan: 0
+mute: true
+rhythm:
+O Ch Ah F A2 D2
+O Ch Ah F G2 A2
+O Ch Ah F A2 D2
+Ah F E D F E D A
+
+O Ch Ah F A2 D2
+O Ch Ah F G2 A2
+O G A O A D E D
+Ah F – D F E D A

@@ -7,6 +7,7 @@ function onDocumentLoaded() {
         setDefaultValues();
         addEventListeners();
     } );
+
 }
 
 function setDefaultValues() {
@@ -15,7 +16,7 @@ function setDefaultValues() {
 
 function addEventListeners() {
     instrumentRackUI.rackChangedNotifier.addValueChangeListener( [
-        (rack) => { insrumentRackMixer.updateAndRender(); },
+        (rack) => { instrumentRackMixer.updateAndRender(); },
         instrumentVisualizer.onRackChanged.bind(instrumentVisualizer)
     ]);
 
@@ -59,7 +60,7 @@ function clickPlayRhythm() {
     }
 }
 
-function collectAllRhythms() {
+function makeRhythmCard() {
     let result = "";
 
     // header
@@ -75,12 +76,15 @@ function collectAllRhythms() {
         result += `${instance.instrument.instrumentName}
             gain: ${instance.data.audio.gain}
             pan: ${instance.data.audio.panorama}
+            mute: ${instance.data.audio.mute ? instance.data.audio.mute : false}
             rhythm:
             ${instance.data.rhythm}\n\n`;
         
     });
     result = result.split("\n").map(line=>line.trim()).join("\n");
-    console.log( result );
+    let textEd = new ExtraTextEditor();
+    textEd.init();
+    textEd.showText( result );
     return result;
 }
 
@@ -95,7 +99,17 @@ function showHideStrokesHelp() {
     } else {
         let selectedInstance = instrumentRackUI.rack.getSelectedInstance();
         div.innerHTML = !selectedInstance ? "" : 
-            selectedInstance.instrument.strokeInfo();
+            selectedInstance.instrument.strokeInfo( (stroke, hint, idx, length) => {
+                // formatting output for each stroke
+                let result = "";
+                let numOfStrokesInRow = 4;
+                if (idx!=0 && idx%numOfStrokesInRow == 0) result += "<br>";
+                result += `<span class='stroke-info-stroke'>${stroke}</span>`;
+                if ( hint ) result += " <span class='stroke-info-hint'>(" + hint + ")</span>";
+                if ( idx%numOfStrokesInRow < (numOfStrokesInRow-1) && idx < length-1  )
+                    result += "&nbsp;&nbsp;|&nbsp;&nbsp;";
+                return result;
+            });
 
         butt.textContent = buttLabelsShowHideStrokesInfo[1];
         strokesInfoVisible = true;
@@ -111,10 +125,42 @@ function hideStrokesInfo() {
     strokesInfoVisible = false;
 }
 
+// Takes the current editor's text and treats is as a rhythm card
 function parseRhythmCard() {
+
+    // STEP 1. Load the instrument definitions
+    let rhythmCardText = new TextRhythmEditorAgent(RHYTHM_EDITOR_TEXT_ID).getRhythm();
+
     let rCard = new RhythmCard();
-    rCard.parseRhythmCardText();
+    rCard.parseRhythmCardText( rhythmCardText );
+    console.log( "Loading rhythm card: " + rCard.name + "\n" + "Category: " + rCard.category );
 
+    let arrInstrNames = rCard.records.map( record => record.instrument );
 
+    function onInstrumentsLoaded() {
+        // STEP 2. Create instrument instances, set the tempo
+        const rack = instrumentRackUI.rack;
+        rack.deleteAll();
+
+        tempoAgent.setTempo( rCard.tempo );
+
+        rCard.records.forEach( record => {
+            let {rhythm, instrument, gain, pan, mute} = record;
+            console.log( instrument, gain, pan, rhythm );
+            
+            let instrInstance = rack.createInstrumentInstance( instrument );
+            instrInstance.data.rhythm = rhythm;
+            instrInstance.data.audio.gain = gain;
+            instrInstance.data.audio.panorama = pan;
+            instrInstance.data.audio.mute = mute;
+
+        });
+
+        instrumentRackUI.render();
+        instrumentRackMixer.updateAndRender();
+
+    }
+
+    instrumentManager.loadMultipleInstruments(arrInstrNames, onInstrumentsLoaded);
 }
 

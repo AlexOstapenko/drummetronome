@@ -56,3 +56,22 @@
 	font-size: 1em;
 	color: black;
 }
+
+
+
+
+
+.div-extra-text-editor {
+	width: 94%;
+	max-width: 900px;
+	flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.extra-text-editor {
+	width: 100%;
+	font-size: 1.2em;
+	border-radius: 5px;	
+}

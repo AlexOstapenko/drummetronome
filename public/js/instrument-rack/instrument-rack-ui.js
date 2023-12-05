@@ -94,7 +94,7 @@ class InstrumentRackUIController {
 
         let select = document.getElementById( INSTRUMENT_SELECT_EL_ID );
         const instrumentName = select.value;
-        instrumentManager.loadInstrument( instrumentName, this.onInstrumentLoaded.bind(this) );
+        instrumentManager.loadSingleInstrument( instrumentName, this.onInstrumentLoaded.bind(this) );
 
         // the rest is done in onInstrumentLoaded method
     }
@@ -104,9 +104,6 @@ class InstrumentRackUIController {
         this.render();
         this.textRhythmEditorAgent.setRhythm( instance.getRhythm() );
         this.rackChangedNotifier.notify( this.rack );
-
-        //console.log( `Instrument ${instr.instrumentName} is loaded. Notifying.`)
-        //this.instrumentLoadedNotifier.notify( instr );
     }
 
 

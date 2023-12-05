@@ -1,0 +1,36 @@
+{
+    "instrumentName": "Percussion",
+    "arrStrokeInfo": [
+		{"stroke": "Wb", "file": "woodblock.mp3", "hint" : "Wood block"},
+		{"stroke": "Bh", "file": "bongo-high.mp3", "hint" : "Bongo high"},
+		{"stroke": "Bl", "file": "bongo-low.mp3", "hint" : "Bongo low"},
+		{"stroke": "Ca", "file": "cabasa.mp3", "hint" : "Cabasa"},
+		{"stroke": "C", "file": "clave.mp3", "hint" : "Clave"},
+		{"stroke": "Sh", "file": "shaker.mp3", "hint" : "Shaker"},
+		{"stroke": "Ch", "file": "conga-high.mp3", "hint" : "Conga hign"},
+		{"stroke": "Cl", "file": "conga-low.mp3", "hint" : "Conga low"},
+		{"stroke": "Cb", "file": "cowbell.mp3", "hint" : "Cow bell"},
+		{"stroke": "K", "file": "kick.mp3", "hint" : "Kick"},
+		{"stroke": "Sn", "file": "snare.mp3", "hint" : "Snare drum"},
+		{"stroke": "Rim", "file": "rim.mp3", "hint" : "Rim"},
+		{"stroke": "H", "file": "hh-closed.mp3", "hint" : "High hat closed"},
+		{"stroke": "Ho", "file": "hh-open.mp3", "hint" : "High hat open"},
+		{"stroke": "R", "file": "ride.mp3", "hint" : "Ride"},
+		{"stroke": "Rb", "file": "ride-bell.mp3", "hint" : "Ride bell"},
+		{"stroke": "Tf", "file": "tom-floor.mp3", "hint" : "Floor tom"},
+		{"stroke": "Th", "file": "tom-high.mp3", "hint" : "Hight tom"},
+		{"stroke": "Tm", "file": "tom-mid.mp3", "hint" : "Middle tom"},
+		{"stroke": "Tr", "file": "triangle-muted.mp3", "hint" : "Triangle muted"},
+        {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.7, "hint" : "Triangle open"},
+        {"stroke": "z", "file": "#root#/common/triangle.mp3", "gain": 0.3, "hint" : "Triangle open soft"}
+    ],
+    "images" : {
+        "icon" : "img/different-percussion-icon.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "",
+        "text-rhythm" : ""
+    }
+}
+
+

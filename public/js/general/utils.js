@@ -1,3 +1,12 @@
+
+function parseBool(value) {
+    if (typeof value === 'string') {
+        const lowercaseValue = value.toLowerCase().trim();
+        return lowercaseValue === 'true' || lowercaseValue === '1';
+    }
+    return Boolean(value);
+}
+
 function isOdd(num)
 {
   return num%2;
