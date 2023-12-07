@@ -1,9 +1,5 @@
 {
 	"name" : "6/8 basic to advanced training",
-	"intro" : "module-intro.html",
-	"img" : {
-		"icon" : ""
-	},
 	"lessons" : [
 		{
 			"name" : "Basic rhythm",

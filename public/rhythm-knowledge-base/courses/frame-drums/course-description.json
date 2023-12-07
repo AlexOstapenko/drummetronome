@@ -1,11 +1,12 @@
 {
-	"name" : "Frame drum lap style training",
+	"name" : "Frame drum lap style training by Alex Ostapenko",
 	"intro" : "course-intro.html",
 	"img" : {
 		"icon" : "img/frame-drum-lapstyle-icon.jpg",
 		"large" : "img/alex-frame.jpg"
 	},
 	"modules" : [
+		"module_lapstyle_basics",
 		"module_6-8"
 	]
 }

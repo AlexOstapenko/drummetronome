@@ -1,4 +1,3 @@
-
 function parseBool(value) {
     if (typeof value === 'string') {
         const lowercaseValue = value.toLowerCase().trim();
@@ -29,6 +28,20 @@ function getRandomInt(min, max)
 {
   return min + Math.floor(Math.random() * (max - min));
 }
+
+/////////////////////
+class IDGenerator {
+  constructor() {
+    this.idCounter = -1;
+  }
+
+  getNewID() {
+    this.idCounter++;
+    return this.idCounter;
+  }
+}
+
+
 
 // ------------------- ARRAYS
 

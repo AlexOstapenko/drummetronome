@@ -1,0 +1,17 @@
+{
+	"name" : "Lapstyle basic exercises",
+	"lessons" : [
+		{
+			"name" : "What is lapstyle technique?",
+			"file" : "lesson-0.html"
+		},
+		{
+			"name" : "Exercises set #1",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Exercises set #2",
+			"file" : "lesson-2.html"
+		}
+	]
+}
