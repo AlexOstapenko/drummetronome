@@ -52,9 +52,10 @@ class CourseRenderer {
 		let bgIdx = -1;
 
 		let html = 
-		`<h1>${courseModule.course.name}</h1>
+		`<b class='course-title'>${courseModule.course.name}</b>
 		<h2>Module: ${courseModule.name}</h2>
 		${courseModule.introHTML}
+		<h3>Lessons:</h3>
 		<div class='cards-container'>`;
 		
 		courseModule.lessons.forEach( (lesson,idx) => {
@@ -77,7 +78,9 @@ class CourseRenderer {
 
 	renderLesson( lesson ) {
 		let html = 
-		`<h3>${lesson.parentModule.course.name} <br> ${lesson.parentModule.name}<br> ${lesson.name}</h3>`;
+		`<b class='course-title'><i>${lesson.parentModule.course.name}</i><br> 
+		Module: ${lesson.parentModule.name}</b>
+		<h3>${lesson.name}</h3>`;
 		
 		
 		html += this.parseLessonContent( lesson );

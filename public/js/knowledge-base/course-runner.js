@@ -29,7 +29,7 @@ class CourseRunner {
 	loadCourse(courseFolderName) {
 
 		let courseLoader = new CourseLoader();
-		let path = "/rhythm-knowledge-base/courses/" + courseFolderName;
+		let path = "rhythm-knowledge-base/courses/" + courseFolderName;
 		courseLoader.loadCoursePreview( path, course => {
 				this.loadedCourses.push(course);
 				console.log( course );
@@ -73,6 +73,9 @@ class CourseRunner {
 		}
 		else this.courseRenderer.renderLesson( lesson );
 	}
+
+
+
 
 
 }
