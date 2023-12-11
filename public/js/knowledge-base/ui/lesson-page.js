@@ -33,7 +33,7 @@ class LessonPage {
 
 	createRhythmPlayerControl() {
 		let rpControl = new RhythmPlayerControl( this );
-		rpControl.id = this.idGeneratorForRhythmPlayers.getNewID();
+		rpControl.setID( this.idGeneratorForRhythmPlayers.getNewID() );
 		this.rhythmPlayerControls.push( rpControl );
 		return rpControl;
 	}
@@ -145,7 +145,8 @@ class LessonPage {
 	        mtRhythmPlayer.stop();
 	        audioFilePlayer.resumeAudio().then( () => {
 	            mtRhythmPlayer.play( rack, rCard.tempo );
-	            //playingDurationTimer.start();
+	            this.activeRhythmPlayerControl.startDurationTimer();
+	            
 	         });
 	        //tempoAgent.showTempoDiv(false);
 
@@ -158,6 +159,7 @@ class LessonPage {
 
 	stopPlaying() {
 		mtRhythmPlayer.stop();
+		this.activeRhythmPlayerControl.stopDurationTimer();
 		this.activeRhythmPlayerControl = null;
 		this.updateButtons();
 	}

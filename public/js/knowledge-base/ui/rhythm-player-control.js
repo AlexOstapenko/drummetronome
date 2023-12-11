@@ -15,7 +15,12 @@ class RhythmPlayerControl {
 		this.tempoCtrl = null;
 		this.buttState = "PLAY";
 		this.htmlForDisplayText = "";
-		this.playingDurationTimer = new PlayingDurationTimer();
+		this.durationTimer = new PlayingDurationTimer("");
+	}
+
+	setID(id) {
+		this.id = id;
+		this.durationTimer.setDivID( "divDurationTimer_" + this.id );
 	}
 
 	setXML( xml ) {
@@ -53,6 +58,14 @@ class RhythmPlayerControl {
 	    </div>`;
 
 		return html;
+	}
+
+	startDurationTimer() {
+		this.durationTimer.start();
+	}
+
+	stopDurationTimer() {
+		this.durationTimer.stop();
 	}
 
 	// state = play or stop

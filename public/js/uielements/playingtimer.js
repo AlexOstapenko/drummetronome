@@ -1,9 +1,13 @@
 class PlayingDurationTimer {
 
       constructor(divIDTime) {
-            this.divIDTime = divIDTime;
+            this.divIDTime = divIDTime ? divIDTime : "";
             this.intervalID = -1;
             this.startTime = -1;
+      }
+
+      setDivID(id) {
+            this.divIDTime = id;
       }
 
       start(intervalID) {
@@ -12,7 +16,7 @@ class PlayingDurationTimer {
             timerElement.innerHTML = "0:00";
             this.startTime = Date.now();
             this.intervalID = setInterval( () => {
-                  playingDurationTimer.update();
+                  this.update();
             }, 200);
       }
 
