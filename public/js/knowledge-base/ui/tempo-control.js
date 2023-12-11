@@ -2,14 +2,7 @@ class UITempoControl {
 	constructor(id) {
 		this.id = id;
 		this.bpm = 90;
-	}
-
-	set divID(divID) {
-		this.divContainerID = divID;
-	}
-
-	get divContainer() {
-		return document.getElementById(this.divContainerID);
+		this.tempoChangeNotifier = new ValueChangeNotifier();
 	}
 
 	render() {
@@ -19,9 +12,9 @@ class UITempoControl {
             <div class='div-tempo-text'>Tempo: <span id="${this.idTempoValue}">${this.bpm}</span> <br></div>
             <div id="divTempo_${id}">
                 <input id="${this.idInputTempo}" class="tempoRuller"
-                    size="10" value="120" type="range" min="20" max="500" step="5"
+                    size="10" value="${this.bpm}" type="range" min="20" max="500" step="5"
                     oninput="tempoControlsManager.onChangeTempo(${id})">
-
+                <br>
                 <button class='butt-tempo-shift' onclick="tempoControlsManager.clickShiftTempo(${id},-20)">-20</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button class='butt-tempo-shift' onclick="tempoControlsManager.clickShiftTempo(${id},-5)">-5</button>
@@ -32,7 +25,8 @@ class UITempoControl {
             </div>
         </div>`;
 
-        this.divContainer.innerHTML = html;
+        //this.divContainer.innerHTML = html;
+        return html;
 	}
 
 	get idInputTempo() {
@@ -50,9 +44,15 @@ class UITempoControl {
 		this.updateToWebDoc();
 	}
 
+	setInitialTempo( newBPM ) {
+		this.bpm = newBPM;
+	}
+
 	updateToWebDoc() {
 		document.getElementById(this.idInputTempo).value = this.bpm;
 		document.getElementById(this.idTempoValue).innerHTML = this.bpm;
+
+		this.tempoChangeNotifier.notify(this.bpm);
 	}
 
 	updateBPMFromWebDoc() {
@@ -94,9 +94,8 @@ class TempoControlsManager {
 		return this.idCounter;
 	}
 
-	createTempoControl(divID) {
+	createTempoControl() {
 		let tempoCtrl = new UITempoControl( this.newID() );
-		tempoCtrl.divID = divID;
 		this.tempoControls.push( tempoCtrl );
 		return tempoCtrl;
 	}

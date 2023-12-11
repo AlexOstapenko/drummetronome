@@ -84,9 +84,13 @@ class AudioFilePlayer {
 	    });
 	}
 
-	// checks if the audio files for the given instrument are loaded
+	// checks if the audio files for the given instrument are loaded.
+	// instrument can be instance of InstrumentDefinition or sting with name
 	isInstrumentLoaded( instrument ) {
-		return this.loadedInstrumentNames.indexOf( instrument.instrumentName ) >= 0;
+		let instrumentName = instrument instanceof InstrumentDefinition ? 
+				instrument.instrumentName : instrument;
+
+		return this.loadedInstrumentNames.indexOf( instrumentName ) >= 0;
 	}
 
 	filesLoaded( loadedAudioBuffers, instrumentName ) {

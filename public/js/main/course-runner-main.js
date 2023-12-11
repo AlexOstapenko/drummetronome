@@ -4,15 +4,14 @@
 const courseRunner = new CourseRunner();
 
 function onDocumentLoaded() {
-
-	// tempoCtrl = tempoControlsManager.createTempoControl("divTempo2");
-	// tempoCtrl.render();
-
-	init();
+	instrumentManager.loadInstrumentDefinitions( function() {
+		init();
+	});
 }
 
 function init() {
 	courseRunner.courseRenderer.mainDivID = "divCoursesContainer";
+	courseRunner.lessonPage.mainDivID = "divCoursesContainer";
 }
 
 function loadCourse() {
@@ -36,4 +35,8 @@ function onClickModulePreview(moduleID) {
 */
 function onClickLessonPreview(fullLessonID) {
 	courseRunner.showLesson( fullLessonID );
+}
+
+function onClickPlayRhythm(rhythmPlayerControlID) {
+	courseRunner.play( rhythmPlayerControlID );
 }

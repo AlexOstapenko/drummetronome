@@ -55,17 +55,17 @@ class InstrumentManager {
         if ( typeof instrumentRef === 'string') instrumentDef = this.getInstrument(instrumentRef);
         else instrumentDef = instrumentRef;
 
+        this.callbackWhenInstrumentIsLoaded = callbackFunction;
+
         if (!audioFilePlayer.isInstrumentLoaded(instrumentDef) ) {
             this.currentModalDiv = new ModalDiv();
             this.currentModalDiv.show( `Loading instrument: ` + instrumentDef.instrumentName );
 
-            this.callbackWhenInstrumentIsLoaded = callbackFunction;
-
             if (!audioFilePlayer.isInstrumentLoaded(instrumentDef) ) {
                 audioFilePlayer.loadAudioFiles( instrumentDef, this.instrumentLoaded.bind(this) );
             }
-        } else
-            this.currentModalDiv.hide();
+        } else 
+            this.instrumentLoaded(instrumentDef);
     }
 
     // Called when single instrument is loaded (see loadSingleInstrument method).
@@ -97,18 +97,28 @@ class InstrumentManager {
             });
             return arrNames;
         }
-        let arrInstrumentDefinitions = unique( arrInstrNames ).map( instrName => this.getInstrument(instrName) );
 
-        const currentModalDiv = new ModalDiv();
-        currentModalDiv.show( `Loading instruments:]\n` + arrInstrNames.join("\n") );
+        // make the unique list of those instruments which are not loaded yet
+        arrInstrNames = unique( arrInstrNames ).filter( 
+            name => !audioFilePlayer.isInstrumentLoaded(name) );
 
-        const onInstrumentsLoaded = () => {
-            currentModalDiv.close();
+        if (arrInstrNames.length === 0) { // all loaded, nothing has to be done
             callbackFunction();
         }
-    
-        let multInstrLoader = new MultipleInstrumentsLoader();
-        multInstrLoader.loadInstruments( arrInstrumentDefinitions, onInstrumentsLoaded );
+        else { // load those which are not loaded yet
+            let arrInstrumenDefsToLoad = arrInstrNames.map( instrName => this.getInstrument(instrName) );
+            const currentModalDiv = new ModalDiv();
+            currentModalDiv.show( `Loading instruments:]\n` + arrInstrNames.join("\n") );
+
+            const whenInstrumentsLoaded = () => {
+                currentModalDiv.close();
+                callbackFunction();
+            }
+        
+            let multInstrLoader = new MultipleInstrumentsLoader();
+            multInstrLoader.loadInstruments( arrInstrumenDefsToLoad, whenInstrumentsLoaded );
+
+        }
     }
 
 

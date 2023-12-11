@@ -10,13 +10,19 @@
     <link rel="icon" href="data:;base64," />
 
     <link rel="stylesheet" href="css/knowledge-base/course-style.css">
+    <link rel="stylesheet" href="css/knowledge-base/lesson-styles.css">
     <link rel="stylesheet" href="css/knowledge-base/tempo-control.css">
+    <link rel="stylesheet" href="css/start-stop.css">
+    <link rel="stylesheet" href="css/playing-duration-timer.css">
+
+<!-- SCRIPTS -->
 
 	<script src="js/general/constants.js"></script>
+	<script src="js/general/utils.js"></script>
+    <script src="js/general/value-change-notifier.js"></script>
+    <script src="js/uielements/modaldiv.js"></script>
 
     <!-- for parsing rhythm text -->
-    <script src="js/general/utils.js"></script>
-    <script src="js/general/value-change-notifier.js"></script>
     <script src="js/command/command.js"></script>
     <script src="js/sentence/fraction.js"></script>
     <script src="js/sentence/phrase.js"></script>
@@ -25,25 +31,25 @@
     <script src="js/sentence/textrhythmprocessor.js"></script>
 
     <script src="js/instruments/instrument-definitions-loader.js"></script>
+    <script src="js/uielements/playingtimer.js"></script>
+
     <script src="js/knowledge-base/rhythm-card.js"></script>
     <script src="js/knowledge-base/course.js"></script>    
     <script src="js/knowledge-base/loader/file-loader.js"></script>    
-    <script src="js/knowledge-base/loader/course-loader.js"></script>    
-	
-	<script src="js/uielements/tempo-agent.js"></script>
-
+    <script src="js/knowledge-base/loader/course-loader.js"></script>
+    
     <script src="js/instruments/instrumentmanager.js"></script>
     <script src="js/instrument-rack/instrument-instance.js"></script>
     <script src="js/instrument-rack/instrument-rack.js"></script>
 
 	<script src="js/players/rhythm.js"></script>
-    <script src="js/uielements/modaldiv.js"></script>
 
     <script src="js/players/audioFilePlayer.js"></script>
     <script src="js/players/multitrack-player.js"></script>
-    <script src="js/uielements/playingtimer.js"></script>
 
-	<script src="js/knowledge-base/ui/tempo-control.js"></script>    
+	<script src="js/knowledge-base/ui/tempo-control.js"></script>  
+	<script src="js/knowledge-base/ui/rhythm-player-control.js"></script>
+	<script src="js/knowledge-base/ui/lesson-page.js"></script>  
 	<script src="js/knowledge-base/ui/course-renderer.js"></script>
 	<script src="js/knowledge-base/course-runner.js"></script>
     <script src="js/main/course-runner-main.js"></script>

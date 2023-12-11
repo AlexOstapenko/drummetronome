@@ -1,0 +1,34 @@
+.rhythm-player-control-container {
+	max-width: 500px;
+	border: 1px solid black;
+	background-color: rgba(255,255,0,0.1);
+	box-sizing: border-box;
+	padding: 10px;
+	text-align: left;
+	border-radius: 10px;
+}
+
+.rhythm-to-display {
+	font-family: "Arial", sans-serif;
+	box-sizing: border-box;
+	font-weight: 300;
+	color: black;
+	width: 100%;
+	padding: 10px 0px;
+	text-align: left;
+}
+
+.rhythm-to-display-text-big {
+	font-size:1.4em;
+}
+
+.rhythm-to-display-text-small {
+	font-size:1em;
+}
+
+.rhythm-comment {
+	padding-left: 20px; 
+	font-size: 0.6em;
+	color: brown;
+	font-family: "Arial", sans-serif;
+}

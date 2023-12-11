@@ -1,3 +1,8 @@
+/*
+* Renders course, modules and lesson previews.
+* For rendering lessons there is specialized class LessonRenderer.
+*/
+
 class CourseRenderer {
 
 	constructor() {
@@ -75,23 +80,17 @@ class CourseRenderer {
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
 	}
-
-	renderLesson( lesson ) {
-		let html = 
-		`<b class='course-title'><i>${lesson.parentModule.course.name}</i><br> 
-		Module: ${lesson.parentModule.name}</b>
-		<h3>${lesson.name}</h3>`;
-		
-		
-		html += this.parseLessonContent( lesson );
-		this.divContainer.className = "";
-		this.divContainer.innerHTML = html;	
-	}
-
-	parseLessonContent(lesson) {
-		// TODO – parse rhythms cards in html
-		return lesson.content;
-	}
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

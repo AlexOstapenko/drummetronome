@@ -1,18 +1,41 @@
 Let's learn the basic rhythm. Here is how we'll write it in text notation. 
-<br>
-<rhythm> D L L T L L </rhythm>
-<br>
+<displayrhythm> D L L T L L </displayrhythm>
 Please study the notation and compare it with how I play in the video. In this course, we are building your understanding of rhythm, so it's crucial to comprehend its notation and learn to think in this format.
 <br>
 <br>
 <iframe width="350" height="196" src="https://www.youtube.com/embed/GGDxPbjaaqk?si=fL8dYNLi4ShIbU0M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <br>
-Now, as you saw how I play it, please play along with this track and achieve the freedom to play the basic rhythm in tempo.
-
-<rhythmplayer tempo=40>
+<br>
+Now, as you saw how I play it, please play along with this track. Start with slow tempo and slowly achieve the freedom to play the basic rhythm in tempo 120 bpm.
+<br>
+<rhythmplayer>
 	<rhythmcard>
+		tempo: 40
+		#####
 		instrument: Tar
 		rhythm:
 		D L L T L L
 	</rhythmcard>
+	<displayrhythm size="big">D L L T L L</displayrhythm>
+</rhythmplayer>
+<br><br>
+<p>Now, as you can play this 'plain' rhythm, let's add some spice. I mean, let's construct a phrase where you first play it slowly and then - 2 times faster. And here's a little math lesson.</p>
+
+<p>When you have a rhythmic phrase A that takes, let's say, 2 seconds of time. Now, if I ask you to play it 2 times faster, it'll take not 2, but 1 second of time, right? So, we need to divide the time of A by 2. When I write it in text notation, I will also divide the rhythmic phrase by 2, signifying a reduction in the time for its performance.</p>
+
+<p>So, listen to how it sounds and go ahead, play with a metronome, gradually increasing the tempo to 80 bpm. Good luck!</p>
+<br>
+<rhythmplayer>
+	<rhythmcard>
+		tempo: 40
+		#####
+		instrument: Tar
+		rhythm:
+		D L L T L L
+		(D L L T L L)/2:2
+	</rhythmcard>
+	<displayrhythm size="small">
+		D L L T L L
+		(D L L T L L)/2 <span class="rhythm-comment">(two times)</span>
+	</displayrhythm>
 </rhythmplayer>

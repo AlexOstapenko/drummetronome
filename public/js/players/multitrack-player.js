@@ -119,6 +119,30 @@ class MultiTrackRhythmPlayer {
 		this.precountTrack = null; // precount is taken from the first instrument that has precount. others are ignored
 	}
 
+	play(instrumentRack, bpm ) {
+		this.stop();
+        this.audioPlayer.turnOnSound();
+		this.onePulseDuration = 60*1000/(bpm*2);
+		this.isPlaying = true;
+
+		const playStartTime = this.audioPlayer.audioContext.currentTime+0.05;
+
+        // get ready precount (if any) and rhythms of all the tracks
+		this.prepare(instrumentRack);
+			
+        // initially schedule just the precountTrack (if it is defined) and after this calculate timelines for each track
+        if (this.precountTrack) {
+        	this.precountTrack.lastStartTime = playStartTime;
+			let precountDuration = this.precountTrack.scheduleNextLoop();
+			this.precountTrack = null; // we don't need it anymore
+			// closer to an end of precountTrack schedule first loop for all tracks
+			setTimeout( function() {
+		        this.scheduleAllTracks(playStartTime + precountDuration/1000);
+		    }.bind(this), precountDuration - 200 );
+		} else 
+			this.scheduleAllTracks(playStartTime); // if there's no precount - start immediately all tracks
+	}
+
 	/*
 		Retrieves raw text rhythms for each instance, which is not muted (data.audio.mute property).
 		Parses those texts, finds pre-count (chooses the first one and ignores all others) and prepares timelines for the first lauch.
@@ -153,39 +177,10 @@ class MultiTrackRhythmPlayer {
 		});
 	}
 
-	play(instrumentRack, bpm ) {
-		this.stop();
-        this.audioPlayer.turnOnSound();
-		this.onePulseDuration = 60*1000/(bpm*2);
-		this.isPlaying = true;
-
-		const playStartTime = this.audioPlayer.audioContext.currentTime+0.05;
-
-        // get ready precount (if any) and rhythms of all the tracks
-		this.prepare(instrumentRack);
-			
-        // initially schedule just the precountTrack (if it is defined) and after this calculate timelines for each track
-        if (this.precountTrack) {
-        	this.precountTrack.lastStartTime = playStartTime;
-			let precountDuration = this.precountTrack.scheduleNextLoop();
-			this.precountTrack = null; // we don't need it anymore
-			// closer to an end of precountTrack schedule first loop for all tracks
-			setTimeout( function() {
-		        this.scheduleAllTracks(playStartTime + precountDuration/1000);
-		    }.bind(this), precountDuration - 200 );
-		} else 
-			this.scheduleAllTracks(playStartTime); // if there's no precount - start immediately all tracks
-	}
-
 	scheduleAllTracks(startTime) {
 		this.tracks.forEach( track => {
 			track.lastStartTime = startTime;
 			track.scheduleNextLoop();
-
-			// // setup the repetition of scheduling for each track
-			// track.intervalID = setInterval(function () {
-		    //     track.scheduleNextLoop();
-		    // }.bind( track ), track.oneLoopDuration ); // approx 200 ms before the end of the loop schedule next loop
 		});
 	}
 

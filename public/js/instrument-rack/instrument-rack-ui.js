@@ -114,18 +114,26 @@ class InstrumentRackUIController {
     }
 
     onClickXButton(id) {
+
+        // if player is playing - don't do anything
+        if ( mtRhythmPlayer.isPlaying ) return;
+
         this.rack.removeInstrumentInstance(id);
         this.render();
         this.rackChangedNotifier.notify( this.rack );
     }
 
     onClickDeleteAll() {
+
+        // if player is playing - don't add
+        if ( mtRhythmPlayer.isPlaying ) return;
+
         this.rack.deleteAll();
         this.render();
         this.rackChangedNotifier.notify( this.rack );
     }
 
-    generateInstrumentOptions() {
+    generateChoiceOfInstruments() {
         let select = document.getElementById( INSTRUMENT_SELECT_EL_ID );
         instrumentManager.allInstruments.forEach( instr => {
             let option = document.createElement("option");

@@ -3,7 +3,7 @@ function onDocumentLoaded() {
     instrumentManager.loadInstrumentDefinitions( function() {
         instrumentVisualizer.init();
         instrumentRackUI.render();
-        instrumentRackUI.generateInstrumentOptions();
+        instrumentRackUI.generateChoiceOfInstruments();
         setDefaultValues();
         addEventListeners();
     } );
@@ -19,9 +19,6 @@ function addEventListeners() {
         (rack) => { instrumentRackMixer.updateAndRender(); },
         instrumentVisualizer.onRackChanged.bind(instrumentVisualizer)
     ]);
-
-    // to update the canvas when the image is loaded
-    //instrumentRackUI.instrumentLoadedNotifier.addValueChangeListener( instrumentVisualizer.onInstrumentLoaded.bind(instrumentVisualizer) );
 }
 
 function clearTextRhythm() {

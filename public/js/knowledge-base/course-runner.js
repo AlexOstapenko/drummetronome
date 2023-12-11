@@ -2,6 +2,7 @@ class CourseRunner {
 
 	constructor() {
 		this.courseRenderer = new CourseRenderer();
+		this.lessonPage = new LessonPage();
 		this.loadedCourses = [];
 	}
 
@@ -68,14 +69,13 @@ class CourseRunner {
 		if ( !lesson.contentLoaded) {
 			let courseLoader = new CourseLoader();
 			courseLoader.loadLessonContent( lesson, l => {
-				this.courseRenderer.renderLesson( lesson );
+				this.lessonPage.render( lesson );
 			});
 		}
-		else this.courseRenderer.renderLesson( lesson );
+		else this.lessonPage.render( lesson );
 	}
 
-
-
-
-
+	play( rhythmPlayerControlID ) {
+		this.lessonPage.play( rhythmPlayerControlID );
+	}
 }

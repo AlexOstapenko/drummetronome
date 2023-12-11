@@ -38,7 +38,7 @@ class InstrumentRack {
                 newArr.push( instance );
         });
         this.instrumentInstances = newArr;
-        this.setSelectedIndex(selectedIdx);
+        this.setSelectedIndex(newArr.length===0 ? -1 : selectedIdx);
     }
 
     isEmpty() {
@@ -46,7 +46,9 @@ class InstrumentRack {
     }
 
     setSelectedIndex(idx) {
-        if (idx < this.instrumentInstances.length && idx >=0 )
+        if (this.instrumentInstances.length === 0)
+            this.selectedInstance = -1;
+        else if (idx >=0 && idx < this.instrumentInstances.length )
             this.selectedInstance = idx;
         else if (this.instrumentInstances.length > 0)
             this.selectedInstance = 0;

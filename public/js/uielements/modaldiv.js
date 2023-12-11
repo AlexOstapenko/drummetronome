@@ -29,6 +29,8 @@ class ModalDiv {
 		document.body.style.pointerEvents = 'none';
 	}
 
+	hide() { this.close() }
+
 	close() {
 		const modal = document.querySelector(`#${this.divID}`);
 		if (modal) {
