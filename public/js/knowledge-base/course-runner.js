@@ -33,8 +33,7 @@ class CourseRunner {
 		let path = "rhythm-knowledge-base/courses/" + courseFolderName;
 		courseLoader.loadCoursePreview( path, course => {
 				this.loadedCourses.push(course);
-				console.log( course );
-				this.courseRenderer.renderCourse(course);
+				this.courseRenderer.renderCoursePreview(course);
 			} );;
 	}
 
@@ -44,11 +43,11 @@ class CourseRunner {
 			let courseLoader = new CourseLoader();
 			courseLoader.loadCourseIntro(course, course => {
 				courseLoader.loadModulesPreview( course, course => {
-					this.courseRenderer.renderModules(course);
+					this.courseRenderer.renderCourse(course);
 				});
 			});
 		}
-		else this.courseRenderer.renderModules(course);
+		else this.courseRenderer.renderCourse(course);
 	}
 
 	showModule(moduleFullID) {
@@ -69,13 +68,18 @@ class CourseRunner {
 		if ( !lesson.contentLoaded) {
 			let courseLoader = new CourseLoader();
 			courseLoader.loadLessonContent( lesson, l => {
-				this.lessonPage.render( lesson );
+				this.lessonPage.render( l );
 			});
 		}
 		else this.lessonPage.render( lesson );
+
 	}
 
 	play( rhythmPlayerControlID ) {
 		this.lessonPage.play( rhythmPlayerControlID );
+	}
+
+	stop() {
+		this.lessonPage.stopPlaying();	
 	}
 }

@@ -1,8 +1,6 @@
 class FileLoader {
 
 	loadFile(filePath, callback) {
-
-		console.log( "Loading file: " + filePath );
 		let lodedFiles = this.loadFilesFromServer( [filePath], (fileContents) => {
 			if (fileContents)
 				callback( fileContents[0]);

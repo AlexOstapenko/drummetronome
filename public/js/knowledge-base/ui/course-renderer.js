@@ -15,7 +15,7 @@ class CourseRenderer {
 
 	get divContainer() { return document.getElementById(this.divContainerID); }
 
-	renderCourse(course) {
+	renderCoursePreview(course) {
 		let html = 
 		`<div class="course-preview">
 			<img src='${course.img.icon}' onclick='onClickCoursePreview(${course.id})'>
@@ -25,13 +25,12 @@ class CourseRenderer {
 		this.divContainer.innerHTML = html;
 	}
 
-	renderModules(course) {
+	renderCourse(course) {
 
 		const bgs = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", "bg-color-red"];
 		let bgIdx = -1;
 
 		let html = `${course.introHTML}
-		<br>
 		<h1>Modules</h1>
 		<div class='cards-container'>`;
 		course.modules.forEach( m => {
@@ -56,8 +55,20 @@ class CourseRenderer {
 		const bgs = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", "bg-color-red"];
 		let bgIdx = -1;
 
+		let renderHeaderLinks = (course) => {
+			let html = 
+			`<div class='page-header'>
+				<span class='lesson-header-link lesson-header-link-1'
+					onclick='onClickParentCourse(${course.id})'>Back to course</span>
+			</div>
+			`;
+			return html;
+		};
+
+
 		let html = 
-		`<b class='course-title'>${courseModule.course.name}</b>
+		`${renderHeaderLinks(courseModule.course)}
+		<b class='course-title'>${courseModule.course.name}</b>
 		<h2>Module: ${courseModule.name}</h2>
 		${courseModule.introHTML}
 		<h3>Lessons:</h3>

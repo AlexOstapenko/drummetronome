@@ -20,8 +20,9 @@ class LessonPage {
 		this.reinit();
 
 		let html = 
-		`<b class='course-title'><i>${lesson.parentModule.course.name}</i><br> 
-		Module: ${lesson.parentModule.name}</b>
+		`${this.renderHeader(lesson)}
+		<p><b class='course-title'><i>${lesson.parentModule.course.name}</i></p>
+		<p>Module: ${lesson.parentModule.name}</b></p>
 		<h3>${lesson.name}</h3>`;
 		
 		html += this.parseDisplayRhythmTags( 
@@ -29,6 +30,18 @@ class LessonPage {
 
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
+	}
+
+	// Generates links to previous page
+	renderHeader(lesson) {
+		let html = 
+			`<div class='page-header'>
+				<span class='lesson-header-link lesson-header-link-1'
+					onclick='onClickParentCourse(${lesson.parentModule.course.id})'>Back to course</span> |
+				<span class='lesson-header-link lesson-header-link-2'
+					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>Back to module</span> 
+			</div>`;
+		return html;
 	}
 
 	createRhythmPlayerControl() {
@@ -148,20 +161,23 @@ class LessonPage {
 	            this.activeRhythmPlayerControl.startDurationTimer();
 	            
 	         });
-	        //tempoAgent.showTempoDiv(false);
-
+	        
 	        // change button labels of "Play/Stop" buttons of all player controls on the page
 	        this.updateButtons();
+	        this.updateTempoControls();
 	    }
 
 	    instrumentManager.loadMultipleInstruments(arrInstrNames, onInstrumentsLoaded);
 	}
 
 	stopPlaying() {
-		mtRhythmPlayer.stop();
-		this.activeRhythmPlayerControl.stopDurationTimer();
-		this.activeRhythmPlayerControl = null;
-		this.updateButtons();
+		if (this.activeRhythmPlayerControl) {
+			mtRhythmPlayer.stop();
+			this.activeRhythmPlayerControl.stopDurationTimer();
+			this.activeRhythmPlayerControl = null;
+			this.updateButtons();
+			this.updateTempoControls();
+		}
 	}
 
 	updateButtons() {
@@ -176,4 +192,13 @@ class LessonPage {
 		});
 	}
 	
+	updateTempoControls() {
+		this.rhythmPlayerControls.forEach( playerControl => {
+			let isVisible = true;
+			if (this.activeRhythmPlayerControl !== null && this.activeRhythmPlayerControl.id === playerControl.id )
+				isVisible = false;
+
+			playerControl.setTempoControlVisibility( isVisible );
+		});
+	}
 }

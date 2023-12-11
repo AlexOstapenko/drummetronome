@@ -23,6 +23,7 @@ class RhythmPlayerControl {
 		this.durationTimer.setDivID( "divDurationTimer_" + this.id );
 	}
 
+
 	setXML( xml ) {
 		const tagDisplayRhythm = 'displayrhythm';
 		let html = "";
@@ -54,10 +55,15 @@ class RhythmPlayerControl {
 	    		${this.buttState}
 	    	</button>
             <div id='divDurationTimer_${this.id}' class='divPlayingDurationTimer'></div>
-	    	${this.tempoCtrl.render()}
+	    	<div id='rhythm-player-control-tempo-control_${this.id}'>${this.tempoCtrl.render()}</div>
 	    </div>`;
 
 		return html;
+	}
+
+	setTempoControlVisibility(isVisible) {
+		document.getElementById(`rhythm-player-control-tempo-control_${this.id}`).innerHTML = 
+			isVisible ? this.tempoCtrl.render() : "";
 	}
 
 	startDurationTimer() {

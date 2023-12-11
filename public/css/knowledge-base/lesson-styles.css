@@ -32,3 +32,18 @@
 	color: brown;
 	font-family: "Arial", sans-serif;
 }
+
+.lesson-header-link {
+	font-family: "Arial", sans-serif;
+	font-weight: 700;
+	text-decoration: none; /* Убрать стандартное подчеркивание */
+	cursor: pointer;
+}
+
+.lesson-header-link-1 {
+	color: #1aaa60;
+}
+
+.lesson-header-link-2 {
+	color: #2ecc71;
+}

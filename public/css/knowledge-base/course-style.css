@@ -63,7 +63,7 @@
 
 .card-preview-name {
     margin: 10px 10px; /* Отступ между изображением и текстом */
-    font-size: 1em; /* Размер шрифта для текста */
+    font-size: 0.9em; /* Размер шрифта для текста */
     text-align: center;
 }
 

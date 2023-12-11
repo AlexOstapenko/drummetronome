@@ -26,8 +26,8 @@ function onClickCoursePreview(id) {
 /*
 * Module id = courseID@@@module-folder-name
 */
-function onClickModulePreview(moduleID) {
-	courseRunner.showModule(moduleID);
+function onClickModulePreview(moduleFullID) {
+	courseRunner.showModule(moduleFullID);
 }
 
 /*
@@ -40,3 +40,17 @@ function onClickLessonPreview(fullLessonID) {
 function onClickPlayRhythm(rhythmPlayerControlID) {
 	courseRunner.play( rhythmPlayerControlID );
 }
+
+function onClickParentCourse(courseID) {
+	courseRunner.stop();
+	onClickCoursePreview( courseID );
+}
+
+function onClickParentModule(moduleFullID) {
+	courseRunner.stop();
+	onClickModulePreview(moduleFullID);
+}
+
+
+
+
