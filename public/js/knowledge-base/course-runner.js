@@ -27,51 +27,65 @@ class CourseRunner {
 		return lesson;
 	}
 
-	loadCourse(courseFolderName) {
+	loadCourse(courseFolderName, callback) {
 
 		let courseLoader = new CourseLoader();
 		let path = "rhythm-knowledge-base/courses/" + courseFolderName;
 		courseLoader.loadCoursePreview( path, course => {
 				this.loadedCourses.push(course);
 				this.courseRenderer.renderCoursePreview(course);
+				if (callback) callback( course );
 			} );;
 	}
 
-	showCourseModules(courseID) {
+	showCourseModules(courseID, callback) {
 		let course = this.getCourse(courseID);
 		if (!course.introFileLoaded) {
 			let courseLoader = new CourseLoader();
 			courseLoader.loadCourseIntro(course, course => {
-				courseLoader.loadModulesPreview( course, course => {
+				courseLoader.loadModulesPreviews( course, course => {
 					this.courseRenderer.renderCourse(course);
+					if (callback) callback( course );
 				});
 			});
 		}
 		else this.courseRenderer.renderCourse(course);
 	}
 
-	showModule(moduleFullID) {
+	showModule(moduleFullID, callback) {
+
+		let whenReady = (module) => {
+			this.courseRenderer.renderModule( module );
+			if (callback) callback(module);
+		};
+
 		let m = this.getModule(moduleFullID);
 		let courseLoader = new CourseLoader();
 
 		if (!m.introFileLoaded) {
 			courseLoader.loadModuleIntro(m, courseModule => {
-				this.courseRenderer.renderModule( courseModule );
+				whenReady( courseModule );
 			});	
 		}
 		else
-			this.courseRenderer.renderModule( m );
+			whenReady( m );
 	}
 
-	showLesson( fullLessonID ) {
+	showLesson( fullLessonID, callback ) {
+
+		let whenReady = (lesson) => {
+			this.lessonPage.render( lesson );
+			if (callback) callback( lesson );
+		}
+
 		let lesson = this.getLesson( fullLessonID );
 		if ( !lesson.contentLoaded) {
 			let courseLoader = new CourseLoader();
 			courseLoader.loadLessonContent( lesson, l => {
-				this.lessonPage.render( l );
+				whenReady(l);
 			});
 		}
-		else this.lessonPage.render( lesson );
+		else whenReady(lesson);
 
 	}
 

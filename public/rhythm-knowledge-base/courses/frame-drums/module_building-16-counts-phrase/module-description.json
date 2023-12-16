@@ -1,0 +1,26 @@
+{
+	"name" : "How to build a 16-beat phrase",
+	"lessons" : [
+		{
+			"name" : "4 times 4 - Part A",
+			"file" : "lesson-1.html"			
+		},
+		{
+			"name" : "4 times 4 - Part B",
+			"file" : "lesson-2.html"			
+		},
+		{
+			"name" : "5 + 5 + 6",
+			"file" : "lesson-8.html"
+		},
+		{
+			"name" : "4 + 6 + 6",
+			"file" : "lesson-9.html"
+		},
+		{
+			"name" : "2 + 7 + 7",
+			"file" : "lesson-10.html"
+		}
+	]
+
+}

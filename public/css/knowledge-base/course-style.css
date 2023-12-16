@@ -92,5 +92,14 @@
 	color: grey;
 }
 
+.course-style-title {
+	font-weight: 700;
+	font-style: italic;
+	color: #772222;
+}
+
+.module-title {
+	color: darkorange;
+}
 
 

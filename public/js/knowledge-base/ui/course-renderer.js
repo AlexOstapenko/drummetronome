@@ -30,7 +30,9 @@ class CourseRenderer {
 		const bgs = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", "bg-color-red"];
 		let bgIdx = -1;
 
-		let html = `${course.introHTML}
+		let introHTMLParsed = this.parseCustomTags(course.introHTML);
+
+		let html = `${introHTMLParsed}
 		<h1>Modules</h1>
 		<div class='cards-container'>`;
 		course.modules.forEach( m => {
@@ -65,11 +67,10 @@ class CourseRenderer {
 			return html;
 		};
 
-
 		let html = 
 		`${renderHeaderLinks(courseModule.course)}
 		<b class='course-title'>${courseModule.course.name}</b>
-		<h2>Module: ${courseModule.name}</h2>
+		<h2><span class='module-title'>Module:</span> ${courseModule.name}</h2>
 		${courseModule.introHTML}
 		<h3>Lessons:</h3>
 		<div class='cards-container'>`;
@@ -90,6 +91,10 @@ class CourseRenderer {
 		
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
+	}
+
+	parseCustomTags(content) {
+		return CustomTagParser.parseFoldableSections( content );
 	}
 }
 

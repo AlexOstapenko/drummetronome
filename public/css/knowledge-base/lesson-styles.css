@@ -1,3 +1,7 @@
+.lesson {
+	max-width: 600px;
+}
+
 .rhythm-player-control-container {
 	max-width: 500px;
 	border: 1px solid black;
@@ -8,13 +12,17 @@
 	border-radius: 10px;
 }
 
+.rhythm-player-control-title {
+	font-weight: 700;
+}
+
 .rhythm-to-display {
 	font-family: "Arial", sans-serif;
 	box-sizing: border-box;
 	font-weight: 300;
 	color: black;
 	width: 100%;
-	padding: 10px 0px;
+	padding: 5px 0px;
 	text-align: left;
 }
 
@@ -31,6 +39,10 @@
 	font-size: 0.6em;
 	color: brown;
 	font-family: "Arial", sans-serif;
+}
+
+.lesson-header-title {
+	font-size: 0.8em;
 }
 
 .lesson-header-link {

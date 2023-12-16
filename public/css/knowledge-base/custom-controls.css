@@ -1,0 +1,28 @@
+.custom-foldable-section-title {
+	font-weight: 700;
+	font-style: italic;
+	color: #772222;
+	cursor: pointer;
+}
+
+.custom-foldable-section-closed {
+	cursor: pointer;	
+}
+
+.custom-foldable-section-open {
+	cursor: pointer;	
+}
+
+.custom-foldable-section-thereismore {
+	border: 1px solid gray;
+	min-width: 30px;
+	border-radius: 5px;
+	text-align: center;
+	display: inline;
+	padding: 0px 10px;
+	cursor: pointer;
+}
+
+.custom-foldable-section-content {
+	padding-left: 20px;
+}

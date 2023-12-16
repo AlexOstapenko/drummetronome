@@ -1,0 +1,11 @@
+{
+	"name" : "Игра на рамочном барабане с Александром Остапенко в технике lapstyle",
+	"intro" : "course-intro.html",
+	"img" : {
+		"icon" : "img/frame-drum-lapstyle-icon.jpg",
+		"large" : "img/alex-frame.jpg"
+	},
+	"modules" : [
+		"module_lapstyle_basics"
+	]
+}

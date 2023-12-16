@@ -44,7 +44,7 @@ class CourseLoader {
 		else callback( course );
 	}
 
-	loadModulesPreview(course, callback) {
+	loadModulesPreviews(course, callback) {
 
 		if ( !course.modulePreviewsLoaded() ) {
 			course.moduleFolders.forEach( moduleFolder => {
@@ -78,11 +78,26 @@ class CourseLoader {
 
 					course.modules.push( courseModule );
 
-					if ( course.modulePreviewsLoaded() )
+					if ( course.modulePreviewsLoaded() ) {
+						this.makeProperModulesSequence(course);
 						callback( course );
+					}
 				});
 			});
 		}
+	}
+
+	// Make sure all modules are loaded.
+	// This method rearranges course.modules array so the sequence is the same as in course.moduleFolders
+	// This is needed because some modules can be loaded earlier, some later, so the sequence
+	// mayy appear different than it should be according to the course description. So we fix it here.
+	makeProperModulesSequence(course) {
+		let arrProperSequence = [];
+		course.moduleFolders.forEach(folder => {
+			let m = course.getModule(folder);
+			if (m) arrProperSequence.push( m );
+		});
+		course.modules = arrProperSequence;
 	}
 
 	loadModuleIntro(courseModule, callback) {

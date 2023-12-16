@@ -1,0 +1,17 @@
+{
+	"name" : "9/8 basic to advanced training",
+	"lessons" : [
+		{
+			"name" : "Basic rhythm",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Bassic rhythm variations",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Interesting variation with lots of snap rolls",
+			"file" : "lesson-4.html"
+		}
+	]
+}

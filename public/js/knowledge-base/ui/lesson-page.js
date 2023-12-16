@@ -1,3 +1,8 @@
+const LESSON_TAGS = {
+	"displayrhythm": 'displayrhythm',
+	"rhythmplayer" : "rhythmplayer"
+}
+
 class LessonPage {
 	constructor() {
 		this.divContainerID = "";
@@ -20,13 +25,18 @@ class LessonPage {
 		this.reinit();
 
 		let html = 
-		`${this.renderHeader(lesson)}
-		<p><b class='course-title'><i>${lesson.parentModule.course.name}</i></p>
-		<p>Module: ${lesson.parentModule.name}</b></p>
-		<h3>${lesson.name}</h3>`;
+		`<div class='lesson'>
+		${this.renderHeader(lesson)}
+		<p class='lesson-header-title'>
+			<b>Course:</b><i>${lesson.parentModule.course.name}</i><br>
+			<b>Module</b>: ${lesson.parentModule.name}
+		</b></p>
+		<h3>Lesson: ${lesson.name}</h3>`;
 		
 		html += this.parseDisplayRhythmTags( 
 					this.parseRhythmPlayerTags( lesson.content ) );
+
+		html += "</div>";
 
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
@@ -60,7 +70,7 @@ class LessonPage {
 		// cut each occurrence of <rhythmplayer> ... </rhythmplayer> and 
 		// insert rhythm-player-component in those places.
 
-		content = this.replaceTags( content, "rhythmplayer", (xml) => {
+		content = this.replaceTags( content, LESSON_TAGS["rhythmplayer"], (xml) => {
 			let rhythmPlayerControl = this.createRhythmPlayerControl( this );
 			rhythmPlayerControl.setXML(xml);
 			let html = 
@@ -75,7 +85,7 @@ class LessonPage {
 	}
 
 	parseDisplayRhythmTags(content) {
-		return this.replaceTags( content, "displayrhythm", (xml) => {
+		return this.replaceTags( content, LESSON_TAGS["displayrhythm"], (xml) => {
 			let xmlParser = new DOMParser();
 			let xmlDoc = xmlParser.parseFromString( xml, "text/xml" );
 			return this.renderDisplayRhythmTag( xmlDoc.documentElement );

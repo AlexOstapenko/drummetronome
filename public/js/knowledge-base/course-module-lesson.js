@@ -35,6 +35,12 @@ class Course {
 	static makeModuleID(courseID, moduleID) {
 		return courseID + Course.idSplitter() + moduleID;
 	}
+
+	getModule(moduleFolder) {
+		let arrFilteredModules = this.modules.filter( m => m.moduleFolder === moduleFolder );
+		if (arrFilteredModules) return arrFilteredModules[0];
+		return null;
+	}
 }
 
 class CourseModule {

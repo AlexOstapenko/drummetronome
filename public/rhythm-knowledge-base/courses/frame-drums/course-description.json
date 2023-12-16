@@ -7,6 +7,8 @@
 	},
 	"modules" : [
 		"module_lapstyle_basics",
-		"module_6-8"
+		"module_building-16-counts-phrase",
+		"module_6-8",
+		"module_9-8"
 	]
 }

@@ -43,7 +43,7 @@ class KeyValueParser {
 class RhythmCard {
 
 	constructor() {
-		this.records = [];
+		this.records = []; // array of {instrument: ..., gain: ..., pan: ..., rhythm: ...}
 		this.category = "";
 		this.name = "";
 		this.tempo = 90;
