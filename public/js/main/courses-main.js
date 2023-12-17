@@ -2,7 +2,7 @@
 * GLOBAL VARIABLES
 */
 const courseRunner = new CourseRunner();
-const openByDefault = {course: "frame-drums-ru"};
+const openByDefault = {course: "frame-drums-ru", module: "module_lapstyle_basics", lesson: "lesson-5.html"};
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {

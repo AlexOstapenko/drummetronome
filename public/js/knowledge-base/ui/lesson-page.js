@@ -28,13 +28,12 @@ class LessonPage {
 		`<div class='lesson'>
 		${this.renderHeader(lesson)}
 		<p class='lesson-header-title'>
-			<b>Course:</b><i>${lesson.parentModule.course.name}</i><br>
-			<b>Module</b>: ${lesson.parentModule.name}
+			<b>${CURR_LOC().course.course}: </b><i>${lesson.parentModule.course.name}</i><br>
+			<b>${CURR_LOC().course.module}</b>: ${lesson.parentModule.name}
 		</b></p>
-		<h3>Lesson: ${lesson.name}</h3>`;
+		<h3>${CURR_LOC().course.lesson}: ${lesson.name}</h3>`;
 		
-		html += this.parseDisplayRhythmTags( 
-					this.parseRhythmPlayerTags( lesson.content ) );
+		html += this.parseCustomTags( lesson.content );
 
 		html += "</div>";
 
@@ -47,9 +46,9 @@ class LessonPage {
 		let html = 
 			`<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-1'
-					onclick='onClickParentCourse(${lesson.parentModule.course.id})'>Back to course</span> |
+					onclick='onClickParentCourse(${lesson.parentModule.course.id})'>${CURR_LOC().course.backToCourse}</span> |
 				<span class='lesson-header-link lesson-header-link-2'
-					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>Back to module</span> 
+					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${CURR_LOC().course.backToModule}</span> 
 			</div>`;
 		return html;
 	}
@@ -211,4 +210,26 @@ class LessonPage {
 			playerControl.setTempoControlVisibility( isVisible );
 		});
 	}
+
+	parseCustomTags(content) {
+		let arrShortcuts = [
+			{A: "<r-p", B: "<rhythmplayer"},
+			{A: "</r-p>", B: "</rhythmplayer>"},
+			{A: "<r-c", B: "<rhythmcard"},
+			{A: "</r-c>", B: "</rhythmcard>"},
+			{A: "<d-r", B: "<displayrhythm"},
+			{A: "</d-r>", B: "</displayrhythm>"}
+		];
+		// replace all chortcuts: 
+		arrShortcuts.forEach( shortcut => {
+			content = replaceString( content, shortcut.A, shortcut.B );
+		});
+
+		// now come to parse custom tags
+		content = CustomTagParser.parseFoldableSections( content );
+		content = this.parseRhythmPlayerTags( content );
+		content = this.parseDisplayRhythmTags( content );
+		return content;
+	}
+
 }

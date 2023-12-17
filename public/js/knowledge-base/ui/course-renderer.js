@@ -32,8 +32,10 @@ class CourseRenderer {
 
 		let introHTMLParsed = this.parseCustomTags(course.introHTML);
 
-		let html = `${introHTMLParsed}
-		<h1>Modules</h1>
+		let html = `
+		<b class='course-title'>${course.name}</b>
+		${introHTMLParsed}
+		<h1>${CURR_LOC().course.modules}</h1>
 		<div class='cards-container'>`;
 		course.modules.forEach( m => {
 			bgIdx++; if (bgIdx == bgs.length) bgIdx = 0; // choose next overlay color
@@ -61,18 +63,20 @@ class CourseRenderer {
 			let html = 
 			`<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-1'
-					onclick='onClickParentCourse(${course.id})'>Back to course</span>
+					onclick='onClickParentCourse(${course.id})'>${CURR_LOC().course.backToCourse}</span>
 			</div>
 			`;
 			return html;
 		};
 
+		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML );
+
 		let html = 
 		`${renderHeaderLinks(courseModule.course)}
 		<b class='course-title'>${courseModule.course.name}</b>
-		<h2><span class='module-title'>Module:</span> ${courseModule.name}</h2>
-		${courseModule.introHTML}
-		<h3>Lessons:</h3>
+		<h2><span class='module-title'>${CURR_LOC().course.module}:</span> ${courseModule.name}</h2>
+		${parsedIntroHTML}
+		<h3>${CURR_LOC().course.lessons}:</h3>
 		<div class='cards-container'>`;
 		
 		courseModule.lessons.forEach( (lesson,idx) => {

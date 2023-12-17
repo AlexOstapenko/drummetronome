@@ -1,17 +1,25 @@
 {
-	"name" : "Основы техники Lap style и текстовая запись ритмов",
+	"name" : "Базовые звуки: как играть и записывать",
 	"lessons" : [
 		{
-			"name" : "First strokes",
-			"file" : "lesson-0.html"
-		},
-		{
-			"name" : "Exercises set #1",
+			"name" : "DUM и пауза",
 			"file" : "lesson-1.html"
 		},
 		{
-			"name" : "Exercises set #2",
+			"name" : "TAK",
 			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Сочетаем D, T и паузу",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "KA - левая рука",
+			"file" : "lesson-4.html"	
+		},
+		{
+			"name" : "T, K и паузы",
+			"file" : "lesson-5.html"	
 		}
 	]
 }

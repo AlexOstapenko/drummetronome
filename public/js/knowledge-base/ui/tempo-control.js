@@ -9,7 +9,7 @@ class UITempoControl {
 		let id = this.id;
 		let html = 
 		`<div class='div-tempo-container' id='${this.idTempoContainer}'>
-            <div class='div-tempo-text'>Tempo: <span id="${this.idTempoValue}">${this.bpm}</span> <br></div>
+            <div class='div-tempo-text'>${CURR_LOC().controls.tempoTitle}: <span id="${this.idTempoValue}">${this.bpm}</span> <br></div>
             <div id="divTempo_${id}">
                 <input id="${this.idInputTempo}" class="tempoRuller"
                     size="10" value="${this.bpm}" type="range" min="20" max="500" step="5"

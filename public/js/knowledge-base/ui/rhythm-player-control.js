@@ -52,7 +52,7 @@ class RhythmPlayerControl {
 		let html = 
 	    `<br>
 	    <div class='rhythm-player-control-container'>
-	    	<span class='rhythm-player-control-title'>Rhythm</span>
+	    	<span class='rhythm-player-control-title'>${CURR_LOC().controls.playerTitle}</span>
 	    	${this.htmlForDisplayText}
 	    	<button class='${this.buttonClass}'
 	    		onclick="onClickPlayRhythm(${this.id});">

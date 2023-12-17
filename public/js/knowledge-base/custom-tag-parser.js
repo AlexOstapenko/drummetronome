@@ -15,7 +15,7 @@ class CustomTagParser {
 			(innerContent, params) => {
 
 				let classForTitle = params.state==="0" ? "custom-foldable-section-closed" : "custom-foldable-section-open";
-				let styleForContent = params.state==="0" ? `style="display: none"` : "";
+				let styleForContent = params.state==="0" ? `style="display: none"` : 'style="display: block"';
 				let onclick = `onclick='CustomTagParser.onClickFoldableSection(${idx})'`;
 
 				let html = 
@@ -26,11 +26,11 @@ class CustomTagParser {
 					</span>
 					<span id='span-foldable-section-triangle_${idx}' class=${classForTitle}
 						${onclick}>
-						${params.state==="closed" ? closedSectionChar : openSectionChar} 
+						${params.state==="0" ? openSectionChar : closedSectionChar} 
 					</span>
-					<span class='custom-foldable-section-thereismore' id='foldable-section-thereismore_${idx}'
+					<span ${params.state==="0" ? "class='custom-foldable-section-thereismore'" : ""} id='foldable-section-thereismore_${idx}'
 						${onclick}>
-					...
+						${params.state==="0" ? "..." : ""} 
 					</span>
 				</p>
 
@@ -46,18 +46,19 @@ class CustomTagParser {
 	}
 
 	static onClickFoldableSection(id) {
+		// show or hide content of a foldable section
 		let content = document.querySelector(`#div-foldable-section_${id}`);
 		let isClosed = (content.style.display === 'none' || content.style.display === '');
   		content.style.display = (isClosed) ? 'block' : 'none';
 
+  		// set the proper opening or closing triangle
   		document.querySelector(`#span-foldable-section-triangle_${id}`).innerHTML = 
   			isClosed ? CustomTagParser.closedSectionChar : CustomTagParser.openSectionChar;
 
+  		// Show/hide THERE IS MORE ... section
   		let thereIsMore = document.querySelector(`#foldable-section-thereismore_${id}`);
   		thereIsMore.classList.toggle("custom-foldable-section-thereismore" );
   		thereIsMore.innerHTML = isClosed ? "" : "...";
-
-
 	}
 
 	// Generic methog to replace all given tags and call a function for each tag
@@ -110,7 +111,7 @@ class CustomTagParser {
 
 		for (let i = 0; i < node.attributes.length; i++) {
     		let attr = node.attributes[i];
-			result[attr.name] = attr.value ? attr.value : true;
+			result[attr.name] = attr.value ? attr.value : "";
 		};
 
 		return result;

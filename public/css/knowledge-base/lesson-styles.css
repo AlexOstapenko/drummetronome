@@ -59,3 +59,8 @@
 .lesson-header-link-2 {
 	color: #2ecc71;
 }
+
+.TODO {
+	color: red;
+	font-size: 2em;
+}
