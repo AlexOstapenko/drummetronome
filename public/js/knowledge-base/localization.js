@@ -6,8 +6,9 @@ const LOCALIZATION = {
 			"modules" : "Модули",
 			"lesson" : "Урок",
 			"lessons" : "Уроки",
-			"backToCourse" : "Курс",
-			"backToModule" : "Модуль"
+			"backToCourse" : "Вернуться к курсу",
+			"backToModule" : "Вернуться к модулю",
+			"nextLesson" : "Следующий урок"
 		},
 		controls: {
 			playerTitle : "Ритм",
@@ -23,7 +24,8 @@ const LOCALIZATION = {
 			"lesson" : "Lesson",
 			"lessons" : "Lessons",
 			"backToCourse" : "Back to the course",
-			"backToModule" : "Back to the module"
+			"backToModule" : "Back to the module",
+			"nextLesson" : "Next lesson"
 		},
 		controls: {
 			playerTitle : "Rhythm",

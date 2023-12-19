@@ -80,6 +80,19 @@ class Lesson {
 		return `${this.parentModule.id}${Course.idSplitter()}${this.file}`;
 	}
 
+	getNextLesson() {
+		let numOfLessons = this.parentModule.lessons.length;
+		for( let i=0; i < numOfLessons; i++) {
+			let currLesson = this.parentModule.lessons[i];
+			if (currLesson.file === this.file) {
+				if (i === (numOfLessons-1) ) return null;
+				return this.parentModule.lessons[i+1];
+			}
+		}
+		return null;
+	}
+
+
 }
 
 

@@ -83,10 +83,6 @@
 	background-color: pink;
 }
 
-.flip-vertical {
-    transform: scaleY(-1);
-}
-
 .course-title {
 	color: grey;
 }

@@ -64,3 +64,22 @@
 	color: red;
 	font-size: 2em;
 }
+
+.lesson-div-next-lesson {
+	padding: 10px 0px;
+}
+
+.lesson-button-next-lesson {
+	cursor: pointer;
+	padding: 10px;
+	background-color: orange;
+	border: 0.5px solid gray;
+	color: white;
+	border-radius: 5px;
+	font-size: 1.5em;
+}
+
+.lesson-button-next-lesson:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}

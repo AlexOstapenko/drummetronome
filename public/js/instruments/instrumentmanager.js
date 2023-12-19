@@ -43,7 +43,7 @@ class InstrumentManager {
     set currentInstrument(instrument) {
         if ( instrument.instrumentName === this.selectedInstrument.instrumentName) return;
         this.selectedInstrument = instrument;
-        this.loadInstrument(instrument, this.onInstrumentLoaded.bind(this) );
+        this.loadSingleInstrument(instrument, this.onInstrumentLoaded.bind(this) );
     }
 
     // Call this function to load instrument and give the callback to get notified when the instrument is loaded.

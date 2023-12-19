@@ -13,6 +13,7 @@
         {"stroke": "R", "file": "r.mp3", "gain": 1},
         {"stroke": "L", "file": "l.mp3", "gain": 1},
         {"stroke": "P", "file": "pbrighter.mp3", "gain" : 1.5},
+        {"stroke": "PA", "file": "pbrighter.mp3", "gain" : 1.5},
         {"stroke": "A", "file": "a.mp3", "gain": 1.5},
         {"stroke": "B", "file": "b.mp3", "gain": 1.5},
         {"stroke": "C", "file": "c.mp3", "gain": 1.5},

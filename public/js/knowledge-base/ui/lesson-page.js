@@ -37,6 +37,8 @@ class LessonPage {
 
 		html += "</div>";
 
+		html += this.htmlNextLesson(lesson);
+
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
 	}
@@ -230,6 +232,19 @@ class LessonPage {
 		content = this.parseRhythmPlayerTags( content );
 		content = this.parseDisplayRhythmTags( content );
 		return content;
+	}
+
+	htmlNextLesson(lesson) {
+		let nextLesson = lesson.getNextLesson();
+		if (nextLesson) {
+			let html = 
+			`<div class='lesson-div-next-lesson'>
+				<button class='lesson-button-next-lesson' 
+					onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>
+			</div>`;
+			return html;
+		}
+		return "";
 	}
 
 }
