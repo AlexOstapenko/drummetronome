@@ -2,7 +2,7 @@
 * GLOBAL VARIABLES
 */
 const courseRunner = new CourseRunner();
-const openByDefault = {course: "frame-drums-ru", module: "module_lapstyle_basics"};
+const openByDefault = {course: "frame-drums-ru", module: "module_snaps_2", lesson: "lesson-1.html"};
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
@@ -50,6 +50,7 @@ function onClickModulePreview(moduleFullID, callback) {
 */
 function onClickLessonPreview(fullLessonID, callback) {
 	courseRunner.showLesson( fullLessonID, callback );
+	window.scrollTo(0,0);
 }
 
 function onClickPlayRhythm(rhythmPlayerControlID) {

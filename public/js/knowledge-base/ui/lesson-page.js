@@ -34,10 +34,10 @@ class LessonPage {
 		<h3>${CURR_LOC().course.lesson}: ${lesson.name}</h3>`;
 		
 		html += this.parseCustomTags( lesson.content );
-
+		
+		html += this.htmlLessonNavigation(lesson);
+		
 		html += "</div>";
-
-		html += this.htmlNextLesson(lesson);
 
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
@@ -220,7 +220,9 @@ class LessonPage {
 			{A: "<r-c", B: "<rhythmcard"},
 			{A: "</r-c>", B: "</rhythmcard>"},
 			{A: "<d-r", B: "<displayrhythm"},
-			{A: "</d-r>", B: "</displayrhythm>"}
+			{A: "</d-r>", B: "</displayrhythm>"},
+			{A: "<f-s", B: "<foldable-section"},
+			{A: "</f-s>", B: "</foldable-section>"},
 		];
 		// replace all chortcuts: 
 		arrShortcuts.forEach( shortcut => {
@@ -228,23 +230,44 @@ class LessonPage {
 		});
 
 		// now come to parse custom tags
+		content = CustomTagParser.parseIntCounters( content );
 		content = CustomTagParser.parseFoldableSections( content );
 		content = this.parseRhythmPlayerTags( content );
 		content = this.parseDisplayRhythmTags( content );
 		return content;
 	}
 
-	htmlNextLesson(lesson) {
+	htmlLessonNavigation(lesson) {
+
+		let html = 
+			`<div style="height:20px">&nbsp;</div>
+			<div class='lesson-div-lesson-navigation'>`;
+		
+		let prevLesson = lesson.getPrevLesson();
 		let nextLesson = lesson.getNextLesson();
-		if (nextLesson) {
-			let html = 
-			`<div class='lesson-div-next-lesson'>
-				<button class='lesson-button-next-lesson' 
-					onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>
-			</div>`;
-			return html;
+		
+		if (prevLesson) {
+			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
+					onclick='onClickLessonPreview("${prevLesson.id}")'>${CURR_LOC().course.prevLesson}</button>`
 		}
-		return "";
+
+		if (nextLesson) {
+			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
+				onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>`;
+		}
+
+		if (!nextLesson) {
+			let nextModule = lesson.parentModule.getNextModule();
+			if (nextModule) {
+				html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-module' 
+					onclick='onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
+			}
+		}
+
+		
+		html += `</div>`;
+
+		return (prevLesson || nextLesson) ? html : "";
 	}
 
 }

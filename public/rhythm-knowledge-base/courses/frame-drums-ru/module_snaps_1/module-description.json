@@ -1,9 +1,25 @@
 {
-	"name" : "Щелчко-мания 1.0, основы",
+	"name" : "Введение в щелчки",
 	"lessons" : [
 		{
-			"name" : "Наши первые щелчки на фрейме",
-			"file" : "lesson-0.html"
+			"name" : "Одиночные щелчки",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "По 2 щелчка",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "По 3 щелчка",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "Серии по 4 щелчка",
+			"file" : "lesson-4.html"
+		},
+		{
+			"name" : "Как записывать щелчки?",
+			"file" : "lesson-5.html"
 		}
 	]
 }

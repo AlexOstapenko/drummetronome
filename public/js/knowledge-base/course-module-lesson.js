@@ -41,6 +41,12 @@ class Course {
 		if (arrFilteredModules) return arrFilteredModules[0];
 		return null;
 	}
+
+	getModuleIdx(someModule) {
+		for( let i=0; i < this.modules.length; i++ )
+			if (someModule.moduleFolder === this.modules[i].moduleFolder) return i;
+		return -1;
+	}
 }
 
 class CourseModule {
@@ -61,6 +67,19 @@ class CourseModule {
 	get id() {
 		return `${this.course.id}${Course.idSplitter()}${this.moduleFolder}`;
 	}
+
+	getLessonIdx(lesson) {
+		for( let i=0; i < this.lessons.length; i++ )
+			if (lesson.file === this.lessons[i].file) return i;
+		return -1;
+	}
+
+	getNextModule() {
+		let idx = this.course.getModuleIdx(this);
+		let numOfModules = this.course.modules.length;
+		if (idx < 0 || idx === (numOfModules-1) ) return null;
+		return this.course.modules[idx+1];
+	}
 }
 
 class Lesson {
@@ -80,19 +99,18 @@ class Lesson {
 		return `${this.parentModule.id}${Course.idSplitter()}${this.file}`;
 	}
 
-	getNextLesson() {
-		let numOfLessons = this.parentModule.lessons.length;
-		for( let i=0; i < numOfLessons; i++) {
-			let currLesson = this.parentModule.lessons[i];
-			if (currLesson.file === this.file) {
-				if (i === (numOfLessons-1) ) return null;
-				return this.parentModule.lessons[i+1];
-			}
-		}
-		return null;
+	getPrevLesson() {
+		let idx = this.parentModule.getLessonIdx(this);
+		if (idx <= 0 ) return null;
+		return this.parentModule.lessons[idx-1];
 	}
 
-
+	getNextLesson() {
+		let idx = this.parentModule.getLessonIdx(this);
+		let numOfLessons = this.parentModule.lessons.length;
+		if (idx < 0 || idx === (numOfLessons-1) ) return null;
+		return this.parentModule.lessons[idx+1];
+	}
 }
 
 

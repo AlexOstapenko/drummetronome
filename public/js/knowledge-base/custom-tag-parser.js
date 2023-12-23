@@ -1,64 +1,40 @@
 class CustomTagParser {
 
-	static get openSectionChar() {return '\u25B6'}
-	static get closedSectionChar() {return '\u25BC'}
-
 	static parseFoldableSections(text) {
-		const tagFoldableSection = "foldable-section";
-		let idx = 0;
-
-		let openSectionChar = CustomTagParser.openSectionChar;
-		let closedSectionChar = CustomTagParser.closedSectionChar;
-
-		let result = CustomTagParser.replaceAllTags(
-			text, tagFoldableSection,
-			(innerContent, params) => {
-
-				let classForTitle = params.state==="0" ? "custom-foldable-section-closed" : "custom-foldable-section-open";
-				let styleForContent = params.state==="0" ? `style="display: none"` : 'style="display: block"';
-				let onclick = `onclick='CustomTagParser.onClickFoldableSection(${idx})'`;
-
-				let html = 
-				`<p>
-					<span class='custom-foldable-section-title ${classForTitle}' 
-						${onclick}>
-						${params.title} 
-					</span>
-					<span id='span-foldable-section-triangle_${idx}' class=${classForTitle}
-						${onclick}>
-						${params.state==="0" ? openSectionChar : closedSectionChar} 
-					</span>
-					<span ${params.state==="0" ? "class='custom-foldable-section-thereismore'" : ""} id='foldable-section-thereismore_${idx}'
-						${onclick}>
-						${params.state==="0" ? "..." : ""} 
-					</span>
-				</p>
-
-				<div ${styleForContent} class='custom-foldable-section-content' id='div-foldable-section_${idx}'>
-					${innerContent}
-				</div>`;
-
-				idx++;
-				return html;
-		});
+		const customTag = "foldable-section";
+		let idCounter = 0;
+		let result = CustomTagParser.replaceAllTags( text, customTag,
+			(innerContent, params) => FoldableSectionRenderer.render( innerContent, params, idCounter++) );
 
 		return result;
 	}
 
-	static onClickFoldableSection(id) {
-		// show or hide content of a foldable section
-		let content = document.querySelector(`#div-foldable-section_${id}`);
-		let isClosed = (content.style.display === 'none' || content.style.display === '');
-  		content.style.display = (isClosed) ? 'block' : 'none';
+	// Parses the custom tag below. Creates object IntCounter and then searches all occurencies 
+	// <int-counter name="exerciseNum" value="1" step="1"></int-counter>
+	static parseIntCounters(text) {
+		const customTag = "int-counter";
 
-  		// set the proper opening or closing triangle
-  		document.querySelector(`#span-foldable-section-triangle_${id}`).innerHTML = 
-  			isClosed ? CustomTagParser.closedSectionChar : CustomTagParser.openSectionChar;
+		let arrIntCounters = [];
+		text = CustomTagParser.replaceAllTags( text, customTag,
+			(innerContent, params) => {
+				// ignore inner content, we are interested in params
+				arrIntCounters.push( new IntCounter(params.name, params.value, params.step) );
 
-  		// Show/hide THERE IS MORE ... section
-  		let thereIsMore = document.querySelector(`#foldable-section-thereismore_${id}`);
-  		thereIsMore.classList.toggle("custom-foldable-section-thereismore" );
-  		thereIsMore.innerHTML = isClosed ? "" : "...";
+				return ""; // this tag is not for direct html generation, it is for information,
+							// so, this callback returns "" instead of full custom tag to prevent it's 
+							// occurence in the final html
+		});
+
+		// now process each counter on the page separately
+		arrIntCounters.forEach( intCounter => {
+			text = CustomTagParser.replaceAllCalculatedValues(text, intCounter.name, name => {
+				let returnValue = intCounter.value;
+				intCounter.increment();
+				return returnValue;
+			});
+		});
+
+		return text;
 	}
 
 	// Generic methog to replace all given tags and call a function for each tag
@@ -117,4 +93,89 @@ class CustomTagParser {
 		return result;
 	}
 
+	// finds each occurence of ${name} in text and replaces it to the value from callback function
+	static replaceAllCalculatedValues(content, name, callback) {
+		let substr = "$[" + name + "]";
+		let idx1 = content.indexOf(substr);
+		while( idx1 >=0 ) {
+			let idx2 = idx1 + substr.length;
+			
+			content = content.substring(0, idx1) + 
+					callback( name ) +
+					content.substring( idx2 );
+
+			idx1 = content.indexOf(substr);
+		}
+
+		return content;
+	}
+
 }
+
+// Responsible for the foldable-section tag on the page.
+class FoldableSectionRenderer {
+	static get openSectionChar() {return '\u25B6'} // triangle
+	static get closedSectionChar() {return '\u25BC'} // triangle
+
+	static render( innerContent, params, id ) {
+		const openSectionChar = FoldableSectionRenderer.openSectionChar;
+		const closedSectionChar = FoldableSectionRenderer.closedSectionChar;
+
+		const classForTitle = params.state==="0" ? "custom-foldable-section-closed" : "custom-foldable-section-open";
+		const styleForContent = params.state==="0" ? `style="display: none"` : 'style="display: block"';
+		const onclick = `onclick='FoldableSectionRenderer.onClickFoldableSection(${id})'`;
+
+		let html = 
+		`<p>
+			<span class='custom-foldable-section-title ${classForTitle}' 
+				${onclick}>
+				${params.title} 
+			</span>
+			<span id='span-foldable-section-triangle_${id}' class=${classForTitle}
+				${onclick}>
+				${params.state==="0" ? openSectionChar : closedSectionChar} 
+			</span>
+			<span ${params.state==="0" ? "class='custom-foldable-section-thereismore'" : ""} id='foldable-section-thereismore_${id}'
+				${onclick}>
+				${params.state==="0" ? "..." : ""} 
+			</span>
+		</p>
+
+		<div ${styleForContent} class='custom-foldable-section-content' id='div-foldable-section_${id}'>
+			${innerContent}
+		</div>`;
+
+		return html;
+	}
+
+	static onClickFoldableSection(id) {
+		// show or hide content of a foldable section
+		let content = document.querySelector(`#div-foldable-section_${id}`);
+		let isClosed = (content.style.display === 'none' || content.style.display === '');
+  		content.style.display = (isClosed) ? 'block' : 'none';
+
+  		// set the proper opening or closing triangle
+  		document.querySelector(`#span-foldable-section-triangle_${id}`).innerHTML = 
+  			isClosed ? FoldableSectionRenderer.closedSectionChar : FoldableSectionRenderer.openSectionChar;
+
+  		// Show/hide THERE IS MORE ... section
+  		let thereIsMore = document.querySelector(`#foldable-section-thereismore_${id}`);
+  		thereIsMore.classList.toggle("custom-foldable-section-thereismore" );
+  		thereIsMore.innerHTML = isClosed ? "" : "...";
+	}
+}
+
+
+////////////////////////////////////////////////
+class IntCounter {
+	constructor(name, value, step) {
+		this.name = name;
+		this.value = parseInt( value );
+		this.step = parseInt( step );
+	}
+
+	increment() {
+		this.value += this.step;
+	}
+}
+

@@ -65,21 +65,35 @@
 	font-size: 2em;
 }
 
-.lesson-div-next-lesson {
+.lesson-div-lesson-navigation {
+	border-top: 1px solid gray;
 	padding: 10px 0px;
+	display: flex;
+	justify-content: flex-start;
 }
 
-.lesson-button-next-lesson {
+.lesson-button-lesson-navigation {
+	margin-left: 15px;
 	cursor: pointer;
 	padding: 10px;
-	background-color: orange;
 	border: 0.5px solid gray;
 	color: white;
 	border-radius: 5px;
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
-.lesson-button-next-lesson:hover {
+.lesson-button-lesson-navigation-lesson {
+	background-color: orange;
+}
+.lesson-button-lesson-navigation-module {
+	background-color: green;
+}
+
+.lesson-button-lesson-navigation:first-child {
+	margin-left: 0;
+}
+
+.lesson-button-lesson-navigation:hover {
   transform: scale(1.05);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
