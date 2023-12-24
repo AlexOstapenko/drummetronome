@@ -80,6 +80,10 @@ class CourseModule {
 		if (idx < 0 || idx === (numOfModules-1) ) return null;
 		return this.course.modules[idx+1];
 	}
+
+	getModuleNumber() {
+		return this.course.getModuleIdx(this)+1;
+	}
 }
 
 class Lesson {
@@ -110,6 +114,10 @@ class Lesson {
 		let numOfLessons = this.parentModule.lessons.length;
 		if (idx < 0 || idx === (numOfLessons-1) ) return null;
 		return this.parentModule.lessons[idx+1];
+	}
+
+	getLessonNumber() {
+		return this.parentModule.getLessonIdx(this)+1;
 	}
 }
 

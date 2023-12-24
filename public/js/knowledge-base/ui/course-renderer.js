@@ -70,11 +70,11 @@ class CourseRenderer {
 		};
 
 		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML );
-
+		let moduleNumber = courseModule.getModuleNumber();
 		let html = 
 		`${renderHeaderLinks(courseModule.course)}
 		<b class='course-title'>${courseModule.course.name}</b>
-		<h2><span class='module-title'>${CURR_LOC().course.module}:</span> ${courseModule.name}</h2>
+		<h2><span class='module-title'>${CURR_LOC().course.module} ${moduleNumber}:</span> ${courseModule.name}</h2>
 		${parsedIntroHTML}
 		<h3>${CURR_LOC().course.lessons}:</h3>
 		<div class='cards-container'>`;

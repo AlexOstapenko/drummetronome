@@ -24,14 +24,17 @@ class LessonPage {
 	render(lesson) {
 		this.reinit();
 
+		let moduleNumber = lesson.parentModule.getModuleNumber();
+		let lessonNumber = lesson.getLessonNumber();
+
 		let html = 
 		`<div class='lesson'>
 		${this.renderHeader(lesson)}
 		<p class='lesson-header-title'>
 			<b>${CURR_LOC().course.course}: </b><i>${lesson.parentModule.course.name}</i><br>
-			<b>${CURR_LOC().course.module}</b>: ${lesson.parentModule.name}
+			<b>${CURR_LOC().course.module} ${moduleNumber}</b>: ${lesson.parentModule.name}
 		</b></p>
-		<h3>${CURR_LOC().course.lesson}: ${lesson.name}</h3>`;
+		<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
 		
 		html += this.parseCustomTags( lesson.content );
 		

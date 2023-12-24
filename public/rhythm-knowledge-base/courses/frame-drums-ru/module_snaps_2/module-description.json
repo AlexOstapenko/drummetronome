@@ -6,8 +6,16 @@
 			"file" : "lesson-1.html"
 		},
 		{
-			"name" : "Хитрый Мальфуф",
-			"file" : "lesson-5.html"
+			"name" : "Арифметика на пальцах",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Простой Мальфуф",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "Хитрый Мальфуф с вариациями",
+			"file" : "lesson-4.html"
 		},
 		{
 			"name" : "12-пальцевый ролл",
