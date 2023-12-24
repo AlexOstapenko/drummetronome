@@ -2,7 +2,7 @@
 * GLOBAL VARIABLES
 */
 const courseRunner = new CourseRunner();
-const openByDefault = {course: "frame-drums-ru", module: "module_snaps_2", lesson: "lesson-3.html"};
+const openByDefault = {course: "frame-drums-ru"};//, module: "module_snaps_2", lesson: "lesson-3.html"};
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
@@ -14,6 +14,7 @@ function init() {
 	courseRunner.courseRenderer.mainDivID = "divCoursesContainer";
 	courseRunner.lessonPage.mainDivID = "divCoursesContainer";
 
+	if (openByDefault && openByDefault.course)
 	courseRunner.loadCourse( openByDefault.course, course => {
 		courseRunner.showCourseModules(course.id, course => {
 			if (openByDefault.module)

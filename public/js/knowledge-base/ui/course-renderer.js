@@ -88,7 +88,7 @@ class CourseRenderer {
 					<img class='card-preview-img' src='${lesson.img.icon}'>	
 					<div class="card-preview-img-overlay ${bgs[bgIdx]}"></div>
 				</div>
-				<div class='card-preview-name'>${lesson.name}</div>
+				<div class='card-preview-name'><b>${idx+1}.</b> ${lesson.name}</div>
 			</div>`;
 		});
 		html += "</div>";
