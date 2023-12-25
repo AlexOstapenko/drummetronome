@@ -73,7 +73,7 @@ class CourseRenderer {
 		let moduleNumber = courseModule.getModuleNumber();
 		let html = 
 		`${renderHeaderLinks(courseModule.course)}
-		<b class='course-title'>${courseModule.course.name}</b>
+		<span class='module-page-course-title'>${courseModule.course.name}</span>
 		<h2><span class='module-title'>${CURR_LOC().course.module} ${moduleNumber}:</span> ${courseModule.name}</h2>
 		${parsedIntroHTML}
 		<h3>${CURR_LOC().course.lessons}:</h3>

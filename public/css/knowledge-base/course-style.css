@@ -83,10 +83,14 @@
 	background-color: pink;
 }
 
-.course-title {
+.module-page-course-title {
 	color: grey;
+	font-size: 0.8em;
 }
 
+/*
+ This style is used in lesson html page for titles.
+*/
 .course-style-title {
 	font-size: 1.2em;
 	font-weight: 700;
