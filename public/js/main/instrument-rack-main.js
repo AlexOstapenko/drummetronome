@@ -149,7 +149,6 @@ function applyRhythmCard(rhythmCard) {
 
         rhythmCard.records.forEach( record => {
             let {rhythm, instrument, gain, pan, mute} = record;
-            console.log( instrument, gain, pan, rhythm );
             
             let instrInstance = rack.createInstrumentInstance( instrument );
             instrInstance.data.rhythm = rhythm;
@@ -185,6 +184,7 @@ function processURLParams() {
 
         let rCardLoader = new RhythmCardLoader();
         rCardLoader.loadSingleRhythmCard( rCardsMainFolder+folder, cardName, rCard => {
+            console.log( `Loaded rhythmic card\n${folder}/${cardName}.`);
             applyRhythmCard( rCard );
         });    
     }
