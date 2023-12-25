@@ -9,23 +9,32 @@ class CustomTagParser {
 		return result;
 	}
 
-	// Parses the custom tag below. Creates object IntCounter and then searches all occurencies 
-	// <int-counter name="exerciseNum" value="1" step="1"></int-counter>
+	// This function helps to provide integer counter to the page. If there is a list of items and
+	// you want to make auto-indexing to not write directly 1, 2, 3, 4..., you can define <int-counter>
+	// tag, set a name and all values and just mention it on the page as a calculated value 
+	// like this: $[name_of_counter].
+	// Each occurence will be automatically replaced with the increasing number. 
+	// Example: 
+	//     <int-counter name="N" value="10" step="2"></int-counter>      - definition of the counter
+	//     This is number $[N], and this is number $[N].                 - calculated values 
+	// Will be turned to:
+	//      This is number 10, and this is number 12.
 	static parseIntCounters(text) {
 		const customTag = "int-counter";
 
 		let arrIntCounters = [];
+		// here we collect all the definitions of different counter and 
+		// for each we create a dedicated IntCounter object. 
 		text = CustomTagParser.replaceAllTags( text, customTag,
 			(innerContent, params) => {
 				// ignore inner content, we are interested in params
 				arrIntCounters.push( new IntCounter(params.name, params.value, params.step) );
 
-				return ""; // this tag is not for direct html generation, it is for information,
-							// so, this callback returns "" instead of full custom tag to prevent it's 
-							// occurence in the final html
+				return ""; // this tag is not for direct html generation, it is for definition of counters,
+							// so, this callback returns "" to prevent tag's presence in the final html
 		});
 
-		// now process each counter on the page separately
+		// now process each counter's calculated values $[name-of-counter] on the page
 		arrIntCounters.forEach( intCounter => {
 			text = CustomTagParser.replaceAllCalculatedValues(text, intCounter.name, name => {
 				let returnValue = intCounter.value;

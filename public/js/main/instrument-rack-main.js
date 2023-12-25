@@ -6,8 +6,9 @@ function onDocumentLoaded() {
         instrumentRackUI.generateChoiceOfInstruments();
         setDefaultValues();
         addEventListeners();
-    } );
 
+        processURLParams();
+    } );
 }
 
 function setDefaultValues() {
@@ -132,16 +133,21 @@ function parseRhythmCard() {
     rCard.parseRhythmCardText( rhythmCardText );
     console.log( "Loading rhythm card: " + rCard.name + "\n" + "Category: " + rCard.category );
 
-    let arrInstrNames = rCard.records.map( record => record.instrument );
+    // STEP 2. Apply rhythm card into instrument rack
+    applyRhythmCard( rCard );
+}
+
+function applyRhythmCard(rhythmCard) {
+    let arrInstrNames = rhythmCard.records.map( record => record.instrument );
 
     function onInstrumentsLoaded() {
         // STEP 2. Create instrument instances, set the tempo
         const rack = instrumentRackUI.rack;
         rack.deleteAll();
 
-        tempoAgent.setTempo( rCard.tempo );
+        tempoAgent.setTempo( rhythmCard.tempo );
 
-        rCard.records.forEach( record => {
+        rhythmCard.records.forEach( record => {
             let {rhythm, instrument, gain, pan, mute} = record;
             console.log( instrument, gain, pan, rhythm );
             
@@ -160,4 +166,32 @@ function parseRhythmCard() {
 
     instrumentManager.loadMultipleInstruments(arrInstrNames, onInstrumentsLoaded);
 }
+
+function processURLParams() {
+    let urlString = window.location.href;
+    let url = new URL(urlString);
+
+    // Process the load rhythmic card 
+    let rCardsMainFolder = "rhythm-knowledge-base/rhythm-cards/";
+    let command =url.searchParams.get("cmd"); 
+
+    // if the query in the url is:
+    // cmd=rc&f=<folder>&rc=<name of card>
+    if (command === "rc") {
+        let folder = url.searchParams.get("f");
+        let cardName = url.searchParams.get("rc");
+
+        folder = folder.split("~").join("/");
+
+        let rCardLoader = new RhythmCardLoader();
+        rCardLoader.loadSingleRhythmCard( rCardsMainFolder+folder, cardName, rCard => {
+            applyRhythmCard( rCard );
+        });    
+    }
+}
+
+
+
+
+
 

@@ -1,0 +1,24 @@
+name: Ритм для Маши и Софи
+tempo: 110
+#####
+instrument: Darbuka
+rhythm:
+D - T D D - T -
+D D T D D - T -
+D - T D D - T -
+D D T D - - T -
+
+D - T D D - T -
+D D T D D - T -
+D - T D D - T -
+D D T D D - T -
+
+D - T D D - T -
+D D T D D - T -
+D - T D D - T -
+D D T D D - T -
+
+D - T D D - T -
+D D T D D - T -
+D - T D D - T -
+(D - - D)/2 T D D - T -
