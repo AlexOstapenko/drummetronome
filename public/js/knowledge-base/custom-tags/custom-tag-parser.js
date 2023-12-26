@@ -25,14 +25,17 @@ class CustomTagParser {
 		let arrIntCounters = [];
 		// here we collect all the definitions of different counter and 
 		// for each we create a dedicated IntCounter object. 
-		text = CustomTagParser.replaceAllTags( text, customTag,
-			(innerContent, params) => {
+		text = CustomTagParser.replaceAllTags( text, customTag, (innerContent, params) => {
 				// ignore inner content, we are interested in params
+				// default values
+				if (!params.value) params.value = "1";
+				if (!params.step) params.step = "1";
+
 				arrIntCounters.push( new IntCounter(params.name, params.value, params.step) );
 
 				return ""; // this tag is not for direct html generation, it is for definition of counters,
 							// so, this callback returns "" to prevent tag's presence in the final html
-		});
+			});
 
 		// now process each counter's calculated values $[name-of-counter] on the page
 		arrIntCounters.forEach( intCounter => {
@@ -45,6 +48,21 @@ class CustomTagParser {
 
 		return text;
 	}
+
+	// In the lesson or in module description, or in the course description there could be a reference (link)
+	// to some particular lesson or module.
+	// <ref# params>Text</ref#>
+	// params could be: module="" lesson="", either both or just the module.
+	static parseInternalReferences(text, funcReferenceProcessor) {
+		const customTag = "ref#";
+		text = CustomTagParser.replaceAllTags( text, customTag, (innerContent, params) => {
+			return funcReferenceProcessor(innerContent ? innerContent : "", params);
+		});
+		return text;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////
+
 
 	// Generic methog to replace all given tags and call a function for each tag
 	// if the tag has some params, they will be passed to callback function as a second parameter

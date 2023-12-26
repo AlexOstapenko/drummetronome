@@ -36,7 +36,7 @@ class LessonPage {
 		</b></p>
 		<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
 		
-		html += this.parseCustomTags( lesson.content );
+		html += this.parseCustomTags( lesson );
 		
 		html += this.htmlLessonNavigation(lesson);
 		
@@ -216,7 +216,8 @@ class LessonPage {
 		});
 	}
 
-	parseCustomTags(content) {
+	parseCustomTags(lesson) {
+		let content = lesson.content;
 		let arrShortcuts = [
 			{A: "<r-p", B: "<rhythmplayer"},
 			{A: "</r-p>", B: "</rhythmplayer>"},
@@ -237,6 +238,26 @@ class LessonPage {
 		content = CustomTagParser.parseFoldableSections( content );
 		content = this.parseRhythmPlayerTags( content );
 		content = this.parseDisplayRhythmTags( content );
+
+		content = CustomTagParser.parseInternalReferences( content, (innerContent, params) => {
+			if (params.module && params.lesson) {// this is reference to a lesson
+				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
+				let lessonID = Course.makeLessonID(lesson.parentModule.course.id, moduleFolder, params.lesson );
+				let internalRefHTML =  
+				`<span onclick='onClickLessonPreview("${lessonID}");' class='inner-reference'>${innerContent}</span>`;
+
+				return internalRefHTML;
+			}
+			else if (params.module) { // this is reference to a module
+				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
+				let moduleID = Course.makeModuleID(lesson.parentModule.course.id, moduleFolder);
+				let internalRefHTML =  `<span onclick='onClickModulePreview("${moduleID}");' 
+								class='inner-reference'>${innerContent}</span>`;
+				return internalRefHTML;
+			}
+			else return "";
+		});
+
 		return content;
 	}
 

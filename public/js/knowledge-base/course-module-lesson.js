@@ -32,8 +32,12 @@ class Course {
 		return result;
 	} 
 
-	static makeModuleID(courseID, moduleID) {
-		return courseID + Course.idSplitter() + moduleID;
+	static makeModuleID(courseID, moduleFolder) {
+		return courseID + Course.idSplitter() + moduleFolder;
+	}
+
+	static makeLessonID(courseID, moduleFolder, lessonFile) {
+		return Course.makeModuleID(courseID, moduleFolder) + Course.idSplitter() + lessonFile;
 	}
 
 	getModule(moduleFolder) {
@@ -65,7 +69,8 @@ class CourseModule {
 	}
 
 	get id() {
-		return `${this.course.id}${Course.idSplitter()}${this.moduleFolder}`;
+		return Course.makeModuleID( this.course.id, this.moduleFolder );
+		//return `${this.course.id}${Course.idSplitter()}${this.moduleFolder}`;
 	}
 
 	getLessonIdx(lesson) {
@@ -100,7 +105,7 @@ class Lesson {
 	}
 
 	get id() {
-		return `${this.parentModule.id}${Course.idSplitter()}${this.file}`;
+		return Course.makeLessonID(this.parentModule.course.id, this.parentModule.moduleFolder, this.file );
 	}
 
 	getPrevLesson() {

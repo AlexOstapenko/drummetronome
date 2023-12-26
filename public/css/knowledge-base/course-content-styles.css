@@ -1,0 +1,22 @@
+/*
+	Here those styles are defined which are used in a lesson html page or 
+	module-intro.html, or course-intro.html.
+*/
+
+
+/*
+ This style is used in lesson html page for titles.
+*/
+.course-style-title {
+	font-size: 1.2em;
+	font-weight: 700;
+	font-style: italic;
+	color: #772222;
+}
+
+.emphasis {
+	font-size: 1.2em;
+	font-weight: 550;
+}
+
+

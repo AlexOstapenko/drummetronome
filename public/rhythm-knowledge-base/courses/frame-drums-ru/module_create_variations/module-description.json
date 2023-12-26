@@ -4,6 +4,10 @@
 		{
 			"name" : "Подход",
 			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Где 2, там и 4",
+			"file" : "lesson-2.html"
 		}
 	]
 }
