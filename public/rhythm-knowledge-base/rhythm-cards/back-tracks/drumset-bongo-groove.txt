@@ -47,7 +47,6 @@ K-H - K-H K-H Sn-H K-H H-Sn H-Sn
 instrument: Hang Low Mystic (D)
 gain: 2.18
 pan: 0
-mute: true
 rhythm:
 O Ch Ah F A2 D2
 O Ch Ah F G2 A2
