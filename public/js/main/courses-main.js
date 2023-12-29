@@ -2,7 +2,7 @@
 * GLOBAL VARIABLES
 */
 const courseRunner = new CourseRunner();
-const openByDefault = {course: "frame-drums-ru", module: "module_snaps_2", lesson: "lesson-6.html"};
+const openByDefault = {course: "frame-drums-ru", module: "module_snaps_2", lesson: "lesson-8.html"};
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
@@ -68,6 +68,17 @@ function onClickParentModule(moduleFullID) {
 	onClickModulePreview(moduleFullID);
 }
 
+/////////////////////////////////////
 
+function gotoRandomExercise(idName, counterName) {
+	let a = 10;
+	if ( courseRunner.lessonPage && courseRunner.lessonPage.arrIntCounters ) {
+		let arr = courseRunner.lessonPage.arrIntCounters.filter(counter => counter.name == counterName)[0].history;
 
+		let randomIndex = Math.floor(Math.random() * arr.length);
+		let elementID = idName + randomIndex;
+		let element = document.getElementById( elementID );
+		element.scrollIntoView();
+	}
+}
 

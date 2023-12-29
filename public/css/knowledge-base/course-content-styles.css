@@ -19,4 +19,41 @@
 	font-weight: 550;
 }
 
+.display-rhythm-comment {
+	padding:0px;
+	border: 1px solid black;
+}
 
+.rhythm-outdent {
+	margin: 0px 20px;
+}
+
+.button-random-exercise {
+	border-radius: 5px;
+	font-size: 1em;
+	padding: 5px;
+	/*background-color: orange;*/
+	background-color: transparent;
+	border: 0.5px solid black;
+	color: #006600;
+	cursor: pointer;
+}
+
+.button-random-exercise:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-random-exercise-modest {
+	background-color: transparent;
+	border-radius: 5px;
+	border: 0.5px solid black;
+	cursor: pointer;
+	color: #006600;
+	padding: 3px;
+}
+
+.button-random-exercise-modest:hover {
+  transform: scale(1.02);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}

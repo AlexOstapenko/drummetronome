@@ -39,14 +39,26 @@ class CustomTagParser {
 
 		// now process each counter's calculated values $[name-of-counter] on the page
 		arrIntCounters.forEach( intCounter => {
-			text = CustomTagParser.replaceAllCalculatedValues(text, intCounter.name, name => {
-				let returnValue = intCounter.value;
-				intCounter.increment();
-				return returnValue;
+			text = CustomTagParser.replaceAllCalculatedValues(text, intCounter.name, (name, sameValueRequested) => {
+				let result = -1;
+				if (intCounter.isFirstTime) {  // at the first time don't increment the value
+					result = intCounter.value;
+					intCounter.makeSnapshot();
+					intCounter.isFirstTime = false; 
+				} else {
+					if (sameValueRequested) // don't increment as there is request to the same value as previous
+						result = intCounter.value
+					else {
+						result = intCounter.increment();
+						intCounter.makeSnapshot();
+					}
+				}
+
+			  	return result+"";
 			});
 		});
 
-		return text;
+		return {text, intCounters: arrIntCounters};
 	}
 
 	// In the lesson or in module description, or in the course description there could be a reference (link)
@@ -59,6 +71,42 @@ class CustomTagParser {
 			return funcReferenceProcessor(innerContent ? innerContent : "", params);
 		});
 		return text;
+	}
+
+	// <rhythm-repeat n="2"> - decoration in displayrhythm section to make it more convenient to read
+	static parseRhythmRepeat( text ) {
+		const customTag = "rhythm-repeat";
+		let idCounter = 0;
+		let result = CustomTagParser.replaceAllTags( text, customTag,
+			(innerContent, params) => {
+				let html = 
+				`<div><b style='color: gray'>---------</b>
+				${innerContent}
+				<b style='color: gray;'>---------</b>:${params.n}</div>`;
+				return html;
+			});
+
+		return result;
+	}
+
+	// There could be many exercises on the lesson page and one or many buttons "Go to random exercise".
+	// Exercises should be organised into groups
+	// <random-exercise-button elementID='warmup_exercise_' counter='N' 
+	//        appearance='small'>Перейти на случайное упражнение</random-exercise-button>
+
+	static parseRandomExerciseButtons(text) {
+		const customTag = "random-exercise-button";
+		let result = CustomTagParser.replaceAllTags( text, customTag, 
+			(innerContent, params) => {
+				let className = params.appearance == "small" ? "button-random-exercise-modest" : "button-random-exercise";
+				let html = 
+				`<button onclick="gotoRandomExercise('${params.elementID}', '${params.counter}');" 
+						class="${className}">${innerContent}
+				</button>`;
+				return html;
+			});
+
+		return result;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////
@@ -120,23 +168,19 @@ class CustomTagParser {
 		return result;
 	}
 
-	// finds each occurence of ${name} in text and replaces it to the value from callback function
+	// finds each occurence of $[name] in content and replaces it to the value from callback function.
+	// if $[name!] is found, the value is not increased (same number as before is requested).
 	static replaceAllCalculatedValues(content, name, callback) {
-		let substr = "$[" + name + "]";
-		let idx1 = content.indexOf(substr);
-		while( idx1 >=0 ) {
-			let idx2 = idx1 + substr.length;
-			
-			content = content.substring(0, idx1) + 
-					callback( name ) +
-					content.substring( idx2 );
+		var regex = new RegExp('\\$\\[' + name + '(!|)\\]', 'g');
 
-			idx1 = content.indexOf(substr);
+		// callback to replace matches
+		function replacer(match, p1) {
+			return callback(name, p1 === '!');
 		}
 
-		return content;
+		var result = content.replace(regex, replacer);
+		return result;
 	}
-
 }
 
 // Responsible for the foldable-section tag on the page.
@@ -199,10 +243,18 @@ class IntCounter {
 		this.name = name;
 		this.value = parseInt( value );
 		this.step = parseInt( step );
+		this.isFirstTime = true;
+		this.history = []; // all created numbers.
+	}
+
+	makeSnapshot() {
+		if (this.history.indexOf(this.value) === -1 )
+			this.history.push( this.value );
 	}
 
 	increment() {
 		this.value += this.step;
+		return this.value;
 	}
 }
 

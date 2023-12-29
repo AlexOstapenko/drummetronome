@@ -7,6 +7,8 @@ class CourseRenderer {
 
 	constructor() {
 		this.divContainerID = "";
+		this.bgColorClasses = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", 
+			"bg-color-red", "bg-color-blue",  "bg-color-violet", "bg-color-orange"];
 	}
 
 	set mainDivID(id) {
@@ -27,8 +29,9 @@ class CourseRenderer {
 
 	renderCourse(course) {
 
-		const bgs = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", "bg-color-red"];
+		const bgs = this.bgColorClasses;
 		let bgIdx = -1;
+
 
 		let introHTMLParsed = this.parseCustomTags(course.introHTML);
 
@@ -56,7 +59,7 @@ class CourseRenderer {
 
 	renderModule(courseModule) {
 		let course = courseModule.course;
-		const bgs = ['bg-color-yellow', 'bg-color-pink', "bg-color-green", "bg-color-red"];
+		const bgs = this.bgColorClasses;
 		let bgIdx = -1;
 
 		let renderHeaderLinks = (course) => {

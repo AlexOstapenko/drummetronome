@@ -83,6 +83,20 @@
 	background-color: pink;
 }
 
+.bg-color-blue {
+	background-color: #1c88d5
+}
+
+.bg-color-violet {
+	background-color: #9f09a8;
+}
+
+.bg-color-orange {
+	background-color: #dd6004;
+}
+
+
+
 .module-page-course-title {
 	color: grey;
 	font-size: 0.8em;

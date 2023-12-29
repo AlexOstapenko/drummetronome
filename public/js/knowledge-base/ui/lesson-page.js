@@ -227,6 +227,8 @@ class LessonPage {
 			{A: "</d-r>", B: "</displayrhythm>"},
 			{A: "<f-s", B: "<foldable-section"},
 			{A: "</f-s>", B: "</foldable-section>"},
+			{A: "<r-e-b", B: "<random-exercise-button"},
+			{A: "</r-e-b>", B: "</random-exercise-button>"}
 		];
 		// replace all chortcuts: 
 		arrShortcuts.forEach( shortcut => {
@@ -234,10 +236,14 @@ class LessonPage {
 		});
 
 		// now come to parse custom tags
-		content = CustomTagParser.parseIntCounters( content );
+		let resultIntCounters = CustomTagParser.parseIntCounters( content );
+		content = resultIntCounters.text;
+		this.arrIntCounters = resultIntCounters.intCounters; 
 		content = CustomTagParser.parseFoldableSections( content );
+		content = CustomTagParser.parseRhythmRepeat( content );
 		content = this.parseRhythmPlayerTags( content );
 		content = this.parseDisplayRhythmTags( content );
+		content = CustomTagParser.parseRandomExerciseButtons( content );
 
 		content = CustomTagParser.parseInternalReferences( content, (innerContent, params) => {
 			if (params.module && params.lesson) {// this is reference to a lesson

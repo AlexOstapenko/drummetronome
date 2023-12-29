@@ -2,6 +2,7 @@
     "instrumentName": "Hang Low Mystic (D)",
     "arrStrokeInfo": [
         {"stroke": "O", "file": "d-ding.mp3"},
+        {"stroke": "o", "file": "d-ding.mp3", "gain" : 0.4},
         {"stroke": "G", "file": "g.mp3"},
         {"stroke": "A", "file": "a.mp3"},
         {"stroke": "A#", "file": "asharp.mp3"},

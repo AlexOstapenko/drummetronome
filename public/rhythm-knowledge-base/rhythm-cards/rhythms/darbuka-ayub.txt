@@ -1,0 +1,7 @@
+category: rhythms
+name: Ayoub
+tempo: 100
+#####
+instrument: Darbuka
+rhythm:
+D - - D D - S -
