@@ -32,10 +32,8 @@
 	border-radius: 5px;
 	font-size: 1em;
 	padding: 5px;
-	/*background-color: orange;*/
-	background-color: transparent;
-	border: 0.5px solid black;
-	color: #006600;
+	background-color: #eeee88;
+	border: 1px solid orange;
 	cursor: pointer;
 }
 
@@ -45,11 +43,10 @@
 }
 
 .button-random-exercise-modest {
-	background-color: transparent;
+	background-color: #eeee88;
 	border-radius: 5px;
-	border: 0.5px solid black;
+	border: 0.5px solid orange;
 	cursor: pointer;
-	color: #006600;
 	padding: 3px;
 }
 
