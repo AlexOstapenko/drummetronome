@@ -27,7 +27,7 @@
 .course-page {
 	max-width: 600px;
 	margin: 0 auto;
-  	padding: 20px;
+  	padding: 5px;
 }
 
 .cards-container {
@@ -36,8 +36,8 @@
 }
 
 .card-preview {
-	margin: 10px;
-	max-width: 150px;
+	margin: 5px;
+	max-width: 130px;
 	border: 1px solid black;
 	border-radius: 10px;
 	cursor: pointer;
@@ -52,7 +52,7 @@
 	width: 100%;
 	height: auto;
 	display: block;
-	margin: 20 auto;
+	margin: 10 auto;
 	border-bottom: 1px solid black;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
