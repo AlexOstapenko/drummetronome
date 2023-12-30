@@ -54,10 +54,10 @@ class RhythmPlayerControl {
 	    	<span class='rhythm-player-control-title'>${CURR_LOC().controls.playerTitle}</span>
 	    	${this.htmlForDisplayText}
 	    	<div class="rhythm-player-control-button-container">
-	    	<button class='${this.buttonClass}'
-	    		onclick="onClickPlayRhythm(${this.id});">
-	    		${this.buttState}
-	    	</button>
+		    	<button class='${this.buttonClass}'
+		    		onclick="onClickPlayRhythm(${this.id});">
+		    		${this.buttState}
+		    	</button>
 	    	</div>
             <div id='divDurationTimer_${this.id}' class='divPlayingDurationTimer'></div>
 	    	<div id='rhythm-player-control-tempo-control_${this.id}'>${this.tempoCtrl.render()}</div>

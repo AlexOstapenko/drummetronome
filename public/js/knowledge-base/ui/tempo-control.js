@@ -24,8 +24,6 @@ class UITempoControl {
                 <button class='butt-tempo-shift' onclick="tempoControlsManager.clickShiftTempo(${id},20)">+20</button>
             </div>
         </div>`;
-
-        //this.divContainer.innerHTML = html;
         return html;
 	}
 
