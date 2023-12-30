@@ -229,7 +229,8 @@ class LessonPage {
 			{A: "</f-s>", B: "</foldable-section>"},
 			{A: "<r-e-b", B: "<random-exercise-button"},
 			{A: "</r-e-b>", B: "</random-exercise-button>"},
-			{A: "<r-v-d/>", B: `<div style="border:0.5px solid #aaaaaa"> </div>`}
+			{A: "<r-v-d/>", B: `<div><img src="/img/delimiter_curve.png"/></div>`}
+			//{A: "<r-v-d/>", B: `<div style="border:0.5px solid #aaaaaa"> </div>`}
 		];
 		// replace all chortcuts: 
 		arrShortcuts.forEach( shortcut => {

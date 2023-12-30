@@ -79,11 +79,18 @@ class CustomTagParser {
 		let idCounter = 0;
 		let result = CustomTagParser.replaceAllTags( text, customTag,
 			(innerContent, params) => {
+				
 				let html = 
+				`<div><img src="/img/repetition_line_1.png"/>
+				${innerContent}
+				<img src="/img/repetition_line_2.png"/>:${params.n}</div>`;
+				return html;
+
+				/*let html = 
 				`<div><b style='color: gray'>---------</b>
 				${innerContent}
 				<b style='color: gray;'>---------</b>:${params.n}</div>`;
-				return html;
+				return html;*/
 			});
 
 		return result;
