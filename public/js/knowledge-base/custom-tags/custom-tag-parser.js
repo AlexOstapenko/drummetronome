@@ -81,9 +81,9 @@ class CustomTagParser {
 			(innerContent, params) => {
 				
 				let html = 
-				`<div><img src="/img/repetition_line_1.png"/>
+				`<div><img src="../img/repetition_line_1.png"/>
 				${innerContent}
-				<img src="/img/repetition_line_2.png"/>:${params.n}</div>`;
+				<img src="../img/repetition_line_2.png"/>:${params.n}</div>`;
 				return html;
 
 				/*let html = 
