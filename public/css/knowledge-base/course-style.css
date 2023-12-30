@@ -1,6 +1,9 @@
 .courses-container {
  	display: flex;
     flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+  	padding: 20px;
 }
 
 .course-preview {
@@ -19,6 +22,12 @@
     margin-top: 10px; /* Отступ между изображением и текстом */
     font-size: 18px; /* Размер шрифта для текста */
     text-align: center;
+}
+
+.course-page {
+	max-width: 600px;
+	margin: 0 auto;
+  	padding: 20px;
 }
 
 .cards-container {
@@ -96,6 +105,11 @@
 }
 
 
+.module-page {
+	max-width: 600px;
+	margin: 0 auto;
+  	padding: 20px;
+}
 
 .module-page-course-title {
 	color: grey;
@@ -104,4 +118,13 @@
 
 .module-title {
 	color: darkorange;
+}
+
+
+.video-container {
+	display: flex;
+    align-items: center;
+  	justify-content: center;
+    
+  	padding: 20px;
 }

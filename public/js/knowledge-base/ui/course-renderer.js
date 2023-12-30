@@ -35,7 +35,8 @@ class CourseRenderer {
 
 		let introHTMLParsed = this.parseCustomTags(course.introHTML);
 
-		let html = `
+		let html = 
+		`<div class="course-page">
 		<b class='course-title'>${course.name}</b>
 		${introHTMLParsed}
 		<h1>${CURR_LOC().course.modules}</h1>
@@ -52,7 +53,7 @@ class CourseRenderer {
 				<div class='card-preview-name'>${m.name}</div>
 			</div>`;
 		});
-		html += "</div>";
+		html += `</div></div>`;
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	
 	}
@@ -75,7 +76,8 @@ class CourseRenderer {
 		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML );
 		let moduleNumber = courseModule.getModuleNumber();
 		let html = 
-		`${renderHeaderLinks(courseModule.course)}
+		`<div class="module-page">
+		${renderHeaderLinks(courseModule.course)}
 		<span class='module-page-course-title'>${courseModule.course.name}</span>
 		<h2><span class='module-title'>${CURR_LOC().course.module} ${moduleNumber}:</span> ${courseModule.name}</h2>
 		${parsedIntroHTML}
@@ -94,7 +96,7 @@ class CourseRenderer {
 				<div class='card-preview-name'><b>${idx+1}.</b> ${lesson.name}</div>
 			</div>`;
 		});
-		html += "</div>";
+		html += "</div></div>";
 		
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	

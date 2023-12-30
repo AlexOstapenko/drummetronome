@@ -1,5 +1,7 @@
 .lesson {
 	max-width: 600px;
+	margin: 0 auto;
+  padding: 20px;
 }
 
 
@@ -30,7 +32,7 @@
 }
 
 .lesson-header-lesson-label {
-	color: #772222;
+	color: #555555;
 }
 
 .TODO {

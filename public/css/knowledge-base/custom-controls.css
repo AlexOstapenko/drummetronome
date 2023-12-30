@@ -1,7 +1,7 @@
 .custom-foldable-section-title {
 	font-weight: 700;
-	font-style: italic;
-	color: #772222;
+	/*font-style: italic;*/
+	color: #555555;
 	cursor: pointer;
 }
 
