@@ -4,6 +4,10 @@
   padding: 10px;
 }
 
+.lesson p {
+	width: 90%;
+}
+
 .rhythm-comment {
 	padding-left: 20px; 
 	font-size: 0.6em;
