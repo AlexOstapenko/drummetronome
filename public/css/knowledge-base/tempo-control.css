@@ -17,8 +17,9 @@
 .butt-tempo-shift {
 	font-size: 1.0em;
 	border-radius: 7px;
-	border: 0.5px solid gray;
+	border: 0.5px solid white;
 	background-color: #999999;
 	color: white;
 	cursor: pointer;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
