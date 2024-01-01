@@ -15,10 +15,9 @@
 		<li><b>(фраза):N</b> - надо повторить фразу столько раз, какое число стоит после двоеточия. Если двоеточие стоит в конце строки через пробел, то повторяем всю строку, а если двоеточие стоит сразу после скобок (без пробела), то повторять надо только фразу из скобок, например: <br>
 			(T K):2 D -
 			<br> будет то же самое, что <br>
-			T K T K D -.<br>
+			T K T K D -<br>
 			Еще пример: <br>
-			T:3 – это то же самое, что написать: T T T.
-			<br>R:4 - равносильно R R R R.
+			T K :3 – это то же самое, что написать: T K T K T K, потому что :3 стоит через пробел и не относится к конкретному удару или фразе в скобках. То есть надо повторять всю строку.
 		</li>
 	</ul>
 </foldable-section>
@@ -242,9 +241,12 @@
 	#####
 	instrument: Tar
 	rhythm:
-	D - L - (R R R R L L L L )/2 
-    T - L - (R R R R L L L L )/2
-    D - L - (R R R R L L L L )/2
+	D - L - 
+	(R R R R L L L L )/2 
+    T - L - 
+    (R R R R L L L L )/2
+    D - L - 
+    (R R R R L L L L )/2
     R R R R L L L L
 </r-c></r-p>
 <r-e-b elementID='w_ex_' counter='N' appearance='small'>Перейти на случайное упражнение</r-e-b>
@@ -400,10 +402,14 @@
 	#####
 	instrument: Tar
 	rhythm:
-	(D L L L R R R R )/2 L L L L 
-    (T L L L R R R R )/2 L L L L
-    (D L L L R R R R )/2 L L L L
-    (R R R R L L L L )/2 (R R L L)/2 R L 
+	(D L L L R R R R )/2 
+	L L L L 
+    (T L L L R R R R )/2 
+    L L L L
+    (D L L L R R R R )/2 
+    L L L L
+    (R R R R L L L L )/2 
+    (R R L L)/2 R L 
 </r-c></r-p>
 <r-e-b elementID='w_ex_' counter='N' appearance='small'>Перейти на случайное упражнение</r-e-b>
 
@@ -467,7 +473,8 @@
 </r-c>
 <d-r>
 	<rhythm-repeat n="2">
-		(R R R R L L L L)/2 D - D - 
+		(R R R R L L L L)/2
+		D - D - 
 	</rhythm-repeat>
 	T L L L 
 	D L L L 

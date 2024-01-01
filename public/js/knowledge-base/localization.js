@@ -16,7 +16,9 @@ const LOCALIZATION = {
 			playerTitle : "Ритм",
 			tempoTitle: "Темп"
 		},
-
+		messages: {
+			"lessoNotAvailable" : "Урок не доступен."
+		}
 	},
 	"EN" : {
 		"course": {
@@ -34,6 +36,9 @@ const LOCALIZATION = {
 		controls: {
 			playerTitle : "Rhythm",
 			tempoTitle: "Tempo"
+		},
+		messages: {
+			"lessoNotAvailable" : "The lesson is not available."
 		}
 	}
 }

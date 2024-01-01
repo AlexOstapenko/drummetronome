@@ -92,11 +92,17 @@ class CourseModule {
 }
 
 class Lesson {
+
+	static STATUS = {
+		NOT_AVAILABLE : "not-available"
+	}
+
 	constructor() {
 		this.name = "";
 		this.parentModule = null;
 		this.file = "";
 		this.content = "";
+		this.status = "";
 		this.contentLoaded = false;
 	}
 

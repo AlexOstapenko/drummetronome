@@ -1,0 +1,18 @@
+{
+	"name" : "Динамика игры",
+	"lessons" : [
+		{
+			"name" : "Громко и тихо на 4 счета",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Громко и тихо на 3 счета",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "...",
+			"file" : "lesson-3.html"
+		}
+	],
+	"status" : "not-available"
+}

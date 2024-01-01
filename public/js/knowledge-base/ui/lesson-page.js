@@ -26,24 +26,32 @@ class LessonPage {
 
 		let moduleNumber = lesson.parentModule.getModuleNumber();
 		let lessonNumber = lesson.getLessonNumber();
+		let lessonHTML = this.renderHeader(lesson);
 
-		let html = 
-		`<div class='lesson'>
-		${this.renderHeader(lesson)}
-		<p class='lesson-header-title'>
-			<b>${CURR_LOC().course.course}: </b><i>${lesson.parentModule.course.name}</i><br>
-			<b>${CURR_LOC().course.module} ${moduleNumber}</b>: ${lesson.parentModule.name}
-		</b></p>
-		<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
-		
-		html += this.parseCustomTags( lesson );
-		
-		html += this.htmlLessonNavigation(lesson);
-		
-		html += "</div>";
+		let isLessonAvailable = true;
+		if ( window.location.href.indexOf( "localhost:" ) === -1 )
+			isLessonAvailable = 
+				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
+				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
 
+		if ( !isLessonAvailable )
+			lessonHTML += 
+				`<p class='course-style-title'>${CURR_LOC().messages.lessoNotAvailable}</p>`;
+		else {
+			lessonHTML += 
+			`<p class='lesson-header-title'>
+				<b>${CURR_LOC().course.course}: </b><i>${lesson.parentModule.course.name}</i><br>
+				<b>${CURR_LOC().course.module} ${moduleNumber}</b>: ${lesson.parentModule.name}
+			</b></p>
+			<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
+			
+			lessonHTML += this.parseCustomTags( lesson );
+			lessonHTML += this.htmlLessonNavigation(lesson);
+		}
+		
+		let html = `<div class='lesson'>${lessonHTML}</div>`;
 		this.divContainer.className = "";
-		this.divContainer.innerHTML = html;	
+		this.divContainer.innerHTML = html;
 	}
 
 	// Generates links to previous page

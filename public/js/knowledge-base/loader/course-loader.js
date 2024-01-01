@@ -59,6 +59,7 @@ class CourseLoader {
 					courseModule.name = json.name;
 					courseModule.course = course;
 					courseModule.moduleFolder = moduleFolder;
+					courseModule.status = json.status;
 					courseModule.img = {icon: 
 						(json.img && json.img.icon) ? 
 							`${moduleFullPath}/${json.img.icon}` : 
@@ -70,6 +71,7 @@ class CourseLoader {
 						l.name = lessonRecord.name;
 						l.file = lessonRecord.file;
 						l.parentModule = courseModule;
+						l.status = lessonRecord.status;
 
 						let fileNameIdx = idx%2===0 ? "1" : "2";
 						l.img = {icon: `${course.path}/img/${this.lessonDefaultIconFileName.replace(/###/g, fileNameIdx)}`}
