@@ -34,11 +34,13 @@ function loadCourse(courseFolder, callback) {
 }
 
 function onClickLoadCourse() {
+	courseRunner.stop();
 	const courseFolderName = document.getElementById("inputCourseFolder").value;
 	courseRunner.loadCourse( courseFolderName );
 }
 
 function onClickCoursePreview(id, callback) {
+	courseRunner.stop();
 	courseRunner.showCourseModules(id, callback);
 }
 
@@ -46,6 +48,7 @@ function onClickCoursePreview(id, callback) {
 * Module id = courseID@@@module-folder-name
 */
 function onClickModulePreview(moduleFullID, callback) {
+	courseRunner.stop();
 	courseRunner.showModule(moduleFullID, callback);
 }
 
@@ -53,6 +56,7 @@ function onClickModulePreview(moduleFullID, callback) {
 * Lesson id = courseID@@@module-folder-name@@@lessonIndex
 */
 function onClickLessonPreview(fullLessonID, callback) {
+	courseRunner.stop();
 	courseRunner.showLesson( fullLessonID, callback );
 	window.scrollTo(0,0);
 }
