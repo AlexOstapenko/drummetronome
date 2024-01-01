@@ -2,7 +2,7 @@
 * GLOBAL VARIABLES
 */
 const courseRunner = new CourseRunner();
-const openByDefault = {course: "frame-drums-ru", module: null, lesson: null};
+const openByDefault = {}; // {course: "frame-drums-ru", module: null, lesson: null};
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
@@ -11,6 +11,9 @@ function onDocumentLoaded() {
 }
 
 function init() {
+
+	processURLParams();
+
 	courseRunner.courseRenderer.mainDivID = "divCoursesContainer";
 	courseRunner.lessonPage.mainDivID = "divCoursesContainer";
 
@@ -69,6 +72,21 @@ function onClickParentModule(moduleFullID) {
 }
 
 /////////////////////////////////////
+
+function processURLParams() {
+    let urlString = window.location.href;
+    let url = new URL(urlString);
+
+    let course = url.searchParams.get("course");
+    let moduleFolder = url.searchParams.get("module");
+    let lesson = url.searchParams.get("lesson");
+
+    // if the query in the url is:
+    // course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-.html>
+    if (course) openByDefault.course = course;
+    if (moduleFolder) openByDefault.module = moduleFolder;
+    if ( lesson ) openByDefault.lesson = lesson + ".html";
+}
 
 function gotoRandomExercise(idName, counterName) {
 	let a = 10;

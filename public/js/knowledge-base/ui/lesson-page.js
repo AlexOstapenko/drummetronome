@@ -29,10 +29,13 @@ class LessonPage {
 		let lessonHTML = this.renderHeader(lesson);
 
 		let isLessonAvailable = true;
-		if ( window.location.href.indexOf( "localhost:" ) === -1 )
-			isLessonAvailable = 
+		if ( window.location.href.indexOf( "localhost:" ) === -1 ) {
+			let lessonNotAvailable = 
 				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
 				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
+
+			isLessonAvailable = !lessonNotAvailable;
+		}
 
 		if ( !isLessonAvailable )
 			lessonHTML += 
