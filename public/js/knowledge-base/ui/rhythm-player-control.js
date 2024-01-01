@@ -69,21 +69,32 @@ class RhythmPlayerControl {
 	// the rhythm text that we show to the user can be defined in <displayrhythm> tag.
     // but if such tag is absent – use rhythm text from the first instrument in rhythm card
 	calculateHTMLForDisplayText(xmlDoc) {
-		const tagDisplayRhythm = LESSON_TAGS['displayrhythm'];
+		const tagDisplayRhythm = 'displayrhythm';
 		let displayRhythmNode = xmlDoc.getElementsByTagName( tagDisplayRhythm );
 		if (displayRhythmNode && displayRhythmNode.length > 0 )
 			displayRhythmNode = displayRhythmNode[0];
-		else { // take html from rhythm card
+		else { 
+			// take html from rhythm card 
 			let xml = 
-			`<${LESSON_TAGS["displayrhythm"]} size='big'>
+			`<${tagDisplayRhythm} size='big'>
 				${this.rhythmCard.records[0].rhythm}
-			</${LESSON_TAGS["displayrhythm"]}>`;
+			</${tagDisplayRhythm}>`;
 			let xmlParser = new DOMParser();
 			xmlDoc = xmlParser.parseFromString( xml, "text/xml" );
 			displayRhythmNode = xmlDoc.documentElement;
 		}
 
-		this.htmlForDisplayText = this.lessonRenderer.renderDisplayRhythmTag( displayRhythmNode );
+		//this.htmlForDisplayText = this.lessonRenderer.renderDisplayRhythmTag( displayRhythmNode );
+		this.htmlForDisplayText = this.renderDisplayRhythmNode( displayRhythmNode );
+	}
+
+	renderDisplayRhythmNode(xmlNode) {
+		let textSize = xmlNode.hasAttribute("size") ? xmlNode.getAttribute("size") : "big";
+		let additionalClass = "rhythm-to-display-text-" + textSize;
+		let textToDisplay = xmlNode.innerHTML;
+		textToDisplay = nonEmptyValues( textToDisplay.split("\n")).join("<br>");
+
+		return `<div class='rhythm-to-display ${additionalClass}'>${textToDisplay}</div>`;
 	}
 
 	setTempoControlVisibility(isVisible) {

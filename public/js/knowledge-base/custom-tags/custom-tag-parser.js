@@ -1,5 +1,38 @@
 class CustomTagParser {
 
+	static parseRhythmPlayerTags(content, lessonPage) {
+		const customTag = "rhythmplayer";
+
+		content = CustomTagParser.replaceAllTags( content, customTag, (innerContent, params, fullTagText) => {
+			let rhythmPlayerControl = lessonPage.createRhythmPlayerControl( lessonPage );
+			let xmlText = fullTagText;
+			rhythmPlayerControl.setXML(xmlText);
+			let html = 
+			`<div id="rhythm-player-control-${rhythmPlayerControl.id}">
+				${rhythmPlayerControl.render()}
+			</div>`;
+
+			return html;
+		});
+
+		return content;
+	}
+
+	static parseDisplayRhythmTags(content) {
+		const customTag = "displayrhythm";
+		content = CustomTagParser.replaceAllTags( content, customTag, (innerContent, params) => {
+
+			let textSize = params.size ? params.size : "big";
+			let additionalClass = "rhythm-to-display-text-" + textSize;
+			let textToDisplay = innerContent;
+			// TODO: maybe a more clever processing?
+			textToDisplay = nonEmptyValues( textToDisplay.split("\n")).join("<br>");
+			return `<div class='rhythm-to-display ${additionalClass}'>${textToDisplay}</div>`;
+		});
+		
+		return content;
+	}
+
 	static parseFoldableSections(text) {
 		const customTag = "foldable-section";
 		let idCounter = 0;
@@ -65,10 +98,26 @@ class CustomTagParser {
 	// to some particular lesson or module.
 	// <ref# params>Text</ref#>
 	// params could be: module="" lesson="", either both or just the module.
-	static parseInternalReferences(text, funcReferenceProcessor) {
+	static parseInternalReferences(text, lesson) {
 		const customTag = "ref#";
 		text = CustomTagParser.replaceAllTags( text, customTag, (innerContent, params) => {
-			return funcReferenceProcessor(innerContent ? innerContent : "", params);
+
+			if (params.module && params.lesson) {// this is reference to a lesson
+				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
+				let lessonID = Course.makeLessonID(lesson.parentModule.course.id, moduleFolder, params.lesson );
+				let internalRefHTML =  
+				`<span onclick='onClickLessonPreview("${lessonID}");' class='inner-reference'>${innerContent}</span>`;
+
+				return internalRefHTML;
+			}
+			else if (params.module) { // this is reference to a module
+				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
+				let moduleID = Course.makeModuleID(lesson.parentModule.course.id, moduleFolder);
+				let internalRefHTML =  `<span onclick='onClickModulePreview("${moduleID}");' 
+								class='inner-reference'>${innerContent}</span>`;
+				return internalRefHTML;
+			}
+			else return "";
 		});
 		return text;
 	}
@@ -120,7 +169,10 @@ class CustomTagParser {
 
 
 	// Generic methog to replace all given tags and call a function for each tag
+	// callback( tagInnerContent, params, fullTagText)
 	// if the tag has some params, they will be passed to callback function as a second parameter
+	// In some cases you may need not only innerContent but full tag text from opening tag to closing tag.
+	// callback gets it as a third parameter
 	static replaceAllTags(content, tagName, funcTagProcessor) {
 		let closingTag = `</${tagName}>`;
 		let idx1 = content.indexOf("<" + tagName);
@@ -137,9 +189,10 @@ class CustomTagParser {
 			let idx2_2 = idx2 + closingTag.length;
 			
 			let innerContent = content.substring( idx1_1+1, idx2 ).trim();
+			let fullTagText = content.substring( idx1, idx2_2 ).trim();
 			
 			content = content.substring(0, idx1) + 
-					funcTagProcessor( innerContent, params ) +
+					funcTagProcessor( innerContent, params, fullTagText ) +
 					content.substring( idx2_2 );
 
 			idx1 = content.indexOf(`<${tagName}`);

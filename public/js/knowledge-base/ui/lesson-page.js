@@ -1,8 +1,3 @@
-const LESSON_TAGS = {
-	"displayrhythm": 'displayrhythm',
-	"rhythmplayer" : "rhythmplayer"
-}
-
 class LessonPage {
 	constructor() {
 		this.divContainerID = "";
@@ -74,66 +69,6 @@ class LessonPage {
 		rpControl.setID( this.idGeneratorForRhythmPlayers.getNewID() );
 		this.rhythmPlayerControls.push( rpControl );
 		return rpControl;
-	}
-
-	/*
-	* In the lesson text there could be tags <rhythmplayer>...</rhythmplayer>.
-	* Change eacn one of them to a rhytm-player-control component.
-	*/
-	parseRhythmPlayerTags(content) {
-
-		// cut each occurrence of <rhythmplayer> ... </rhythmplayer> and 
-		// insert rhythm-player-component in those places.
-
-		content = this.replaceTags( content, LESSON_TAGS["rhythmplayer"], (xml) => {
-			let rhythmPlayerControl = this.createRhythmPlayerControl( this );
-			rhythmPlayerControl.setXML(xml);
-			let html = 
-			`<div id="rhythm-player-control-${rhythmPlayerControl.id}">
-				${rhythmPlayerControl.render()}
-			</div>`;
-
-			return html;
-		});
-
-		return content;
-	}
-
-	parseDisplayRhythmTags(content) {
-		return this.replaceTags( content, LESSON_TAGS["displayrhythm"], (xml) => {
-			let xmlParser = new DOMParser();
-			let xmlDoc = xmlParser.parseFromString( xml, "text/xml" );
-			return this.renderDisplayRhythmTag( xmlDoc.documentElement );
-		});
-	}
-
-	renderDisplayRhythmTag(xmlNode) {
-		let textSize = xmlNode.hasAttribute("size") ? xmlNode.getAttribute("size") : "big";
-		let additionalClass = "rhythm-to-display-text-" + textSize;
-		let textToDisplay = xmlNode.innerHTML;
-		textToDisplay = nonEmptyValues( textToDisplay.split("\n")).join("<br>");
-
-		return `<div class='rhythm-to-display ${additionalClass}'>${textToDisplay}</div>`;
-	}
-
-	//	generic methog to replace all given tags and call a function for each tag
-	replaceTags(content, tagName, funcTagProcessor) {
-		let closingTag = `</${tagName}>`;
-		let idx1 = content.indexOf("<" + tagName);
-		while( idx1 >=0 ) {
-			let idx2 = content.indexOf( closingTag );
-			if (idx2==-1) throw SyntaxError(`Closing tag not found for '${tagName}'.`);
-			idx2 += closingTag.length;
-			let xml = content.substring( idx1, idx2 );
-			
-			content = content.substring(0, idx1) + 
-					funcTagProcessor( xml ) +
-					content.substring( idx2 );
-
-			idx1 = content.indexOf(`<${tagName}`);
-		}
-
-		return content;
 	}
 
 	getRhythmPlayerControl( id ) {
@@ -258,31 +193,13 @@ class LessonPage {
 		// now come to parse custom tags
 		let resultIntCounters = CustomTagParser.parseIntCounters( content );
 		content = resultIntCounters.text;
+		// save the counters for future possible uses like function gotoRandomExercise in courses-main.js
 		this.arrIntCounters = resultIntCounters.intCounters; 
 		content = CustomTagParser.parseFoldableSections( content );
 		content = CustomTagParser.parseRhythmRepeat( content );
-		content = this.parseRhythmPlayerTags( content );
-		content = this.parseDisplayRhythmTags( content );
+		content = CustomTagParser.parseRhythmPlayerTags( content, this );
 		content = CustomTagParser.parseRandomExerciseButtons( content );
-
-		content = CustomTagParser.parseInternalReferences( content, (innerContent, params) => {
-			if (params.module && params.lesson) {// this is reference to a lesson
-				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
-				let lessonID = Course.makeLessonID(lesson.parentModule.course.id, moduleFolder, params.lesson );
-				let internalRefHTML =  
-				`<span onclick='onClickLessonPreview("${lessonID}");' class='inner-reference'>${innerContent}</span>`;
-
-				return internalRefHTML;
-			}
-			else if (params.module) { // this is reference to a module
-				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
-				let moduleID = Course.makeModuleID(lesson.parentModule.course.id, moduleFolder);
-				let internalRefHTML =  `<span onclick='onClickModulePreview("${moduleID}");' 
-								class='inner-reference'>${innerContent}</span>`;
-				return internalRefHTML;
-			}
-			else return "";
-		});
+		content = CustomTagParser.parseInternalReferences( content, lesson );
 
 		return content;
 	}

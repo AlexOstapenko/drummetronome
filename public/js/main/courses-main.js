@@ -3,11 +3,31 @@
 */
 const courseRunner = new CourseRunner();
 const openByDefault = {}; // {course: "frame-drums-ru", module: null, lesson: null};
+let youtubePlayer = null;
 
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
 		init();
 	});
+
+/*
+	function onYouTubeIframeAPIReady() {
+	  player = new YT.Player('youtubePlayer', {
+	    events: {
+	      'onReady': onPlayerReady
+	    }
+	  });
+	}
+
+	function onPlayerReady(event) {
+	  // Воспроизведение видео
+	  // player.playVideo();
+
+	  // Остановка видео
+	  // player.stopVideo();
+	}
+*/
+	
 }
 
 function init() {
@@ -28,6 +48,10 @@ function init() {
 		});
 	});
 }
+
+
+
+
 
 function loadCourse(courseFolder, callback) {
 	courseRunner.loadCourse( courseFolder, callback);
