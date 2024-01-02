@@ -106,6 +106,10 @@ class Lesson {
 		this.contentLoaded = false;
 	}
 
+	get parentCourse() {
+		return this.parentModule.course;
+	}
+
 	get path() {
 		return `${this.parentModule.path}/${this.file}`;
 	}

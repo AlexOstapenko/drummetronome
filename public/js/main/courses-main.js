@@ -102,6 +102,16 @@ function onClickParentModule(moduleFullID) {
 /////////////////////////////////////
 
 function processURLParams() {
+
+	let origin = window.location.origin;
+	let pathname = window.location.pathname;
+	var fullBaseUrl = origin + pathname;
+	console.log(
+`origin = ${origin}
+pathname = ${pathname}
+full = ${origin}${pathname}`);
+
+
     let urlString = window.location.href;
     let url = new URL(urlString);
 
@@ -127,4 +137,11 @@ function gotoRandomExercise(idName, counterName) {
 		element.scrollIntoView();
 	}
 }
+
+function onClickGenerateNewRhythm(rhythmPlayerControlID) {
+	if ( !courseRunner.lessonPage ) return;
+	courseRunner.lessonPage.changeRandomRhythm(rhythmPlayerControlID);
+}
+
+
 

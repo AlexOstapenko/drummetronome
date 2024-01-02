@@ -1,12 +1,14 @@
 class CustomTagParser {
 
-	static parseRhythmPlayerTags(content, lessonPage) {
+	/*
+	Context is the parent object that should have method createRhythmPlayerControl( context )
+	*/
+	static parseRhythmPlayerTags(content, context) {
 		const customTag = "rhythmplayer";
 
 		content = CustomTagParser.replaceAllTags( content, customTag, (innerContent, params, fullTagText) => {
-			let rhythmPlayerControl = lessonPage.createRhythmPlayerControl( lessonPage );
-			let xmlText = fullTagText;
-			rhythmPlayerControl.setXML(xmlText);
+			let rhythmPlayerControl = context.createRhythmPlayerControl( context );
+			rhythmPlayerControl.setXML(fullTagText);
 			let html = 
 			`<div id="rhythm-player-control-${rhythmPlayerControl.id}">
 				${rhythmPlayerControl.render()}
@@ -98,21 +100,22 @@ class CustomTagParser {
 	// to some particular lesson or module.
 	// <ref# params>Text</ref#>
 	// params could be: module="" lesson="", either both or just the module.
-	static parseInternalReferences(text, lesson) {
+	// context is an object {course: , module: , lesson: }. Module and lesson are optional.
+	static parseInternalReferences(text, context) {
 		const customTag = "ref#";
 		text = CustomTagParser.replaceAllTags( text, customTag, (innerContent, params) => {
 
 			if (params.module && params.lesson) {// this is reference to a lesson
-				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
-				let lessonID = Course.makeLessonID(lesson.parentModule.course.id, moduleFolder, params.lesson );
+				let moduleFolder = params.module === "#" ? context.module.moduleFolder : params.module;
+				let lessonID = Course.makeLessonID(context.course.id, moduleFolder, params.lesson );
 				let internalRefHTML =  
 				`<span onclick='onClickLessonPreview("${lessonID}");' class='inner-reference'>${innerContent}</span>`;
 
 				return internalRefHTML;
 			}
 			else if (params.module) { // this is reference to a module
-				let moduleFolder = params.module === "#" ? lesson.parentModule.moduleFolder : params.module;
-				let moduleID = Course.makeModuleID(lesson.parentModule.course.id, moduleFolder);
+				let moduleFolder = params.module === "#" ? context.module.moduleFolder : params.module;
+				let moduleID = Course.makeModuleID(context.course.id, moduleFolder);
 				let internalRefHTML =  `<span onclick='onClickModulePreview("${moduleID}");' 
 								class='inner-reference'>${innerContent}</span>`;
 				return internalRefHTML;
@@ -134,12 +137,6 @@ class CustomTagParser {
 				${innerContent}
 				<img src="img/repetition_line_2.png"/>:${params.n}</div>`;
 				return html;
-
-				/*let html = 
-				`<div><b style='color: gray'>---------</b>
-				${innerContent}
-				<b style='color: gray;'>---------</b>:${params.n}</div>`;
-				return html;*/
 			});
 
 		return result;
@@ -160,6 +157,26 @@ class CustomTagParser {
 						class="${className}">${innerContent}
 				</button>`;
 				return html;
+			});
+
+		return result;
+	}
+
+	/*
+	Inner content of the tag is the base to build a random exercise. It is expected to be:
+	
+	phraseA-1, phraseA-2, praseA-3, ...
+	-----
+	phraseB-1, phraseB-2, ...
+	-----
+	...
+
+	*/
+	static parseRandomExerciseGenerator(text, context) {
+		const customTag = "random-exercise-generator";
+		let result = CustomTagParser.replaceAllTags( text, customTag, 
+			(innerContent, params) => {
+				return RandomExerciseRenderer.render(context, innerContent, params);
 			});
 
 		return result;
@@ -317,4 +334,74 @@ class IntCounter {
 		return this.value;
 	}
 }
+
+class RandomExerciseRenderer {
+
+	static createRhythmCardText( instrument, rhythmText, tempo ) {
+		let result =
+`tempo: ${tempo}
+#####
+instrument: ${instrument}
+rhythm:
+${rhythmText}`;
+
+		return result;
+	};
+
+	static createRhythmPlayerXML( instrument, rhythmText, tempo ) {
+		let result = 
+			`<rhythmplayer>
+				<rhythmcard>
+				${RandomExerciseRenderer.createRhythmCardText(instrument, rhythmText, tempo)}
+				</rhythmcard>
+			</rhythmplayer>`;
+		return result;
+	}
+
+	static textToShowHTML(rhythmText) {
+		let html = (idx, line) => {
+			return `<div style='color: gray; display: inline-block; min-width: 40px'>${idx}</div>${line}`;
+		};
+		return rhythmText.trim().split("\n").map((line,idx) => `${html(idx+1, line)}`).join("\n")
+	}
+
+	static render(context, innerTagContent, params) {
+
+		let tempo = parseInt( params.tempo ) || 80;
+		let numOfLines = parseInt(params.lines) || 4;
+		let limit = parseInt( params.limit) || 2;
+		let instrument = params.instrument;
+
+		// generate random rhythm based on innerContent which should be a set of variations.
+		let rhythmText = ExerciseGenerator.generateSpeedsJugglingExercise(innerTagContent, limit, numOfLines );
+
+		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, tempo);
+			
+		rhythmPlayerControl.setXML(xmlText);
+		rhythmPlayerControl.additionalTitleHtml = 
+		`<div class='random-exercice-generator-button-div'>
+			<button class="button-random-exercise"
+				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id})'>Новое упражнение
+			</button>
+		</div>`;
+		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
+			RandomExerciseRenderer.textToShowHTML(rhythmText), "big"
+		);
+
+		let id = rhythmPlayerControl.id;
+
+		let html = 
+		`<div id="div-random-rhythms-params${id}" style="display: none">
+			instrument="${instrument}" limit="${limit}" numOfLines="${numOfLines}" tempo="${tempo}"
+		</div>
+		<div id='div-random-rhythms-base-${id}' style="display: none">${innerTagContent}</div>
+		<div id="rhythm-player-control-${id}">
+			${rhythmPlayerControl.render()}
+		</div>`;
+
+		return html;
+	}
+}
+
 

@@ -16,6 +16,7 @@ class RhythmPlayerControl {
 		this.buttState = "PLAY";
 		this.htmlForDisplayText = "";
 		this.durationTimer = new PlayingDurationTimer("");
+		this.additionalTitleHtml = "";
 	}
 
 	setID(id) {
@@ -28,8 +29,8 @@ class RhythmPlayerControl {
 		let html = "";
 		let xmlParser = new DOMParser();
 		let xmlDoc = xmlParser.parseFromString( xml, "text/xml" );
-
-		let rhythmCardText = nonEmptyValues( xmlDoc.getElementsByTagName("rhythmcard")[0].textContent.split("\n")).join("\n");
+		let rhythmCardNode = xmlDoc.getElementsByTagName("rhythmcard")[0];
+		let rhythmCardText = nonEmptyValues( rhythmCardNode.textContent.split("\n")).join("\n");
 		
 		this.rhythmCard = new RhythmCard();
 	    this.rhythmCard.parseRhythmCardText( rhythmCardText );
@@ -47,10 +48,28 @@ class RhythmPlayerControl {
 	    });
 	}
 
+	/*
+		This method can be applied to change the rhythm of the player at any time.
+	*/
+	setRhythmCard(rcText, textToShow, textSize) {
+		let rhythmCardText = nonEmptyValues( rcText.split("\n") ).join("\n");
+		this.rhythmCard = new RhythmCard();
+	    this.rhythmCard.parseRhythmCardText( rhythmCardText );
+	    this.htmlForDisplayText = this.renderDisplayRhythmFromText(textToShow, textSize);
+	}
+
 	render() {
-		
 		let html = 
-	    `<div class='rhythm-player-control-container'>
+	    `<div id="rhythm-player-control-container${this.id}" class='rhythm-player-control-container'>
+	    	${this.getInnerHTML()}
+	    </div>`;
+
+		return html;
+	}
+
+	getInnerHTML() {
+		let html =
+			`${this.additionalTitleHtml}
 	    	<span class='rhythm-player-control-title'>${CURR_LOC().controls.playerTitle}</span>
 	    	${this.htmlForDisplayText}
 	    	<div class="rhythm-player-control-button-container">
@@ -60,41 +79,60 @@ class RhythmPlayerControl {
 		    	</button>
 	    	</div>
             <div id='divDurationTimer_${this.id}' class='divPlayingDurationTimer'></div>
-	    	<div id='rhythm-player-control-tempo-control_${this.id}'>${this.tempoCtrl.render()}</div>
-	    </div>`;
+	    	<div id='rhythm-player-control-tempo-control_${this.id}'>${this.tempoCtrl.render()}</div>`;
 
-		return html;
+	    	return html;
+	}
+
+
+	reRender() {
+		let div = document.getElementById( `rhythm-player-control-container${this.id}` );
+		if (div) div.innerHTML = this.getInnerHTML();
 	}
 
 	// the rhythm text that we show to the user can be defined in <displayrhythm> tag.
     // but if such tag is absent – use rhythm text from the first instrument in rhythm card
 	calculateHTMLForDisplayText(xmlDoc) {
 		const tagDisplayRhythm = 'displayrhythm';
+		let displayRhythmText = "";
+		let textSize = "big";
+
+		// rhythm text may have comments as: // blah blah...
+		// remove "//" in all comment-type lines
+		function processCommentsInRhythmText(text) {
+			let lines = text.split("\n");
+			return lines.map( line => {
+				if ( line.trim().indexOf( "//")==0 ) 
+					return line.substring( 2 );
+				else return line;
+			} ).join("\n");
+		}
+
 		let displayRhythmNode = xmlDoc.getElementsByTagName( tagDisplayRhythm );
-		if (displayRhythmNode && displayRhythmNode.length > 0 )
+		if (displayRhythmNode && displayRhythmNode.length > 0 ) { // there is a child tag displayrhythm
 			displayRhythmNode = displayRhythmNode[0];
-		else { 
-			// take html from rhythm card 
-			let xml = 
-			`<${tagDisplayRhythm} size='big'>
-				${this.rhythmCard.records[0].rhythm}
-			</${tagDisplayRhythm}>`;
-			let xmlParser = new DOMParser();
-			xmlDoc = xmlParser.parseFromString( xml, "text/xml" );
-			displayRhythmNode = xmlDoc.documentElement;
+			
+			// calculate text size
+			textSize = displayRhythmNode.hasAttribute("size") ? displayRhythmNode.getAttribute("size") : "big";
+			if ( ["big", "small"].indexOf(textSize)===-1 ) textSize = "big";
+			// get text
+			displayRhythmText = displayRhythmNode.innerHTML;
+			if (displayRhythmText=== "=")
+				displayRhythmText = processCommentsInRhythmText( this.rhythmCard.records[0].rhythm )
+		}
+		else {  // there is no special child tag displayrhythm, so copy from rhythm-card
+			displayRhythmText = processCommentsInRhythmText( this.rhythmCard.records[0].rhythm );
 		}
 
 		//this.htmlForDisplayText = this.lessonRenderer.renderDisplayRhythmTag( displayRhythmNode );
-		this.htmlForDisplayText = this.renderDisplayRhythmNode( displayRhythmNode );
+		this.htmlForDisplayText = this.renderDisplayRhythmFromText( displayRhythmText, textSize );
 	}
 
-	renderDisplayRhythmNode(xmlNode) {
-		let textSize = xmlNode.hasAttribute("size") ? xmlNode.getAttribute("size") : "big";
+	renderDisplayRhythmFromText(text, size) {
+		let textSize = size || "big";
 		let additionalClass = "rhythm-to-display-text-" + textSize;
-		let textToDisplay = xmlNode.innerHTML;
-		textToDisplay = nonEmptyValues( textToDisplay.split("\n")).join("<br>");
-
-		return `<div class='rhythm-to-display ${additionalClass}'>${textToDisplay}</div>`;
+		text = nonEmptyValues( text.split("\n")).join("<br>");
+		return `<div class='rhythm-to-display ${additionalClass}'>${text}</div>`;
 	}
 
 	setTempoControlVisibility(isVisible) {
@@ -122,9 +160,9 @@ class RhythmPlayerControl {
 	get buttonClass() {
 		return this.buttState === BUTTON_STATE_PLAY ? "button-play" : "button-stop";
 	}
-
-
 }
+
+
 
 
 

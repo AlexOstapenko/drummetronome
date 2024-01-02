@@ -1,0 +1,22 @@
+{
+	"name" : "Жонглирование скоростями",
+	"lessons" : [
+		{
+			"name" : "Четыре скорости",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Диалог скоростей",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Жонглирование скоростями",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "Генератор случайных упражнений",
+			"file" : "lesson-4.html"
+		}
+	],
+	"status" : "not-available"
+}

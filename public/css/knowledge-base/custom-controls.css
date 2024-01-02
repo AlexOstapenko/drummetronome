@@ -26,3 +26,42 @@
 .custom-foldable-section-content {
 	padding-left: 20px;
 }
+
+
+/*
+RANDOM EXERCISE BUTTON
+*/
+
+.button-random-exercise {
+	border-radius: 5px;
+	font-size: 1em;
+	padding: 5px;
+	background-color: #f2ac67;
+	border: 1px solid gray;
+	cursor: pointer;
+}
+
+.button-random-exercise:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-random-exercise-modest {
+	font-size: 1em;
+	background-color: transparent;
+	border-radius: 5px;
+	border: 0.5px solid black;
+	cursor: pointer;
+	padding: 3px;
+}
+
+.button-random-exercise-modest:hover {
+  transform: scale(1.02);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.random-exercice-generator-button-div {
+	width: 100%;
+	text-align: center;
+}
+

@@ -2,18 +2,6 @@
 	"name" : "Как научитсья играть вариации?",
 	"lessons" : [
 		{
-			"name" : "Подход",
-			"file" : "lesson-1.html"
-		},
-		{
-			"name" : "Где 2, там и 4",
-			"file" : "lesson-2.html"
-		},
-		{
-			"name" : "Жонглирование скоростями",
-			"file" : "lesson-3.html"
-		},
-		{
 			"name" : "12-пальцевые роллы",
 			"file" : "lesson-7.html"
 		},

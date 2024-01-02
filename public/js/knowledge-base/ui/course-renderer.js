@@ -73,7 +73,7 @@ class CourseRenderer {
 			return html;
 		};
 
-		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML );
+		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML, {course: course, module: courseModule});
 		let moduleNumber = courseModule.getModuleNumber();
 		let html = 
 		`<div class="module-page">
@@ -102,8 +102,10 @@ class CourseRenderer {
 		this.divContainer.innerHTML = html;	
 	}
 
-	parseCustomTags(content) {
-		return CustomTagParser.parseFoldableSections( content );
+	parseCustomTags(content, context) {
+		content = CustomTagParser.parseFoldableSections( content );
+		content = CustomTagParser.parseInternalReferences( content, context );
+		return content;
 	}
 }
 
