@@ -176,12 +176,22 @@ class CustomTagParser {
 		const customTag = "random-exercise-generator";
 		let result = CustomTagParser.replaceAllTags( text, customTag, 
 			(innerContent, params) => {
-				return RandomExerciseRenderer.render(context, innerContent, params);
+				return RandomExerciseRenderer.renderRandomExerciseGenerator(context, innerContent, params);
 			});
 
 		return result;
 	}
-	
+
+	static parseRhythmRandomizer(text, context) {
+		const customTag = "rhythm-randomizer";
+		let result = CustomTagParser.replaceAllTags( text, customTag, 
+			(innerContent, params) => {
+				return RandomExerciseRenderer.renderRhythmRandomizer(context, innerContent, params);
+			});
+
+		return result;
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -365,13 +375,16 @@ ${rhythmText}`;
 		return rhythmText.trim().split("\n").map((line,idx) => `${html(idx+1, line)}`).join("\n")
 	}
 
-	static render(context, innerTagContent, params) {
+	static renderRandomExerciseGenerator(context, innerTagContent, params) {
 
+		// universal params
 		let tempo = parseInt( params.tempo ) || 80;
-		let numOfLines = parseInt(params.lines) || 4;
-		let limit = parseInt( params.limit) || 2;
 		let instrument = params.instrument;
 
+		// this randomize operation specific
+		let numOfLines = parseInt(params.lines) || 4;
+		let limit = parseInt( params.limit) || 2;
+		
 		// generate random rhythm based on innerContent which should be a set of variations.
 		let rhythmText = ExerciseGenerator.generateSpeedsJugglingExercise(innerTagContent, limit, numOfLines );
 
@@ -382,7 +395,8 @@ ${rhythmText}`;
 		rhythmPlayerControl.additionalTitleHtml = 
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
-				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id})'>Новое упражнение
+				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
+							${ExerciseGenerator.TYPE.speedJuggling})'>Новое упражнение
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
@@ -393,7 +407,44 @@ ${rhythmText}`;
 
 		let html = 
 		`<div id="div-random-rhythms-params${id}" style="display: none">
-			instrument="${instrument}" limit="${limit}" numOfLines="${numOfLines}" tempo="${tempo}"
+			instrument="${instrument}" limit="${limit}" numOfLines="${numOfLines}" tempo="${tempo}" textSize="big"
+		</div>
+		<div id='div-random-rhythms-base-${id}' style="display: none">${innerTagContent}</div>
+		<div id="rhythm-player-control-${id}">
+			${rhythmPlayerControl.render()}
+		</div>`;
+
+		return html;
+	}
+
+	static renderRhythmRandomizer( context, innerTagContent, params ) {
+		// universal params
+		let tempo = parseInt( params.tempo ) || 80;
+		let instrument = params.instrument;
+
+		// generate random rhythm based on innerContent which should be a set of variations.
+		let rhythmText = ExerciseGenerator.generateRandomizedRhythm(innerTagContent);
+
+		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, tempo);
+			
+		rhythmPlayerControl.setXML(xmlText);
+		rhythmPlayerControl.additionalTitleHtml = 
+		`<div class='random-exercice-generator-button-div'>
+			<button class="button-random-exercise"
+				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
+					${ExerciseGenerator.TYPE.rhythmRandomizer})'>Случайный ритм
+			</button>
+		</div>`;
+		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
+			RandomExerciseRenderer.textToShowHTML(rhythmText), "small"
+		);
+
+		let id = rhythmPlayerControl.id;
+
+		let html = 
+		`<div id="div-random-rhythms-params${id}" style="display: none">
+			instrument="${instrument}" tempo="${tempo}" textSize="small"
 		</div>
 		<div id='div-random-rhythms-base-${id}' style="display: none">${innerTagContent}</div>
 		<div id="rhythm-player-control-${id}">

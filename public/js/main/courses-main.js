@@ -8,26 +8,7 @@ let youtubePlayer = null;
 function onDocumentLoaded() {
 	instrumentManager.loadInstrumentDefinitions( function() {
 		init();
-	});
-
-/*
-	function onYouTubeIframeAPIReady() {
-	  player = new YT.Player('youtubePlayer', {
-	    events: {
-	      'onReady': onPlayerReady
-	    }
-	  });
-	}
-
-	function onPlayerReady(event) {
-	  // Воспроизведение видео
-	  // player.playVideo();
-
-	  // Остановка видео
-	  // player.stopVideo();
-	}
-*/
-	
+	});	
 }
 
 function init() {
@@ -47,6 +28,19 @@ function init() {
 			 });
 		});
 	});
+
+	ExerciseGenerator.generateRandomizedRhythm( 
+		`!A= D L, (D L L L)/2, (D - L L)/2, (D L L -)/2, (D L - L)/2;
+	!B= PA L, (PA L L L)/2, (PA - L L)/2, (PA L L -)/2, (PA L - L)/2;
+	rhythm:
+		D - PA -
+		!A !B
+		D - PA -
+		!A !B
+		D - PA -
+		!A !B
+		!A !B
+		!A !B`);
 }
 
 
@@ -138,10 +132,7 @@ function gotoRandomExercise(idName, counterName) {
 	}
 }
 
-function onClickGenerateNewRhythm(rhythmPlayerControlID) {
+function onClickGenerateNewRhythm(rhythmPlayerControlID, randomizerType) {
 	if ( !courseRunner.lessonPage ) return;
-	courseRunner.lessonPage.changeRandomRhythm(rhythmPlayerControlID);
+	courseRunner.lessonPage.changeRandomRhythm(rhythmPlayerControlID, randomizerType); 
 }
-
-
-

@@ -114,7 +114,9 @@ class LessonPage {
 		content = CustomTagParser.parseInternalReferences( content, 
 			{course: lesson.parentCourse, module: lesson.parentModule, lesson: lesson} );
 
+		// random exercises
 		content = CustomTagParser.parseRandomExerciseGenerator(content, this);
+		content = CustomTagParser.parseRhythmRandomizer( content, this );
 
 		return content;
 	}
@@ -152,21 +154,28 @@ class LessonPage {
 		return (prevLesson || nextLesson) ? html : "";
 	}
 
-	changeRandomRhythm(rhythmPlayerID) {
+	changeRandomRhythm(rhythmPlayerID, randomizerType) {
+
+		let rhythmPlayerControl = this.rhythmPlayers.getRhythmPlayerControl( rhythmPlayerID );
 		let divOptions = document.getElementById( `div-random-rhythms-base-${rhythmPlayerID}` );
 		let divParams =  document.getElementById( `div-random-rhythms-params${rhythmPlayerID}` );
-		let plainOptionsForVariations = divOptions.textContent;
+		let plainTextWithVariations = divOptions.textContent;
 		let params = CustomTagParser.parseParams( divParams.textContent.trim() );
-		let rhythmPlayerControl = this.rhythmPlayers.getRhythmPlayerControl( rhythmPlayerID );
-
-		let randomRhythmText = ExerciseGenerator.generateSpeedsJugglingExercise( 
-			plainOptionsForVariations, parseInt( params.limit ), parseInt( params.numOfLines ) );
+		let randomRhythmText = "";
+		
+		if (randomizerType === ExerciseGenerator.TYPE.speedJuggling) {
+			randomRhythmText = ExerciseGenerator.generateSpeedsJugglingExercise( 
+			plainTextWithVariations, parseInt( params.limit ), parseInt( params.numOfLines ) );
+		} else if (randomizerType === ExerciseGenerator.TYPE.rhythmRandomizer ) {
+			randomRhythmText = ExerciseGenerator.generateRandomizedRhythm( plainTextWithVariations ); 
+		}
 
 		rhythmPlayerControl.setRhythmCard( RandomExerciseRenderer.createRhythmCardText( 
 			params.instrument, randomRhythmText, parseInt(params.tempo) ),
-			RandomExerciseRenderer.textToShowHTML(randomRhythmText), "big");
+			RandomExerciseRenderer.textToShowHTML(randomRhythmText), params.textSize);
 		rhythmPlayerControl.reRender();
 	}
+	
 }
 
 
