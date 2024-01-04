@@ -21,14 +21,7 @@ class LessonPage {
 		let lessonNumber = lesson.getLessonNumber();
 		let lessonHTML = this.renderHeader(lesson);
 
-		let isLessonAvailable = true;
-		if ( window.location.href.indexOf( "localhost:" ) === -1 ) {
-			let lessonNotAvailable = 
-				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
-				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
-
-			isLessonAvailable = !lessonNotAvailable;
-		}
+		let isLessonAvailable = this.isLessonAvailable(lesson);
 
 		if ( !isLessonAvailable )
 			lessonHTML += 
@@ -48,6 +41,18 @@ class LessonPage {
 		let html = `<div class='lesson'>${lessonHTML}</div>`;
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;
+	}
+
+	isLessonAvailable(lesson) {
+		let isAvailable = true;
+		if ( window.location.href.indexOf( "localhost:" ) === -1 ) {
+			let lessonNotAvailable = 
+				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
+				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
+
+			isAvailable = !lessonNotAvailable;
+		}
+		return isAvailable;
 	}
 
 	// Generates links to previous page

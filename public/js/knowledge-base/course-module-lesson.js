@@ -51,6 +51,12 @@ class Course {
 			if (someModule.moduleFolder === this.modules[i].moduleFolder) return i;
 		return -1;
 	}
+
+	getModuleFolderByIdx(idx) {
+		let result = null;
+		if ( idx >=0 && idx < this.moduleFolders.length) result = this.moduleFolders[idx];
+		return result;
+	}
 }
 
 class CourseModule {

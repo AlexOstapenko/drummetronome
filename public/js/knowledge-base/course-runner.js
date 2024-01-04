@@ -30,12 +30,14 @@ class CourseRunner {
 	loadCourse(courseFolderName, callback) {
 
 		let courseLoader = new CourseLoader();
-		let path = "rhythm-knowledge-base/courses/" + courseFolderName;
-		courseLoader.loadCoursePreview( path, course => {
+		//let path = "rhythm-knowledge-base/courses/" + courseFolderName;
+		courseLoader.loadCoursePreview( courseFolderName, course => {
 				this.loadedCourses.push(course);
 				this.courseRenderer.renderCoursePreview(course);
 				if (callback) callback( course );
-			} );;
+
+				this.updateBrowserURL(course.folderName);
+			} );
 	}
 
 	showCourseModules(courseID, callback) {
@@ -46,17 +48,22 @@ class CourseRunner {
 				courseLoader.loadModulesPreviews( course, course => {
 					this.courseRenderer.renderCourse(course);
 					if (callback) callback( course );
+					this.updateBrowserURL(course.folderName);
 				});
 			});
 		}
-		else this.courseRenderer.renderCourse(course);
+		else {
+			this.updateBrowserURL(course.folderName);
+			this.courseRenderer.renderCourse(course);
+		}
 	}
 
 	showModule(moduleFullID, callback) {
 
-		let whenReady = (module) => {
-			this.courseRenderer.renderModule( module );
-			if (callback) callback(module);
+		let whenReady = (aModule) => {
+			this.updateBrowserURL(aModule.course.folderName, aModule.moduleFolder);
+			this.courseRenderer.renderModule( aModule );
+			if (callback) callback(aModule);
 		};
 
 		let m = this.getModule(moduleFullID);
@@ -74,6 +81,10 @@ class CourseRunner {
 	showLesson( fullLessonID, callback ) {
 
 		let whenReady = (lesson) => {
+			this.updateBrowserURL(lesson.parentModule.course.folderName, 
+				lesson.parentModule.moduleFolder, 
+				lesson.file.split(".")[0] );
+
 			this.lessonPage.render( lesson );
 			if (callback) callback( lesson );
 		}
@@ -95,5 +106,21 @@ class CourseRunner {
 
 	stop() {
 		this.lessonPage.stopPlaying();	
+	}
+
+	updateBrowserURL(course, moduleFolder, lesson) {
+		let fullBaseUrl = window.location.origin + window.location.pathname;
+		let part2 = "?";
+		if (!course) return;
+		part2 += `course=${course}`;
+		if (moduleFolder) {
+			part2 += `&module=${moduleFolder}`;
+			if (lesson) part2 += `&lesson=${lesson}`;
+		}
+
+		var newURL = fullBaseUrl + part2;
+
+		// Update URL in the address bar
+		window.history.pushState({path: newURL}, null, newURL);
 	}
 }

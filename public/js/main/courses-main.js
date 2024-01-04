@@ -21,31 +21,21 @@ function init() {
 	if (openByDefault && openByDefault.course)
 	courseRunner.loadCourse( openByDefault.course, course => {
 		courseRunner.showCourseModules(course.id, course => {
-			if (openByDefault.module)
-				courseRunner.showModule(Course.makeModuleID(course.id, openByDefault.module), module => {
-					if (openByDefault.lesson)
-			 			courseRunner.showLesson( module.id + "@@@" + openByDefault.lesson );
-			 });
+			// openByDefault.module may be the folder name of the module or order number (e.g. @5). 
+			// If it's the number, we have to get the folder name by it's index
+			if (openByDefault.module) {
+				if (openByDefault.module.indexOf("@")===0)
+					openByDefault.module = course.getModuleFolderByIdx(parseInt(openByDefault.module.substring(1))-1);
+
+				if (openByDefault.module)
+					courseRunner.showModule(Course.makeModuleID(course.id, openByDefault.module), module => {
+						if (openByDefault.lesson)
+				 			courseRunner.showLesson( module.id + "@@@" + openByDefault.lesson );
+					});
+			}
 		});
 	});
-
-	ExerciseGenerator.generateRandomizedRhythm( 
-		`!A= D L, (D L L L)/2, (D - L L)/2, (D L L -)/2, (D L - L)/2;
-	!B= PA L, (PA L L L)/2, (PA - L L)/2, (PA L L -)/2, (PA L - L)/2;
-	rhythm:
-		D - PA -
-		!A !B
-		D - PA -
-		!A !B
-		D - PA -
-		!A !B
-		!A !B
-		!A !B`);
 }
-
-
-
-
 
 function loadCourse(courseFolder, callback) {
 	courseRunner.loadCourse( courseFolder, callback);
@@ -55,6 +45,7 @@ function onClickLoadCourse() {
 	courseRunner.stop();
 	const courseFolderName = document.getElementById("inputCourseFolder").value;
 	courseRunner.loadCourse( courseFolderName );
+
 }
 
 function onClickCoursePreview(id, callback) {
@@ -94,30 +85,22 @@ function onClickParentModule(moduleFullID) {
 }
 
 /////////////////////////////////////
-
+// if the query in the url is:
+// course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-.html>
+// also for module it can be #<num> to define number of the module in the list (1-based)
 function processURLParams() {
-
-	let origin = window.location.origin;
-	let pathname = window.location.pathname;
-	var fullBaseUrl = origin + pathname;
-	console.log(
-`origin = ${origin}
-pathname = ${pathname}
-full = ${origin}${pathname}`);
-
 
     let urlString = window.location.href;
     let url = new URL(urlString);
 
-    let course = url.searchParams.get("course");
-    let moduleFolder = url.searchParams.get("module");
-    let lesson = url.searchParams.get("lesson");
+    let aCourse = url.searchParams.get("course");
+    let aModule = url.searchParams.get("module");
+    let aLesson = url.searchParams.get("lesson");
 
-    // if the query in the url is:
-    // course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-.html>
-    if (course) openByDefault.course = course;
-    if (moduleFolder) openByDefault.module = moduleFolder;
-    if ( lesson ) openByDefault.lesson = lesson + ".html";
+    // 
+    if (aCourse) openByDefault.course = aCourse;
+    if (aModule) openByDefault.module = aModule;
+    if (aLesson) openByDefault.lesson = aLesson + ".html";
 }
 
 function gotoRandomExercise(idName, counterName) {

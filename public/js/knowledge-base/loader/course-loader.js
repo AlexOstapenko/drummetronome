@@ -2,6 +2,7 @@ class CourseLoader {
 
 	constructor() {
 		this.idGenerator = new IDGenerator();
+		this.coursesFolder = "rhythm-knowledge-base/courses/";
 	}
 
 	get courseDescriptionFileName() { return "course-description.json"; }
@@ -14,9 +15,10 @@ class CourseLoader {
 	loadCoursePreview(folderName, callback) {
 		let course = new Course();
 		course.id = this.idGenerator.getNewID();
-		course.path = folderName;
+		course.folderName = folderName;
+		course.path = this.coursesFolder + folderName;
 
-		let courseDescriptionPath = folderName + "/" + this.courseDescriptionFileName;
+		let courseDescriptionPath = course.path + "/" + this.courseDescriptionFileName;
 		let fileLoader = new FileLoader();
 		let textFile = fileLoader.loadFile(courseDescriptionPath, text => {
 			let json = JSON.parse(text);
