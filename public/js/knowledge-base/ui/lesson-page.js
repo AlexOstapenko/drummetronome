@@ -157,21 +157,29 @@ class LessonPage {
 	changeRandomRhythm(rhythmPlayerID, randomizerType) {
 
 		let rhythmPlayerControl = this.rhythmPlayers.getRhythmPlayerControl( rhythmPlayerID );
+		this.stopPlaying();
+
 		let divOptions = document.getElementById( `div-random-rhythms-base-${rhythmPlayerID}` );
 		let divParams =  document.getElementById( `div-random-rhythms-params${rhythmPlayerID}` );
 		let plainTextWithVariations = divOptions.textContent;
 		let params = CustomTagParser.parseParams( divParams.textContent.trim() );
 		let randomRhythmText = "";
+		let precount = "";
 		
 		if (randomizerType === ExerciseGenerator.TYPE.speedJuggling) {
-			randomRhythmText = ExerciseGenerator.generateSpeedsJugglingExercise( 
+			let rhythmObj = ExerciseGenerator.generateSpeedsJugglingExercise( 
 			plainTextWithVariations, parseInt( params.limit ), parseInt( params.numOfLines ) );
+
+			randomRhythmText = rhythmObj.rhythm;
+			precount = rhythmObj.precount;
 		} else if (randomizerType === ExerciseGenerator.TYPE.rhythmRandomizer ) {
-			randomRhythmText = ExerciseGenerator.generateRandomizedRhythm( plainTextWithVariations ); 
+			let rhythmObj = ExerciseGenerator.generateRandomizedRhythm( plainTextWithVariations ); 
+			randomRhythmText = rhythmObj.rhythm;
+			precount = rhythmObj.precount;
 		}
 
 		rhythmPlayerControl.setRhythmCard( RandomExerciseRenderer.createRhythmCardText( 
-			params.instrument, randomRhythmText, parseInt(params.tempo) ),
+			params.instrument, randomRhythmText, precount, parseInt(params.tempo) ),
 			RandomExerciseRenderer.textToShowHTML(randomRhythmText), params.textSize);
 		rhythmPlayerControl.reRender();
 	}

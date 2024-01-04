@@ -1,0 +1,6 @@
+name: просто метроном
+tempo: 110
+#####
+instrument: Tar
+rhythm:
+Z2 O2:3

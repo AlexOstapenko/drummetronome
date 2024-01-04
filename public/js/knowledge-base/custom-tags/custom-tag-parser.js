@@ -347,22 +347,23 @@ class IntCounter {
 
 class RandomExerciseRenderer {
 
-	static createRhythmCardText( instrument, rhythmText, tempo ) {
+	static createRhythmCardText( instrument, rhythmText, precount, tempo ) {
 		let result =
 `tempo: ${tempo}
 #####
 instrument: ${instrument}
 rhythm:
+${precount ? precount + "\n***\n" : ""}
 ${rhythmText}`;
 
 		return result;
 	};
 
-	static createRhythmPlayerXML( instrument, rhythmText, tempo ) {
+	static createRhythmPlayerXML( instrument, rhythmText, precount, tempo ) {
 		let result = 
 			`<rhythmplayer>
 				<rhythmcard>
-				${RandomExerciseRenderer.createRhythmCardText(instrument, rhythmText, tempo)}
+				${RandomExerciseRenderer.createRhythmCardText(instrument, rhythmText, precount, tempo)}
 				</rhythmcard>
 			</rhythmplayer>`;
 		return result;
@@ -386,10 +387,12 @@ ${rhythmText}`;
 		let limit = parseInt( params.limit) || 2;
 		
 		// generate random rhythm based on innerContent which should be a set of variations.
-		let rhythmText = ExerciseGenerator.generateSpeedsJugglingExercise(innerTagContent, limit, numOfLines );
+		let rhythmObj = ExerciseGenerator.generateSpeedsJugglingExercise(innerTagContent, limit, numOfLines );
+		let rhythmText = rhythmObj.rhythm;
+		let precount = rhythmObj.precount;
 
 		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
-		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, tempo);
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo);
 			
 		rhythmPlayerControl.setXML(xmlText);
 		rhythmPlayerControl.additionalTitleHtml = 
@@ -422,11 +425,14 @@ ${rhythmText}`;
 		let tempo = parseInt( params.tempo ) || 80;
 		let instrument = params.instrument;
 
-		// generate random rhythm based on innerContent which should be a set of variations.
-		let rhythmText = ExerciseGenerator.generateRandomizedRhythm(innerTagContent);
+		// generate random rhythm based on innerContent which should be 
+		// a set of variations, precount and rhythm formula.
+		let rhythmObj = ExerciseGenerator.generateRandomizedRhythm(innerTagContent);
+		let rhythmText = rhythmObj.rhythm;
+		let precount = rhythmObj.precount;
 
 		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
-		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, tempo);
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo);
 			
 		rhythmPlayerControl.setXML(xmlText);
 		rhythmPlayerControl.additionalTitleHtml = 

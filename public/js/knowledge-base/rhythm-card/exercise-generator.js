@@ -33,6 +33,14 @@ class ExerciseGenerator {
 	Creates an array of PhraseVariations objects
 	*/
 	static parsePlainTextOfVariations(plainText, limit) {
+
+		let precount = "";
+		let arr = plainText.split( "***" );
+		if (arr.length === 2) {
+			precount = arr[0].trim();
+			plainText = arr[1].trim();
+		}
+
 		let arrResult = [];
 		plainText.split( "-----").forEach(commaSeparatedVariations => {
 			let arrVariationsOfOneOption = nonEmptyValues( commaSeparatedVariations.split(",") );
@@ -40,22 +48,24 @@ class ExerciseGenerator {
 			phraseVariationsObj.limit = limit;
 			arrResult.push( phraseVariationsObj );
 		});
-		return arrResult;
+
+		return {variations: arrResult, precount: precount };
 	}
 
 	/*
 	Takes array of PhraseVariations objects and generates an exercise 
 	*/
 	static generateSpeedsJugglingExercise(plainTextWithVariations, limit, numOfLines) {
-		let arrPhraseVariations = ExerciseGenerator.parsePlainTextOfVariations( 
-				plainTextWithVariations, limit );
-		let result = "";
+		let parseResult = ExerciseGenerator.parsePlainTextOfVariations( 
+							plainTextWithVariations, limit );
+		let arrPhraseVariations = parseResult.variations;
+		let rhythmText = "";
 		for (let i=0; i < numOfLines; i++) {
 			let phrase = null;
 			while (!phrase) phrase = getRandomElement( arrPhraseVariations ).getVariation();
-			result += phrase + "\n";
+			rhythmText += phrase + "\n";
 		}
-		return result;
+		return {rhythm: rhythmText, precount: parseResult.precount };
 	}
 
 	/*
@@ -92,17 +102,27 @@ class ExerciseGenerator {
 					variations: new PhraseVariations( nonEmptyValues( arr[1].split(",") ), -1)
 				}
 			});
+
+			let arrCheckPrecount = result.rhythmFormula.split("***");
+			if (arrCheckPrecount.length === 2) {
+				result.precount = arrCheckPrecount[0].trim();
+				result.rhythmFormula = arrCheckPrecount[1].trim();
+			}
+
 			return result;
 		}
 
 		// get the rhythm formula and phrase variation arrays
-		let {rhythmFormula, variables} = parsePlainText( plainText );
+		let parsedObj = parsePlainText( plainText );
+		let rhythm = parsedObj.rhythmFormula;
 		// replace variables to random values from the corresponding phrases array
-		variables.forEach( v => {
+		parsedObj.variables.forEach( v => {
 			let regex = new RegExp(`!${v.name}`, 'g');
-			rhythmFormula = rhythmFormula.replace(regex, v.variations.getVariation.bind(v.variations));
+			rhythm = rhythm.replace(regex, v.variations.getVariation.bind(v.variations));
 		});
+		let returnObj = { rhythm: rhythm }
+		if (parsedObj.precount) returnObj.precount = parsedObj.precount;
 
-		return rhythmFormula; // the rhythm is randomized!
+		return returnObj // the rhythm is randomized!
 	}
 }
