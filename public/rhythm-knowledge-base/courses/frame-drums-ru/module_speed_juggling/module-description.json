@@ -16,7 +16,12 @@
 		{
 			"name" : "Генератор случайных упражнений",
 			"file" : "lesson-4.html"
+		},
+		{
+			"name" : "Вопрос-ответ",
+			"file" : "lesson-5.html"
 		}
+
 	],
 	"status" : "not-available"
 }

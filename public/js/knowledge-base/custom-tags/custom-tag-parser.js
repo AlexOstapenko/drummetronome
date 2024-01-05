@@ -399,7 +399,7 @@ ${rhythmText}`;
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
 				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
-							${ExerciseGenerator.TYPE.speedJuggling})'>Новое упражнение
+							${ExerciseGenerator.TYPE.speedJuggling})'>${params.buttonLabel || "Новое упражнение"}
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
@@ -439,7 +439,7 @@ ${rhythmText}`;
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
 				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
-					${ExerciseGenerator.TYPE.rhythmRandomizer})'>Случайный ритм
+					${ExerciseGenerator.TYPE.rhythmRandomizer})'>${params.buttonLabel || "Случайный ритм"}
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(

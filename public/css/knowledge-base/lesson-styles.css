@@ -60,6 +60,15 @@
 	font-size: 1.2em;
 }
 
+.lesson-button-lesson-navigation-tiny {
+	cursor: pointer;
+	border: 0.5px solid gray;
+	color: black;
+	background-color: orange;
+	border-radius: 3px;
+	font-size: 1em;
+}
+
 .lesson-button-lesson-navigation-lesson {
 	background-color: orange;
 }

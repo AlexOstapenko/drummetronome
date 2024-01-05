@@ -57,13 +57,30 @@ class LessonPage {
 
 	// Generates links to previous page
 	renderHeader(lesson) {
+
+		let prevLesson = lesson.getPrevLesson();
+		let nextLesson = lesson.getNextLesson();
+
 		let html = 
-			`<div class='page-header'>
+		`<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-1'
 					onclick='onClickParentCourse(${lesson.parentModule.course.id})'>${CURR_LOC().course.backToCourse}</span> |
 				<span class='lesson-header-link lesson-header-link-2'
-					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${CURR_LOC().course.backToModule}</span> 
-			</div>`;
+					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${CURR_LOC().course.backToModule}</span> `;
+		if (prevLesson || nextLesson) html += " | ";
+
+		if (prevLesson) {
+			html += `<button class="lesson-button-lesson-navigation-tiny"
+						onclick='onClickLessonPreview("${prevLesson.id}")'>&leftarrow;</button> `;
+		}
+
+		if (nextLesson) {
+			html += `<button class="lesson-button-lesson-navigation-tiny"
+						onclick='onClickLessonPreview("${nextLesson.id}")'>&rightarrow;</button>`;
+		}
+
+		html += `</div>`;
+
 		return html;
 	}
 
