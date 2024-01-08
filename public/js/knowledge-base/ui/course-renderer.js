@@ -105,6 +105,7 @@ class CourseRenderer {
 	parseCustomTags(content, context) {
 		content = CustomTagParser.parseFoldableSections( content );
 		content = CustomTagParser.parseInternalReferences( content, context );
+		content = CustomTagParser.parseGlobalValues( content, context );
 		return content;
 	}
 }

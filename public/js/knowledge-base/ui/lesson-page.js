@@ -129,6 +129,8 @@ class LessonPage {
 		content = resultIntCounters.text;
 		// save the counters for future possible uses like function gotoRandomExercise in courses-main.js
 		this.arrIntCounters = resultIntCounters.intCounters; 
+
+		content = CustomTagParser.parseGlobalValues( content, {course: lesson.parentCourse} );
 		content = CustomTagParser.parseFoldableSections( content );
 		content = CustomTagParser.parseRhythmRepeat( content );
 		content = CustomTagParser.parseRhythmPlayerTags( content, this );

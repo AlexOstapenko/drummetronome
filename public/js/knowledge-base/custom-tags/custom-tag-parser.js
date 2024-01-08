@@ -192,6 +192,27 @@ class CustomTagParser {
 		return result;
 	}
 
+	// searches in text all occurencies of $g[name] - global variables.
+	// Context obj = {course: , module: , lesson: }
+	static parseGlobalValues( text, contextObj ) {
+
+		function replaceSubstrings(inputString, callback) {
+		    const regex = /\$g\[(.*?)\]/g;
+		    return inputString.replace(regex, (_, name) => callback(name));
+		}
+
+		function replaceValue(name) {
+			let values = {
+				"nothing-yet-defined" : "PLACEHOLDER"
+			}	
+
+			if (values[name]) return values[name];
+			else return contextObj.course.courseRunner.getGlobalValue(name, contextObj);
+		}
+
+		return replaceSubstrings( text, replaceValue );
+	}
+
 	////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -443,7 +464,7 @@ ${rhythmText}`;
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
-			RandomExerciseRenderer.textToShowHTML(rhythmText), "small"
+			RandomExerciseRenderer.textToShowHTML(rhythmText), params.size || "small"
 		);
 
 		let id = rhythmPlayerControl.id;

@@ -12,6 +12,7 @@ class Course {
 			icon: "",
 			large: ""
 		}
+		this.courseRunner = null;
 	}
 
 	modulePreviewsLoaded() {

@@ -2,6 +2,10 @@
 	"name" : "Канджира-стайл",
 	"lessons" : [
 		{
+			"name" : "Техника канджиры",
+			"file" : "lesson-1.html"
+		},
+		{
 			"name" : "Триольное тремоло",
 			"file" : "lesson-5.html"
 		},
