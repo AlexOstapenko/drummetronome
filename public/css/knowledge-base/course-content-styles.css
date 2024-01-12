@@ -26,3 +26,34 @@
 .rhythm-outdent {
 	margin: 0px 20px;
 }
+
+.text-card-style {
+	padding: 10px;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.text-card-blue {
+	background-color: #6dcff6;
+}
+
+.text-card-orange {
+	background-color: #fdc689;
+}
+
+.text-card-pink {
+	background-color: #f5989d;
+}
+
+.text-card-violet {
+	background-color: #a186be;
+}
+
+.text-card-yellow {
+	background-color: #fff799;
+}
+
+.text-card-green {
+	background-color: #a3d39c;
+}
+

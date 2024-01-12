@@ -70,9 +70,8 @@ D T :2 T D D :3 T :5
 class ExpressionParser {
 
 	constructor() {
-
+		this.varValueInBrackets = true;
 	}
-
 
 	/*
 	In the beginning you can define variables. For example:
@@ -98,22 +97,24 @@ class ExpressionParser {
 	      );
 	    }
 
-	   function replaceVar( text, varName, varValue) {
+	   let replaceVar = ( text, varName, varValue) => {
 	        let startIdx = 0;
 	        let result = "";
 	        let idx = text.indexOf(varName, startIdx);
 	        while (idx>=0) {
 	            let endIdx = idx + varName.length;
 	            if ( isSeparateWord(text, idx, endIdx) ) {
-	                text = text.substring(0, idx) + ' (' + varValue.trim() +')' + text.substring( endIdx ); 
+	            	if ( this.varValueInBrackets )
+						text = text.substring(0, idx) + ' (' + varValue.trim() +')' + text.substring( endIdx ); 
+					else
+						text = text.substring(0, idx) + varValue.trim() + text.substring( endIdx ); 
 	            } else startIdx = endIdx;
 	            idx = text.indexOf(varName, startIdx);
 	        }
 	        return text;
-
 	    }
 
-		function processFirstVariable(text) {
+		let processFirstVariable = (text) => {
 			let idx = text.indexOf( "=" );
 			if (idx===-1) return text;
 

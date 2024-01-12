@@ -6,12 +6,16 @@
 			"file" : "lesson-1.html"
 		},
 		{
-			"name" : "Подборка ритмов на 4 счета",
+			"name" : "Разные ритмы для вашей копилки",
 			"file" : "lesson-2.html"
 		},
 		{
 			"name" : "Подборка ритмов на 6 счетов",
 			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "Нечетные ритмы",
+			"file" : "lesson-4.html"
 		}
 	],
 	"status" : "not-available"

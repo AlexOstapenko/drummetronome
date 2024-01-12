@@ -27,7 +27,7 @@ class FileLoader {
 	                }
 	            })
 	            .catch(error => {
-	                console.error(`Ошибка при загрузке файла ${filePath}: ${error.message}`);
+	                console.error(`Ошибка при загрузке файла ${filePath}: ${error.message} \n${error.stack}`);
 	                filesToLoad--;
 
 	                if (filesToLoad === 0) {

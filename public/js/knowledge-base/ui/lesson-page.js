@@ -109,8 +109,10 @@ class LessonPage {
 			{A: "</f-s>", B: "</foldable-section>"},
 			{A: "<r-e-b", B: "<random-exercise-button"},
 			{A: "</r-e-b>", B: "</random-exercise-button>"},
-			{A: "<r-v-d/>", B: `<div><img src="../img/delimiter_curve.png"/></div>`}
-			//{A: "<r-v-d/>", B: `<div style="border:0.5px solid #aaaaaa"> </div>`}
+			{A: "<r-v-d/>", B: `<div><img src="../img/delimiter_curve.png"/></div>`},
+			{A: "<t-c", B: `<text-card`},
+			{A: "</t-c>", B: `</text-card>`}
+			
 		];
 		// replace all chortcuts: 
 		arrShortcuts.forEach( shortcut => {
@@ -130,6 +132,7 @@ class LessonPage {
 		// save the counters for future possible uses like function gotoRandomExercise in courses-main.js
 		this.arrIntCounters = resultIntCounters.intCounters; 
 
+		content = CustomTagParser.parseTextCards( content );
 		content = CustomTagParser.parseGlobalValues( content, {course: lesson.parentCourse} );
 		content = CustomTagParser.parseFoldableSections( content );
 		content = CustomTagParser.parseRhythmRepeat( content );
@@ -141,6 +144,7 @@ class LessonPage {
 		// random exercises
 		content = CustomTagParser.parseRandomExerciseGenerator(content, this);
 		content = CustomTagParser.parseRhythmRandomizer( content, this );
+
 
 		return content;
 	}
@@ -197,7 +201,9 @@ class LessonPage {
 			randomRhythmText = rhythmObj.rhythm;
 			precount = rhythmObj.precount;
 		} else if (randomizerType === ExerciseGenerator.TYPE.rhythmRandomizer ) {
-			let rhythmObj = ExerciseGenerator.generateRandomizedRhythm( plainTextWithVariations ); 
+			let maxRepetitions = params["max-repetitions"] ? parseInt( params["max-repetitions"] ) : -1;
+			let rhythmObj = ExerciseGenerator.generateRandomizedRhythm( 
+				plainTextWithVariations, maxRepetitions ); 
 			randomRhythmText = rhythmObj.rhythm;
 			precount = rhythmObj.precount;
 		}

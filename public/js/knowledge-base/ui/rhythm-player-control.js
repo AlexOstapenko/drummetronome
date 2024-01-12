@@ -121,7 +121,12 @@ class RhythmPlayerControl {
 				displayRhythmText = processCommentsInRhythmText( this.rhythmCard.records[0].rhythm )
 		}
 		else {  // there is no special child tag displayrhythm, so copy from rhythm-card
-			displayRhythmText = processCommentsInRhythmText( this.rhythmCard.records[0].rhythm );
+			// remove the precount part if present
+			let rhythmText = this.rhythmCard.records[0].rhythm;
+			let arr = rhythmText.split( "***" );
+			rhythmText = arr.length===2 ? arr[1] : arr[0];
+			// remove comments from the rhythm text
+			displayRhythmText = processCommentsInRhythmText( rhythmText );
 		}
 
 		//this.htmlForDisplayText = this.lessonRenderer.renderDisplayRhythmTag( displayRhythmNode );
