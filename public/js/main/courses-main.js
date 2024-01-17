@@ -84,6 +84,13 @@ function onClickParentModule(moduleFullID) {
 	onClickModulePreview(moduleFullID);
 }
 
+function onOpenInternalRef(courseFolder, moduleFolder, lessonFileName) {
+	let currentUrlWithoutParams = window.location.origin + window.location.pathname;
+	let url = currentUrlWithoutParams + `?course=${courseFolder}&module=${moduleFolder}&lesson=${lessonFileName}`;
+	window.open(url, '_blank');
+}
+
+
 /////////////////////////////////////
 // if the query in the url is:
 // course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-.html>
@@ -119,3 +126,5 @@ function onClickGenerateNewRhythm(rhythmPlayerControlID, randomizerType) {
 	if ( !courseRunner.lessonPage ) return;
 	courseRunner.lessonPage.changeRandomRhythm(rhythmPlayerControlID, randomizerType); 
 }
+
+

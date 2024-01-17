@@ -42,6 +42,9 @@ class KeyValueParser {
 
 class RhythmCard {
 
+	static INSTRUMENT_SPLITTER = "@@@@@";
+	static GENERAL_INFO_SPLITTER = "#####";
+
 	constructor() {
 		this.records = []; // array of {instrument: ..., gain: ..., pan: ..., rhythm: ...}
 		this.category = "";
@@ -96,14 +99,14 @@ class RhythmCard {
 	parseRhythmCardText(text) {
 
 		let caption = "";
-		let arrCardParts = text.split( "#####" );
+		let arrCardParts = text.split( RhythmCard.GENERAL_INFO_SPLITTER );
 		if (arrCardParts.length===2) {
 			caption = arrCardParts[0];
 			text = arrCardParts[1];
 		} else text = arrCardParts[0]; // no caption
 
 		this.parseCaption( caption );
-		this.records = text.split( "@@@@@" ).map( record => this.parseSingleInstrumentRecord(record) );
+		this.records = text.split( RhythmCard.INSTRUMENT_SPLITTER ).map( record => this.parseSingleInstrumentRecord(record) );
 	}
 }
 

@@ -1,22 +1,23 @@
 class RandomExerciseRenderer {
 
-	static createRhythmCardText( instrument, rhythmText, precount, tempo ) {
+	static createRhythmCardText( instrument, rhythmText, precount, tempo, otherRhythms ) {
 		let result =
 `tempo: ${tempo}
 #####
 instrument: ${instrument}
 rhythm:
 ${precount ? precount + "\n***\n" : ""}
-${rhythmText}`;
+${rhythmText}
+${otherRhythms || ""} `;
 
 		return result;
 	};
 
-	static createRhythmPlayerXML( instrument, rhythmText, precount, tempo ) {
+	static createRhythmPlayerXML( instrument, rhythmText, precount, tempo, otherRhythms ) {
 		let result = 
 			`<rhythmplayer>
 				<rhythmcard>
-				${RandomExerciseRenderer.createRhythmCardText(instrument, rhythmText, precount, tempo)}
+				${RandomExerciseRenderer.createRhythmCardText(instrument, rhythmText, precount, tempo, otherRhythms)}
 				</rhythmcard>
 			</rhythmplayer>`;
 		return result;
@@ -40,6 +41,7 @@ ${rhythmText}`;
 		// universal params
 		let tempo = parseInt( params.tempo ) || 80;
 		let instrument = params.instrument;
+		let otherRhythms = params.otherRhythms;
 
 		// this randomize operation specific
 		let numOfLines = parseInt(params.lines) || 4;
@@ -51,14 +53,15 @@ ${rhythmText}`;
 		let precount = rhythmObj.precount;
 
 		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
-		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo);
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo, otherRhythms);
 			
 		rhythmPlayerControl.setXML(xmlText);
 		rhythmPlayerControl.additionalTitleHtml = 
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
 				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
-							${ExerciseGenerator.TYPE.speedJuggling})'>${params.buttonLabel || "Новое упражнение"}
+
+							${ExerciseGenerator.TYPE.speedJuggling})'>${params.buttonLabel || CURR_LOC().randomizer.buttonNewExercise}
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(
@@ -83,6 +86,7 @@ ${rhythmText}`;
 		// universal params
 		let tempo = parseInt( params.tempo ) || 80;
 		let instrument = params.instrument;
+		let otherRhythms = params.otherRhythms;
 
 		// generate random rhythm based on innerContent which should be 
 		// a set of variations, precount and rhythm formula.
@@ -92,14 +96,14 @@ ${rhythmText}`;
 		let precount = rhythmObj.precount;
 
 		let rhythmPlayerControl = context.createRhythmPlayerControl( context );
-		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo);
+		let xmlText = RandomExerciseRenderer.createRhythmPlayerXML( instrument, rhythmText, precount, tempo, otherRhythms);
 			
 		rhythmPlayerControl.setXML(xmlText);
 		rhythmPlayerControl.additionalTitleHtml = 
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
 				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
-					${ExerciseGenerator.TYPE.rhythmRandomizer})'>${params.buttonLabel || "Случайный ритм"}
+					${ExerciseGenerator.TYPE.rhythmRandomizer})'>${params.buttonLabel || CURR_LOC().randomizer.buttonRandomRhythm}
 			</button>
 		</div>`;
 		rhythmPlayerControl.htmlForDisplayText = rhythmPlayerControl.renderDisplayRhythmFromText(

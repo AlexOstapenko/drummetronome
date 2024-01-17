@@ -84,3 +84,22 @@
   transform: scale(1.05);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.strokes-table {
+	border-collapse: collapse;
+}
+
+.strokes-table td{
+	border-bottom: 1px solid gray;
+}
+
+.table-all-borders {
+	border-collapse: collapse;	
+	border: 1px solid gray;
+	table-layout: fixed;
+}
+
+.table-all-borders td{
+	border: 1px solid gray;
+}
+

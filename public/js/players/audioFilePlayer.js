@@ -99,7 +99,7 @@ class AudioFilePlayer {
 		});
 
 		//this.strokeID2Buffer = loadedAudioBuffers;
-		console.log( `------------------------\n[${instrumentName}] - all sound files are loaded. `);
+		//console.log( `------------------------\n[${instrumentName}] - all sound files are loaded. `);
 	}
 
 	// strokeInfo may be string with stroke ID or object with two fields: instrumentName, strokeName,

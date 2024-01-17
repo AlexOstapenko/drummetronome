@@ -20,8 +20,19 @@
 		{
 			"name" : "Вопрос-ответ",
 			"file" : "lesson-5.html"
+		},
+		{
+			"name" : "Триоли",
+			"file" : "lesson-6.html"
+		},
+		{
+			"name" : "Триоли, продолжение",
+			"file" : "lesson-7.html"
+		},
+		{
+			"name" : "Секстоли",
+			"file" : "lesson-7.html"
 		}
-
 	],
 	"status" : "not-available"
 }

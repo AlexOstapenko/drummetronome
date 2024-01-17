@@ -134,8 +134,6 @@ class CourseRunner {
 		}
 		globalValues["video-size"] = `width="${globalValues["video-size-w"]}" height="${globalValues["video-size-h"]}"`;
 
-
-
 		return globalValues[name];
 	}
 

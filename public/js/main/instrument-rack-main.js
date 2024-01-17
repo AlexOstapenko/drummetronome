@@ -71,7 +71,7 @@ function makeRhythmCard() {
     if (instrumentRackUI.rack.instrumentInstances)
     instrumentRackUI.rack.instrumentInstances.forEach( (instance,idx) => {
         if (idx > 0) result += '@@@@@\n\n';
-        result += `${instance.instrument.instrumentName}
+        result += `instrument: ${instance.instrument.instrumentName}
             gain: ${instance.data.audio.gain}
             pan: ${instance.data.audio.panorama}
             mute: ${instance.data.audio.mute ? instance.data.audio.mute : false}

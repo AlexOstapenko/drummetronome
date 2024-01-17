@@ -105,22 +105,30 @@ class CustomTagParser {
 		const customTag = "ref#";
 		text = CustomTagParser.replaceAllTags( text, customTag, (innerContent, params) => {
 
-			if (params.module && params.lesson) {// this is reference to a lesson
-				let moduleFolder = params.module === "#" ? context.module.moduleFolder : params.module;
-				let lessonID = Course.makeLessonID(context.course.id, moduleFolder, params.lesson );
+			let courseFolder = context.course.folderName;
+			let moduleRef = params.module || "";
+			let moduleFolder = moduleRef === "#" ? context.module.moduleFolder : moduleRef;
+			let lessonFileName = (params.lesson || "").split(".")[0]; // remove html extension if any
+
+			let internalRefHTML =  
+				`<span onclick='onOpenInternalRef("${courseFolder}", "${moduleFolder}", "${lessonFileName}");' class='inner-reference'>${innerContent}</span>`;
+
+			return internalRefHTML;
+
+			/*if (lesson) {// this is reference to a lesson
+				let lessonID = Course.makeLessonID(context.course.id, moduleFolder, lesson);
 				let internalRefHTML =  
 				`<span onclick='onClickLessonPreview("${lessonID}");' class='inner-reference'>${innerContent}</span>`;
 
 				return internalRefHTML;
 			}
 			else if (params.module) { // this is reference to a module
-				let moduleFolder = params.module === "#" ? context.module.moduleFolder : params.module;
 				let moduleID = Course.makeModuleID(context.course.id, moduleFolder);
 				let internalRefHTML =  `<span onclick='onClickModulePreview("${moduleID}");' 
 								class='inner-reference'>${innerContent}</span>`;
 				return internalRefHTML;
 			}
-			else return "";
+			else return "";*/
 		});
 		return text;
 	}
@@ -176,7 +184,9 @@ class CustomTagParser {
 		const customTag = "random-exercise-generator";
 		let result = CustomTagParser.replaceAllTags( text, customTag, 
 			(innerContent, params) => {
-				return RandomExerciseRenderer.renderRandomExerciseGenerator(context, innerContent, params);
+				let rhythmsInfo = CustomTagParser.randomizerTagsSplitMainAndOtherRhythms(innerContent);
+				params.otherRhythms = rhythmsInfo.otherRhythms;
+				return RandomExerciseRenderer.renderRandomExerciseGenerator(context, rhythmsInfo.mainRhythmInfo, params);
 			});
 
 		return result;
@@ -186,7 +196,9 @@ class CustomTagParser {
 		const customTag = "rhythm-randomizer";
 		let result = CustomTagParser.replaceAllTags( text, customTag, 
 			(innerContent, params) => {
-				return RandomExerciseRenderer.renderRhythmRandomizer(context, innerContent, params);
+				let rhythmsInfo = CustomTagParser.randomizerTagsSplitMainAndOtherRhythms(innerContent);
+				params.otherRhythms = rhythmsInfo.otherRhythms;
+				return RandomExerciseRenderer.renderRhythmRandomizer(context, rhythmsInfo.mainRhythmInfo, params);
 			});
 
 		return result;
@@ -217,7 +229,13 @@ class CustomTagParser {
 		const customTag = "text-card";
 		let result = CustomTagParser.replaceAllTags( text, customTag, 
 			(innerContent, params) => {
-				return `<div class="text-card-style text-card-${params.c}">${innerContent}</div>`;
+				// ingerit all params except for "c"
+				let paramsPart = "";
+				Object.keys(params).forEach( key => {
+					if (key !== "c") paramsPart += `${key}="${params[key]}"; `;
+				})
+
+				return `<div class="text-card-style text-card-${params.c}" ${paramsPart}>${innerContent}</div>`;
 			});
 
 		return result;
@@ -299,6 +317,20 @@ class CustomTagParser {
 		var result = content.replace(regex, replacer);
 		return result;
 	}
+
+	static randomizerTagsSplitMainAndOtherRhythms(innerTagContent) {
+		// in case there are several instruments (separated by RhythmCard.INSTRUMENT_SPLITTER), cut the first one 
+		// as info for exercise generator, all the rest just add to the rhythm card as it is.
+		let result = {mainRhythmInfo: "", otherRhythms: ""};
+		let idx = innerTagContent.indexOf(RhythmCard.INSTRUMENT_SPLITTER);
+		if (idx>=0) {
+			result.mainRhythmInfo = innerTagContent.substring(0, idx);
+			result.otherRhythms = innerTagContent.substring( idx );
+		} else 
+			result.mainRhythmInfo = innerTagContent;
+		return result;
+	}
+
 }
 
 // Responsible for the foldable-section tag on the page.

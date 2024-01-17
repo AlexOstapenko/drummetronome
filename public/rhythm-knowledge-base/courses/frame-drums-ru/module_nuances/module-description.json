@@ -1,0 +1,23 @@
+{
+	"name" : "Разные важные нюансы",
+	"lessons" : [
+		{
+			"name" : "Динамика-1",
+			"file" : "lesson-1.html"
+		},
+		{
+			"name" : "Динамика-2",
+			"file" : "lesson-2.html"
+		},
+		{
+			"name" : "Случайные упражнения на динамику",
+			"file" : "lesson-3.html"
+		},
+		{
+			"name" : "Сильная/слабая доля",
+			"file" : "lesson-4.html"
+		}
+
+	],
+	"status" : "not-available"
+}

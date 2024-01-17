@@ -18,6 +18,10 @@ const LOCALIZATION = {
 		},
 		messages: {
 			"lessoNotAvailable" : "Урок не доступен."
+		},
+		randomizer: {
+			"buttonNewExercise" : "Новое упражнение",
+			"buttonRandomRhythm" : "Случайный ритм"
 		}
 	},
 	"EN" : {
@@ -39,6 +43,10 @@ const LOCALIZATION = {
 		},
 		messages: {
 			"lessoNotAvailable" : "The lesson is not available."
+		},
+		randomizer: {
+			"buttonNewExercise" : "New exercise",
+			"buttonRandomRhythm" : "Random rhythm"
 		}
 	}
 }

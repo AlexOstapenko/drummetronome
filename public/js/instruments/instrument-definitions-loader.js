@@ -52,7 +52,7 @@ class InstrumentDefinitionsLoader {
             return response.json();
         })
         .then(jsonObject => {
-            console.log('Activated instruments:', '\n' + jsonObject['instrument-paths'].join('\n') );
+            //console.log('Activated instruments:', '\n' + jsonObject['instrument-paths'].join('\n') );
             this.loadInstrumentDefinitionJsons( jsonObject["instrument-paths"].map(path => this.folderName + "/" + path) );
         })
         .catch(error => {
