@@ -179,14 +179,16 @@ class LessonPage {
 
 		// generate links to all lessons in this module
 		html += `<br><b>${CURR_LOC().course.allLessons}</b><br>`;
-		lesson.parentModule.lessons.forEach( (lesson, idx) => {
+		lesson.parentModule.lessons.forEach( (currLesson, idx) => {
 			let link = `${window.location.pathname}?`+
-						`course=${lesson.parentModule.course.folderName}&`+
-						`module=${lesson.parentModule.moduleFolder}&`+
-						`lesson=${lesson.getFileNameWithoutExt()}`;
-			html += `<a class="lesson-navigation-link-to-lesson" 
-						href="${link}">
-					${idx+1}. ${lesson.name}</a><br>`;
+						`course=${currLesson.parentModule.course.folderName}&`+
+						`module=${currLesson.parentModule.moduleFolder}&`+
+						`lesson=${currLesson.getFileNameWithoutExt()}`;
+
+			let linkText = `${idx+1}. ${currLesson.name}`;
+			if (lesson.file===currLesson.file) linkText = `<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
+
+			html += `<a class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
 		});
 		html += "<br>";
 

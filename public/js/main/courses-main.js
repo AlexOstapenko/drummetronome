@@ -93,7 +93,7 @@ function onOpenInternalRef(courseFolder, moduleFolder, lessonFileName) {
 
 /////////////////////////////////////
 // if the query in the url is:
-// course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-.html>
+// course=<name-of-course>&module=<module-folder>&lesson=<name-of-file-without-".html">
 // also for module it can be #<num> to define number of the module in the list (1-based)
 function processURLParams() {
 
