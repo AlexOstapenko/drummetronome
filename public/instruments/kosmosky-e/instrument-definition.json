@@ -13,7 +13,9 @@
         {"stroke": "Dh", "file": "d-higher.mp3", "gain": 0.7},
         {"stroke": "Eh", "file": "e-higher.mp3", "gain": 0.6},
         {"stroke": "Z", "file": "#root#/common/triangle.mp3", "gain": 0.08, "hint" : "triangle open"},
-        {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08, "hint" : "shaker"}
+        {"stroke": "^", "file": "#root#/common/cabasa.mp3", "gain": 0.08, "hint" : "shaker"},
+        {"stroke": "s", "file": "#root#/common/cabasa.mp3", "gain": 0.08, "hint" : "shaker"}
+
     ],
     "defaultRhythms": {
         "visual-rhythm" : "O B D O B D E F", 

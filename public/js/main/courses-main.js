@@ -30,7 +30,7 @@ function init() {
 				if (openByDefault.module)
 					courseRunner.showModule(Course.makeModuleID(course.id, openByDefault.module), module => {
 						if (openByDefault.lesson)
-				 			courseRunner.showLesson( module.id + "@@@" + openByDefault.lesson );
+				 			courseRunner.showLesson( module.id + Course.idSplitter() + openByDefault.lesson );
 					});
 			}
 		});

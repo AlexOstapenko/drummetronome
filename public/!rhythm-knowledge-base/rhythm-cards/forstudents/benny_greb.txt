@@ -1,0 +1,48 @@
+category: rhythm basics
+name: Benny Greb 16 cards (Kosmosky)
+tempo: 90
+
+#####
+
+instrument: Kosmosky (E)
+gain: 1
+pan: 0
+mute: false
+rhythm:
+
+Z2 s2:3
+***
+
+s s s s :4
+E s s s :4
+E s F s :4
+E F G A :4
+
+s E s s :4
+s s F s :4
+s s s G :4
+s E s A :4
+
+E F s s :4
+s F G s :4
+s s G A :4
+E s s A :4
+
+E F G s :4
+s F G A :4
+G A s Bh :4
+A s Bh Dh :4
+
+O-E-Eh100
+
+@@@@@
+
+instrument: Percussion
+gain: 0.54
+pan: 0
+mute: false
+rhythm:
+
+K - Sn - :64
+K100
+

@@ -157,10 +157,9 @@ function applyRhythmCard(rhythmCard) {
             instrInstance.data.audio.mute = mute;
 
         });
-
+        instrumentRackUI.rack.setSelectedIndex(0);
         instrumentRackUI.render();
         instrumentRackMixer.updateAndRender();
-
     }
 
     instrumentManager.loadMultipleInstruments(arrInstrNames, onInstrumentsLoaded);
@@ -171,7 +170,7 @@ function processURLParams() {
     let url = new URL(urlString);
 
     // Process the load rhythmic card 
-    let rCardsMainFolder = "rhythm-knowledge-base/rhythm-cards/";
+    let rCardsMainFolder = "!rhythm-knowledge-base/rhythm-cards/";
     let command =url.searchParams.get("cmd"); 
 
     // if the query in the url is:
@@ -184,8 +183,13 @@ function processURLParams() {
 
         let rCardLoader = new RhythmCardLoader();
         rCardLoader.loadSingleRhythmCard( rCardsMainFolder+folder, cardName, rCard => {
-            console.log( `Loaded rhythmic card\n${folder}/${cardName}.`);
-            applyRhythmCard( rCard );
+            if (rCard) {
+                console.log( `Loaded rhythmic card\n${folder}/${cardName}.`);
+                applyRhythmCard( rCard );
+            } else {
+                //console.log( `Rhythmic card ${folder}/${cardName} is not found.`)
+            }
+            
         });    
     }
 }

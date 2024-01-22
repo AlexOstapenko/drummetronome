@@ -1,6 +1,6 @@
 {
-  "name": "frame-drum-rhythms-player",
-  "version": "1.0.0",
+  "name": "advanced-rhythms-player",
+  "version": "1.10.0",
   "description": "",
   "main": "index.js",
   "scripts": {

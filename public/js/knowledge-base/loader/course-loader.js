@@ -2,9 +2,9 @@ class CourseLoader {
 
 	constructor() {
 		this.idGenerator = new IDGenerator();
-		this.coursesFolder = "rhythm-knowledge-base/courses/";
 	}
 
+	get coursesFolder() {return GlobalValues.getGlobalValue("root-folder"); }
 	get courseDescriptionFileName() { return "course-description.json"; }
 	get moduleDescriptionFileName() { return "module-description.json"; }
 	get courseIntroFileName() { return "course-intro.html" }

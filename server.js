@@ -6,5 +6,5 @@ const port = 3001; // Вы можете изменить порт по свое�
 app.use(express.static('public'));
 
 app.listen(port, () => {
-    console.log(`Сервер запущен на порту ${port}`);
+    console.log(`RHYTHM CLUB SERVER STARTED AT PORT ${port}`);
 });

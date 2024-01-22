@@ -4,6 +4,7 @@ class Course {
 		this.id = -1;
 		this.path = "";
 		this.name = "";
+		this.folderName = "";
 		this.introHTML = "";
 		this.introFileLoaded = false;
 		this.moduleFolders = [];
@@ -32,6 +33,7 @@ class Course {
 			result.lessonID = arr[2];
 		return result;
 	} 
+
 
 	static makeModuleID(courseID, moduleFolder) {
 		return courseID + Course.idSplitter() + moduleFolder;
@@ -140,6 +142,10 @@ class Lesson {
 
 	getLessonNumber() {
 		return this.parentModule.getLessonIdx(this)+1;
+	}
+
+	getFileNameWithoutExt() {
+		return this.file.split(".")[0].trim();
 	}
 }
 

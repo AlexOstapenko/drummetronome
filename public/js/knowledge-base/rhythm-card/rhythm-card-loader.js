@@ -6,9 +6,12 @@ class RhythmCardLoader {
 
 	loadSingleRhythmCard(folder, cardName, callback) {
 		let fileLoader = new FileLoader();
+		let rhythmCard = null;
 		fileLoader.loadFile( folder + "/" + cardName + this.cardFileExtension, rhythmCardText => {
-			let rhythmCard = new RhythmCard();
-		    rhythmCard.parseRhythmCardText( rhythmCardText );
+			if (rhythmCardText) {
+				rhythmCard = new RhythmCard();
+			    rhythmCard.parseRhythmCardText( rhythmCardText );
+			}
 		    callback( rhythmCard );
 		});
 	}

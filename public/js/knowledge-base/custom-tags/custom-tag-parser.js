@@ -219,7 +219,7 @@ class CustomTagParser {
 			}	
 
 			if (values[name]) return values[name];
-			else return contextObj.course.courseRunner.getGlobalValue(name, contextObj);
+			else return GlobalValues.getGlobalValue(name, contextObj);
 		}
 
 		return replaceSubstrings( text, replaceValue );

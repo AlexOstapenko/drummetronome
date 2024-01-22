@@ -85,6 +85,21 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.lesson-navigation-link-to-lesson {
+	text-decoration: none;
+  color: gray; 
+  cursor: pointer;
+  line-height: 2em;
+}
+.lesson-navigation-link-to-lesson:visited {
+	color: gray; 	
+}
+
+.lesson-navigation-link-to-lesson:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .strokes-table {
 	border-collapse: collapse;
 }

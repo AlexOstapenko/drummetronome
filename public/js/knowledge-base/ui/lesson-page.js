@@ -175,9 +175,20 @@ class LessonPage {
 					onclick='onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
 			}
 		}
-
-		
 		html += `</div>`;
+
+		// generate links to all lessons in this module
+		html += `<br><b>${CURR_LOC().course.allLessons}</b><br>`;
+		lesson.parentModule.lessons.forEach( (lesson, idx) => {
+			let link = `${window.location.pathname}?`+
+						`course=${lesson.parentModule.course.folderName}&`+
+						`module=${lesson.parentModule.moduleFolder}&`+
+						`lesson=${lesson.getFileNameWithoutExt()}`;
+			html += `<a class="lesson-navigation-link-to-lesson" 
+						href="${link}">
+					${idx+1}. ${lesson.name}</a><br>`;
+		});
+		html += "<br>";
 
 		return (prevLesson || nextLesson) ? html : "";
 	}
