@@ -1,0 +1,31 @@
+{
+    "instrumentName": "Kosmosky-15",
+    "notation" : "with-numbers",
+    "arrStrokeInfo": [
+        {"stroke": "-", "file": ""},
+        {"stroke": "G", "file": "1-g.mp3", "gain": 1},
+        {"stroke": "A", "file": "2-a.mp3", "gain": 1},
+        {"stroke": "B", "file": "3-b.mp3", "gain": 1},
+        {"stroke": "C", "file": "4-c.mp3", "gain": 1},
+        {"stroke": "D", "file": "5-d.mp3", "gain": 1},
+        {"stroke": "E", "file": "6-e.mp3", "gain": 1},
+        {"stroke": "F", "file": "7-fsharp.mp3", "gain": 1},
+        {"stroke": "G*", "file": "8-g.mp3", "gain": 1},
+        {"stroke": "A*", "file": "9-a.mp3", "gain": 1},
+        {"stroke": "B*", "file": "10-b.mp3", "gain": 1},
+        {"stroke": "C*", "file": "11-c.mp3", "gain": 1},
+        {"stroke": "D*", "file": "12-d.mp3", "gain": 1},
+        {"stroke": "E*", "file": "13-e.mp3", "gain": 1},
+        {"stroke": "F*", "file": "14-fsharp.mp3", "gain": 1},
+        {"stroke": "G**", "file": "15-g.mp3", "gain": 1}
+    ],
+    "images" : {
+        "icon" : "img/kosmosky-15_100x100.png",
+        "large" : "img/kosmosky-15_600x600.png"
+    },
+    "defaultRhythms": {
+        "visual-rhythm" : "",
+        "text-rhythm" : 
+        ""
+    }
+}

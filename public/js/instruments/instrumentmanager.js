@@ -12,8 +12,10 @@ class InstrumentManager {
         this.allInstruments = [];
         this.selectedInstrument = null;
         this.instrumentChangedListeners = [];
+
         // key: instrument name, memory contains such elements like audio settings, last entered rhythms etc.
         this.instrumentsMemory = {};
+        
         this.currentModalDiv = null;
         this.callbackWhenInstrumentDefinitionsLoaded = null;
         this.callbackWhenInstrumentIsLoaded = null;

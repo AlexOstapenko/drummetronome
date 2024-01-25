@@ -1,4 +1,5 @@
- class InstrumentDefinition {
+class InstrumentDefinition {
+
     static create(obj) {
         let def = new InstrumentDefinition();
         Object.assign( def, obj );
@@ -73,7 +74,7 @@ class InstrumentDefinitionsLoader {
 
           // Проверяем, был ли успешный HTTP-статус
           if (!response.ok) {
-            throw new Error(`Ошибка загрузки файла ${filePath}: ${response.status} ${response.statusText}`);
+            throw new Error(`Error loading file ${filePath}: ${response.status} ${response.statusText}`);
           }
 
           // Асинхронно преобразуем ответ в JSON
@@ -111,6 +112,12 @@ class InstrumentDefinitionsLoader {
     }
 }
 
+// class AliasHelper {
 
+//     static get ALIASES() {
+//         return "a b c d e f g h i j k l m n o p r s t u v w x y z";
+//     }
+
+// }
 
 
