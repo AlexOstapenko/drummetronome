@@ -1,8 +1,22 @@
+/*
+	FOLDABLE SECTION STYLES
+*/
+
+.custom-foldable-section-container {
+	border-bottom: 1px solid lightgray;
+	padding: 10px 0;
+}
+
 .custom-foldable-section-title {
 	font-weight: 700;
-	/*font-style: italic;*/
 	color: #555555;
 	cursor: pointer;
+}
+
+.custom-foldable-section-title-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .custom-foldable-section-closed {
@@ -10,26 +24,32 @@
 }
 
 .custom-foldable-section-open {
-	cursor: pointer;	
+	cursor: pointer;
 }
 
-.custom-foldable-section-thereismore {
-	border: 1px solid gray;
-	min-width: 30px;
+.custom-foldable-section-toggle {
+	border: 1px solid lightgray;
+	min-width: 10px;
 	border-radius: 5px;
 	text-align: center;
 	display: inline;
 	padding: 0px 10px;
 	cursor: pointer;
+	user-select: none;
 }
 
 .custom-foldable-section-content {
 	padding-left: 20px;
+	border-left: 4px solid #DF7401;
 }
 
+.custom-foldable-section-str {
+	font-size: 1.5em;
+	font-weight: 700;
+}
 
 /*
-RANDOM EXERCISE BUTTON
+	RANDOM EXERCISE BUTTON
 */
 
 .button-random-exercise {
@@ -65,5 +85,19 @@ RANDOM EXERCISE BUTTON
 .random-exercice-generator-button-div {
 	width: 100%;
 	text-align: center;
+}
+
+/*
+	INNER REFERENCE
+*/
+
+.inner-reference {
+	border-radius: 2px;
+	padding: 1px;
+	cursor: pointer;
+	font-weight: 700;
+	color: green;
+	border: 1px dashed gray;
+	background-color: #ffffee;
 }
 

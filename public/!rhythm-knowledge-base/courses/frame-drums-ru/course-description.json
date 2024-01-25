@@ -1,9 +1,11 @@
 {
 	"name" : "Магия ритма на рамочном барабане с Александром Остапенко",
+	"nameHTML" : "МАГИЯ РИТМА НА РАМОЧНОМ БАРАБАНЕ<br>с Александром Остапенко",
 	"intro" : "course-intro.html",
 	"img" : {
 		"icon" : "img/frame-drum-lapstyle-icon.jpg",
-		"large" : "img/alex-frame.jpg"
+		"large" : "img/alex-frame.jpg",
+		"titleIcon" : "img/hand-on-drum.png"
 	},
 	"modules" : [
 		"module_lapstyle_basics",

@@ -25,8 +25,10 @@ class CourseLoader {
 
 			// init the course object
 			course.name = json.name;
+			course.nameHTML = json.nameHTML;
 			course.img.icon = json.img.icon ? course.path + "/" + json.img.icon : "";
 			course.img.large = json.img.large ? course.path + "/" + json.img.large : "";
+			course.img.titleIcon = json.img.titleIcon ? course.path + "/" + json.img.titleIcon : "";
 			course.moduleFolders = json.modules;
 
 			callback( course );

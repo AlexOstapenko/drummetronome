@@ -19,40 +19,26 @@ class LessonPage {
 
 		let moduleNumber = lesson.parentModule.getModuleNumber();
 		let lessonNumber = lesson.getLessonNumber();
-		let lessonHTML = this.renderHeader(lesson);
+		let lessonHTML = "";
 
-		let isLessonAvailable = this.isLessonAvailable(lesson);
-
-		if ( !isLessonAvailable )
+		if ( !this.isMangoTasty(lesson) )
 			lessonHTML += 
 				`<p class='course-style-title'>${CURR_LOC().messages.lessoNotAvailable}</p>`;
 		else {
 			lessonHTML += 
-			`<p class='lesson-header-title'>
-				<b>${CURR_LOC().course.course}: </b><i>${lesson.parentModule.course.name}</i><br>
-				<b>${CURR_LOC().course.module} ${moduleNumber}</b>: ${lesson.parentModule.name}
-			</b></p>
-			<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
+			`<h3><span class="lesson-header-lesson-label">${CURR_LOC().course.lesson} ${lessonNumber}:</span> ${lesson.name}</h3>`;
 			
 			lessonHTML += this.parseCustomTags( lesson );
 			lessonHTML += this.htmlLessonNavigation(lesson);
 		}
 		
-		let html = `<div class='lesson'>${lessonHTML}</div>`;
+		let html = 
+		`<div class='page-container'>
+			${this.renderHeader(lesson)}
+			<div class='lesson-content'>${lessonHTML}</div>
+		</div>`;
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;
-	}
-
-	isLessonAvailable(lesson) {
-		let isAvailable = true;
-		if ( window.location.href.indexOf( "localhost:" ) === -1 ) {
-			let lessonNotAvailable = 
-				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
-				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
-
-			isAvailable = !lessonNotAvailable;
-		}
-		return isAvailable;
 	}
 
 	// Generates links to previous page
@@ -60,15 +46,18 @@ class LessonPage {
 
 		let prevLesson = lesson.getPrevLesson();
 		let nextLesson = lesson.getNextLesson();
+		let moduleNumber = lesson.parentModule.getModuleNumber();
+		let moduleLabel = `${CURR_LOC().course.module} ${moduleNumber}</b>: ${lesson.parentModule.name}`;
 
 		let html = 
-		`<div class='page-header'>
-				<span class='lesson-header-link lesson-header-link-1'
-					onclick='onClickParentCourse(${lesson.parentModule.course.id})'>${CURR_LOC().course.backToCourse}</span> |
+		`${lesson.parentCourse.courseRunner.courseRenderer.renderCourseTitle(lesson.parentCourse)}
+		<div style="padding: 5px 0"></div>
+		<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-2'
-					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${CURR_LOC().course.backToModule}</span> `;
+					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${moduleLabel}</span> `;
+		
+		// add PREV and NEXT buttons
 		if (prevLesson || nextLesson) html += " | ";
-
 		if (prevLesson) {
 			html += `<button class="lesson-button-lesson-navigation-tiny"
 						onclick='onClickLessonPreview("${prevLesson.id}")'>&leftarrow;</button> `;
@@ -82,6 +71,25 @@ class LessonPage {
 		html += `</div>`;
 
 		return html;
+	}
+
+	isMangoTasty(lesson) {
+		let isAvailable = true;
+		if ( window.location.href.indexOf("localhost:")>=0 ) return isAvailable;
+
+		let urlString = window.location.href;
+	    let url = new URL(urlString);
+	    let mango = url.searchParams.get("mango");
+
+	    if ( !mango || parseInt(mango)!==1 ) {
+
+			let lessonNotAvailable = 
+				(lesson.status && lesson.status === Lesson.STATUS.NOT_AVAILABLE ) ||
+				(lesson.parentModule.status && lesson.parentModule.status === Lesson.STATUS.NOT_AVAILABLE);
+
+			isAvailable = !lessonNotAvailable;
+		}
+		return isAvailable;
 	}
 
 	play( rhythmPlayerControlID ) {
@@ -180,13 +188,11 @@ class LessonPage {
 		// generate links to all lessons in this module
 		html += `<br><b>${CURR_LOC().course.allLessons}</b><br>`;
 		lesson.parentModule.lessons.forEach( (currLesson, idx) => {
-			let link = `${window.location.pathname}?`+
-						`course=${currLesson.parentModule.course.folderName}&`+
-						`module=${currLesson.parentModule.moduleFolder}&`+
-						`lesson=${currLesson.getFileNameWithoutExt()}`;
-
+			let link = this.makeUrl(currLesson);
 			let linkText = `${idx+1}. ${currLesson.name}`;
-			if (lesson.file===currLesson.file) linkText = `<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
+			if (lesson.file===currLesson.file) 
+				linkText = 
+					`<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
 
 			html += `<a class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
 		});
@@ -225,6 +231,23 @@ class LessonPage {
 			params.instrument, randomRhythmText, precount, parseInt(params.tempo) ),
 			RandomExerciseRenderer.textToShowHTML(randomRhythmText), params.textSize);
 		rhythmPlayerControl.reRender();
+	}
+
+	makeUrl( obj ) {
+		let fullBaseUrl = window.location.origin + window.location.pathname;
+		let result = "";
+		if (obj.constructor && obj.constructor.name  === "Lesson") {
+			result = `${fullBaseUrl}?`+
+					`course=${obj.parentModule.course.folderName}&`+
+					`module=${obj.parentModule.moduleFolder}&`+
+					`lesson=${obj.getFileNameWithoutExt()}`;
+
+		} else if (obj.constructor && obj.constructor.name === "CourseModule") {
+			result = `${fullBaseUrl}?`+
+					`course=${obj.course.folderName}&`+
+					`module=${obj.moduleFolder}`;
+		}
+		return result;
 	}
 	
 }

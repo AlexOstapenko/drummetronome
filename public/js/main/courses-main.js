@@ -51,6 +51,7 @@ function onClickLoadCourse() {
 function onClickCoursePreview(id, callback) {
 	courseRunner.stop();
 	courseRunner.showCourseModules(id, callback);
+	window.scrollTo(0,0);
 }
 
 /*
@@ -59,6 +60,7 @@ function onClickCoursePreview(id, callback) {
 function onClickModulePreview(moduleFullID, callback) {
 	courseRunner.stop();
 	courseRunner.showModule(moduleFullID, callback);
+	window.scrollTo(0,0);
 }
 
 /*

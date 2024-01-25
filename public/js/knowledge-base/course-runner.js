@@ -123,4 +123,6 @@ class CourseRunner {
 		// Update URL in the address bar
 		window.history.pushState({path: newURL}, null, newURL);
 	}
+
+
 }

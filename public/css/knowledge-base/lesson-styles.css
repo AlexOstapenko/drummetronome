@@ -1,11 +1,10 @@
 .lesson {
 	max-width: 600px;
 	margin: 0 auto;
-  padding: 10px;
 }
 
-.lesson p {
-	width: 98%;
+.lesson-content {
+	padding: 0px 10px;
 }
 
 .rhythm-comment {
@@ -22,7 +21,7 @@
 .lesson-header-link {
 	font-family: "Arial", sans-serif;
 	font-weight: 700;
-	text-decoration: none; /* Убрать стандартное подчеркивание */
+	text-decoration: none; 
 	cursor: pointer;
 }
 

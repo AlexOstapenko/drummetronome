@@ -32,13 +32,12 @@ class CourseRenderer {
 		const bgs = this.bgColorClasses;
 		let bgIdx = -1;
 
-
 		let introHTMLParsed = this.parseCustomTags(course.introHTML);
 
 		let html = 
-		`<div class="course-page">
-		<b class='course-title'>${course.name}</b>
-		${introHTMLParsed}
+		`<div class="course-view">
+		${this.renderCourseTitle(course)}
+		<div class='course-view-intro'>${introHTMLParsed}</div>
 		<h1>${CURR_LOC().course.modules}</h1>
 		<div class='cards-container'>`;
 		course.modules.forEach( m => {
@@ -58,6 +57,19 @@ class CourseRenderer {
 		this.divContainer.innerHTML = html;	
 	}
 
+	renderCourseTitle(course) {
+		let result = 
+		`<div class='course-view-course-title-container' onclick="onClickCoursePreview(${course.id}, null);">
+			<img src='${course.img.titleIcon}' width="50px" height="50px"></img>
+			<div class='course-view-course-title'>
+				${course.getNameHTML()}
+			</div>
+		</div>`;
+		result = result.split("\n").map(arrItem=>arrItem.trim()).join("");
+		return result;
+	}
+
+
 	renderModule(courseModule) {
 		let course = courseModule.course;
 		const bgs = this.bgColorClasses;
@@ -76,27 +88,34 @@ class CourseRenderer {
 		let parsedIntroHTML = this.parseCustomTags( courseModule.introHTML, {course: course, module: courseModule});
 		let moduleNumber = courseModule.getModuleNumber();
 		let html = 
-		`<div class="module-page">
-		${renderHeaderLinks(courseModule.course)}
-		<span class='module-page-course-title'>${courseModule.course.name}</span>
-		<h2><span class='module-title'>${CURR_LOC().course.module} ${moduleNumber}:</span> ${courseModule.name}</h2>
-		${parsedIntroHTML}
-		<h3>${CURR_LOC().course.lessons}:</h3>
-		<div class='cards-container'>`;
-		
+		`<div class="page-container">
+			${this.renderCourseTitle(course)}
+			<div class="page-content">
+				<h2><span class='module-title'>
+						${CURR_LOC().course.module} ${moduleNumber}:
+					</span> 
+					${courseModule.name}
+				</h2>
+				${parsedIntroHTML}
+				<h3>${CURR_LOC().course.lessons}:</h3>
+				<div class='cards-container'>`;
+			
 		courseModule.lessons.forEach( (lesson,idx) => {
-			bgIdx++; if (bgIdx == bgs.length) bgIdx = 0; // choose next overlay color
+		bgIdx++; if (bgIdx == bgs.length) bgIdx = 0; // choose next overlay color
 
+			// add LESSON CARDS
 			html += 
-			`<div class="card-preview" onclick="onClickLessonPreview('${lesson.id}')">
-				<div class="card-preview-img-container">
-					<img class='card-preview-img' src='${lesson.img.icon}'>	
-					<div class="card-preview-img-overlay ${bgs[bgIdx]}"></div>
-				</div>
-				<div class='card-preview-name'><b>${idx+1}.</b> ${lesson.name}</div>
-			</div>`;
+					`<div class="card-preview" onclick="onClickLessonPreview('${lesson.id}')">
+						<div class="card-preview-img-container">
+							<img class='card-preview-img' src='${lesson.img.icon}'>	
+							<div class="card-preview-img-overlay ${bgs[bgIdx]}"></div>
+						</div>
+						<div class='card-preview-name'><b>${idx+1}.</b> ${lesson.name}</div>
+					</div>`;
 		});
-		html += "</div></div>";
+		html += `</div>
+			</div>
+		</div>`;
 		
 		this.divContainer.className = "";
 		this.divContainer.innerHTML = html;	

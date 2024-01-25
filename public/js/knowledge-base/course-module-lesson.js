@@ -4,6 +4,7 @@ class Course {
 		this.id = -1;
 		this.path = "";
 		this.name = "";
+		this.nameHTML = "";
 		this.folderName = "";
 		this.introHTML = "";
 		this.introFileLoaded = false;
@@ -18,6 +19,10 @@ class Course {
 
 	modulePreviewsLoaded() {
 		return this.modules.length === this.moduleFolders.length;
+	}
+
+	getNameHTML() {
+		return this.nameHTML || this.name;
 	}
 
 	static idSplitter() { return "@@@" }

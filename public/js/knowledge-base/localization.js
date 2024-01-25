@@ -18,7 +18,7 @@ const LOCALIZATION = {
 			tempoTitle: "Темп"
 		},
 		messages: {
-			"lessoNotAvailable" : "Урок не доступен."
+			"lessoNotAvailable" : "Урок недоступен."
 		},
 		randomizer: {
 			"buttonNewExercise" : "Новое упражнение",
