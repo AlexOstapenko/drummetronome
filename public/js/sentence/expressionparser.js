@@ -69,6 +69,8 @@ D T :2 T D D :3 T :5
 
 class ExpressionParser {
 
+	static NOTATION_STROKE_CONTAIN_NUMBERS = "stroke-contain-numbers";
+
 	constructor() {
 		this.varValueInBrackets = true;
 	}
@@ -184,6 +186,7 @@ class ExpressionParser {
 		tagsInfo.forEach( tagData => {
 			text1 = applyRepetitionTag( text1, tagData.tagName, tagData.numOfRepetitions );	
 		});
+
 		return text1;
 
 		// Algorhythm

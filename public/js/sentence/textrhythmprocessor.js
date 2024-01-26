@@ -44,7 +44,7 @@ function trimLinesInRhythm(txt) {
     D2/3 K2/3 T2/3 K2/3
     
     Ex2: 
-    L:3/2 = L/2:3 = L/2 L/2 L/2
+    L/2:3 = L/2 L/2 L/2
 
     Ex3:
     Non-specific repetitions char :

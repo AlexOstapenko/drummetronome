@@ -27,6 +27,7 @@ class Track {
 	}	
 
 	set rhythm(rhythmText) {
+		SyllableParser.setNotation( this.instrInstance.instrument.notation );
 		this.rhythmPhrase = new Phrase( rhythmText );
 		this.oneLoopDuration = this.rhythmPhrase.getSize(false) * this.parentRack.onePulseDuration;
 		this.calculateTimeline();
@@ -39,8 +40,7 @@ class Track {
     scheduleNextLoop( ) {
         // schedule next bar of rhythm in Web Audio API from new startTime
         this.timeline.forEach( timeLineItem => {
-
-            const time = this.lastStartTime + timeLineItem.relativeTime/1000;
+    	    const time = this.lastStartTime + timeLineItem.relativeTime/1000;
             const strokeInfo = 
             {
             	instrumentName: this.instrInstance.instrument.instrumentName, 
@@ -73,7 +73,7 @@ class Track {
 
         let addRhythmToTimeline = ( rhythm, accumulatedTime ) => {
             rhythm.elements.forEach( item => {
-                if ( !isPause(item.stroke) ) { // there is no sense to add pause to timeline
+                if ( !isPause(item.stroke) && item.size > 0) { // there is no sense to add pause to timeline
 
                     // it is allowed the + sign in the syllable. It means several syllables should be played simultaneously.
                     // here we'll split them and add each to timeline.

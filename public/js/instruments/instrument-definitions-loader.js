@@ -112,12 +112,16 @@ class InstrumentDefinitionsLoader {
     }
 }
 
-// class AliasHelper {
+class AliasHelper {
 
-//     static get ALIASES() {
-//         return "a b c d e f g h i j k l m n o p r s t u v w x y z";
-//     }
+    static get ALIASES() {
+        const digits = "0123456789";
 
-// }
+        const arr = digits.split().map(digit => `~num~`);
+
+        return "a b c d e f g h i j k l m n o p r s t u v w x y z";
+    }
+
+}
 
 
