@@ -129,4 +129,8 @@ function onClickGenerateNewRhythm(rhythmPlayerControlID, randomizerType) {
 	courseRunner.lessonPage.changeRandomRhythm(rhythmPlayerControlID, randomizerType); 
 }
 
+function stopPlayer() {
+	console.log( "Stop player." );
+	courseRunner.stop();
+}
 

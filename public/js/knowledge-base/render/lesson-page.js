@@ -73,6 +73,50 @@ class LessonPage {
 		return html;
 	}
 
+	htmlLessonNavigation(lesson) {
+
+		let html = 
+			`<div style="height:20px">&nbsp;</div>
+			<div class='lesson-div-lesson-navigation'>`;
+		
+		let prevLesson = lesson.getPrevLesson();
+		let nextLesson = lesson.getNextLesson();
+		
+		if (prevLesson) {
+			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
+					onclick='onClickLessonPreview("${prevLesson.id}")'>${CURR_LOC().course.prevLesson}</button>`
+		}
+
+		if (nextLesson) {
+			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
+				onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>`;
+		}
+
+		if (!nextLesson) {
+			let nextModule = lesson.parentModule.getNextModule();
+			if (nextModule) {
+				html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-module' 
+					onclick='onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
+			}
+		}
+		html += `</div>`;
+
+		// generate links to all lessons in this module
+		html += `<br><b>${CURR_LOC().course.allLessons}</b><br>`;
+		lesson.parentModule.lessons.forEach( (currLesson, idx) => {
+			let link = this.makeUrl(currLesson);
+			let linkText = `${idx+1}. ${currLesson.name}`;
+			if (lesson.file===currLesson.file) 
+				linkText = 
+					`<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
+
+			html += `<a onclick="stopPlayer();" class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
+		});
+		html += "<br>";
+
+		return (prevLesson || nextLesson) ? html : "";
+	}
+
 	isMangoTasty(lesson) {
 		let isAvailable = true;
 		if ( window.location.href.indexOf("localhost:")>=0 ) return isAvailable;
@@ -155,50 +199,6 @@ class LessonPage {
 
 
 		return content;
-	}
-
-	htmlLessonNavigation(lesson) {
-
-		let html = 
-			`<div style="height:20px">&nbsp;</div>
-			<div class='lesson-div-lesson-navigation'>`;
-		
-		let prevLesson = lesson.getPrevLesson();
-		let nextLesson = lesson.getNextLesson();
-		
-		if (prevLesson) {
-			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
-					onclick='onClickLessonPreview("${prevLesson.id}")'>${CURR_LOC().course.prevLesson}</button>`
-		}
-
-		if (nextLesson) {
-			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
-				onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>`;
-		}
-
-		if (!nextLesson) {
-			let nextModule = lesson.parentModule.getNextModule();
-			if (nextModule) {
-				html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-module' 
-					onclick='onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
-			}
-		}
-		html += `</div>`;
-
-		// generate links to all lessons in this module
-		html += `<br><b>${CURR_LOC().course.allLessons}</b><br>`;
-		lesson.parentModule.lessons.forEach( (currLesson, idx) => {
-			let link = this.makeUrl(currLesson);
-			let linkText = `${idx+1}. ${currLesson.name}`;
-			if (lesson.file===currLesson.file) 
-				linkText = 
-					`<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
-
-			html += `<a class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
-		});
-		html += "<br>";
-
-		return (prevLesson || nextLesson) ? html : "";
 	}
 
 	changeRandomRhythm(rhythmPlayerID, randomizerType) {
