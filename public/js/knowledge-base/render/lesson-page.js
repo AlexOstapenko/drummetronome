@@ -161,7 +161,7 @@ class LessonPage {
 			{A: "</f-s>", B: "</foldable-section>"},
 			{A: "<r-e-b", B: "<random-exercise-button"},
 			{A: "</r-e-b>", B: "</random-exercise-button>"},
-			{A: "<r-v-d/>", B: `<div><img src="/img/delimiter-curve.png"/></div>`},
+			{A: "<r-v-d/>", B: `<div><img src="img/delimiter-curve.png"/></div>`},
 			{A: "<t-c", B: `<text-card`},
 			{A: "</t-c>", B: `</text-card>`}
 			
