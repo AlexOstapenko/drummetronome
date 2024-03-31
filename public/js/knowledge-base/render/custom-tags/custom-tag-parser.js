@@ -111,7 +111,7 @@ class CustomTagParser {
 			let lessonFileName = (params.lesson || "").split(".")[0]; // remove html extension if any
 
 			let internalRefHTML =  
-				`<span onclick='onOpenInternalRef("${courseFolder}", "${moduleFolder}", "${lessonFileName}");' class='inner-reference'>${innerContent}</span>`;
+				`<span onclick='CourseRunnerGlobals.onOpenInternalRef("${courseFolder}", "${moduleFolder}", "${lessonFileName}");' class='inner-reference'>${innerContent}</span>`;
 
 			return internalRefHTML;
 
@@ -153,7 +153,7 @@ class CustomTagParser {
 	// There could be many exercises on the lesson page and one or many buttons "Go to random exercise".
 	// Exercises should be organised into groups
 	// <random-exercise-button elementID='warmup_exercise_' counter='N' 
-	//        appearance='small'>Перейти на случайное упражнение</random-exercise-button>
+	//        appearance='small'>Goto random exercise</random-exercise-button>
 
 	static parseRandomExerciseButtons(text) {
 		const customTag = "random-exercise-button";
@@ -161,7 +161,7 @@ class CustomTagParser {
 			(innerContent, params) => {
 				let className = params.appearance == "small" ? "button-random-exercise-modest" : "button-random-exercise";
 				let html = 
-				`<button onclick="gotoRandomExercise('${params.elementID}', '${params.counter}');" 
+				`<button onclick="CourseRunnerGlobals.gotoRandomExercise('${params.elementID}', '${params.counter}');" 
 						class="${className}">${innerContent}
 				</button>`;
 				return html;

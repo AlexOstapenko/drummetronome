@@ -14,6 +14,7 @@
 		{"stroke": "Sn", "file": "snare.mp3", "hint" : "Snare drum"},
 		{"stroke": "Rim", "file": "rim.mp3", "hint" : "Rim"},
 		{"stroke": "H", "file": "hh-closed.mp3", "hint" : "High hat closed"},
+		{"stroke": "h", "file": "hh-closed.mp3", "gain": 0.5, "hint" : "High hat closed"},
 		{"stroke": "Ho", "file": "hh-open.mp3", "hint" : "High hat open"},
 		{"stroke": "R", "file": "ride.mp3", "hint" : "Ride"},
 		{"stroke": "Rb", "file": "ride-bell.mp3", "hint" : "Ride bell"},

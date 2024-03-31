@@ -20,7 +20,7 @@ class CourseRenderer {
 	renderCoursePreview(course) {
 		let html = 
 		`<div class="course-preview">
-			<img src='${course.img.icon}' onclick='onClickCoursePreview(${course.id})'>
+			<img src='${course.img.icon}' onclick='CourseRunnerGlobals.onClickCoursePreview(${course.id})'>
 			<div class='course-name'>${course.name}</div>
 		</div>`;
 		this.divContainer.className = 'courses-container';
@@ -44,7 +44,7 @@ class CourseRenderer {
 			bgIdx++; if (bgIdx == bgs.length) bgIdx = 0; // choose next overlay color
 
 			html += 
-			`<div class="card-preview" onclick="onClickModulePreview('${course.id}@@@${m.moduleFolder}')">
+			`<div class="card-preview" onclick="CourseRunnerGlobals.onClickModulePreview('${course.id}@@@${m.moduleFolder}')">
 				<div class="card-preview-img-container">
 					<img class='card-preview-img' src='${m.img.icon}'>	
 					<div class="card-preview-img-overlay ${bgs[bgIdx]}"></div>
@@ -59,7 +59,7 @@ class CourseRenderer {
 
 	renderCourseTitle(course) {
 		let result = 
-		`<div class='course-view-course-title-container' onclick="onClickCoursePreview(${course.id}, null);">
+		`<div class='course-view-course-title-container' onclick="CourseRunnerGlobals.onClickCoursePreview(${course.id}, null);">
 			<img src='${course.img.titleIcon}' width="50px" height="50px"></img>
 			<div class='course-view-course-title'>
 				${course.getNameHTML()}
@@ -79,7 +79,7 @@ class CourseRenderer {
 			let html = 
 			`<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-1'
-					onclick='onClickParentCourse(${course.id})'>${CURR_LOC().course.backToCourse}</span>
+					onclick='CourseRunnerGlobals.onClickParentCourse(${course.id})'>${CURR_LOC().course.backToCourse}</span>
 			</div>
 			`;
 			return html;
@@ -105,7 +105,7 @@ class CourseRenderer {
 
 			// add LESSON CARDS
 			html += 
-					`<div class="card-preview" onclick="onClickLessonPreview('${lesson.id}')">
+					`<div class="card-preview" onclick="CourseRunnerGlobals.onClickLessonPreview('${lesson.id}')">
 						<div class="card-preview-img-container">
 							<img class='card-preview-img' src='${lesson.img.icon}'>	
 							<div class="card-preview-img-overlay ${bgs[bgIdx]}"></div>

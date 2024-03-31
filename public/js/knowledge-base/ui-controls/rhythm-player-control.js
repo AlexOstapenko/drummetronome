@@ -74,7 +74,7 @@ class RhythmPlayerControl {
 	    	${this.htmlForDisplayText}
 	    	<div class="rhythm-player-control-button-container">
 		    	<button class='${this.buttonClass}'
-		    		onclick="onClickPlayRhythm(${this.id});">
+		    		onclick="CourseRunnerGlobals.onClickPlayRhythm(${this.id});">
 		    		${this.buttState}
 		    	</button>
 	    	</div>

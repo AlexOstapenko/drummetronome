@@ -37,6 +37,7 @@
     <!-- for parsing rhythm text -->
     <script src="js/command/command.js"></script>
     <script src="js/sentence/fraction.js"></script>
+    <script src="js/sentence/syllable.js"></script>
     <script src="js/sentence/phrase.js"></script>
     <script src="js/sentence/sentence.js"></script>
     <script src="js/sentence/expressionparser.js"></script>
@@ -82,17 +83,10 @@
 
 </head>
 <body>
-
-	<!--Course:
-	<input id="inputCourseFolder" type="text" value="frame-drums">
-	<button onclick="loadCourse()">Load course</button>
-	<hr>-->
 	<div id="divCoursesContainer" width="100%"></div>
-
 	<script>
-        onDocumentLoaded();
+        CourseRunnerGlobals.onDocumentLoaded();
     </script>
-
 </body>
 
 </html>

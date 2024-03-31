@@ -1,0 +1,38 @@
+category: rhythm basics
+name: Frame drum - 3 counts QA
+tempo: 120
+
+#####
+
+
+instrument: Tar
+gain: 1
+pan: 0
+mute: false
+rhythm:
+// вариант 1
+(R R R R)/2 L L D - ES6
+
+// вариант 2
+R R (L L L L)/2 D - ES6
+
+// вариант 3
+L L D - (R R L L)/2 ES6
+
+// вариант 4
+D - (L L L L)/2 R L ES6
+
+@@@@@
+
+instrument: Percussion
+gain: 0.78
+pan: 0
+mute: false
+rhythm:
+H h h H h h
+***
+z-H h h
+H h h
+
+
+

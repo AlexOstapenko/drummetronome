@@ -109,13 +109,11 @@ function containsValue(arr, val)
 
 
 function toInteger(value) {
-    // Попытаемся преобразовать значение в целое число
     const integer = parseInt(value, 10);
-    // Проверим, было ли успешное преобразование
     if (!isNaN(integer) && Number.isInteger(integer)) {
         return integer;
     }
-    return null; // Возвращаем null, если не удалось преобразовать
+    return null; 
 }
 
 /////////////////////////////////////////////////////////

@@ -5,6 +5,38 @@ function trimLinesInRhythm(txt) {
     return arr1.join("\n");
 }
 
+
+
+/*
+
+Rhythm syntax:
+
+    Split each syllable with space " " for proper parsing.
+    Example: AB will be treated as single stroke "AB". A B - as two consequent strokes "A" and "B".
+
+    // - comments. After "//" full line is ignored
+    *** - precount delimiter. 
+        Everything before *** is treated as precount and is played only once in the beginning.
+    
+    Definition of variables. Define variables in the form 
+        Name = value;
+    Place vars in the beginning of the rhythm definition. If you want to define vars 
+    in the middle/end of the rhythm text, wrap it with VAR: ... :VAR
+
+    Example:
+        VAR:
+        A = D K T K;
+        B = A/2;
+        C = S k (T K T K)/2;
+        :VAR
+
+    You can use previously defined variables to define new ones, like in the example: 
+    B is defined via A.
+
+
+*/
+
+
 /* Задача: все неспецифичные операторы повтора ":" превратить в повторы фраз, перед которыми они стоят.
 Неспецифичный - это такой, который не стоит вплотную к слогу или скобковому выражению. 
 Тогда он относится ко всему, что слева, но до такого же несецифичного оператора левее 
@@ -60,6 +92,8 @@ function trimLinesInRhythm(txt) {
 */
 function processRawTextRhythm( text ) {    
    
+    let time = new Date();
+
     function cleanRawTextRhythm(str) {
         const lines = nonEmptyValues( str.split("\n") );
         const effectiveLines = lines.filter( line => line.slice(0,2) !== "//" );

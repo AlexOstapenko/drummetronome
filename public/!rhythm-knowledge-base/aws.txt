@@ -1,0 +1,21 @@
+Asfak, hi!
+
+So, I have my WebSite with lots of JavaScript and small media-files (mp3 and img). 
+This is the library for interactive rhythm-based courses.
+
+What I need to add is:
+- User authentification
+- Course purchase (different models: monthly based, one-time-purchase, coupons - this last is not urgent)
+- Access to different modules of the course according to the purchase. 
+
+For example: a user Asfak purchased the course "Frame drum Lap Style", but not the whole course, just the first pack of 3 modules with basics. It's a monthly based plan, the access to those 3 modules will be valid till 24 of March. So The system should check:
+- if the user tries to get access to the course on the 25th March, the access should be restricted. Instead he should get the page with the option to pay for the next month. 
+- a week before the end of the period the user should receive e-mail with a reminder to pay for the next month.
+
+Additional features:
+- Storing data about the progress of the user in each course. 
+Like: last visited lesson, the highest tempo of each exercise that he was working on. The list of his favorite exercises etc (whatever will come to my mind in the future).
+
+So, to conclude: the core library, which is related directly to the subject of Rhythm - I have it.
+What I need is a wrapper about user authentification and access according to the purchases.
+

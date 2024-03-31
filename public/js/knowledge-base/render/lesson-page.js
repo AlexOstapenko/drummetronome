@@ -54,18 +54,18 @@ class LessonPage {
 		<div style="padding: 5px 0"></div>
 		<div class='page-header'>
 				<span class='lesson-header-link lesson-header-link-2'
-					onclick='onClickParentModule( "${lesson.parentModule.id}" )'>${moduleLabel}</span> `;
+					onclick='CourseRunnerGlobals.onClickParentModule( "${lesson.parentModule.id}" )'>${moduleLabel}</span> `;
 		
 		// add PREV and NEXT buttons
 		if (prevLesson || nextLesson) html += " | ";
 		if (prevLesson) {
 			html += `<button class="lesson-button-lesson-navigation-tiny"
-						onclick='onClickLessonPreview("${prevLesson.id}")'>&leftarrow;</button> `;
+						onclick='CourseRunnerGlobals.onClickLessonPreview("${prevLesson.id}")'>&leftarrow;</button> `;
 		}
 
 		if (nextLesson) {
 			html += `<button class="lesson-button-lesson-navigation-tiny"
-						onclick='onClickLessonPreview("${nextLesson.id}")'>&rightarrow;</button>`;
+						onclick='CourseRunnerGlobals.onClickLessonPreview("${nextLesson.id}")'>&rightarrow;</button>`;
 		}
 
 		html += `</div>`;
@@ -84,19 +84,19 @@ class LessonPage {
 		
 		if (prevLesson) {
 			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
-					onclick='onClickLessonPreview("${prevLesson.id}")'>${CURR_LOC().course.prevLesson}</button>`
+					onclick='CourseRunnerGlobals.onClickLessonPreview("${prevLesson.id}")'>${CURR_LOC().course.prevLesson}</button>`
 		}
 
 		if (nextLesson) {
 			html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-lesson' 
-				onclick='onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>`;
+				onclick='CourseRunnerGlobals.onClickLessonPreview("${nextLesson.id}")'>${CURR_LOC().course.nextLesson}</button>`;
 		}
 
 		if (!nextLesson) {
 			let nextModule = lesson.parentModule.getNextModule();
 			if (nextModule) {
 				html += `<button class='lesson-button-lesson-navigation lesson-button-lesson-navigation-module' 
-					onclick='onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
+					onclick='CourseRunnerGlobals.onClickModulePreview("${nextModule.id}")'>${CURR_LOC().course.nextModule}</button>`;		
 			}
 		}
 		html += `</div>`;
@@ -110,7 +110,7 @@ class LessonPage {
 				linkText = 
 					`<span class="lesson-navigation-link-to-curr-lesson">${linkText}</span>`;
 
-			html += `<a onclick="stopPlayer();" class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
+			html += `<a onclick="CourseRunnerGlobals.stopPlayer();" class="lesson-navigation-link-to-lesson" href="${link}">${linkText}</a><br>`;
 		});
 		html += "<br>";
 

@@ -84,6 +84,121 @@ class ExpressionParser {
 	Variables are expected as first part of any text rhythm
 	*/
 	parseVariables(text) {
+		
+		// check what is before and afer the given indexes
+	    function isSeparateWord(text, startIndex, endIndex) {
+	          const varAllowedChars = "_"+
+	      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"+
+	      "абвгдеёжзийклмнопрстуфхцышщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"; // Список допустимых символов в словах
+	      const charBefore = text[startIndex - 1] || '';
+	      const charAfter = text[endIndex] || '';
+
+	      return (
+	        varAllowedChars.includes(text[startIndex]) && // Первый символ слова
+	        (!varAllowedChars.includes(charBefore) || charBefore === '') && // Проверка, что перед словом нет другой буквы
+	        (!varAllowedChars.includes(charAfter) || charAfter === '') // Проверка, что после слова нет другой буквы
+	      );
+	    }
+
+	   let replaceVar = ( text, varName, varValue) => {
+	        let startIdx = 0;
+	        let result = "";
+	        let idx = text.indexOf(varName, startIdx);
+	        while (idx>=0) {
+	            let endIdx = idx + varName.length;
+	            if ( isSeparateWord(text, idx, endIdx) ) {
+	            	if ( this.varValueInBrackets )
+						text = text.substring(0, idx) + ' (' + varValue.trim() +')' + text.substring( endIdx ); 
+					else
+						text = text.substring(0, idx) + varValue.trim() + text.substring( endIdx ); 
+	            } else startIdx = endIdx;
+	            idx = text.indexOf(varName, startIdx);
+	        }
+	        return text;
+	    }
+
+		let processFirstVariable = (text) => {
+			let idx = text.indexOf( "=" );
+			if (idx===-1) return text;
+
+			// get the variable name from the position of "=" till the beginning of current line
+			let doContinue = true;
+			let varName = "";
+			for( let i=idx-1; doContinue; i--) {
+				let currChar = text.charAt(i);
+				if ( !/\s/.test(currChar) && currChar!='\n') varName = currChar + varName;
+				doContinue = !(currChar==='\n' || i===0);
+			}
+			
+			// get variable value from "=" char to ";" char
+			let idxSemicolon = text.indexOf(';');
+			if (idxSemicolon===-1) throw new SyntaxError(`Semicolon ';' not found in variable ${varName} declaration.`)
+			let varValue = text.substring(idx+1, idxSemicolon);
+
+			// get rest of the string
+			let restOfText = text.substring( idxSemicolon+1 ).trim();
+
+			//replace all [varName] to [varValue]
+			doContinue = true;
+			do {
+				let replaced = replaceVar(restOfText, varName, varValue);
+				doContinue = (replaced !== restOfText);
+				restOfText = replaced;
+			} while (doContinue);
+
+			return restOfText;
+		}
+
+		// cuts variable definitions (text between VAR: and :VAR )
+		// and returns object: {vars: string, rhythm: string}
+		let cutVarDefinitions = (text) => {
+			const varsOpening = "VAR:";
+			const varsClosing = ":VAR";
+
+			let idx1 = text.indexOf(varsOpening);
+			let idx2 = text.indexOf(varsClosing);
+
+			if ( (idx1 >= 0 && idx2===-1) || (idx1===-1 && idx2 >= 0) )
+				throw new SyntaxError( "VAR definition is not correct." );
+
+			if (idx1===-1 && idx2===-1) return {vars: "", rhythm: text};
+
+			// now cut 
+			let vars = text.substring(idx1 + varsOpening.length, idx2);
+			let rhythm = 
+				text.substring(0, idx1) + 
+				text.substring(idx2 + varsClosing.length);
+
+			return {vars: vars, rhythm: rhythm};
+		}
+
+
+		// replace all variables to their values
+		
+		/* 
+			VARS: ... :VARS can be placed anywhere in the text. Let's bring the content
+			of VARS container to the beginning of text before var processing.
+		*/
+
+		// cut the variable definitions (if any)
+		let rhythmInfo = cutVarDefinitions(text);
+		text = rhythmInfo.vars + "\n" + rhythmInfo.rhythm;
+		
+		let doContinue = true;
+		let processed = text;
+		do {
+			let currProcessed = processFirstVariable(processed);
+			doContinue = ( currProcessed !== processed);
+			processed = currProcessed;
+		}while(doContinue);
+
+		return processed;
+	}
+
+
+
+	parseVariables_old(text) {
+
 		// check what is before and afer the given indexes
 	    function isSeparateWord(text, startIndex, endIndex) {
 	          const varAllowedChars = "_"+

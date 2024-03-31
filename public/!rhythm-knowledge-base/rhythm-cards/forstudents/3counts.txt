@@ -1,0 +1,46 @@
+category: rhythm basics
+name: ускорения в ритме на 3 счета
+tempo: 90
+
+#####
+
+instrument: Darbuka
+gain: 1
+pan: 0
+mute: false
+rhythm:
+// вариант 1
+(T K T K)/2 T K D - ES6
+
+// вариант 2
+T K (T K T K)/2 D - ES6
+
+// вариант 3
+T K D - (T K T K)/2 ES6
+
+// вариант 4
+D - (T K T K)/2 T K ES6
+
+@@@@@
+
+instrument: Hang Low Mystic (D)
+gain: 0.52
+pan: 0.14
+mute: true
+rhythm:
+O2 G-D2 E-Ch2
+O2 G-E2 A-F2
+
+@@@@@
+
+instrument: Percussion
+gain: 0.78
+pan: 0
+mute: false
+rhythm:
+H h h H h h
+***
+z-H h h
+H h h
+
+

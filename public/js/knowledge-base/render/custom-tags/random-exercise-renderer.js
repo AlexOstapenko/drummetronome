@@ -59,7 +59,7 @@ ${otherRhythms || ""} `;
 		rhythmPlayerControl.additionalTitleHtml = 
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
-				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
+				onclick='CourseRunnerGlobals.onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
 
 							${ExerciseGenerator.TYPE.speedJuggling})'>${params.buttonLabel || CURR_LOC().randomizer.buttonNewExercise}
 			</button>
@@ -102,7 +102,7 @@ ${otherRhythms || ""} `;
 		rhythmPlayerControl.additionalTitleHtml = 
 		`<div class='random-exercice-generator-button-div'>
 			<button class="button-random-exercise"
-				onclick='onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
+				onclick='CourseRunnerGlobals.onClickGenerateNewRhythm(${rhythmPlayerControl.id}, 
 					${ExerciseGenerator.TYPE.rhythmRandomizer})'>${params.buttonLabel || CURR_LOC().randomizer.buttonRandomRhythm}
 			</button>
 		</div>`;
