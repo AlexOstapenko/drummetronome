@@ -59,6 +59,9 @@ function clickPlayRhythm() {
 }
 
 function makeRhythmCard() {
+
+    instrumentRackUI.saveCurrentTextRhythm();
+
     let result = "";
 
     // header
@@ -70,6 +73,7 @@ function makeRhythmCard() {
 
     if (instrumentRackUI.rack.instrumentInstances)
     instrumentRackUI.rack.instrumentInstances.forEach( (instance,idx) => {
+
         if (idx > 0) result += '@@@@@\n\n';
         result += `instrument: ${instance.instrument.instrumentName}
             gain: ${instance.data.audio.gain}

@@ -14,6 +14,7 @@ class CustomTagParser {
 				${rhythmPlayerControl.render()}
 			</div>`;
 
+
 			return html;
 		});
 
