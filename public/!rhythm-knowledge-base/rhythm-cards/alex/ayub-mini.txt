@@ -4,6 +4,7 @@ tempo: 130
 
 #####
 
+
 instrument: Darbuka
 gain: 1.51
 pan: 0
@@ -43,4 +44,23 @@ rhythm:
 (O-A G-E A#-D G-E)8
 (O-A G-E D-F E-Ah)8
 O-A8 G-E8 D-F5 A-E5 D-A#:3 es3
+
+@@@@@
+
+instrument: Percussion
+gain: 0.75
+pan: 0
+mute: false
+rhythm:
+es:24
+Bh Bh Bl Bl C C Wb -
+
+es:24
+(Sh C Bl Bh)2
+
+es:24
+Bh Bh Bl Bl C C Wb -
+
+es:16
+Bh:2 Bl:2 - :2 (Bl Bl Wb Wb)/2 C4
 
