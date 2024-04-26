@@ -76,10 +76,12 @@ GENERAL PAGE STYLE
 	CARDS with modules or lessons
 */
 
+
 .cards-container {
 	display: flex;
     flex-wrap: wrap;
 }
+
 
 .card-preview {
 	margin: 5px;

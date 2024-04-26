@@ -4,18 +4,15 @@ class ExtraTextEditor {
 	}
 
 	init() {
-		this.divContainer = document.getElementById("div-extra-text-editor");	
+		this.textEditorElement = document.getElementById("extra-text-editor");	
 	}
 
 	showText(text) {
-		this.divContainer.innerHTML = 
-		`<div>
-            <textarea class="extra-text-editor" id="extra-text-editor" rows="10">${text}</textarea><br>
-        </div>`;
+		this.textEditorElement.value = text;
 	}
 
 	hideText() {
-		this.divContainer.innerHTML = "";
+		this.textEditorElement.value = "";
 	}
 
 }

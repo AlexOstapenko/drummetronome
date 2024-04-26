@@ -1,3 +1,9 @@
+body {
+
+	max-width: 900px;
+	margin: 0 auto;
+}
+
 .div-instruments-rack-board {
 	display: inline;
 	text-align: center;
@@ -62,6 +68,22 @@ ONE INSTRUMENT INSTANCE
 
 }
 
+/*
+EXTRA TEXT EDITOR FOR SOME NEEDS
+like the place where to generate a rhythm card
+*/
+
+.div-extra-text-editor {
+  padding-top: 10px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.extra-text-editor {
+	width: 100%;
+	font-size: 1.2em;
+	border-radius: 5px;	
+}
 
 
 

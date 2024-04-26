@@ -80,8 +80,8 @@
                 <button class="button-delete-textrhythm" onclick="clearTextRhythm()">Clear text</button>
                 <button id="buttShowHideStrokesHelp" 
                     class="button-tools" onclick="showHideStrokesHelp()">Show strokes</button> 
-                <button class="button-tools" onclick="makeRhythmCard()">Create Rhythm Card</button>
-                <button class="button-tools" onclick="parseRhythmCard()">Parse rhythm card</button>
+                <button class="button-tools" onclick="makeRhythmCard()">Generate Rhythm Card</button>
+                <button class="button-tools" onclick="parseRhythmCard()">Parse Rhythm Card</button>
             </div>
             <div id="div-strokes-help" class="div-strokes-help"></div>
 
@@ -130,9 +130,8 @@
     </div>
 
     <div id="div-extra-text-editor" class="div-extra-text-editor">
-        <div>
-            <textarea class="extra-text-editor" id="extra-text-editor" rows="10"></textarea><br>
-        </div>
+        <h2>Rhythm card:</h2>
+        <textarea class="extra-text-editor" id="extra-text-editor" rows="10"></textarea>
     </div>
 
     <script>

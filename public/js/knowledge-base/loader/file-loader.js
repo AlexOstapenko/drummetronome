@@ -38,6 +38,8 @@ class FileLoader {
 
 		for (const filePath of filePaths) {
 	    	try {
+	    		console.log( `Fetching: ${filePath}`);
+
 		        fetch(filePath)
 		            .then(response => {
 		            	if (!response.ok)

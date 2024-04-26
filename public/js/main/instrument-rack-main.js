@@ -83,6 +83,12 @@ function makeRhythmCard() {
     let textEd = new ExtraTextEditor();
     textEd.init();
     textEd.showText( result );
+
+    // scroll to the text field with rhythm card
+    const element = document.getElementById("div-extra-text-editor");
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     return result;
 }
 
@@ -165,6 +171,11 @@ function applyRhythmCard(rhythmCard) {
     instrumentManager.loadMultipleInstruments(arrInstrNames, onInstrumentsLoaded);
 }
 
+
+/*
+* URL for opening a specified rhythm-card:
+* cmd=rc&f=<folder>&rc=<name of card>
+*/
 function processURLParams() {
     let urlString = window.location.href;
     let url = new URL(urlString);

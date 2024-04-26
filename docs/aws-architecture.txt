@@ -35,7 +35,13 @@ Describes all available products
 		{
 			type: "music-tracks-player",
 			productID: "beats-for-lessons-vol-1",
-
+		},
+		{
+			type: "course",
+			productID: "konnakkol-training-1",
+			productLanguage: "RU",
+			productName: "Тренажер Коннакол, уровень 1",
+			productAuthor: "Александр Остапенко",
 		}
 
 	]
@@ -97,11 +103,5 @@ purchased-products:
 			
 		
 ]
-
-
-
-
-
-
 
 User course progress card

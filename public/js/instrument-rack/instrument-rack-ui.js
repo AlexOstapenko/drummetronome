@@ -71,6 +71,7 @@ class InstrumentRackUIController {
         // set text of the newly selected instrument into text editor
         let instance = this.rack.getInstanceByIdx( this.rack.selectedInstance );
         this.textRhythmEditorAgent.setRhythm( instance.getRhythm() );
+        hideStrokesInfo();
 
         this.rackChangedNotifier.notify(this.rack);
     }

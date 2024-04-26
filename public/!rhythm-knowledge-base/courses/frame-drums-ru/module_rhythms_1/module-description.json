@@ -14,8 +14,12 @@
 			"file" : "lesson-3.html"
 		},
 		{
-			"name" : "Нечетные ритмы",
+			"name" : "Учебная композиция на 6/8",
 			"file" : "lesson-4.html"
+		},
+		{
+			"name" : "Нечетные ритмы",
+			"file" : "lesson-5.html"
 		}
 	],
 	"status" : "not-available"

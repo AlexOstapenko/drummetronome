@@ -1,0 +1,97 @@
+Таблица USER-PRODUCTS
+
+user-id  |  product-type  |  product-id  |  expiration-date  |  specific-info-json
+
+
+
+
+
+
+purchase-id: id0192u,
+purchase-date: 01.02.2024
+purchase-info: {
+	user-id: ao@yahoo.com,
+	product-type: rcourses,
+	product-id: frame-drums-ru,
+	expiration-date: 01.05.2024,
+	specific-info: 
+	{
+		modules: [m_1, m_2, m_3]
+	}
+}
+
+
+!!!!!
+primary key = partition key + Sort key
++ global secondary index (GSI)
+
+user-id + product-id
+
+
+GSI - user-id
+
+ITEM 1
+
+purchase-id: 12lks, // primary key, unique
+product-id: 'frame-drums-ru', // secondary key, not unique
+user-id: 'ao@gmail.com', // global secondary index
+purchase-info: {
+	module: {
+		id: 'module_lapstyle_basics',
+		purchase-date: 01.03.2024,
+		expiration-date: 01.05.2024
+	},
+	module: {
+		id: 'module_snaps_1',
+		purchase-date: 01.03.2024,
+		expiration-date: 01.05.2024
+	},
+	module: {
+		id: 'module_snaps_2',
+		purchase-date: 01.03.2024,
+		expiration-date: 01.05.2024
+	},
+}
+
+
+OR !!!!!
+
+ITEM 1
+{
+	user-id : ao@gmail.com, // primary key
+	`u | module_lapstyle_basics", // secondary key
+	purchase-date: 01.03.2024,
+	expiration-date: 01.05.2024
+}
+
+ITEM 2
+{
+	user-id : ao@gmail.com, // primary key
+	product-id : "frame-drums-ru | module_snaps_1", // secondary key
+	purchase-date: 01.03.2024,
+	expiration-date: 01.05.2024
+}
+
+ITEM 3
+{
+	user-id : ao@gmail.com, // primary key
+	product-id : "frame-drums-ru | module_snaps_2", // secondary key
+	purchase-date: 01.03.2024,
+	expiration-date: 01.05.2024
+}
+
+
+
+
+https://courses.rhythm-with-alex.com/course/frame-drums-ru/module/module_lapstyle_basics/lesson/lesson-1
+
+user-id = current user from session
+product-id = {{course-id}} | {{module-id}}
+
+query, projection = expiration-date
+
+
+
+
+
+

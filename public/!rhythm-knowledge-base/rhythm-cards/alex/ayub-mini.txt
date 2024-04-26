@@ -1,0 +1,46 @@
+category: bp-lessons
+name: Ayub mini composition
+tempo: 130
+
+#####
+
+instrument: Darbuka
+gain: 1.51
+pan: 0
+mute: false
+rhythm:
+D - - D D - T - : 3
+es8
+D - - D D - T - : 3
+es8
+D - - D D - T - : 3
+es8
+D - - D D - T - : 2
+es16
+
+@@@@@
+
+instrument: Percussion
+gain: 0.43
+pan: 0
+mute: false
+rhythm:
+H h h h :4
+***
+h:32
+h:32
+h:32
+h:32
+
+@@@@@
+
+instrument: Hang Low Mystic (D)
+gain: 1
+pan: 0
+mute: false
+rhythm:
+(O-A G-E D-F E-Ah)8
+(O-A G-E A#-D G-E)8
+(O-A G-E D-F E-Ah)8
+O-A8 G-E8 D-F5 A-E5 D-A#:3 es3
+

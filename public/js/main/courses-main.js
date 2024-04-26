@@ -5,7 +5,6 @@
 const openByDefault = {}; // {course: "frame-drums-ru", module: null, lesson: null};
 let youtubePlayer = null;
 
-
 class CourseRunnerGlobals {
 
 	static mainDivID = "divCoursesContainer";
